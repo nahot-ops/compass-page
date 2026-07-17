@@ -1,0 +1,1369 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>学習塾ComPass｜未来をひらく羅針盤（愛媛県松山市）</title>
+<meta name="description" content="愛媛県松山市の学習塾ComPass。「わかる」から「好きになる」へ。根を育てる教育で、小学生から中学生まで、自分で人生を選べる力を育てます。無料体験受付中。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-900:#0b2a4d;
+    --navy-800:#123a6b;
+    --blue-600:#1f5f9e;
+    --blue-500:#2f7dc4;
+    --blue-100:#e9f2fb;
+    --blue-050:#f4f9fd;
+    --accent-500:#ef9b3d;
+    --accent-600:#e2822a;
+    --cream-050:#fdf9f1;
+    --ink-800:#1e2a37;
+    --ink-600:#3f4f60;
+    --ink-400:#6c7d8f;
+    --line:#e2e9f1;
+    --white:#ffffff;
+    --radius-lg:22px;
+    --radius-md:16px;
+    --radius-sm:10px;
+    --shadow-soft:0 18px 40px -20px rgba(11,42,77,0.25);
+    --container:1120px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",sans-serif;
+    color:var(--ink-800);
+    background:var(--white);
+    line-height:1.8;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{
+    font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif;
+    margin:0;
+    line-height:1.5;
+    color:var(--navy-900);
+  }
+  p{margin:0;}
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  ul{margin:0;padding:0;list-style:none;}
+  button{font-family:inherit;}
+
+  .wrap{
+    width:100%;
+    max-width:var(--container);
+    margin:0 auto;
+    padding:0 24px;
+  }
+  section{padding:88px 0;}
+  @media (max-width:768px){
+    section{padding:60px 0;}
+    .wrap{padding:0 20px;}
+  }
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.08em;
+    color:var(--blue-600);
+    background:var(--blue-100);
+    padding:6px 16px;
+    border-radius:999px;
+  }
+  .section-head{
+    text-align:center;
+    max-width:680px;
+    margin:0 auto 48px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+  }
+  .section-head h2{
+    font-size:clamp(24px,4vw,34px);
+    font-weight:900;
+  }
+  .section-head p{
+    color:var(--ink-600);
+    font-size:15.5px;
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:15px 30px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:15.5px;
+    border:2px solid transparent;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,var(--accent-500),var(--accent-600));
+    color:var(--white);
+    box-shadow:0 14px 30px -12px rgba(226,130,42,0.6);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 34px -12px rgba(226,130,42,0.7);}
+  .btn-outline{
+    background:var(--white);
+    color:var(--navy-800);
+    border-color:var(--line);
+  }
+  .btn-outline:hover{border-color:var(--blue-500);color:var(--blue-600);transform:translateY(-2px);}
+  .btn-ghost{
+    background:rgba(255,255,255,0.12);
+    color:var(--white);
+    border-color:rgba(255,255,255,0.5);
+  }
+  .btn-ghost:hover{background:rgba(255,255,255,0.22);}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    max-width:var(--container);
+    margin:0 auto;
+    padding:14px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+  }
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:900;
+    font-size:19px;
+    color:var(--navy-900);
+  }
+  .logo small{
+    display:block;
+    font-size:10.5px;
+    font-weight:700;
+    color:var(--blue-600);
+    letter-spacing:.14em;
+  }
+  .logo-mark{width:38px;height:38px;flex:none;}
+
+  nav.main-nav{display:flex;align-items:center;gap:30px;}
+  nav.main-nav a{
+    font-size:14.5px;
+    font-weight:700;
+    color:var(--ink-600);
+    padding:6px 2px;
+    border-bottom:2px solid transparent;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  nav.main-nav a:hover{color:var(--blue-600);border-color:var(--accent-500);}
+
+  .header-cta{display:flex;align-items:center;gap:10px;}
+  .header-cta .btn{padding:11px 20px;font-size:14px;}
+
+  .hamburger{
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    gap:5px;
+    width:42px;
+    height:42px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    background:var(--white);
+  }
+  .hamburger span{
+    display:block;height:2px;width:20px;margin:0 auto;background:var(--navy-900);
+    transition:transform .2s ease, opacity .2s ease;
+  }
+  .mobile-nav{
+    display:none;
+    flex-direction:column;
+    gap:2px;
+    background:var(--white);
+    border-top:1px solid var(--line);
+    padding:10px 20px 20px;
+  }
+  .mobile-nav a{
+    padding:13px 4px;
+    font-weight:700;
+    font-size:15px;
+    color:var(--ink-700);
+    border-bottom:1px solid var(--line);
+  }
+  .mobile-nav .btn{margin-top:14px;width:100%;}
+
+  body.nav-open .mobile-nav{display:flex;}
+  body.nav-open .hamburger span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  body.nav-open .hamburger span:nth-child(2){opacity:0;}
+  body.nav-open .hamburger span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  @media (max-width:900px){
+    nav.main-nav{display:none;}
+    .header-cta .btn-outline{display:none;}
+    .hamburger{display:flex;}
+  }
+  @media (max-width:520px){
+    .header-inner{padding:12px 16px;gap:10px;}
+    .logo{font-size:16px;gap:8px;}
+    .logo-mark{width:32px;height:32px;}
+    .logo small{display:none;}
+    .header-cta{gap:8px;}
+    .header-cta .btn-primary{padding:10px 14px;font-size:12.5px;}
+    .hamburger{width:38px;height:38px;flex:none;}
+  }
+  @media (min-width:901px){
+    .mobile-nav{display:none !important;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    background:radial-gradient(circle at 12% 15%,#123a6b 0%,#0b2a4d 46%,#081d38 100%);
+    color:var(--white);
+    overflow:hidden;
+    padding:96px 0 110px;
+  }
+  .hero::before,.hero::after{
+    content:"";
+    position:absolute;
+    border-radius:50%;
+    filter:blur(0px);
+  }
+  .hero::before{
+    width:420px;height:420px;
+    background:radial-gradient(circle,rgba(239,155,61,0.35),transparent 70%);
+    top:-140px;right:-100px;
+  }
+  .hero::after{
+    width:320px;height:320px;
+    background:radial-gradient(circle,rgba(47,125,196,0.4),transparent 70%);
+    bottom:-140px;left:-80px;
+  }
+  .hero-grid{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:56px;
+    align-items:center;
+  }
+  .hero-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.1em;
+    background:rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.25);
+    padding:8px 18px;
+    border-radius:999px;
+    margin-bottom:22px;
+  }
+  .hero h1{
+    color:var(--white);
+    font-size:clamp(30px,4.6vw,50px);
+    font-weight:900;
+    letter-spacing:.01em;
+  }
+  .hero h1 span{color:#ffc98a;}
+  .hero-sub{
+    margin-top:20px;
+    font-size:16.5px;
+    color:rgba(255,255,255,0.86);
+    max-width:520px;
+  }
+  .hero-actions{
+    margin-top:34px;
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .hero-points{
+    margin-top:40px;
+    display:flex;
+    gap:26px;
+    flex-wrap:wrap;
+  }
+  .hero-point{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:13.5px;
+    font-weight:700;
+    color:rgba(255,255,255,0.9);
+  }
+  .hero-point .dot{
+    width:9px;height:9px;border-radius:50%;background:var(--accent-500);flex:none;
+  }
+
+  .compass-visual{
+    position:relative;
+    width:100%;
+    aspect-ratio:1/1;
+    max-width:400px;
+    margin:0 auto;
+  }
+  .compass-visual svg{width:100%;height:100%;}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;text-align:left;}
+    .compass-visual{max-width:260px;margin-top:10px;}
+  }
+
+  /* ---------- Worldview / tree section ---------- */
+  .worldview{background:var(--blue-050);}
+  .worldview-grid{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:56px;
+    align-items:center;
+  }
+  .tree-visual{width:100%;max-width:360px;margin:0 auto;}
+  .worldview-copy .eyebrow{margin-bottom:16px;}
+  .worldview-copy h2{font-size:clamp(24px,3.6vw,32px);font-weight:900;margin-bottom:18px;}
+  .worldview-copy p{color:var(--ink-600);margin-bottom:14px;font-size:15.5px;}
+  .worldview-copy p.lead{
+    font-size:18px;
+    font-weight:700;
+    color:var(--navy-800);
+  }
+  .root-tags{
+    margin-top:22px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .root-tag{
+    font-size:13px;
+    font-weight:700;
+    padding:9px 16px;
+    border-radius:999px;
+    background:var(--white);
+    border:1px solid var(--line);
+    color:var(--navy-800);
+  }
+  @media (max-width:860px){
+    .worldview-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- MVV ---------- */
+  .mvv-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+  }
+  .mvv-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:var(--radius-lg);
+    padding:32px 28px;
+    box-shadow:var(--shadow-soft);
+  }
+  .mvv-card .num{
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:900;
+    font-size:13px;
+    color:var(--blue-600);
+    letter-spacing:.1em;
+  }
+  .mvv-card h3{
+    margin-top:10px;
+    font-size:19px;
+    font-weight:900;
+  }
+  .mvv-card p{
+    margin-top:12px;
+    font-size:14.5px;
+    color:var(--ink-600);
+  }
+  @media (max-width:860px){
+    .mvv-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Values ---------- */
+  .values{background:var(--cream-050);}
+  .values-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+  }
+  .value-card{
+    background:var(--white);
+    border-radius:var(--radius-md);
+    padding:26px 22px;
+    border:1px solid var(--line);
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .value-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-soft);}
+  .value-icon{
+    width:46px;height:46px;
+    border-radius:14px;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--blue-100);
+    margin-bottom:16px;
+  }
+  .value-card h3{font-size:16px;font-weight:900;margin-bottom:8px;}
+  .value-card p{font-size:13.5px;color:var(--ink-600);}
+  @media (max-width:900px){
+    .values-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:520px){
+    .values-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Courses ---------- */
+  .course-flow{
+    display:flex;
+    align-items:stretch;
+    gap:0;
+    margin-bottom:20px;
+  }
+  .courses-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+  }
+  .course-card{
+    position:relative;
+    background:var(--white);
+    border-radius:var(--radius-lg);
+    border:1px solid var(--line);
+    padding:30px 26px 28px;
+    box-shadow:var(--shadow-soft);
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .course-stage{
+    font-size:12px;
+    font-weight:700;
+    color:var(--blue-600);
+    letter-spacing:.08em;
+  }
+  .course-badge{
+    display:inline-flex;
+    align-self:flex-start;
+    font-size:12px;
+    font-weight:700;
+    padding:5px 14px;
+    border-radius:999px;
+    background:var(--blue-900,#0b2a4d);
+    color:#fff;
+  }
+  .course-card.kids .course-badge{background:var(--accent-500);}
+  .course-card.ele .course-badge{background:var(--blue-500);}
+  .course-card.jhs .course-badge{background:var(--navy-800);}
+  .course-card h3{font-size:20px;font-weight:900;}
+  .course-target{font-size:13px;color:var(--ink-400);font-weight:700;}
+  .course-card p.desc{font-size:14.5px;color:var(--ink-600);}
+  .course-card ul{display:flex;flex-direction:column;gap:8px;margin-top:4px;}
+  .course-card ul li{
+    font-size:13.5px;
+    color:var(--ink-700);
+    display:flex;
+    gap:8px;
+    align-items:flex-start;
+  }
+  .course-card ul li::before{
+    content:"";
+    width:6px;height:6px;
+    margin-top:7px;
+    border-radius:50%;
+    background:var(--accent-500);
+    flex:none;
+  }
+  .course-arrow{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0 6px;
+    color:var(--blue-400,#9db8d8);
+    font-size:22px;
+  }
+  @media (max-width:900px){
+    .courses-grid{grid-template-columns:1fr;}
+  }
+
+  .goal-banner{
+    margin-top:36px;
+    background:linear-gradient(120deg,var(--navy-900),var(--blue-600));
+    border-radius:var(--radius-lg);
+    padding:26px 32px;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    flex-wrap:wrap;
+    justify-content:space-between;
+  }
+  .goal-banner p{font-size:14.5px;color:rgba(255,255,255,0.88);}
+  .goal-banner strong{font-size:17px;display:block;margin-bottom:4px;}
+
+  /* ---------- Growth line (stage timeline) ---------- */
+  .growthline{background:var(--blue-050);}
+  .stage-track{
+    display:flex;
+    gap:16px;
+    overflow-x:auto;
+    padding-bottom:14px;
+    scroll-snap-type:x proximity;
+  }
+  .stage-track::-webkit-scrollbar{height:6px;}
+  .stage-track::-webkit-scrollbar-thumb{background:var(--line);border-radius:6px;}
+  .stage-item{
+    scroll-snap-align:start;
+    flex:0 0 210px;
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:var(--radius-md);
+    padding:20px 18px;
+    position:relative;
+  }
+  .stage-item .stage-no{
+    width:30px;height:30px;
+    border-radius:50%;
+    background:var(--navy-900);
+    color:#fff;
+    font-size:12px;
+    font-weight:900;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:12px;
+  }
+  .stage-item h4{font-size:14.5px;font-weight:900;margin-bottom:6px;}
+  .stage-item p{font-size:12.5px;color:var(--ink-600);}
+  .stage-item .stage-theme{
+    font-size:11.5px;
+    font-weight:700;
+    color:var(--accent-600);
+    margin-bottom:6px;
+    display:block;
+  }
+
+  .flow-strip{
+    margin-top:40px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    overflow-x:auto;
+    padding-bottom:6px;
+  }
+  .flow-chip{
+    flex:none;
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:10px 18px;
+    font-size:13px;
+    font-weight:700;
+    color:var(--navy-800);
+    white-space:nowrap;
+  }
+  .flow-chip.is-accent{
+    background:var(--accent-500);
+    color:#fff;
+    border-color:transparent;
+  }
+  .flow-sep{color:var(--ink-400);flex:none;}
+
+  /* ---------- Methods ---------- */
+  .methods-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+  }
+  .method-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:var(--radius-lg);
+    padding:28px 24px;
+    box-shadow:var(--shadow-soft);
+  }
+  .method-card .m-icon{
+    width:48px;height:48px;
+    border-radius:14px;
+    background:var(--blue-100);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:16px;
+  }
+  .method-card h3{font-size:17.5px;font-weight:900;margin-bottom:4px;}
+  .method-card .m-sub{font-size:12px;font-weight:700;color:var(--blue-600);margin-bottom:10px;display:block;}
+  .method-card p{font-size:14px;color:var(--ink-600);}
+  @media (max-width:900px){
+    .methods-grid{grid-template-columns:1fr;}
+  }
+  .method-extra{
+    margin-top:24px;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .method-extra span{
+    font-size:13px;
+    font-weight:700;
+    color:var(--navy-800);
+    background:var(--cream-050);
+    border:1px solid var(--line);
+    padding:9px 16px;
+    border-radius:999px;
+  }
+
+  /* ---------- Team ---------- */
+  .team-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:26px;
+  }
+  .team-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:var(--radius-lg);
+    padding:30px 28px;
+    display:flex;
+    gap:20px;
+    box-shadow:var(--shadow-soft);
+  }
+  .team-avatar{
+    width:76px;height:76px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--blue-500),var(--navy-800));
+    flex:none;
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;
+    font-weight:900;
+    font-size:22px;
+  }
+  .team-card h3{font-size:18px;font-weight:900;}
+  .team-role{font-size:12.5px;font-weight:700;color:var(--accent-600);margin-top:4px;display:block;}
+  .team-card p.bio{font-size:13.5px;color:var(--ink-600);margin-top:10px;}
+  @media (max-width:760px){
+    .team-grid{grid-template-columns:1fr;}
+    .team-card{flex-direction:column;}
+  }
+
+  /* ---------- Steps ---------- */
+  .steps-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+  }
+  .step-card{
+    text-align:center;
+    padding:10px;
+  }
+  .step-num{
+    width:56px;height:56px;
+    margin:0 auto 16px;
+    border-radius:50%;
+    background:var(--white);
+    border:2px solid var(--blue-100);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:900;
+    color:var(--blue-600);
+    font-size:17px;
+    box-shadow:var(--shadow-soft);
+  }
+  .step-card h4{font-size:15px;font-weight:900;margin-bottom:6px;}
+  .step-card p{font-size:12.5px;color:var(--ink-600);}
+  @media (max-width:860px){
+    .steps-grid{grid-template-columns:repeat(2,1fr);row-gap:34px;}
+  }
+
+  /* ---------- CTA banner ---------- */
+  .cta-banner{
+    background:linear-gradient(120deg,#123a6b,#0b2a4d);
+    color:#fff;
+    border-radius:var(--radius-lg);
+    padding:44px 40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:26px;
+    flex-wrap:wrap;
+  }
+  .cta-banner h3{color:#fff;font-size:clamp(20px,3vw,26px);font-weight:900;}
+  .cta-banner p{color:rgba(255,255,255,0.82);margin-top:8px;font-size:14px;}
+  .cta-actions{display:flex;gap:12px;flex-wrap:wrap;}
+
+  /* ---------- Access ---------- */
+  .access-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:32px;
+    align-items:stretch;
+  }
+  .access-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:var(--radius-lg);
+    padding:34px 32px;
+    box-shadow:var(--shadow-soft);
+  }
+  .access-row{
+    display:flex;
+    gap:14px;
+    padding:16px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .access-row:last-child{border-bottom:none;}
+  .access-row .label{
+    flex:none;
+    width:88px;
+    font-size:12.5px;
+    font-weight:700;
+    color:var(--blue-600);
+  }
+  .access-row .value{font-size:14.5px;color:var(--ink-700);}
+  .map-frame{
+    border-radius:var(--radius-lg);
+    overflow:hidden;
+    border:1px solid var(--line);
+    min-height:280px;
+    box-shadow:var(--shadow-soft);
+  }
+  .map-frame iframe{width:100%;height:100%;min-height:280px;border:0;display:block;}
+  @media (max-width:860px){
+    .access-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:#081d38;
+    color:rgba(255,255,255,0.78);
+    padding:64px 0 26px;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr repeat(3,1fr);
+    gap:36px;
+  }
+  .footer-brand .logo{color:#fff;}
+  .footer-brand p{margin-top:14px;font-size:13.5px;color:rgba(255,255,255,0.6);max-width:280px;}
+  .footer-social{margin-top:18px;display:flex;gap:10px;}
+  .footer-social a{
+    width:36px;height:36px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,0.25);
+    display:flex;align-items:center;justify-content:center;
+    font-size:12px;
+    font-weight:700;
+  }
+  .footer-col h5{
+    font-size:13px;
+    font-weight:700;
+    color:#fff;
+    letter-spacing:.06em;
+    margin-bottom:16px;
+  }
+  .footer-col ul{display:flex;flex-direction:column;gap:10px;}
+  .footer-col a{font-size:13.5px;color:rgba(255,255,255,0.65);}
+  .footer-col a:hover{color:#fff;}
+  .footer-bottom{
+    margin-top:50px;
+    padding-top:24px;
+    border-top:1px solid rgba(255,255,255,0.12);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:12px;
+    font-size:12.5px;
+    color:rgba(255,255,255,0.5);
+  }
+  @media (max-width:860px){
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:560px){
+    .footer-grid{grid-template-columns:1fr;}
+  }
+
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.is-visible{opacity:1;transform:translateY(0);}
+  /* JSが動かない/観測前でも中身は必ず見える状態を既定にする */
+  .no-js .reveal,
+  .reveal{opacity:1;transform:none;}
+  .js-ready .reveal{opacity:0;transform:translateY(14px);}
+  .js-ready .reveal.is-visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="#top" class="logo">
+      <svg class="logo-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="24" cy="24" r="21" stroke="#1f5f9e" stroke-width="3"/>
+        <path d="M24 10 L29 24 L24 38 L19 24 Z" fill="#ef9b3d"/>
+        <path d="M24 10 L29 24 L24 24 Z" fill="#123a6b"/>
+        <circle cx="24" cy="24" r="3.4" fill="#0b2a4d"/>
+      </svg>
+      <span>学習塾ComPass<small>MATSUYAMA JUKU COMPASS</small></span>
+    </a>
+
+    <nav class="main-nav" aria-label="メインナビゲーション">
+      <a href="#about">ComPassについて</a>
+      <a href="#courses">コース紹介</a>
+      <a href="#methods">育てるメソッド</a>
+      <a href="#team">代表紹介</a>
+      <a href="#flow">入塾までの流れ</a>
+      <a href="#access">アクセス</a>
+    </nav>
+
+    <div class="header-cta">
+      <a href="#access" class="btn btn-outline">お問い合わせ</a>
+      <a href="#contact-cta" class="btn btn-primary">無料体験に申し込む</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="メニューを開く" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#about">ComPassについて</a>
+    <a href="#courses">コース紹介</a>
+    <a href="#methods">育てるメソッド</a>
+    <a href="#team">代表紹介</a>
+    <a href="#flow">入塾までの流れ</a>
+    <a href="#access">アクセス</a>
+    <a href="#contact-cta" class="btn btn-primary">無料体験に申し込む</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="hero-tag">愛媛県松山市の学習塾｜小1〜中3</span>
+        <h1>学びは、<br><span>未来を選べる力</span>になる。</h1>
+        <p class="hero-sub">
+          学習塾ComPassは、「わかる」から「好きになる」へ。<br>
+          知識という枝葉だけでなく、思考力・自己信頼・戻ってこられる心という「根っこ」を育てる塾です。<br>
+          受験を、自分史上最高の自分になるプロセスに。
+        </p>
+        <div class="hero-actions">
+          <a href="#contact-cta" class="btn btn-primary">無料体験に申し込む</a>
+          <a href="#courses" class="btn btn-ghost">コースを見る</a>
+        </div>
+        <div class="hero-points">
+          <div class="hero-point"><span class="dot"></span>小1〜中3の一貫教育ライン</div>
+          <div class="hero-point"><span class="dot"></span>方眼ノート×THE FORCE</div>
+          <div class="hero-point"><span class="dot"></span>公立トップ校受験に強い</div>
+        </div>
+      </div>
+
+      <div class="compass-visual" aria-hidden="true">
+        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="150" cy="150" r="138" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+          <circle cx="150" cy="150" r="108" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+          <circle cx="150" cy="150" r="108" stroke="rgba(255,255,255,0.14)" stroke-width="1" fill="none"/>
+          <g>
+            <circle cx="150" cy="150" r="82" fill="url(#compassGrad)"/>
+          </g>
+          <path d="M150 68 L172 150 L150 232 L128 150 Z" fill="#ef9b3d"/>
+          <path d="M150 68 L172 150 L150 150 Z" fill="#fff" fill-opacity="0.9"/>
+          <circle cx="150" cy="150" r="10" fill="#0b2a4d" stroke="#fff" stroke-width="2"/>
+          <text x="150" y="42" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="13" font-weight="700" font-family="Zen Maru Gothic, sans-serif">N</text>
+          <text x="150" y="266" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="13" font-weight="700" font-family="Zen Maru Gothic, sans-serif">S</text>
+          <text x="264" y="155" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="13" font-weight="700" font-family="Zen Maru Gothic, sans-serif">E</text>
+          <text x="36" y="155" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="13" font-weight="700" font-family="Zen Maru Gothic, sans-serif">W</text>
+          <defs>
+            <radialGradient id="compassGrad" cx="0.4" cy="0.35" r="0.8">
+              <stop offset="0%" stop-color="#2f7dc4"/>
+              <stop offset="100%" stop-color="#123a6b"/>
+            </radialGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT / WORLDVIEW ================= -->
+  <section class="worldview" id="about">
+    <div class="wrap worldview-grid">
+      <div class="tree-visual" aria-hidden="true">
+        <svg viewBox="0 0 320 340" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="160" cy="300" rx="120" ry="14" fill="#dfeaf6"/>
+          <rect x="150" y="150" width="20" height="130" rx="8" fill="#8a6a45"/>
+          <path d="M160 280 C120 300 80 300 60 320" stroke="#8a6a45" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <path d="M160 280 C200 300 240 300 260 320" stroke="#8a6a45" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <path d="M160 260 C130 275 100 278 80 292" stroke="#8a6a45" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <path d="M160 260 C190 275 220 278 240 292" stroke="#8a6a45" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <circle cx="160" cy="110" r="95" fill="#bfe0c8"/>
+          <circle cx="95" cy="150" r="58" fill="#a9d6b7"/>
+          <circle cx="228" cy="150" r="58" fill="#a9d6b7"/>
+          <circle cx="160" cy="60" r="60" fill="#cbe9d2"/>
+          <text x="160" y="105" text-anchor="middle" font-size="15" font-weight="700" fill="#1f5f9e" font-family="Zen Maru Gothic, sans-serif">枝葉 ＝ 知識</text>
+          <text x="160" y="128" text-anchor="middle" font-size="12" fill="#3f4f60" font-family="Noto Sans JP, sans-serif">増やすことができる</text>
+          <path d="M110 210 C120 235 130 255 140 280 M170 210 C175 235 178 255 180 280 M200 210 C195 235 190 255 185 280"
+                stroke="#c98b4a" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <text x="160" y="322" text-anchor="middle" font-size="15" font-weight="700" fill="#e2822a" font-family="Zen Maru Gothic, sans-serif">根っこ ＝ 思考力・自己信頼・戻る力</text>
+        </svg>
+      </div>
+      <div class="worldview-copy">
+        <span class="eyebrow">ComPassの教育観</span>
+        <h2>教育とは、木を育てるようなもの。</h2>
+        <p class="lead">枝葉は増やせる。でも、根は時間をかけて育てるしかない。</p>
+        <p>数学の公式や英単語の知識は、木で言えば枝葉。しかし枝葉だけでは、木は立ちません。その木を支えるのは根っこです。</p>
+        <p>定期テストの順位、模試の判定、入試本番のプレッシャー、周りの子が自分より賢く見える瞬間——そんな風の中でも立ち続けるために、ComPassはまず根を育てます。</p>
+        <div class="root-tags">
+          <span class="root-tag">思考整理</span>
+          <span class="root-tag">自己信頼</span>
+          <span class="root-tag">感情調整</span>
+          <span class="root-tag">崩れても戻る力</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MVV ================= -->
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Purpose / Mission / Philosophy</span>
+        <h2>未来をひらく羅針盤として。</h2>
+        <p>ComPassという名前には、二つの意味を込めています。子どもたちと共に歩むこと。そして、進む方向を示す羅針盤であること。</p>
+      </div>
+      <div class="mvv-grid">
+        <div class="mvv-card reveal">
+          <span class="num">PURPOSE</span>
+          <h3>未来をひらく羅針盤となる</h3>
+          <p>子どもたちが、自分の人生を、自分の力で選べるように。その方向を示し、共に歩む存在になります。</p>
+        </div>
+        <div class="mvv-card reveal">
+          <span class="num">MISSION</span>
+          <h3>自分の人生を、自分の力で選べる子どもを育てる</h3>
+          <p>点数や周囲の期待ではなく、「私はこれを選んだ」と自覚を持って前に進める力を育てます。</p>
+        </div>
+        <div class="mvv-card reveal">
+          <span class="num">PHILOSOPHY</span>
+          <h3>受験とは、自分史上最高の自分になるプロセス</h3>
+          <p>受験は競争ではなく、昨日の自分を超える挑戦。合格は、その結果としてついてきます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VALUES ================= -->
+  <section class="values">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Values</span>
+        <h2>ComPassが大切にしていること</h2>
+        <p>子どもと関わるときに、私たちが大切にしている行動指針です。</p>
+      </div>
+      <div class="values-grid">
+        <div class="value-card reveal">
+          <div class="value-icon">🌱</div>
+          <h3>信じることから、すべてが始まる</h3>
+          <p>成績より先に、その子の可能性を見る。「できるようになる前から信じる」ことを選びます。</p>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-icon">🧭</div>
+          <h3>寄り添いすぎず、突き放さない</h3>
+          <p>必要以上に手を貸さない。でも、一人にはしない。ちょうどいい距離感が主体性を引き出します。</p>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-icon">🌳</div>
+          <h3>根を育てる</h3>
+          <p>知識だけでなく、思考力・自信・メンタルを育てる。枝葉ではなく、子どもを支える根っこを太くします。</p>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-icon">🔥</div>
+          <h3>受験を、成長のプロセスにする</h3>
+          <p>受験とは、自分史上最高の自分になるプロセス。誰かに勝つためではなく、昨日の自分を超える挑戦です。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= COURSES ================= -->
+  <section id="courses">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Course</span>
+        <h2>コース紹介</h2>
+        <p>小1から中3まで、一本の軸でつながる教育ライン。学年に合わせて、育てる力が少しずつ変わっていきます。</p>
+      </div>
+
+      <div class="courses-grid">
+        <div class="course-card kids reveal">
+          <span class="course-badge">Stage 0｜小1〜4</span>
+          <h3>コンパスキッズ</h3>
+          <p class="course-target">学習塾ComPass 小学生前期プログラム</p>
+          <p class="desc">「小学生のうちに、勉強を嫌いにしない土台を。」算国×マイクラ×速読を組み合わせた、自立学習型の放課後教室です。</p>
+          <ul>
+            <li>算国：計算・文章題・語彙・読み取りで基礎学力を育成</li>
+            <li>マイクラ（プログラミング）：試す・失敗する・改善する思考力</li>
+            <li>速読：全授業に10分間の速読トレーニングを標準搭載</li>
+            <li>少人数制（算国6〜8名程度／プログラミング5名限定）</li>
+          </ul>
+        </div>
+
+        <div class="course-card ele reveal">
+          <span class="course-badge">Stage 1｜小5〜6</span>
+          <h3>ComPass小学部</h3>
+          <p class="course-target">公立中学進学を見据えたブリッジ期</p>
+          <p class="desc">中学部への橋渡しとして、家庭学習習慣・学習自立・基礎学力の完成を目指します。「授業は楽しいもの」という姿勢は崩しません。</p>
+          <ul>
+            <li>算数：学校よりやや早い進度で数学的センスを育成</li>
+            <li>国語：すべての教科の基本となる読解力の土台づくり</li>
+            <li>英語：小学校英語の語彙・文法に慣れ親しむ</li>
+            <li>少人数指導。1科目から受講可能</li>
+          </ul>
+        </div>
+
+        <div class="course-card jhs reveal">
+          <span class="course-badge">Stage 2〜4｜中1〜3</span>
+          <h3>ComPass中学部</h3>
+          <p class="course-target">公立トップ校受験を見据えた集団授業</p>
+          <p class="desc">松山東・松山南・松山北・愛大附属など、公立トップ校受験に向けて、努力する力・思考する力・力を発揮する心を学年ごとに育てます。</p>
+          <ul>
+            <li>中1：学習姿勢と基礎理解、努力して覚える力</li>
+            <li>中2：方眼ノートで思考整理。「自分の勉強」へ</li>
+            <li>中3：THE FORCEで、受験本番に力を出し切る心の技術</li>
+            <li>最大22:30までのアディショナルタイムあり</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="goal-banner reveal">
+        <div>
+          <strong>ComPassは、「公立トップ校に強い教育塾」です。</strong>
+          <p>トップ校合格数を大量に出す塾ではなく、コツコツ努力する子・自分で考える子を育てる塾でありたいと考えています。</p>
+        </div>
+        <a href="#contact-cta" class="btn btn-primary">まずは無料体験へ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= GROWTH LINE ================= -->
+  <section class="growthline" id="line">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Growth Line</span>
+        <h2>小1から中3まで、一貫した成長の設計</h2>
+        <p>ComPassの教育は、楽しさから始まり、習慣・努力・思考・自己信頼・感情調整を経て、受験での発揮、そして未来の選択へとつながっています。</p>
+      </div>
+
+      <div class="stage-track">
+        <div class="stage-item reveal">
+          <div class="stage-no">0</div>
+          <span class="stage-theme">学びは楽しい</span>
+          <h4>コンパスキッズ（小1〜4）</h4>
+          <p>勉強を嫌いにしない土台と、学ぶことへの前向きさを育てます。</p>
+        </div>
+        <div class="stage-item reveal">
+          <div class="stage-no">1</div>
+          <span class="stage-theme">学ぶ習慣をつくる</span>
+          <h4>ComPass小学部（小5〜6）</h4>
+          <p>家庭学習習慣・学習自立・基礎学力を完成させます。</p>
+        </div>
+        <div class="stage-item reveal">
+          <div class="stage-no">2</div>
+          <span class="stage-theme">努力する力を育てる</span>
+          <h4>ComPass中学部 中1</h4>
+          <p>学習姿勢と基礎理解、努力して覚える力を育てます。</p>
+        </div>
+        <div class="stage-item reveal">
+          <div class="stage-no">3</div>
+          <span class="stage-theme">思考を育てる</span>
+          <h4>ComPass中学部 中2</h4>
+          <p>方眼ノートで思考整理。「自分の勉強」へと変えていきます。</p>
+        </div>
+        <div class="stage-item reveal">
+          <div class="stage-no">4</div>
+          <span class="stage-theme">力を発揮する</span>
+          <h4>ComPass中学部 中3</h4>
+          <p>THE FORCEで、受験本番に最高の自分を出す力を育てます。</p>
+        </div>
+      </div>
+
+      <div class="flow-strip" aria-label="成長の流れ">
+        <span class="flow-chip">楽しさ</span><span class="flow-sep">→</span>
+        <span class="flow-chip">習慣</span><span class="flow-sep">→</span>
+        <span class="flow-chip">努力</span><span class="flow-sep">→</span>
+        <span class="flow-chip">思考整理</span><span class="flow-sep">→</span>
+        <span class="flow-chip">自己信頼</span><span class="flow-sep">→</span>
+        <span class="flow-chip">感情調整</span><span class="flow-sep">→</span>
+        <span class="flow-chip">受験で発揮</span><span class="flow-sep">→</span>
+        <span class="flow-chip is-accent">未来選択</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= METHODS ================= -->
+  <section id="methods">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Method</span>
+        <h2>根っこを育てる3つの仕組み</h2>
+        <p>ComPassでは、知識の前に「学び方」と「心の技術」を大切にしています。</p>
+      </div>
+      <div class="methods-grid">
+        <div class="method-card reveal">
+          <div class="m-icon">📐</div>
+          <span class="m-sub">思考整理メソッド</span>
+          <h3>方眼ノート</h3>
+          <p>高橋政史氏の方眼ノートメソッドを活用。思考整理・目標設定・問題の直しなどに用い、自分で考え、自分で決める力を育てます。</p>
+        </div>
+        <div class="method-card reveal">
+          <div class="m-icon">🗣️</div>
+          <span class="m-sub">自己理解の時間</span>
+          <h3>10min</h3>
+          <p>自分のモヤモヤを言葉にする時間。感情や思考を整理し、自己理解と自己信頼につなげていきます。</p>
+        </div>
+        <div class="method-card reveal">
+          <div class="m-icon">🔁</div>
+          <span class="m-sub">受験期メンタルプログラム</span>
+          <h3>THE FORCE</h3>
+          <p>辻秀一氏のライフスキル理論を活用した、受験期の自己立て直し実践プログラム。崩れても自分で心・思考・行動を整え、もう一度前に進む力を育てます。</p>
+        </div>
+      </div>
+      <div class="method-extra">
+        <span>📖 速読解トレーニング（全コース）</span>
+        <span>⏰ アディショナルタイム（最大22:30まで）</span>
+        <span>💻 オンライン学習室（中3必修）</span>
+        <span>🔢 400%学習法（コンパスキッズ）</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TEAM ================= -->
+  <section class="values" id="team">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Our Team</span>
+        <h2>代表紹介</h2>
+        <p>子どもたちのそばで、共に歩む2人です。</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card reveal">
+          <div class="team-avatar">奈保</div>
+          <div>
+            <h3>橘薗 奈保 <span style="font-size:13px;color:var(--ink-400);font-weight:700;">Naho Tachibanazono</span></h3>
+            <span class="team-role">代表／経営・授業・ブランド・マーケティング</span>
+            <p class="bio">愛媛県松山市出身。久米中学校・松山東高校・愛媛大学卒。中・高の教員免許を取得後、神奈川県の大手集団塾「株式会社ステップ」に8年間講師として勤務（延べ900人以上を指導、優秀授業賞を3度受賞）。2019年、学習塾ComPassを開塾。方眼ノートシニアトレーナー、チャイルドコーチングアドバイザーの資格を持つ。</p>
+          </div>
+        </div>
+        <div class="team-card reveal">
+          <div class="team-avatar">直樹</div>
+          <div>
+            <h3>橘薗 直樹 <span style="font-size:13px;color:var(--ink-400);font-weight:700;">Naoki Tachibanazono</span></h3>
+            <span class="team-role">教材・カリキュラム・理数系担当</span>
+            <p class="bio">千葉県出身。日本大学習志野高校・日本大学卒。中・高の教員免許を取得。神奈川県の大手集団塾「株式会社ステップ」に7年間講師として勤務後、本部にて10年間、教材・模試作成に携わる。2024年には「情報」の教員免許を新たに取得。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FLOW ================= -->
+  <section id="flow">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Entry Flow</span>
+        <h2>入塾までの流れ</h2>
+        <p>まずはお気軽にお問い合わせください。お子さまの様子を見ながら、丁寧にご案内します。</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card reveal">
+          <div class="step-num">01</div>
+          <h4>お問い合わせ</h4>
+          <p>お電話・公式LINEより「体験希望」とご連絡ください。</p>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-num">02</div>
+          <h4>学習相談・無料体験</h4>
+          <p>お子さまの状況をお伺いし、実際の授業を体験いただきます。</p>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-num">03</div>
+          <h4>入会テスト・ご入塾手続き</h4>
+          <p>学習姿勢や授業への適合を確認したうえで、ご入塾手続きを行います。</p>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-num">04</div>
+          <h4>授業スタート</h4>
+          <p>お子さまのペースに合わせて、根を育てる学びが始まります。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA BANNER ================= -->
+  <section id="contact-cta" style="padding-top:0;">
+    <div class="wrap">
+      <div class="cta-banner reveal">
+        <div>
+          <h3>まずは無料体験で、ComPassの学びを感じてください。</h3>
+          <p>お電話・公式LINEにて「無料体験希望」とご連絡いただくだけで、日程を調整いたします。</p>
+        </div>
+        <div class="cta-actions">
+          <a href="tel:0899977388" class="btn btn-primary">089-997-7388 に電話する</a>
+          <a href="#access" class="btn btn-outline" style="background:transparent;color:#fff;border-color:rgba(255,255,255,0.5);">アクセスを見る</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ACCESS ================= -->
+  <section id="access">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Access</span>
+        <h2>教室案内・お問い合わせ</h2>
+        <p>愛媛県松山市来住町にて、皆さまのご来塾・お問い合わせをお待ちしております。</p>
+      </div>
+      <div class="access-grid">
+        <div class="access-card reveal">
+          <div class="access-row">
+            <span class="label">塾名</span>
+            <span class="value">学習塾ComPass</span>
+          </div>
+          <div class="access-row">
+            <span class="label">所在地</span>
+            <span class="value">愛媛県松山市来住町230-1</span>
+          </div>
+          <div class="access-row">
+            <span class="label">TEL</span>
+            <span class="value"><a href="tel:0899977388">089-997-7388</a></span>
+          </div>
+          <div class="access-row">
+            <span class="label">Mail</span>
+            <span class="value"><a href="mailto:info@compass-juku.com">info@compass-juku.com</a></span>
+          </div>
+          <div class="access-row">
+            <span class="label">受付時間</span>
+            <span class="value">14:00〜19:00（月曜定休）／公式LINEは24時間受付</span>
+          </div>
+          <div class="access-row">
+            <span class="label">Web</span>
+            <span class="value"><a href="https://compass-juku.com" target="_blank" rel="noopener">compass-juku.com</a></span>
+          </div>
+        </div>
+        <div class="map-frame reveal">
+          <iframe
+            src="https://maps.google.com/maps?q=%E6%84%9B%E5%AA%9B%E7%9C%8C%E6%9D%BE%E5%B1%B1%E5%B8%82%E6%9D%A5%E4%BD%8F%E7%94%BA230-1&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            title="学習塾ComPass 地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="logo">
+          <svg class="logo-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="24" cy="24" r="21" stroke="#5b93c9" stroke-width="3"/>
+            <path d="M24 10 L29 24 L24 38 L19 24 Z" fill="#ef9b3d"/>
+            <path d="M24 10 L29 24 L24 24 Z" fill="#dfeaf6"/>
+            <circle cx="24" cy="24" r="3.4" fill="#081d38"/>
+          </svg>
+          <span>学習塾ComPass</span>
+        </a>
+        <p>「わかる」から「好きになる」へ。根を育てる教育で、子どもが自分で人生を選べる力を育てます。</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/compass_juku/" target="_blank" rel="noopener" aria-label="Instagram（塾全体）">IG</a>
+          <a href="https://www.instagram.com/compass19_kids/" target="_blank" rel="noopener" aria-label="Instagram（キッズ・小学部）">IG²</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>コース紹介</h5>
+        <ul>
+          <li><a href="#courses">コンパスキッズ（小1〜4）</a></li>
+          <li><a href="#courses">ComPass小学部（小5〜6）</a></li>
+          <li><a href="#courses">ComPass中学部（中1〜3）</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>塾について</h5>
+        <ul>
+          <li><a href="#about">教育観・理念</a></li>
+          <li><a href="#methods">育てるメソッド</a></li>
+          <li><a href="#team">代表紹介</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>お問い合わせ</h5>
+        <ul>
+          <li><a href="tel:0899977388">089-997-7388</a></li>
+          <li><a href="mailto:info@compass-juku.com">info@compass-juku.com</a></li>
+          <li><a href="#access">愛媛県松山市来住町230-1</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 学習塾ComPass All Rights Reserved.</span>
+      <span>未来をひらく羅針盤。</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var btn = document.getElementById('hamburgerBtn');
+    var body = document.body;
+    btn.addEventListener('click', function(){
+      var open = body.classList.toggle('nav-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.querySelectorAll('.mobile-nav a').forEach(function(a){
+      a.addEventListener('click', function(){
+        body.classList.remove('nav-open');
+        btn.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    var revealEls = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      body.classList.add('js-ready');
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      revealEls.forEach(function(el){
+        var rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight) {
+          el.classList.add('is-visible');
+        } else {
+          io.observe(el);
+        }
+      });
+    }
+    // フォールバック：何らかの理由でアニメーションが完了しない要素は必ず表示する
+    window.setTimeout(function(){
+      revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+    }, 2500);
+  })();
+</script>
+
+</body>
+</html>
