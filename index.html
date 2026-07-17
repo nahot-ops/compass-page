@@ -7,190 +7,234 @@
 <meta name="description" content="愛媛県松山市の学習塾ComPass。「わかる」から「好きになる」へ。根を育てる教育で、小学生から中学生まで、自分で人生を選べる力を育てます。無料体験受付中。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy-900:#0b2a4d;
-    --navy-800:#123a6b;
-    --blue-600:#1f5f9e;
-    --blue-500:#2f7dc4;
-    --blue-100:#e9f2fb;
-    --blue-050:#f4f9fd;
-    --accent-500:#ef9b3d;
-    --accent-600:#e2822a;
-    --cream-050:#fdf9f1;
-    --ink-800:#1e2a37;
-    --ink-600:#3f4f60;
-    --ink-400:#6c7d8f;
-    --line:#e2e9f1;
+    --ink:#171a1f;
+    --navy-950:#0a1420;
+    --navy-900:#0e1c2e;
+    --navy-800:#152a42;
+    --navy-700:#203a58;
+    --paper:#faf7f1;
+    --paper-dim:#f3efe6;
+    --card:#ffffff;
+    --line:rgba(23,26,31,0.11);
+    --line-strong:rgba(23,26,31,0.2);
+    --line-dark:rgba(255,255,255,0.16);
+    --gold-300:#e2c07d;
+    --gold-500:#b98a3e;
+    --gold-600:#9c7231;
+    --ink-soft:#4a5361;
+    --ink-faint:#7c8593;
     --white:#ffffff;
-    --radius-lg:22px;
-    --radius-md:16px;
-    --radius-sm:10px;
-    --shadow-soft:0 18px 40px -20px rgba(11,42,77,0.25);
-    --container:1120px;
+    --radius-lg:2px;
+    --radius-md:2px;
+    --container:1180px;
+    --serif:"Shippori Mincho","Noto Sans JP",serif;
+    --sans:"Noto Sans JP","Hiragino Kaku Gothic ProN","Hiragino Sans",sans-serif;
+    --display:"Cormorant Garamond","Shippori Mincho",serif;
   }
 
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
     margin:0;
-    font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",sans-serif;
-    color:var(--ink-800);
-    background:var(--white);
-    line-height:1.8;
+    font-family:var(--sans);
+    font-weight:300;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.9;
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
+    letter-spacing:.01em;
   }
   h1,h2,h3,h4{
-    font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif;
+    font-family:var(--serif);
     margin:0;
     line-height:1.5;
-    color:var(--navy-900);
+    color:var(--navy-950);
+    font-weight:600;
+    letter-spacing:.02em;
   }
-  p{margin:0;}
+  p{margin:0;font-weight:300;}
   a{color:inherit;text-decoration:none;}
   img,svg{display:block;max-width:100%;}
   ul{margin:0;padding:0;list-style:none;}
   button{font-family:inherit;}
+  .ic{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:none;}
 
   .wrap{
     width:100%;
     max-width:var(--container);
     margin:0 auto;
-    padding:0 24px;
+    padding:0 32px;
   }
-  section{padding:88px 0;}
-  @media (max-width:768px){
-    section{padding:60px 0;}
-    .wrap{padding:0 20px;}
+  section{padding:130px 0;}
+  @media (max-width:860px){
+    section{padding:84px 0;}
+    .wrap{padding:0 22px;}
   }
 
-  .eyebrow{
-    display:inline-flex;
+  .kicker{
+    display:flex;
     align-items:center;
-    gap:8px;
-    font-size:13px;
-    font-weight:700;
-    letter-spacing:.08em;
-    color:var(--blue-600);
-    background:var(--blue-100);
-    padding:6px 16px;
-    border-radius:999px;
+    gap:12px;
+    font-family:var(--sans);
+    font-size:11.5px;
+    font-weight:600;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--gold-600);
+  }
+  .kicker::before{
+    content:"";
+    width:30px;height:1px;
+    background:var(--gold-500);
   }
   .section-head{
-    text-align:center;
-    max-width:680px;
-    margin:0 auto 48px;
+    max-width:640px;
+    margin:0 0 64px;
     display:flex;
     flex-direction:column;
-    align-items:center;
-    gap:14px;
+    gap:22px;
   }
+  .section-head.center{margin-left:auto;margin-right:auto;text-align:center;align-items:center;}
   .section-head h2{
-    font-size:clamp(24px,4vw,34px);
-    font-weight:900;
+    font-size:clamp(26px,3.6vw,40px);
+    font-weight:600;
   }
   .section-head p{
-    color:var(--ink-600);
-    font-size:15.5px;
+    color:var(--ink-soft);
+    font-size:15px;
+    line-height:2;
+    font-weight:300;
   }
 
+  /* ---------- Buttons ---------- */
   .btn{
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    gap:8px;
-    padding:15px 30px;
-    border-radius:999px;
-    font-weight:700;
-    font-size:15.5px;
-    border:2px solid transparent;
-    transition:transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+    gap:10px;
+    padding:16px 34px;
+    font-weight:600;
+    font-size:13px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    border:1px solid transparent;
+    transition:all .25s ease;
     cursor:pointer;
     white-space:nowrap;
+    font-family:var(--sans);
   }
   .btn-primary{
-    background:linear-gradient(135deg,var(--accent-500),var(--accent-600));
+    background:var(--navy-950);
     color:var(--white);
-    box-shadow:0 14px 30px -12px rgba(226,130,42,0.6);
+    border-color:var(--navy-950);
   }
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 34px -12px rgba(226,130,42,0.7);}
+  .btn-primary:hover{background:var(--gold-600);border-color:var(--gold-600);}
   .btn-outline{
-    background:var(--white);
-    color:var(--navy-800);
-    border-color:var(--line);
+    background:transparent;
+    color:var(--navy-950);
+    border-color:var(--line-strong);
   }
-  .btn-outline:hover{border-color:var(--blue-500);color:var(--blue-600);transform:translateY(-2px);}
+  .btn-outline:hover{border-color:var(--navy-950);}
   .btn-ghost{
-    background:rgba(255,255,255,0.12);
+    background:transparent;
     color:var(--white);
-    border-color:rgba(255,255,255,0.5);
+    border-color:rgba(255,255,255,0.45);
   }
-  .btn-ghost:hover{background:rgba(255,255,255,0.22);}
+  .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,0.08);}
+  .hero .btn-primary,
+  .cta-banner .btn-primary{
+    background:var(--gold-500);
+    border-color:var(--gold-500);
+    color:var(--navy-950);
+  }
+  .hero .btn-primary:hover,
+  .cta-banner .btn-primary:hover{
+    background:var(--gold-300);
+    border-color:var(--gold-300);
+  }
+  .link-arrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;font-weight:600;letter-spacing:.08em;
+    color:var(--navy-950);
+    border-bottom:1px solid var(--line-strong);
+    padding-bottom:3px;
+  }
+  .link-arrow:hover{border-color:var(--gold-500);color:var(--gold-600);}
 
   /* ---------- Header ---------- */
   header{
     position:sticky;
     top:0;
     z-index:100;
-    background:rgba(255,255,255,0.92);
+    background:rgba(250,247,241,0.94);
     backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
   }
   .header-inner{
     max-width:var(--container);
     margin:0 auto;
-    padding:14px 24px;
+    padding:20px 32px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:16px;
+    gap:20px;
   }
   .logo{
     display:flex;
     align-items:center;
-    gap:10px;
-    font-weight:900;
-    font-size:19px;
-    color:var(--navy-900);
+    gap:12px;
+    font-family:var(--serif);
+    font-weight:700;
+    font-size:18px;
+    color:var(--navy-950);
+    letter-spacing:.03em;
+    flex:none;
+    white-space:nowrap;
   }
   .logo small{
     display:block;
-    font-size:10.5px;
-    font-weight:700;
-    color:var(--blue-600);
-    letter-spacing:.14em;
+    font-family:var(--sans);
+    font-size:9.5px;
+    font-weight:600;
+    color:var(--gold-600);
+    letter-spacing:.2em;
+    margin-top:2px;
   }
-  .logo-mark{width:38px;height:38px;flex:none;}
+  .logo-mark{width:34px;height:34px;flex:none;}
 
-  nav.main-nav{display:flex;align-items:center;gap:30px;}
+  nav.main-nav{display:flex;align-items:center;gap:22px;flex:none;}
   nav.main-nav a{
-    font-size:14.5px;
-    font-weight:700;
-    color:var(--ink-600);
-    padding:6px 2px;
-    border-bottom:2px solid transparent;
+    font-family:var(--sans);
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing:.03em;
+    color:var(--ink-soft);
+    padding:6px 0;
+    border-bottom:1px solid transparent;
     transition:color .15s ease, border-color .15s ease;
+    white-space:nowrap;
   }
-  nav.main-nav a:hover{color:var(--blue-600);border-color:var(--accent-500);}
+  nav.main-nav a:hover{color:var(--navy-950);border-color:var(--gold-500);}
 
-  .header-cta{display:flex;align-items:center;gap:10px;}
-  .header-cta .btn{padding:11px 20px;font-size:14px;}
+  .header-cta{display:flex;align-items:center;gap:10px;flex:none;}
+  .header-cta .btn{padding:12px 18px;font-size:11px;white-space:nowrap;}
 
   .hamburger{
     display:none;
     flex-direction:column;
     justify-content:center;
     gap:5px;
-    width:42px;
-    height:42px;
-    border-radius:10px;
-    border:1px solid var(--line);
+    width:40px;
+    height:40px;
+    border:1px solid var(--line-strong);
     background:var(--white);
   }
   .hamburger span{
-    display:block;height:2px;width:20px;margin:0 auto;background:var(--navy-900);
+    display:block;height:1px;width:18px;margin:0 auto;background:var(--navy-950);
     transition:transform .2s ease, opacity .2s ease;
   }
   .mobile-nav{
@@ -199,121 +243,127 @@
     gap:2px;
     background:var(--white);
     border-top:1px solid var(--line);
-    padding:10px 20px 20px;
+    padding:10px 22px 24px;
   }
-  .mobile-nav a{
-    padding:13px 4px;
-    font-weight:700;
-    font-size:15px;
-    color:var(--ink-700);
+  .mobile-nav a:not(.btn){
+    padding:15px 4px;
+    font-weight:600;
+    font-size:14.5px;
+    color:var(--ink);
     border-bottom:1px solid var(--line);
+    font-family:var(--sans);
   }
-  .mobile-nav .btn{margin-top:14px;width:100%;}
+  .mobile-nav .btn{margin-top:16px;width:100%;}
 
   body.nav-open .mobile-nav{display:flex;}
-  body.nav-open .hamburger span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  body.nav-open .hamburger span:nth-child(1){transform:translateY(6px) rotate(45deg);}
   body.nav-open .hamburger span:nth-child(2){opacity:0;}
-  body.nav-open .hamburger span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  body.nav-open .hamburger span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
 
   @media (max-width:900px){
     nav.main-nav{display:none;}
     .header-cta .btn-outline{display:none;}
     .hamburger{display:flex;}
   }
-  @media (max-width:520px){
-    .header-inner{padding:12px 16px;gap:10px;}
-    .logo{font-size:16px;gap:8px;}
-    .logo-mark{width:32px;height:32px;}
-    .logo small{display:none;}
-    .header-cta{gap:8px;}
-    .header-cta .btn-primary{padding:10px 14px;font-size:12.5px;}
-    .hamburger{width:38px;height:38px;flex:none;}
-  }
   @media (min-width:901px){
     .mobile-nav{display:none !important;}
+  }
+  @media (max-width:520px){
+    .header-inner{padding:16px 18px;gap:10px;}
+    .logo{font-size:15.5px;gap:8px;}
+    .logo-mark{width:29px;height:29px;}
+    .logo small{display:none;}
+    .header-cta{gap:8px;}
+    .header-cta .btn-primary{padding:10px 14px;font-size:10.5px;letter-spacing:.08em;}
+    .hamburger{width:38px;height:38px;flex:none;}
   }
 
   /* ---------- Hero ---------- */
   .hero{
     position:relative;
-    background:radial-gradient(circle at 12% 15%,#123a6b 0%,#0b2a4d 46%,#081d38 100%);
+    background:var(--navy-950);
     color:var(--white);
     overflow:hidden;
-    padding:96px 0 110px;
-  }
-  .hero::before,.hero::after{
-    content:"";
-    position:absolute;
-    border-radius:50%;
-    filter:blur(0px);
+    padding:130px 0 150px;
+    background-image:
+      radial-gradient(ellipse 900px 500px at 85% -10%, rgba(185,138,62,0.16), transparent 60%),
+      radial-gradient(ellipse 700px 500px at -10% 110%, rgba(32,58,88,0.5), transparent 60%);
   }
   .hero::before{
-    width:420px;height:420px;
-    background:radial-gradient(circle,rgba(239,155,61,0.35),transparent 70%);
-    top:-140px;right:-100px;
-  }
-  .hero::after{
-    width:320px;height:320px;
-    background:radial-gradient(circle,rgba(47,125,196,0.4),transparent 70%);
-    bottom:-140px;left:-80px;
+    content:"";
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 30%, black, transparent 75%);
+    pointer-events:none;
   }
   .hero-grid{
     position:relative;
     z-index:2;
     display:grid;
     grid-template-columns:1.15fr 0.85fr;
-    gap:56px;
+    gap:60px;
     align-items:center;
   }
   .hero-tag{
     display:inline-flex;
     align-items:center;
-    gap:8px;
-    font-size:13px;
-    font-weight:700;
-    letter-spacing:.1em;
-    background:rgba(255,255,255,0.12);
-    border:1px solid rgba(255,255,255,0.25);
-    padding:8px 18px;
-    border-radius:999px;
-    margin-bottom:22px;
+    gap:10px;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    color:var(--gold-300);
+    margin-bottom:30px;
   }
+  .hero-tag::before{content:"";width:26px;height:1px;background:var(--gold-500);}
   .hero h1{
     color:var(--white);
-    font-size:clamp(30px,4.6vw,50px);
-    font-weight:900;
-    letter-spacing:.01em;
+    font-size:clamp(34px,5vw,58px);
+    font-weight:600;
+    letter-spacing:.02em;
   }
-  .hero h1 span{color:#ffc98a;}
+  .hero h1 em{
+    font-style:normal;
+    color:var(--gold-300);
+  }
   .hero-sub{
-    margin-top:20px;
-    font-size:16.5px;
-    color:rgba(255,255,255,0.86);
+    margin-top:28px;
+    font-size:15.5px;
+    color:rgba(255,255,255,0.7);
     max-width:520px;
+    line-height:2.1;
+    font-weight:300;
   }
   .hero-actions{
-    margin-top:34px;
+    margin-top:44px;
     display:flex;
-    gap:14px;
+    gap:16px;
     flex-wrap:wrap;
   }
   .hero-points{
-    margin-top:40px;
+    margin-top:56px;
     display:flex;
-    gap:26px;
+    gap:0;
     flex-wrap:wrap;
+    border-top:1px solid var(--line-dark);
+    padding-top:24px;
   }
   .hero-point{
     display:flex;
-    align-items:center;
+    align-items:baseline;
     gap:10px;
-    font-size:13.5px;
-    font-weight:700;
-    color:rgba(255,255,255,0.9);
+    font-size:12.5px;
+    font-weight:500;
+    color:rgba(255,255,255,0.65);
+    padding-right:30px;
+    margin-right:30px;
+    border-right:1px solid var(--line-dark);
   }
-  .hero-point .dot{
-    width:9px;height:9px;border-radius:50%;background:var(--accent-500);flex:none;
-  }
+  .hero-point:last-child{border-right:none;}
+  .hero-point .idx{font-family:var(--display);font-size:16px;color:var(--gold-300);font-style:italic;}
 
   .compass-visual{
     position:relative;
@@ -326,466 +376,522 @@
 
   @media (max-width:900px){
     .hero-grid{grid-template-columns:1fr;text-align:left;}
-    .compass-visual{max-width:260px;margin-top:10px;}
+    .compass-visual{max-width:230px;margin-top:20px;}
+    .hero-points{gap:0;}
+    .hero-point{flex-basis:100%;border-right:none;border-bottom:1px solid var(--line-dark);padding:12px 0;margin-right:0;}
+    .hero-point:last-child{border-bottom:none;}
   }
 
   /* ---------- Worldview / tree section ---------- */
-  .worldview{background:var(--blue-050);}
+  .worldview{background:var(--paper);}
   .worldview-grid{
     display:grid;
-    grid-template-columns:0.85fr 1.15fr;
-    gap:56px;
+    grid-template-columns:0.8fr 1.2fr;
+    gap:70px;
     align-items:center;
   }
-  .tree-visual{width:100%;max-width:360px;margin:0 auto;}
-  .worldview-copy .eyebrow{margin-bottom:16px;}
-  .worldview-copy h2{font-size:clamp(24px,3.6vw,32px);font-weight:900;margin-bottom:18px;}
-  .worldview-copy p{color:var(--ink-600);margin-bottom:14px;font-size:15.5px;}
+  .tree-visual{width:100%;max-width:340px;margin:0 auto;}
+  .worldview-copy p{color:var(--ink-soft);margin-bottom:18px;font-size:15px;line-height:2;}
   .worldview-copy p.lead{
-    font-size:18px;
-    font-weight:700;
-    color:var(--navy-800);
+    font-family:var(--serif);
+    font-size:21px;
+    font-weight:600;
+    color:var(--navy-950);
+    line-height:1.7;
+    margin-bottom:22px;
   }
   .root-tags{
-    margin-top:22px;
+    margin-top:30px;
     display:flex;
-    gap:10px;
-    flex-wrap:wrap;
+    flex-direction:column;
+    gap:0;
+    border-top:1px solid var(--line);
   }
   .root-tag{
     font-size:13px;
-    font-weight:700;
-    padding:9px 16px;
-    border-radius:999px;
-    background:var(--white);
-    border:1px solid var(--line);
-    color:var(--navy-800);
+    font-weight:500;
+    padding:15px 0;
+    color:var(--navy-950);
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    gap:12px;
   }
+  .root-tag::before{content:"";width:5px;height:5px;background:var(--gold-500);border-radius:50%;flex:none;}
   @media (max-width:860px){
-    .worldview-grid{grid-template-columns:1fr;}
+    .worldview-grid{grid-template-columns:1fr;gap:44px;}
   }
 
   /* ---------- MVV ---------- */
+  .mvv{background:var(--navy-950);color:#fff;}
+  .mvv .section-head p{color:rgba(255,255,255,0.55);}
+  .mvv .kicker{color:var(--gold-300);}
   .mvv-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:24px;
+    gap:1px;
+    background:var(--line-dark);
+    border:1px solid var(--line-dark);
   }
   .mvv-card{
-    background:var(--white);
-    border:1px solid var(--line);
-    border-radius:var(--radius-lg);
-    padding:32px 28px;
-    box-shadow:var(--shadow-soft);
+    background:var(--navy-950);
+    padding:44px 38px;
+    position:relative;
   }
-  .mvv-card .num{
-    font-family:"Zen Maru Gothic",sans-serif;
-    font-weight:900;
-    font-size:13px;
-    color:var(--blue-600);
-    letter-spacing:.1em;
+  .mvv-card .roman{
+    font-family:var(--display);
+    font-style:italic;
+    font-size:44px;
+    color:rgba(255,255,255,0.14);
+    line-height:1;
+  }
+  .mvv-card .label{
+    display:block;
+    margin-top:18px;
+    font-size:10.5px;
+    font-weight:600;
+    letter-spacing:.24em;
+    color:var(--gold-300);
+    text-transform:uppercase;
   }
   .mvv-card h3{
-    margin-top:10px;
+    margin-top:14px;
     font-size:19px;
-    font-weight:900;
+    font-weight:600;
+    color:#fff;
+    line-height:1.6;
   }
   .mvv-card p{
-    margin-top:12px;
-    font-size:14.5px;
-    color:var(--ink-600);
+    margin-top:16px;
+    font-size:13.5px;
+    color:rgba(255,255,255,0.55);
+    line-height:1.95;
   }
   @media (max-width:860px){
     .mvv-grid{grid-template-columns:1fr;}
   }
 
   /* ---------- Values ---------- */
-  .values{background:var(--cream-050);}
   .values-grid{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
+    grid-template-columns:repeat(2,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
   }
   .value-card{
-    background:var(--white);
-    border-radius:var(--radius-md);
-    padding:26px 22px;
-    border:1px solid var(--line);
-    transition:transform .18s ease, box-shadow .18s ease;
+    background:var(--card);
+    padding:40px;
+    display:flex;
+    gap:22px;
   }
-  .value-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-soft);}
   .value-icon{
     width:46px;height:46px;
-    border-radius:14px;
+    border:1px solid var(--line-strong);
+    border-radius:50%;
     display:flex;align-items:center;justify-content:center;
-    background:var(--blue-100);
-    margin-bottom:16px;
+    flex:none;
+    color:var(--navy-800);
   }
-  .value-card h3{font-size:16px;font-weight:900;margin-bottom:8px;}
-  .value-card p{font-size:13.5px;color:var(--ink-600);}
-  @media (max-width:900px){
-    .values-grid{grid-template-columns:repeat(2,1fr);}
-  }
-  @media (max-width:520px){
+  .value-card h3{font-size:16.5px;font-weight:600;margin-bottom:10px;}
+  .value-card p{font-size:13.5px;color:var(--ink-soft);line-height:1.95;}
+  @media (max-width:760px){
     .values-grid{grid-template-columns:1fr;}
+    .value-card{padding:30px;}
   }
 
   /* ---------- Courses ---------- */
-  .course-flow{
-    display:flex;
-    align-items:stretch;
-    gap:0;
-    margin-bottom:20px;
-  }
-  .courses-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:24px;
-  }
-  .course-card{
-    position:relative;
-    background:var(--white);
-    border-radius:var(--radius-lg);
-    border:1px solid var(--line);
-    padding:30px 26px 28px;
-    box-shadow:var(--shadow-soft);
+  .course-rail{
     display:flex;
     flex-direction:column;
-    gap:14px;
   }
-  .course-stage{
-    font-size:12px;
-    font-weight:700;
-    color:var(--blue-600);
-    letter-spacing:.08em;
+  .course-row{
+    display:grid;
+    grid-template-columns:64px 1fr;
+    gap:0;
   }
-  .course-badge{
-    display:inline-flex;
-    align-self:flex-start;
-    font-size:12px;
-    font-weight:700;
-    padding:5px 14px;
-    border-radius:999px;
-    background:var(--blue-900,#0b2a4d);
-    color:#fff;
-  }
-  .course-card.kids .course-badge{background:var(--accent-500);}
-  .course-card.ele .course-badge{background:var(--blue-500);}
-  .course-card.jhs .course-badge{background:var(--navy-800);}
-  .course-card h3{font-size:20px;font-weight:900;}
-  .course-target{font-size:13px;color:var(--ink-400);font-weight:700;}
-  .course-card p.desc{font-size:14.5px;color:var(--ink-600);}
-  .course-card ul{display:flex;flex-direction:column;gap:8px;margin-top:4px;}
-  .course-card ul li{
-    font-size:13.5px;
-    color:var(--ink-700);
+  .course-rail-col{
     display:flex;
-    gap:8px;
+    flex-direction:column;
+    align-items:center;
+  }
+  .course-dot{
+    width:11px;height:11px;
+    border-radius:50%;
+    background:var(--navy-950);
+    border:1px solid var(--navy-950);
+    margin-top:46px;
+    flex:none;
+  }
+  .course-row.kids .course-dot{background:var(--gold-500);border-color:var(--gold-500);}
+  .course-line{
+    width:1px;
+    flex:1;
+    background:var(--line-strong);
+  }
+  .course-row:last-child .course-line{display:none;}
+  .course-card{
+    padding:34px 0 60px 36px;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+  .course-stage-label{
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--gold-600);
+  }
+  .course-head{
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .course-card h3{font-size:24px;font-weight:600;}
+  .course-target{font-size:12.5px;color:var(--ink-faint);font-weight:500;letter-spacing:.03em;}
+  .course-card p.desc{font-size:14.5px;color:var(--ink-soft);max-width:640px;line-height:2;}
+  .course-card ul{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px 30px;
+    margin-top:6px;
+    max-width:760px;
+  }
+  .course-card ul li{
+    font-size:13px;
+    color:var(--ink);
+    display:flex;
+    gap:10px;
     align-items:flex-start;
+    line-height:1.7;
   }
   .course-card ul li::before{
     content:"";
-    width:6px;height:6px;
-    margin-top:7px;
+    width:4px;height:4px;
+    margin-top:8px;
     border-radius:50%;
-    background:var(--accent-500);
+    background:var(--gold-500);
     flex:none;
   }
-  .course-arrow{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:0 6px;
-    color:var(--blue-400,#9db8d8);
-    font-size:22px;
-  }
-  @media (max-width:900px){
-    .courses-grid{grid-template-columns:1fr;}
+  @media (max-width:640px){
+    .course-card ul{grid-template-columns:1fr;}
+    .course-card{padding-left:26px;}
+    .course-row{grid-template-columns:40px 1fr;}
   }
 
   .goal-banner{
-    margin-top:36px;
-    background:linear-gradient(120deg,var(--navy-900),var(--blue-600));
-    border-radius:var(--radius-lg);
-    padding:26px 32px;
-    color:#fff;
+    margin-top:20px;
+    border-top:1px solid var(--line);
+    padding-top:44px;
     display:flex;
     align-items:center;
-    gap:18px;
+    gap:30px;
     flex-wrap:wrap;
     justify-content:space-between;
   }
-  .goal-banner p{font-size:14.5px;color:rgba(255,255,255,0.88);}
-  .goal-banner strong{font-size:17px;display:block;margin-bottom:4px;}
+  .goal-banner strong{
+    font-family:var(--serif);
+    font-size:19px;
+    font-weight:600;
+    display:block;
+    margin-bottom:8px;
+    color:var(--navy-950);
+  }
+  .goal-banner p{font-size:13.5px;color:var(--ink-soft);max-width:520px;}
 
   /* ---------- Growth line (stage timeline) ---------- */
-  .growthline{background:var(--blue-050);}
+  .growthline{background:var(--navy-950);color:#fff;}
+  .growthline .kicker{color:var(--gold-300);}
+  .growthline .section-head p{color:rgba(255,255,255,0.55);}
   .stage-track{
-    display:flex;
-    gap:16px;
-    overflow-x:auto;
-    padding-bottom:14px;
-    scroll-snap-type:x proximity;
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    border-top:1px solid var(--line-dark);
+    border-left:1px solid var(--line-dark);
   }
-  .stage-track::-webkit-scrollbar{height:6px;}
-  .stage-track::-webkit-scrollbar-thumb{background:var(--line);border-radius:6px;}
   .stage-item{
-    scroll-snap-align:start;
-    flex:0 0 210px;
-    background:var(--white);
-    border:1px solid var(--line);
-    border-radius:var(--radius-md);
-    padding:20px 18px;
-    position:relative;
+    border-right:1px solid var(--line-dark);
+    border-bottom:1px solid var(--line-dark);
+    padding:30px 22px;
   }
   .stage-item .stage-no{
-    width:30px;height:30px;
-    border-radius:50%;
-    background:var(--navy-900);
-    color:#fff;
-    font-size:12px;
-    font-weight:900;
-    display:flex;align-items:center;justify-content:center;
-    margin-bottom:12px;
+    font-family:var(--display);
+    font-style:italic;
+    font-size:26px;
+    color:var(--gold-300);
+    margin-bottom:16px;
   }
-  .stage-item h4{font-size:14.5px;font-weight:900;margin-bottom:6px;}
-  .stage-item p{font-size:12.5px;color:var(--ink-600);}
+  .stage-item h4{font-size:14px;font-weight:600;margin-bottom:10px;color:#fff;}
+  .stage-item p{font-size:12px;color:rgba(255,255,255,0.5);line-height:1.9;}
   .stage-item .stage-theme{
-    font-size:11.5px;
-    font-weight:700;
-    color:var(--accent-600);
-    margin-bottom:6px;
+    font-size:10.5px;
+    font-weight:600;
+    letter-spacing:.1em;
+    color:rgba(255,255,255,0.4);
+    margin-bottom:10px;
     display:block;
+    text-transform:uppercase;
+  }
+  @media (max-width:900px){
+    .stage-track{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:520px){
+    .stage-track{grid-template-columns:1fr;}
   }
 
   .flow-strip{
-    margin-top:40px;
+    margin-top:60px;
     display:flex;
     align-items:center;
-    gap:8px;
+    gap:0;
     overflow-x:auto;
-    padding-bottom:6px;
+    padding-bottom:10px;
   }
   .flow-chip{
     flex:none;
-    background:var(--white);
-    border:1px solid var(--line);
-    border-radius:999px;
-    padding:10px 18px;
-    font-size:13px;
-    font-weight:700;
-    color:var(--navy-800);
+    font-size:11.5px;
+    font-weight:500;
+    letter-spacing:.04em;
+    color:rgba(255,255,255,0.75);
     white-space:nowrap;
+    padding:0 18px;
+    position:relative;
   }
-  .flow-chip.is-accent{
-    background:var(--accent-500);
-    color:#fff;
-    border-color:transparent;
-  }
-  .flow-sep{color:var(--ink-400);flex:none;}
+  .flow-chip.is-accent{color:var(--gold-300);font-weight:700;}
+  .flow-sep{color:rgba(255,255,255,0.25);flex:none;font-size:12px;}
 
   /* ---------- Methods ---------- */
   .methods-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:22px;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
   }
   .method-card{
-    background:var(--white);
-    border:1px solid var(--line);
-    border-radius:var(--radius-lg);
-    padding:28px 24px;
-    box-shadow:var(--shadow-soft);
+    background:var(--card);
+    padding:44px 36px;
   }
   .method-card .m-icon{
-    width:48px;height:48px;
-    border-radius:14px;
-    background:var(--blue-100);
+    width:44px;height:44px;
+    border:1px solid var(--line-strong);
+    border-radius:50%;
     display:flex;align-items:center;justify-content:center;
-    margin-bottom:16px;
+    margin-bottom:26px;
+    color:var(--navy-800);
   }
-  .method-card h3{font-size:17.5px;font-weight:900;margin-bottom:4px;}
-  .method-card .m-sub{font-size:12px;font-weight:700;color:var(--blue-600);margin-bottom:10px;display:block;}
-  .method-card p{font-size:14px;color:var(--ink-600);}
-  @media (max-width:900px){
+  .method-card h3{font-size:19px;font-weight:600;margin-bottom:6px;}
+  .method-card .m-sub{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-600);margin-bottom:14px;display:block;}
+  .method-card p{font-size:13.5px;color:var(--ink-soft);line-height:2;}
+  @media (max-width:860px){
     .methods-grid{grid-template-columns:1fr;}
   }
   .method-extra{
-    margin-top:24px;
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
+    margin-top:0;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border-top:1px solid var(--line);
+    border-left:1px solid var(--line);
   }
   .method-extra span{
-    font-size:13px;
-    font-weight:700;
-    color:var(--navy-800);
-    background:var(--cream-050);
-    border:1px solid var(--line);
-    padding:9px 16px;
-    border-radius:999px;
+    font-size:12px;
+    font-weight:500;
+    color:var(--ink-soft);
+    padding:20px 18px;
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  @media (max-width:760px){
+    .method-extra{grid-template-columns:repeat(2,1fr);}
   }
 
   /* ---------- Team ---------- */
   .team-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:26px;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
   }
   .team-card{
-    background:var(--white);
-    border:1px solid var(--line);
-    border-radius:var(--radius-lg);
-    padding:30px 28px;
+    background:var(--card);
+    padding:44px 40px;
     display:flex;
-    gap:20px;
-    box-shadow:var(--shadow-soft);
+    gap:24px;
   }
   .team-avatar{
-    width:76px;height:76px;
+    width:64px;height:64px;
     border-radius:50%;
-    background:linear-gradient(135deg,var(--blue-500),var(--navy-800));
+    border:1px solid var(--line-strong);
     flex:none;
     display:flex;align-items:center;justify-content:center;
-    color:#fff;
-    font-weight:900;
-    font-size:22px;
+    color:var(--navy-950);
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:18px;
   }
-  .team-card h3{font-size:18px;font-weight:900;}
-  .team-role{font-size:12.5px;font-weight:700;color:var(--accent-600);margin-top:4px;display:block;}
-  .team-card p.bio{font-size:13.5px;color:var(--ink-600);margin-top:10px;}
+  .team-card h3{font-size:18px;font-weight:600;}
+  .team-role{font-size:11.5px;font-weight:600;letter-spacing:.05em;color:var(--gold-600);margin-top:6px;display:block;}
+  .team-card p.bio{font-size:13px;color:var(--ink-soft);margin-top:14px;line-height:1.95;}
   @media (max-width:760px){
     .team-grid{grid-template-columns:1fr;}
-    .team-card{flex-direction:column;}
+    .team-card{flex-direction:column;padding:34px;}
   }
 
   /* ---------- Steps ---------- */
   .steps-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:20px;
+    gap:0;
   }
   .step-card{
-    text-align:center;
-    padding:10px;
+    padding:0 26px 0 0;
+    position:relative;
+  }
+  .step-card:not(:last-child)::after{
+    content:"";
+    position:absolute;
+    top:16px;right:0;
+    width:26px;height:1px;
+    background:var(--line-strong);
   }
   .step-num{
-    width:56px;height:56px;
-    margin:0 auto 16px;
-    border-radius:50%;
-    background:var(--white);
-    border:2px solid var(--blue-100);
-    display:flex;align-items:center;justify-content:center;
-    font-weight:900;
-    color:var(--blue-600);
-    font-size:17px;
-    box-shadow:var(--shadow-soft);
+    font-family:var(--display);
+    font-style:italic;
+    font-size:30px;
+    color:var(--gold-500);
+    margin-bottom:20px;
   }
-  .step-card h4{font-size:15px;font-weight:900;margin-bottom:6px;}
-  .step-card p{font-size:12.5px;color:var(--ink-600);}
+  .step-card h4{font-size:15px;font-weight:600;margin-bottom:10px;}
+  .step-card p{font-size:12.5px;color:var(--ink-soft);line-height:1.9;}
   @media (max-width:860px){
-    .steps-grid{grid-template-columns:repeat(2,1fr);row-gap:34px;}
+    .steps-grid{grid-template-columns:repeat(2,1fr);row-gap:40px;}
+    .step-card:nth-child(2)::after{display:none;}
+  }
+  @media (max-width:520px){
+    .steps-grid{grid-template-columns:1fr;}
+    .step-card::after{display:none;}
   }
 
   /* ---------- CTA banner ---------- */
   .cta-banner{
-    background:linear-gradient(120deg,#123a6b,#0b2a4d);
+    background:var(--navy-950);
     color:#fff;
-    border-radius:var(--radius-lg);
-    padding:44px 40px;
+    padding:64px 56px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:26px;
+    gap:30px;
     flex-wrap:wrap;
+    position:relative;
+    overflow:hidden;
   }
-  .cta-banner h3{color:#fff;font-size:clamp(20px,3vw,26px);font-weight:900;}
-  .cta-banner p{color:rgba(255,255,255,0.82);margin-top:8px;font-size:14px;}
-  .cta-actions{display:flex;gap:12px;flex-wrap:wrap;}
+  .cta-banner::before{
+    content:"";
+    position:absolute;inset:0;
+    background:radial-gradient(ellipse 500px 300px at 90% 0%, rgba(185,138,62,0.2), transparent 65%);
+  }
+  .cta-banner > *{position:relative;z-index:1;}
+  .cta-banner h3{color:#fff;font-size:clamp(21px,3vw,28px);font-weight:600;max-width:480px;}
+  .cta-banner p{color:rgba(255,255,255,0.6);margin-top:14px;font-size:13.5px;max-width:440px;}
+  .cta-actions{display:flex;gap:14px;flex-wrap:wrap;}
+  @media (max-width:760px){
+    .cta-banner{padding:44px 30px;}
+  }
 
   /* ---------- Access ---------- */
   .access-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:32px;
-    align-items:stretch;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
   }
   .access-card{
-    background:var(--white);
-    border:1px solid var(--line);
-    border-radius:var(--radius-lg);
-    padding:34px 32px;
-    box-shadow:var(--shadow-soft);
+    background:var(--card);
+    padding:8px 44px;
   }
   .access-row{
     display:flex;
     gap:14px;
-    padding:16px 0;
+    padding:20px 0;
     border-bottom:1px solid var(--line);
   }
   .access-row:last-child{border-bottom:none;}
   .access-row .label{
     flex:none;
-    width:88px;
-    font-size:12.5px;
-    font-weight:700;
-    color:var(--blue-600);
+    width:84px;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.08em;
+    color:var(--gold-600);
+    text-transform:uppercase;
+    padding-top:2px;
   }
-  .access-row .value{font-size:14.5px;color:var(--ink-700);}
+  .access-row .value{font-size:14px;color:var(--ink);line-height:1.8;}
   .map-frame{
-    border-radius:var(--radius-lg);
     overflow:hidden;
-    border:1px solid var(--line);
+    border:none;
     min-height:280px;
-    box-shadow:var(--shadow-soft);
   }
-  .map-frame iframe{width:100%;height:100%;min-height:280px;border:0;display:block;}
+  .map-frame iframe{width:100%;height:100%;min-height:280px;border:0;display:block;filter:grayscale(0.3) contrast(1.05);}
   @media (max-width:860px){
     .access-grid{grid-template-columns:1fr;}
+    .access-card{padding:8px 30px;}
   }
 
   /* ---------- Footer ---------- */
   footer{
-    background:#081d38;
-    color:rgba(255,255,255,0.78);
-    padding:64px 0 26px;
+    background:var(--navy-950);
+    color:rgba(255,255,255,0.55);
+    padding:80px 0 30px;
   }
   .footer-grid{
     display:grid;
     grid-template-columns:1.4fr repeat(3,1fr);
-    gap:36px;
+    gap:40px;
   }
   .footer-brand .logo{color:#fff;}
-  .footer-brand p{margin-top:14px;font-size:13.5px;color:rgba(255,255,255,0.6);max-width:280px;}
-  .footer-social{margin-top:18px;display:flex;gap:10px;}
+  .footer-brand .logo small{color:var(--gold-300);}
+  .footer-brand p{margin-top:18px;font-size:13px;color:rgba(255,255,255,0.4);max-width:280px;line-height:2;}
+  .footer-social{margin-top:24px;display:flex;gap:10px;}
   .footer-social a{
     width:36px;height:36px;
     border-radius:50%;
-    border:1px solid rgba(255,255,255,0.25);
+    border:1px solid var(--line-dark);
     display:flex;align-items:center;justify-content:center;
-    font-size:12px;
-    font-weight:700;
+    color:rgba(255,255,255,0.6);
+    transition:border-color .2s ease, color .2s ease;
   }
+  .footer-social a:hover{border-color:var(--gold-300);color:var(--gold-300);}
+  .footer-social .ic{width:16px;height:16px;}
   .footer-col h5{
-    font-size:13px;
-    font-weight:700;
+    font-size:11px;
+    font-weight:600;
     color:#fff;
-    letter-spacing:.06em;
-    margin-bottom:16px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    margin-bottom:22px;
   }
-  .footer-col ul{display:flex;flex-direction:column;gap:10px;}
-  .footer-col a{font-size:13.5px;color:rgba(255,255,255,0.65);}
-  .footer-col a:hover{color:#fff;}
+  .footer-col ul{display:flex;flex-direction:column;gap:13px;}
+  .footer-col a{font-size:13px;color:rgba(255,255,255,0.5);}
+  .footer-col a:hover{color:var(--gold-300);}
   .footer-bottom{
-    margin-top:50px;
-    padding-top:24px;
-    border-top:1px solid rgba(255,255,255,0.12);
+    margin-top:64px;
+    padding-top:26px;
+    border-top:1px solid var(--line-dark);
     display:flex;
     justify-content:space-between;
     flex-wrap:wrap;
     gap:12px;
-    font-size:12.5px;
-    color:rgba(255,255,255,0.5);
+    font-size:11.5px;
+    letter-spacing:.05em;
+    color:rgba(255,255,255,0.35);
   }
   @media (max-width:860px){
     .footer-grid{grid-template-columns:1fr 1fr;}
@@ -794,12 +900,8 @@
     .footer-grid{grid-template-columns:1fr;}
   }
 
-  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease;}
-  .reveal.is-visible{opacity:1;transform:translateY(0);}
-  /* JSが動かない/観測前でも中身は必ず見える状態を既定にする */
-  .no-js .reveal,
-  .reveal{opacity:1;transform:none;}
-  .js-ready .reveal{opacity:0;transform:translateY(14px);}
+  .reveal{opacity:1;transform:none;transition:opacity .7s ease, transform .7s ease;}
+  .js-ready .reveal{opacity:0;transform:translateY(16px);}
   .js-ready .reveal.is-visible{opacity:1;transform:translateY(0);}
 </style>
 </head>
@@ -808,11 +910,10 @@
 <header>
   <div class="header-inner">
     <a href="#top" class="logo">
-      <svg class="logo-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="24" cy="24" r="21" stroke="#1f5f9e" stroke-width="3"/>
-        <path d="M24 10 L29 24 L24 38 L19 24 Z" fill="#ef9b3d"/>
-        <path d="M24 10 L29 24 L24 24 Z" fill="#123a6b"/>
-        <circle cx="24" cy="24" r="3.4" fill="#0b2a4d"/>
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="20" cy="20" r="17.5" stroke="#152a42" stroke-width="1.2"/>
+        <path d="M20 8 L24.5 20 L20 32 L15.5 20 Z" fill="none" stroke="#b98a3e" stroke-width="1.2" stroke-linejoin="round"/>
+        <circle cx="20" cy="20" r="2" fill="#152a42"/>
       </svg>
       <span>学習塾ComPass<small>MATSUYAMA JUKU COMPASS</small></span>
     </a>
@@ -852,8 +953,8 @@
   <section class="hero">
     <div class="wrap hero-grid">
       <div>
-        <span class="hero-tag">愛媛県松山市の学習塾｜小1〜中3</span>
-        <h1>学びは、<br><span>未来を選べる力</span>になる。</h1>
+        <span class="hero-tag">愛媛県松山市の学習塾 ／ 小1〜中3</span>
+        <h1>学びは、<br><em>未来を選べる力</em><br>になる。</h1>
         <p class="hero-sub">
           学習塾ComPassは、「わかる」から「好きになる」へ。<br>
           知識という枝葉だけでなく、思考力・自己信頼・戻ってこられる心という「根っこ」を育てる塾です。<br>
@@ -864,33 +965,31 @@
           <a href="#courses" class="btn btn-ghost">コースを見る</a>
         </div>
         <div class="hero-points">
-          <div class="hero-point"><span class="dot"></span>小1〜中3の一貫教育ライン</div>
-          <div class="hero-point"><span class="dot"></span>方眼ノート×THE FORCE</div>
-          <div class="hero-point"><span class="dot"></span>公立トップ校受験に強い</div>
+          <div class="hero-point"><span class="idx">01</span>小1〜中3の一貫教育ライン</div>
+          <div class="hero-point"><span class="idx">02</span>方眼ノート×THE FORCE</div>
+          <div class="hero-point"><span class="idx">03</span>公立トップ校受験に強い</div>
         </div>
       </div>
 
       <div class="compass-visual" aria-hidden="true">
         <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="150" cy="150" r="138" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-          <circle cx="150" cy="150" r="108" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
-          <circle cx="150" cy="150" r="108" stroke="rgba(255,255,255,0.14)" stroke-width="1" fill="none"/>
-          <g>
-            <circle cx="150" cy="150" r="82" fill="url(#compassGrad)"/>
+          <circle cx="150" cy="150" r="140" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+          <circle cx="150" cy="150" r="112" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+          <circle cx="150" cy="150" r="84" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          <g stroke="rgba(255,255,255,0.16)" stroke-width="1">
+            <line x1="150" y1="10" x2="150" y2="30"/>
+            <line x1="150" y1="270" x2="150" y2="290"/>
+            <line x1="10" y1="150" x2="30" y2="150"/>
+            <line x1="270" y1="150" x2="290" y2="150"/>
           </g>
-          <path d="M150 68 L172 150 L150 232 L128 150 Z" fill="#ef9b3d"/>
-          <path d="M150 68 L172 150 L150 150 Z" fill="#fff" fill-opacity="0.9"/>
-          <circle cx="150" cy="150" r="10" fill="#0b2a4d" stroke="#fff" stroke-width="2"/>
-          <text x="150" y="42" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="13" font-weight="700" font-family="Zen Maru Gothic, sans-serif">N</text>
-          <text x="150" y="266" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="13" font-weight="700" font-family="Zen Maru Gothic, sans-serif">S</text>
-          <text x="264" y="155" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="13" font-weight="700" font-family="Zen Maru Gothic, sans-serif">E</text>
-          <text x="36" y="155" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="13" font-weight="700" font-family="Zen Maru Gothic, sans-serif">W</text>
-          <defs>
-            <radialGradient id="compassGrad" cx="0.4" cy="0.35" r="0.8">
-              <stop offset="0%" stop-color="#2f7dc4"/>
-              <stop offset="100%" stop-color="#123a6b"/>
-            </radialGradient>
-          </defs>
+          <path d="M150 62 L178 150 L150 238 L122 150 Z" fill="none" stroke="#e2c07d" stroke-width="1.1" stroke-linejoin="round"/>
+          <path d="M150 62 L178 150 L150 150 Z" fill="rgba(226,192,125,0.35)"/>
+          <circle cx="150" cy="150" r="7" fill="none" stroke="#e2c07d" stroke-width="1.2"/>
+          <circle cx="150" cy="150" r="2" fill="#e2c07d"/>
+          <text x="150" y="40" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="12" font-weight="600" font-family="Noto Sans JP, sans-serif" letter-spacing="2">N</text>
+          <text x="150" y="266" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="12" font-weight="600" font-family="Noto Sans JP, sans-serif" letter-spacing="2">S</text>
+          <text x="262" y="155" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="12" font-weight="600" font-family="Noto Sans JP, sans-serif" letter-spacing="2">E</text>
+          <text x="38" y="155" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="12" font-weight="600" font-family="Noto Sans JP, sans-serif" letter-spacing="2">W</text>
         </svg>
       </div>
     </div>
@@ -900,28 +999,28 @@
   <section class="worldview" id="about">
     <div class="wrap worldview-grid">
       <div class="tree-visual" aria-hidden="true">
-        <svg viewBox="0 0 320 340" xmlns="http://www.w3.org/2000/svg">
-          <ellipse cx="160" cy="300" rx="120" ry="14" fill="#dfeaf6"/>
-          <rect x="150" y="150" width="20" height="130" rx="8" fill="#8a6a45"/>
-          <path d="M160 280 C120 300 80 300 60 320" stroke="#8a6a45" stroke-width="10" stroke-linecap="round" fill="none"/>
-          <path d="M160 280 C200 300 240 300 260 320" stroke="#8a6a45" stroke-width="10" stroke-linecap="round" fill="none"/>
-          <path d="M160 260 C130 275 100 278 80 292" stroke="#8a6a45" stroke-width="8" stroke-linecap="round" fill="none"/>
-          <path d="M160 260 C190 275 220 278 240 292" stroke="#8a6a45" stroke-width="8" stroke-linecap="round" fill="none"/>
-          <circle cx="160" cy="110" r="95" fill="#bfe0c8"/>
-          <circle cx="95" cy="150" r="58" fill="#a9d6b7"/>
-          <circle cx="228" cy="150" r="58" fill="#a9d6b7"/>
-          <circle cx="160" cy="60" r="60" fill="#cbe9d2"/>
-          <text x="160" y="105" text-anchor="middle" font-size="15" font-weight="700" fill="#1f5f9e" font-family="Zen Maru Gothic, sans-serif">枝葉 ＝ 知識</text>
-          <text x="160" y="128" text-anchor="middle" font-size="12" fill="#3f4f60" font-family="Noto Sans JP, sans-serif">増やすことができる</text>
-          <path d="M110 210 C120 235 130 255 140 280 M170 210 C175 235 178 255 180 280 M200 210 C195 235 190 255 185 280"
-                stroke="#c98b4a" stroke-width="5" stroke-linecap="round" fill="none"/>
-          <text x="160" y="322" text-anchor="middle" font-size="15" font-weight="700" fill="#e2822a" font-family="Zen Maru Gothic, sans-serif">根っこ ＝ 思考力・自己信頼・戻る力</text>
+        <svg viewBox="0 0 320 360" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#152a42" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="160" cy="322" rx="108" ry="4" stroke="rgba(21,42,66,0.2)"/>
+          <line x1="160" y1="330" x2="160" y2="200" stroke="#8a6a45" stroke-width="1.4"/>
+          <path d="M160 210 C130 225 108 235 84 300" stroke="#8a6a45" stroke-width="1.1"/>
+          <path d="M160 210 C190 225 212 235 236 300" stroke="#8a6a45" stroke-width="1.1"/>
+          <path d="M160 250 C142 260 128 268 112 300" stroke="#8a6a45" stroke-width="1"/>
+          <path d="M160 250 C178 260 192 268 208 300" stroke="#8a6a45" stroke-width="1"/>
+          <circle cx="160" cy="108" r="92" stroke="rgba(21,42,66,0.55)"/>
+          <circle cx="98" cy="150" r="52" stroke="rgba(21,42,66,0.4)"/>
+          <circle cx="222" cy="150" r="52" stroke="rgba(21,42,66,0.4)"/>
+          <circle cx="160" cy="58" r="54" stroke="rgba(21,42,66,0.4)"/>
+          <line x1="112" y1="212" x2="128" y2="300" stroke="#b98a3e" stroke-width="1.3"/>
+          <line x1="160" y1="216" x2="163" y2="300" stroke="#b98a3e" stroke-width="1.3"/>
+          <line x1="205" y1="212" x2="192" y2="300" stroke="#b98a3e" stroke-width="1.3"/>
+          <text x="160" y="104" text-anchor="middle" font-size="13" font-weight="600" fill="#152a42" font-family="Shippori Mincho, serif" stroke="none">枝葉 ＝ 知識</text>
+          <text x="160" y="326" text-anchor="middle" font-size="13" font-weight="600" fill="#9c7231" font-family="Shippori Mincho, serif" stroke="none">根っこ ＝ 思考力・自己信頼</text>
         </svg>
       </div>
       <div class="worldview-copy">
-        <span class="eyebrow">ComPassの教育観</span>
-        <h2>教育とは、木を育てるようなもの。</h2>
-        <p class="lead">枝葉は増やせる。でも、根は時間をかけて育てるしかない。</p>
+        <span class="kicker">Worldview</span>
+        <h2 style="margin-top:18px;">教育とは、木を育てるようなもの。</h2>
+        <p class="lead" style="margin-top:26px;">枝葉は増やせる。でも、根は時間をかけて育てるしかない。</p>
         <p>数学の公式や英単語の知識は、木で言えば枝葉。しかし枝葉だけでは、木は立ちません。その木を支えるのは根っこです。</p>
         <p>定期テストの順位、模試の判定、入試本番のプレッシャー、周りの子が自分より賢く見える瞬間——そんな風の中でも立ち続けるために、ComPassはまず根を育てます。</p>
         <div class="root-tags">
@@ -935,26 +1034,29 @@
   </section>
 
   <!-- ================= MVV ================= -->
-  <section>
+  <section class="mvv">
     <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Purpose / Mission / Philosophy</span>
+      <div class="section-head center">
+        <span class="kicker" style="justify-content:center;">Purpose / Mission / Philosophy</span>
         <h2>未来をひらく羅針盤として。</h2>
         <p>ComPassという名前には、二つの意味を込めています。子どもたちと共に歩むこと。そして、進む方向を示す羅針盤であること。</p>
       </div>
       <div class="mvv-grid">
         <div class="mvv-card reveal">
-          <span class="num">PURPOSE</span>
+          <span class="roman">I</span>
+          <span class="label">Purpose</span>
           <h3>未来をひらく羅針盤となる</h3>
           <p>子どもたちが、自分の人生を、自分の力で選べるように。その方向を示し、共に歩む存在になります。</p>
         </div>
         <div class="mvv-card reveal">
-          <span class="num">MISSION</span>
+          <span class="roman">II</span>
+          <span class="label">Mission</span>
           <h3>自分の人生を、自分の力で選べる子どもを育てる</h3>
           <p>点数や周囲の期待ではなく、「私はこれを選んだ」と自覚を持って前に進める力を育てます。</p>
         </div>
         <div class="mvv-card reveal">
-          <span class="num">PHILOSOPHY</span>
+          <span class="roman">III</span>
+          <span class="label">Philosophy</span>
           <h3>受験とは、自分史上最高の自分になるプロセス</h3>
           <p>受験は競争ではなく、昨日の自分を超える挑戦。合格は、その結果としてついてきます。</p>
         </div>
@@ -963,33 +1065,49 @@
   </section>
 
   <!-- ================= VALUES ================= -->
-  <section class="values">
+  <section>
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Values</span>
+        <span class="kicker">Values</span>
         <h2>ComPassが大切にしていること</h2>
         <p>子どもと関わるときに、私たちが大切にしている行動指針です。</p>
       </div>
       <div class="values-grid">
         <div class="value-card reveal">
-          <div class="value-icon">🌱</div>
-          <h3>信じることから、すべてが始まる</h3>
-          <p>成績より先に、その子の可能性を見る。「できるようになる前から信じる」ことを選びます。</p>
+          <div class="value-icon">
+            <svg class="ic" viewBox="0 0 24 24"><path d="M12 21c0-6-3-9-7-10 0 7 3 10 7 10Z"/><path d="M12 21c0-8 4-12 9-13 0 8-4 13-9 13Z"/><path d="M12 21v-6"/></svg>
+          </div>
+          <div>
+            <h3>信じることから、すべてが始まる</h3>
+            <p>成績より先に、その子の可能性を見る。「できるようになる前から信じる」ことを選びます。</p>
+          </div>
         </div>
         <div class="value-card reveal">
-          <div class="value-icon">🧭</div>
-          <h3>寄り添いすぎず、突き放さない</h3>
-          <p>必要以上に手を貸さない。でも、一人にはしない。ちょうどいい距離感が主体性を引き出します。</p>
+          <div class="value-icon">
+            <svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7 L14.5 12 L12 17 L9.5 12 Z"/></svg>
+          </div>
+          <div>
+            <h3>寄り添いすぎず、突き放さない</h3>
+            <p>必要以上に手を貸さない。でも、一人にはしない。ちょうどいい距離感が主体性を引き出します。</p>
+          </div>
         </div>
         <div class="value-card reveal">
-          <div class="value-icon">🌳</div>
-          <h3>根を育てる</h3>
-          <p>知識だけでなく、思考力・自信・メンタルを育てる。枝葉ではなく、子どもを支える根っこを太くします。</p>
+          <div class="value-icon">
+            <svg class="ic" viewBox="0 0 24 24"><path d="M12 3c3 2 5 5 5 8a5 5 0 0 1-10 0c0-3 2-6 5-8Z"/><path d="M12 16v5"/><path d="M9 21h6"/></svg>
+          </div>
+          <div>
+            <h3>根を育てる</h3>
+            <p>知識だけでなく、思考力・自信・メンタルを育てる。枝葉ではなく、子どもを支える根っこを太くします。</p>
+          </div>
         </div>
         <div class="value-card reveal">
-          <div class="value-icon">🔥</div>
-          <h3>受験を、成長のプロセスにする</h3>
-          <p>受験とは、自分史上最高の自分になるプロセス。誰かに勝つためではなく、昨日の自分を超える挑戦です。</p>
+          <div class="value-icon">
+            <svg class="ic" viewBox="0 0 24 24"><path d="M12 2v6"/><path d="M6 9l6-6 6 6"/><path d="M5 13a7 7 0 0 0 14 0c0-3-2-5-3-8-1 2-1 4-3 4s-1-3-2-5c-2 3-6 5-6 9Z"/></svg>
+          </div>
+          <div>
+            <h3>受験を、成長のプロセスにする</h3>
+            <p>受験とは、自分史上最高の自分になるプロセス。誰かに勝つためではなく、昨日の自分を超える挑戦です。</p>
+          </div>
         </div>
       </div>
     </div>
@@ -999,49 +1117,72 @@
   <section id="courses">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Course</span>
+        <span class="kicker">Course</span>
         <h2>コース紹介</h2>
         <p>小1から中3まで、一本の軸でつながる教育ライン。学年に合わせて、育てる力が少しずつ変わっていきます。</p>
       </div>
 
-      <div class="courses-grid">
-        <div class="course-card kids reveal">
-          <span class="course-badge">Stage 0｜小1〜4</span>
-          <h3>コンパスキッズ</h3>
-          <p class="course-target">学習塾ComPass 小学生前期プログラム</p>
-          <p class="desc">「小学生のうちに、勉強を嫌いにしない土台を。」算国×マイクラ×速読を組み合わせた、自立学習型の放課後教室です。</p>
-          <ul>
-            <li>算国：計算・文章題・語彙・読み取りで基礎学力を育成</li>
-            <li>マイクラ（プログラミング）：試す・失敗する・改善する思考力</li>
-            <li>速読：全授業に10分間の速読トレーニングを標準搭載</li>
-            <li>少人数制（算国6〜8名程度／プログラミング5名限定）</li>
-          </ul>
+      <div class="course-rail">
+        <div class="course-row kids">
+          <div class="course-rail-col">
+            <div class="course-dot"></div>
+            <div class="course-line"></div>
+          </div>
+          <div class="course-card reveal">
+            <span class="course-stage-label">Stage 0 ｜ 小1〜4</span>
+            <div class="course-head">
+              <h3>コンパスキッズ</h3>
+              <span class="course-target">学習塾ComPass 小学生前期プログラム</span>
+            </div>
+            <p class="desc">「小学生のうちに、勉強を嫌いにしない土台を。」算国×マイクラ×速読を組み合わせた、自立学習型の放課後教室です。</p>
+            <ul>
+              <li>算国：計算・文章題・語彙・読み取りで基礎学力を育成</li>
+              <li>マイクラ（プログラミング）：試す・失敗する・改善する思考力</li>
+              <li>速読：全授業に10分間の速読トレーニングを標準搭載</li>
+              <li>少人数制（算国6〜8名程度／プログラミング5名限定）</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="course-card ele reveal">
-          <span class="course-badge">Stage 1｜小5〜6</span>
-          <h3>ComPass小学部</h3>
-          <p class="course-target">公立中学進学を見据えたブリッジ期</p>
-          <p class="desc">中学部への橋渡しとして、家庭学習習慣・学習自立・基礎学力の完成を目指します。「授業は楽しいもの」という姿勢は崩しません。</p>
-          <ul>
-            <li>算数：学校よりやや早い進度で数学的センスを育成</li>
-            <li>国語：すべての教科の基本となる読解力の土台づくり</li>
-            <li>英語：小学校英語の語彙・文法に慣れ親しむ</li>
-            <li>少人数指導。1科目から受講可能</li>
-          </ul>
+        <div class="course-row">
+          <div class="course-rail-col">
+            <div class="course-dot"></div>
+            <div class="course-line"></div>
+          </div>
+          <div class="course-card reveal">
+            <span class="course-stage-label">Stage 1 ｜ 小5〜6</span>
+            <div class="course-head">
+              <h3>ComPass小学部</h3>
+              <span class="course-target">公立中学進学を見据えたブリッジ期</span>
+            </div>
+            <p class="desc">中学部への橋渡しとして、家庭学習習慣・学習自立・基礎学力の完成を目指します。「授業は楽しいもの」という姿勢は崩しません。</p>
+            <ul>
+              <li>算数：学校よりやや早い進度で数学的センスを育成</li>
+              <li>国語：すべての教科の基本となる読解力の土台づくり</li>
+              <li>英語：小学校英語の語彙・文法に慣れ親しむ</li>
+              <li>少人数指導。1科目から受講可能</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="course-card jhs reveal">
-          <span class="course-badge">Stage 2〜4｜中1〜3</span>
-          <h3>ComPass中学部</h3>
-          <p class="course-target">公立トップ校受験を見据えた集団授業</p>
-          <p class="desc">松山東・松山南・松山北・愛大附属など、公立トップ校受験に向けて、努力する力・思考する力・力を発揮する心を学年ごとに育てます。</p>
-          <ul>
-            <li>中1：学習姿勢と基礎理解、努力して覚える力</li>
-            <li>中2：方眼ノートで思考整理。「自分の勉強」へ</li>
-            <li>中3：THE FORCEで、受験本番に力を出し切る心の技術</li>
-            <li>最大22:30までのアディショナルタイムあり</li>
-          </ul>
+        <div class="course-row">
+          <div class="course-rail-col">
+            <div class="course-dot"></div>
+          </div>
+          <div class="course-card reveal">
+            <span class="course-stage-label">Stage 2〜4 ｜ 中1〜3</span>
+            <div class="course-head">
+              <h3>ComPass中学部</h3>
+              <span class="course-target">公立トップ校受験を見据えた集団授業</span>
+            </div>
+            <p class="desc">松山東・松山南・松山北・愛大附属など、公立トップ校受験に向けて、努力する力・思考する力・力を発揮する心を学年ごとに育てます。</p>
+            <ul>
+              <li>中1：学習姿勢と基礎理解、努力して覚える力</li>
+              <li>中2：方眼ノートで思考整理。「自分の勉強」へ</li>
+              <li>中3：THE FORCEで、受験本番に力を出し切る心の技術</li>
+              <li>最大22:30までのアディショナルタイムあり</li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -1058,39 +1199,39 @@
   <!-- ================= GROWTH LINE ================= -->
   <section class="growthline" id="line">
     <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Growth Line</span>
+      <div class="section-head center">
+        <span class="kicker" style="justify-content:center;">Growth Line</span>
         <h2>小1から中3まで、一貫した成長の設計</h2>
         <p>ComPassの教育は、楽しさから始まり、習慣・努力・思考・自己信頼・感情調整を経て、受験での発揮、そして未来の選択へとつながっています。</p>
       </div>
 
       <div class="stage-track">
         <div class="stage-item reveal">
-          <div class="stage-no">0</div>
+          <div class="stage-no">00</div>
           <span class="stage-theme">学びは楽しい</span>
           <h4>コンパスキッズ（小1〜4）</h4>
           <p>勉強を嫌いにしない土台と、学ぶことへの前向きさを育てます。</p>
         </div>
         <div class="stage-item reveal">
-          <div class="stage-no">1</div>
+          <div class="stage-no">01</div>
           <span class="stage-theme">学ぶ習慣をつくる</span>
           <h4>ComPass小学部（小5〜6）</h4>
           <p>家庭学習習慣・学習自立・基礎学力を完成させます。</p>
         </div>
         <div class="stage-item reveal">
-          <div class="stage-no">2</div>
+          <div class="stage-no">02</div>
           <span class="stage-theme">努力する力を育てる</span>
           <h4>ComPass中学部 中1</h4>
           <p>学習姿勢と基礎理解、努力して覚える力を育てます。</p>
         </div>
         <div class="stage-item reveal">
-          <div class="stage-no">3</div>
+          <div class="stage-no">03</div>
           <span class="stage-theme">思考を育てる</span>
           <h4>ComPass中学部 中2</h4>
           <p>方眼ノートで思考整理。「自分の勉強」へと変えていきます。</p>
         </div>
         <div class="stage-item reveal">
-          <div class="stage-no">4</div>
+          <div class="stage-no">04</div>
           <span class="stage-theme">力を発揮する</span>
           <h4>ComPass中学部 中3</h4>
           <p>THE FORCEで、受験本番に最高の自分を出す力を育てます。</p>
@@ -1098,13 +1239,13 @@
       </div>
 
       <div class="flow-strip" aria-label="成長の流れ">
-        <span class="flow-chip">楽しさ</span><span class="flow-sep">→</span>
-        <span class="flow-chip">習慣</span><span class="flow-sep">→</span>
-        <span class="flow-chip">努力</span><span class="flow-sep">→</span>
-        <span class="flow-chip">思考整理</span><span class="flow-sep">→</span>
-        <span class="flow-chip">自己信頼</span><span class="flow-sep">→</span>
-        <span class="flow-chip">感情調整</span><span class="flow-sep">→</span>
-        <span class="flow-chip">受験で発揮</span><span class="flow-sep">→</span>
+        <span class="flow-chip">楽しさ</span><span class="flow-sep">―</span>
+        <span class="flow-chip">習慣</span><span class="flow-sep">―</span>
+        <span class="flow-chip">努力</span><span class="flow-sep">―</span>
+        <span class="flow-chip">思考整理</span><span class="flow-sep">―</span>
+        <span class="flow-chip">自己信頼</span><span class="flow-sep">―</span>
+        <span class="flow-chip">感情調整</span><span class="flow-sep">―</span>
+        <span class="flow-chip">受験で発揮</span><span class="flow-sep">―</span>
         <span class="flow-chip is-accent">未来選択</span>
       </div>
     </div>
@@ -1114,44 +1255,50 @@
   <section id="methods">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Method</span>
+        <span class="kicker">Method</span>
         <h2>根っこを育てる3つの仕組み</h2>
         <p>ComPassでは、知識の前に「学び方」と「心の技術」を大切にしています。</p>
       </div>
       <div class="methods-grid">
         <div class="method-card reveal">
-          <div class="m-icon">📐</div>
+          <div class="m-icon">
+            <svg class="ic" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M4 9h16M4 14h16M9 4v16M14 4v16"/></svg>
+          </div>
           <span class="m-sub">思考整理メソッド</span>
           <h3>方眼ノート</h3>
           <p>高橋政史氏の方眼ノートメソッドを活用。思考整理・目標設定・問題の直しなどに用い、自分で考え、自分で決める力を育てます。</p>
         </div>
         <div class="method-card reveal">
-          <div class="m-icon">🗣️</div>
+          <div class="m-icon">
+            <svg class="ic" viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4V5Z"/><path d="M8 9h8M8 12h5"/></svg>
+          </div>
           <span class="m-sub">自己理解の時間</span>
           <h3>10min</h3>
           <p>自分のモヤモヤを言葉にする時間。感情や思考を整理し、自己理解と自己信頼につなげていきます。</p>
         </div>
         <div class="method-card reveal">
-          <div class="m-icon">🔁</div>
+          <div class="m-icon">
+            <svg class="ic" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 13.6-5.7L20 8"/><path d="M20 4v4h-4"/><path d="M20 12a8 8 0 0 1-13.6 5.7L4 16"/><path d="M4 20v-4h4"/></svg>
+          </div>
           <span class="m-sub">受験期メンタルプログラム</span>
           <h3>THE FORCE</h3>
           <p>辻秀一氏のライフスキル理論を活用した、受験期の自己立て直し実践プログラム。崩れても自分で心・思考・行動を整え、もう一度前に進む力を育てます。</p>
         </div>
       </div>
       <div class="method-extra">
-        <span>📖 速読解トレーニング（全コース）</span>
-        <span>⏰ アディショナルタイム（最大22:30まで）</span>
-        <span>💻 オンライン学習室（中3必修）</span>
-        <span>🔢 400%学習法（コンパスキッズ）</span>
+        <span><svg class="ic" style="width:16px;height:16px;" viewBox="0 0 24 24"><path d="M4 5c3-1 6-1 8 1 2-2 5-2 8-1v13c-3-1-6-1-8 1-2-2-5-2-8-1V5Z"/><path d="M12 6v13"/></svg>速読解トレーニング（全コース）</span>
+        <span><svg class="ic" style="width:16px;height:16px;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>アディショナルタイム（最大22:30まで）</span>
+        <span><svg class="ic" style="width:16px;height:16px;" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="1"/><path d="M8 21h8M12 17v4"/></svg>オンライン学習室（中3必修）</span>
+        <span><svg class="ic" style="width:16px;height:16px;" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 7h8M8 11h2M12 11h2M16 11h0M8 15h2M12 15h2M16 15h0"/></svg>400%学習法（コンパスキッズ）</span>
       </div>
     </div>
   </section>
 
   <!-- ================= TEAM ================= -->
-  <section class="values" id="team">
+  <section id="team">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Our Team</span>
+        <span class="kicker">Our Team</span>
         <h2>代表紹介</h2>
         <p>子どもたちのそばで、共に歩む2人です。</p>
       </div>
@@ -1159,7 +1306,7 @@
         <div class="team-card reveal">
           <div class="team-avatar">奈保</div>
           <div>
-            <h3>橘薗 奈保 <span style="font-size:13px;color:var(--ink-400);font-weight:700;">Naho Tachibanazono</span></h3>
+            <h3>橘薗 奈保 <span style="font-family:var(--sans);font-size:12px;color:var(--ink-faint);font-weight:500;">Naho Tachibanazono</span></h3>
             <span class="team-role">代表／経営・授業・ブランド・マーケティング</span>
             <p class="bio">愛媛県松山市出身。久米中学校・松山東高校・愛媛大学卒。中・高の教員免許を取得後、神奈川県の大手集団塾「株式会社ステップ」に8年間講師として勤務（延べ900人以上を指導、優秀授業賞を3度受賞）。2019年、学習塾ComPassを開塾。方眼ノートシニアトレーナー、チャイルドコーチングアドバイザーの資格を持つ。</p>
           </div>
@@ -1167,7 +1314,7 @@
         <div class="team-card reveal">
           <div class="team-avatar">直樹</div>
           <div>
-            <h3>橘薗 直樹 <span style="font-size:13px;color:var(--ink-400);font-weight:700;">Naoki Tachibanazono</span></h3>
+            <h3>橘薗 直樹 <span style="font-family:var(--sans);font-size:12px;color:var(--ink-faint);font-weight:500;">Naoki Tachibanazono</span></h3>
             <span class="team-role">教材・カリキュラム・理数系担当</span>
             <p class="bio">千葉県出身。日本大学習志野高校・日本大学卒。中・高の教員免許を取得。神奈川県の大手集団塾「株式会社ステップ」に7年間講師として勤務後、本部にて10年間、教材・模試作成に携わる。2024年には「情報」の教員免許を新たに取得。</p>
           </div>
@@ -1180,7 +1327,7 @@
   <section id="flow">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Entry Flow</span>
+        <span class="kicker">Entry Flow</span>
         <h2>入塾までの流れ</h2>
         <p>まずはお気軽にお問い合わせください。お子さまの様子を見ながら、丁寧にご案内します。</p>
       </div>
@@ -1219,7 +1366,7 @@
         </div>
         <div class="cta-actions">
           <a href="tel:0899977388" class="btn btn-primary">089-997-7388 に電話する</a>
-          <a href="#access" class="btn btn-outline" style="background:transparent;color:#fff;border-color:rgba(255,255,255,0.5);">アクセスを見る</a>
+          <a href="#access" class="btn btn-ghost">アクセスを見る</a>
         </div>
       </div>
     </div>
@@ -1229,7 +1376,7 @@
   <section id="access">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Access</span>
+        <span class="kicker">Access</span>
         <h2>教室案内・お問い合わせ</h2>
         <p>愛媛県松山市来住町にて、皆さまのご来塾・お問い合わせをお待ちしております。</p>
       </div>
@@ -1277,18 +1424,21 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="#top" class="logo">
-          <svg class="logo-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="24" cy="24" r="21" stroke="#5b93c9" stroke-width="3"/>
-            <path d="M24 10 L29 24 L24 38 L19 24 Z" fill="#ef9b3d"/>
-            <path d="M24 10 L29 24 L24 24 Z" fill="#dfeaf6"/>
-            <circle cx="24" cy="24" r="3.4" fill="#081d38"/>
+          <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="17.5" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+            <path d="M20 8 L24.5 20 L20 32 L15.5 20 Z" fill="none" stroke="#e2c07d" stroke-width="1.2" stroke-linejoin="round"/>
+            <circle cx="20" cy="20" r="2" fill="#e2c07d"/>
           </svg>
           <span>学習塾ComPass</span>
         </a>
         <p>「わかる」から「好きになる」へ。根を育てる教育で、子どもが自分で人生を選べる力を育てます。</p>
         <div class="footer-social">
-          <a href="https://www.instagram.com/compass_juku/" target="_blank" rel="noopener" aria-label="Instagram（塾全体）">IG</a>
-          <a href="https://www.instagram.com/compass19_kids/" target="_blank" rel="noopener" aria-label="Instagram（キッズ・小学部）">IG²</a>
+          <a href="https://www.instagram.com/compass_juku/" target="_blank" rel="noopener" aria-label="Instagram（塾全体）">
+            <svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://www.instagram.com/compass19_kids/" target="_blank" rel="noopener" aria-label="Instagram（キッズ・小学部）">
+            <svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/></svg>
+          </a>
         </div>
       </div>
       <div class="footer-col">
