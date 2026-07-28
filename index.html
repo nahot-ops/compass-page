@@ -7,898 +7,461 @@
 <meta name="description" content="愛媛県松山市の学習塾ComPass。「わかる」から「好きになる」へ。根を育てる教育で、小学生から中学生まで、自分で人生を選べる力を育てます。無料体験受付中。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&family=Kosugi+Maru&family=Klee+One:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#171a1f;
-    --navy-950:#0a1420;
-    --navy-900:#0e1c2e;
-    --navy-800:#152a42;
-    --navy-700:#203a58;
-    --paper:#faf7f1;
-    --paper-dim:#f3efe6;
+    --ink:#23262c;
+    --pen-blue:#2b4c9e;
+    --pen-blue-dark:#1c3570;
+    --pink:#ff6fa8;
+    --pink-deep:#ef4f92;
+    --yellow:#ffe066;
+    --yellow-deep:#ffc93c;
+    --mint:#7bd3c0;
+    --paper:#fffdf6;
+    --paper-alt:#fbf5e8;
     --card:#ffffff;
-    --line:rgba(23,26,31,0.11);
-    --line-strong:rgba(23,26,31,0.2);
-    --line-dark:rgba(255,255,255,0.16);
-    --gold-300:#e2c07d;
-    --gold-500:#b98a3e;
-    --gold-600:#9c7231;
-    --ink-soft:#4a5361;
-    --ink-faint:#7c8593;
+    --line-blue:rgba(43,76,158,0.24);
+    --line-blue-soft:rgba(43,76,158,0.14);
+    --line-margin:rgba(255,111,168,0.55);
+    --ink-soft:#454b57;
+    --ink-faint:#767c88;
     --white:#ffffff;
-    --radius-lg:2px;
-    --radius-md:2px;
-    --container:1180px;
-    --serif:"Shippori Mincho","Noto Sans JP",serif;
-    --sans:"Noto Sans JP","Hiragino Kaku Gothic ProN","Hiragino Sans",sans-serif;
-    --display:"Cormorant Garamond","Shippori Mincho",serif;
+    --container:1160px;
+    --hand:"Yusei Magic","Kosugi Maru",sans-serif;
+    --maru:"Kosugi Maru","Yusei Magic",sans-serif;
+    --num:"Klee One","Kosugi Maru",sans-serif;
   }
 
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
     margin:0;
-    font-family:var(--sans);
-    font-weight:300;
+    font-family:var(--maru);
+    font-weight:400;
     color:var(--ink);
     background:var(--paper);
     line-height:1.9;
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
-    letter-spacing:.01em;
   }
   h1,h2,h3,h4{
-    font-family:var(--serif);
+    font-family:var(--hand);
     margin:0;
     line-height:1.5;
-    color:var(--navy-950);
-    font-weight:600;
-    letter-spacing:.02em;
+    color:var(--pen-blue-dark);
+    font-weight:400;
   }
-  p{margin:0;font-weight:300;}
+  p{margin:0;}
   a{color:inherit;text-decoration:none;}
   img,svg{display:block;max-width:100%;}
   ul{margin:0;padding:0;list-style:none;}
   button{font-family:inherit;}
-  .ic{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:none;}
+  .ic{width:26px;height:26px;stroke:var(--pen-blue);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none;}
 
-  .wrap{
-    width:100%;
-    max-width:var(--container);
-    margin:0 auto;
-    padding:0 32px;
-  }
-  section{padding:130px 0;}
+  .wrap{width:100%;max-width:var(--container);margin:0 auto;padding:0 28px;}
+  section{padding:96px 0;position:relative;}
   @media (max-width:860px){
-    section{padding:84px 0;}
-    .wrap{padding:0 22px;}
+    section{padding:64px 0;}
+    .wrap{padding:0 20px;}
   }
+
+  /* ---------- paper textures ---------- */
+  .paper-lines{
+    background-color:var(--paper);
+    background-image:repeating-linear-gradient(var(--paper) 0px, var(--paper) 33px, var(--line-blue-soft) 33px, var(--line-blue-soft) 34px);
+  }
+  .paper-grid{
+    background-color:var(--paper-alt);
+    background-image:
+      repeating-linear-gradient(0deg, var(--line-blue-soft) 0 1px, transparent 1px 26px),
+      repeating-linear-gradient(90deg, var(--line-blue-soft) 0 1px, transparent 1px 26px);
+  }
+
+  /* ---------- bubble / doodle heading ---------- */
+  .bubble{
+    position:relative;
+    display:inline-block;
+    color:#fff;
+    -webkit-text-stroke:2px var(--ink);
+    paint-order:stroke fill;
+    white-space:nowrap;
+  }
+  .bubble::before{
+    content:attr(data-text);
+    position:absolute;
+    left:5px;top:5px;
+    z-index:-1;
+    color:transparent;
+    background-image:repeating-linear-gradient(45deg, var(--ink) 0 2px, transparent 2px 6px);
+    -webkit-background-clip:text;background-clip:text;
+  }
+  .bubble.pink{color:var(--pink);}
+  .bubble.yellow{color:var(--yellow-deep);}
+
+  .mark{
+    position:relative;
+    font-weight:700;
+    white-space:nowrap;
+  }
+  .mark::after{
+    content:"";
+    position:absolute;
+    left:-3px;right:-3px;bottom:2px;top:38%;
+    background:var(--yellow);
+    opacity:.7;
+    z-index:-1;
+    transform:rotate(-1deg);
+    border-radius:3px 8px 4px 9px;
+  }
+  .mark.pink::after{background:var(--pink);opacity:.45;}
 
   .kicker{
-    display:flex;
+    display:inline-flex;
     align-items:center;
-    gap:12px;
-    font-family:var(--sans);
-    font-size:11.5px;
+    gap:10px;
+    font-family:var(--num);
     font-weight:600;
-    letter-spacing:.32em;
-    text-transform:uppercase;
-    color:var(--gold-600);
+    font-size:13px;
+    letter-spacing:.08em;
+    color:var(--pink-deep);
+    background:#fff;
+    border:2px solid var(--ink);
+    padding:5px 16px 6px;
+    border-radius:14px 16px 12px 18px;
+    transform:rotate(-1.5deg);
+    box-shadow:2px 3px 0 rgba(34,37,43,0.16);
   }
-  .kicker::before{
-    content:"";
-    width:30px;height:1px;
-    background:var(--gold-500);
-  }
-  .section-head{
-    max-width:640px;
-    margin:0 0 64px;
-    display:flex;
-    flex-direction:column;
-    gap:22px;
-  }
+  .section-head{max-width:660px;margin:0 0 54px;display:flex;flex-direction:column;gap:18px;}
   .section-head.center{margin-left:auto;margin-right:auto;text-align:center;align-items:center;}
-  .section-head h2{
-    font-size:clamp(26px,3.6vw,40px);
-    font-weight:600;
-  }
-  .section-head p{
-    color:var(--ink-soft);
-    font-size:15px;
-    line-height:2;
-    font-weight:300;
-  }
+  .section-head h2{font-size:clamp(24px,3.6vw,36px);font-weight:400;}
+  .section-head p{color:var(--ink-soft);font-size:15px;line-height:2;font-family:var(--maru);}
 
-  /* ---------- Buttons ---------- */
+  /* ---------- doodle decorations ---------- */
+  .doodle{position:absolute;pointer-events:none;stroke:var(--pen-blue);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;opacity:.85;}
+
+  /* ---------- buttons ---------- */
   .btn{
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    gap:10px;
-    padding:16px 34px;
-    font-weight:600;
-    font-size:13px;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    border:1px solid transparent;
-    transition:all .25s ease;
+    gap:8px;
+    padding:14px 28px;
+    font-weight:700;
+    font-size:15px;
+    font-family:var(--maru);
+    border:2.4px solid var(--ink);
+    border-radius:15px 18px 14px 20px;
+    transition:transform .15s ease, box-shadow .15s ease;
     cursor:pointer;
     white-space:nowrap;
-    font-family:var(--sans);
+    box-shadow:3px 4px 0 rgba(34,37,43,0.9);
+    color:var(--ink);
   }
-  .btn-primary{
-    background:var(--navy-950);
-    color:var(--white);
-    border-color:var(--navy-950);
-  }
-  .btn-primary:hover{background:var(--gold-600);border-color:var(--gold-600);}
-  .btn-outline{
-    background:transparent;
-    color:var(--navy-950);
-    border-color:var(--line-strong);
-  }
-  .btn-outline:hover{border-color:var(--navy-950);}
-  .btn-ghost{
-    background:transparent;
-    color:var(--white);
-    border-color:rgba(255,255,255,0.45);
-  }
-  .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,0.08);}
-  .hero .btn-primary,
-  .cta-banner .btn-primary{
-    background:var(--gold-500);
-    border-color:var(--gold-500);
-    color:var(--navy-950);
-  }
-  .hero .btn-primary:hover,
-  .cta-banner .btn-primary:hover{
-    background:var(--gold-300);
-    border-color:var(--gold-300);
-  }
-  .link-arrow{
-    display:inline-flex;align-items:center;gap:8px;
-    font-size:13px;font-weight:600;letter-spacing:.08em;
-    color:var(--navy-950);
-    border-bottom:1px solid var(--line-strong);
-    padding-bottom:3px;
-  }
-  .link-arrow:hover{border-color:var(--gold-500);color:var(--gold-600);}
+  .btn:hover{transform:translate(1px,2px);box-shadow:1px 2px 0 rgba(34,37,43,0.9);}
+  .btn-primary{background:var(--yellow);}
+  .btn-outline{background:#fff;}
+  .btn-ghost{background:#fff;}
 
   /* ---------- Header ---------- */
   header{
-    position:sticky;
-    top:0;
-    z-index:100;
-    background:rgba(250,247,241,0.94);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
+    position:sticky;top:0;z-index:100;
+    background:rgba(255,253,246,0.95);
+    backdrop-filter:blur(8px);
+    border-bottom:2.5px solid var(--ink);
   }
   .header-inner{
-    max-width:var(--container);
-    margin:0 auto;
-    padding:20px 32px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
+    max-width:var(--container);margin:0 auto;padding:16px 28px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
   }
-  .logo{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    font-family:var(--serif);
-    font-weight:700;
-    font-size:18px;
-    color:var(--navy-950);
-    letter-spacing:.03em;
-    flex:none;
-    white-space:nowrap;
-  }
-  .logo small{
-    display:block;
-    font-family:var(--sans);
-    font-size:9.5px;
-    font-weight:600;
-    color:var(--gold-600);
-    letter-spacing:.2em;
-    margin-top:2px;
-  }
-  .logo-mark{width:34px;height:34px;flex:none;}
+  .logo{display:flex;align-items:center;gap:10px;font-family:var(--hand);font-size:19px;color:var(--pen-blue-dark);flex:none;white-space:nowrap;}
+  .logo small{display:block;font-family:var(--num);font-size:9.5px;font-weight:600;color:var(--pink-deep);letter-spacing:.1em;margin-top:2px;}
+  .logo-mark{width:36px;height:36px;flex:none;}
 
-  nav.main-nav{display:flex;align-items:center;gap:22px;flex:none;}
+  nav.main-nav{display:flex;align-items:center;gap:20px;flex:none;}
   nav.main-nav a{
-    font-family:var(--sans);
-    font-size:12.5px;
-    font-weight:600;
-    letter-spacing:.03em;
-    color:var(--ink-soft);
-    padding:6px 0;
-    border-bottom:1px solid transparent;
+    font-family:var(--maru);font-size:13px;font-weight:700;color:var(--ink-soft);
+    padding:5px 2px;border-bottom:2px dashed transparent;white-space:nowrap;
     transition:color .15s ease, border-color .15s ease;
-    white-space:nowrap;
   }
-  nav.main-nav a:hover{color:var(--navy-950);border-color:var(--gold-500);}
+  nav.main-nav a:hover{color:var(--pen-blue);border-color:var(--pink);}
 
   .header-cta{display:flex;align-items:center;gap:10px;flex:none;}
-  .header-cta .btn{padding:12px 18px;font-size:11px;white-space:nowrap;}
+  .header-cta .btn{padding:10px 18px;font-size:12.5px;box-shadow:2px 3px 0 rgba(34,37,43,0.9);}
 
   .hamburger{
-    display:none;
-    flex-direction:column;
-    justify-content:center;
-    gap:5px;
-    width:40px;
-    height:40px;
-    border:1px solid var(--line-strong);
-    background:var(--white);
+    display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;
+    border:2.2px solid var(--ink);background:var(--white);border-radius:10px;
   }
-  .hamburger span{
-    display:block;height:1px;width:18px;margin:0 auto;background:var(--navy-950);
-    transition:transform .2s ease, opacity .2s ease;
-  }
-  .mobile-nav{
-    display:none;
-    flex-direction:column;
-    gap:2px;
-    background:var(--white);
-    border-top:1px solid var(--line);
-    padding:10px 22px 24px;
-  }
-  .mobile-nav a:not(.btn){
-    padding:15px 4px;
-    font-weight:600;
-    font-size:14.5px;
-    color:var(--ink);
-    border-bottom:1px solid var(--line);
-    font-family:var(--sans);
-  }
-  .mobile-nav .btn{margin-top:16px;width:100%;}
-
+  .hamburger span{display:block;height:2px;width:18px;margin:0 auto;background:var(--ink);transition:transform .2s ease, opacity .2s ease;}
+  .mobile-nav{display:none;flex-direction:column;gap:2px;background:var(--white);border-top:2px solid var(--ink);padding:10px 20px 22px;}
+  .mobile-nav a:not(.btn){padding:14px 4px;font-weight:700;font-size:14.5px;color:var(--ink);border-bottom:1px dashed var(--line-blue);font-family:var(--maru);}
+  .mobile-nav .btn{margin-top:14px;width:100%;}
   body.nav-open .mobile-nav{display:flex;}
   body.nav-open .hamburger span:nth-child(1){transform:translateY(6px) rotate(45deg);}
   body.nav-open .hamburger span:nth-child(2){opacity:0;}
   body.nav-open .hamburger span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
-
   @media (max-width:900px){
     nav.main-nav{display:none;}
     .header-cta .btn-outline{display:none;}
     .hamburger{display:flex;}
   }
-  @media (min-width:901px){
-    .mobile-nav{display:none !important;}
-  }
+  @media (min-width:901px){.mobile-nav{display:none !important;}}
   @media (max-width:520px){
-    .header-inner{padding:16px 18px;gap:10px;}
-    .logo{font-size:15.5px;gap:8px;}
-    .logo-mark{width:29px;height:29px;}
+    .header-inner{padding:12px 16px;gap:8px;}
+    .logo{font-size:15.5px;gap:7px;}
+    .logo-mark{width:30px;height:30px;}
     .logo small{display:none;}
     .header-cta{gap:8px;}
-    .header-cta .btn-primary{padding:10px 14px;font-size:10.5px;letter-spacing:.08em;}
-    .hamburger{width:38px;height:38px;flex:none;}
+    .header-cta .btn-primary{padding:9px 13px;font-size:11px;}
+    .hamburger{width:37px;height:37px;}
   }
 
   /* ---------- Hero ---------- */
-  .hero{
-    position:relative;
-    background:var(--navy-950);
-    color:var(--white);
-    overflow:hidden;
-    padding:130px 0 150px;
-    background-image:
-      radial-gradient(ellipse 900px 500px at 85% -10%, rgba(185,138,62,0.16), transparent 60%),
-      radial-gradient(ellipse 700px 500px at -10% 110%, rgba(32,58,88,0.5), transparent 60%);
-  }
-  .hero::before{
-    content:"";
-    position:absolute;inset:0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-    background-size:64px 64px;
-    mask-image:radial-gradient(ellipse 80% 60% at 50% 30%, black, transparent 75%);
-    pointer-events:none;
-  }
-  .hero-grid{
-    position:relative;
-    z-index:2;
-    display:grid;
-    grid-template-columns:1.15fr 0.85fr;
-    gap:60px;
-    align-items:center;
-  }
+  .hero{position:relative;overflow:hidden;padding:80px 0 96px;}
+  .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr 0.85fr;gap:50px;align-items:center;}
   .hero-tag{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    font-size:11px;
-    font-weight:600;
-    letter-spacing:.24em;
-    text-transform:uppercase;
-    color:var(--gold-300);
-    margin-bottom:30px;
+    display:inline-flex;align-items:center;gap:8px;font-family:var(--num);font-size:12.5px;font-weight:600;
+    color:var(--pen-blue-dark);background:#fff;border:2px solid var(--ink);padding:6px 16px;border-radius:999px;
+    margin-bottom:26px;transform:rotate(-1deg);box-shadow:2px 2px 0 rgba(34,37,43,0.12);
   }
-  .hero-tag::before{content:"";width:26px;height:1px;background:var(--gold-500);}
-  .hero h1{
-    color:var(--white);
-    font-size:clamp(34px,5vw,58px);
-    font-weight:600;
-    letter-spacing:.02em;
-  }
-  .hero h1 em{
-    font-style:normal;
-    color:var(--gold-300);
-  }
-  .hero-sub{
-    margin-top:28px;
-    font-size:15.5px;
-    color:rgba(255,255,255,0.7);
-    max-width:520px;
-    line-height:2.1;
-    font-weight:300;
-  }
-  .hero-actions{
-    margin-top:44px;
-    display:flex;
-    gap:16px;
-    flex-wrap:wrap;
-  }
-  .hero-points{
-    margin-top:56px;
-    display:flex;
-    gap:0;
-    flex-wrap:wrap;
-    border-top:1px solid var(--line-dark);
-    padding-top:24px;
-  }
+  .hero h1{font-size:clamp(32px,5vw,54px);line-height:1.35;}
+  .hero-sub{margin-top:26px;font-size:15.5px;color:var(--ink-soft);max-width:520px;line-height:2.05;font-family:var(--maru);}
+  .hero-actions{margin-top:36px;display:flex;gap:16px;flex-wrap:wrap;}
+  .hero-points{margin-top:44px;display:flex;gap:16px;flex-wrap:wrap;}
   .hero-point{
-    display:flex;
-    align-items:baseline;
-    gap:10px;
-    font-size:12.5px;
-    font-weight:500;
-    color:rgba(255,255,255,0.65);
-    padding-right:30px;
-    margin-right:30px;
-    border-right:1px solid var(--line-dark);
+    display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;color:var(--ink);
+    background:#fff;border:1.6px dashed var(--pen-blue);padding:8px 14px;border-radius:999px;
   }
-  .hero-point:last-child{border-right:none;}
-  .hero-point .idx{font-family:var(--display);font-size:16px;color:var(--gold-300);font-style:italic;}
-
-  .compass-visual{
-    position:relative;
-    width:100%;
-    aspect-ratio:1/1;
-    max-width:400px;
-    margin:0 auto;
-  }
+  .hero-point .dot{width:8px;height:8px;border-radius:50%;background:var(--pink);flex:none;}
+  .compass-visual{position:relative;width:100%;aspect-ratio:1/1;max-width:360px;margin:0 auto;}
   .compass-visual svg{width:100%;height:100%;}
-
   @media (max-width:900px){
     .hero-grid{grid-template-columns:1fr;text-align:left;}
-    .compass-visual{max-width:230px;margin-top:20px;}
-    .hero-points{gap:0;}
-    .hero-point{flex-basis:100%;border-right:none;border-bottom:1px solid var(--line-dark);padding:12px 0;margin-right:0;}
-    .hero-point:last-child{border-bottom:none;}
+    .compass-visual{max-width:230px;margin-top:14px;}
   }
 
-  /* ---------- Worldview / tree section ---------- */
-  .worldview{background:var(--paper);}
-  .worldview-grid{
-    display:grid;
-    grid-template-columns:0.8fr 1.2fr;
-    gap:70px;
-    align-items:center;
-  }
-  .tree-visual{width:100%;max-width:340px;margin:0 auto;}
-  .worldview-copy p{color:var(--ink-soft);margin-bottom:18px;font-size:15px;line-height:2;}
+  /* ---------- Worldview ---------- */
+  .worldview-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:60px;align-items:center;}
+  .tree-visual{width:100%;max-width:320px;margin:0 auto;}
+  .worldview-copy p{color:var(--ink-soft);margin-bottom:16px;font-size:15px;line-height:2;font-family:var(--maru);}
   .worldview-copy p.lead{
-    font-family:var(--serif);
-    font-size:21px;
-    font-weight:600;
-    color:var(--navy-950);
-    line-height:1.7;
-    margin-bottom:22px;
+    font-family:var(--hand);font-size:21px;color:var(--pen-blue-dark);line-height:1.75;margin:22px 0;font-weight:400;
   }
-  .root-tags{
-    margin-top:30px;
-    display:flex;
-    flex-direction:column;
-    gap:0;
-    border-top:1px solid var(--line);
-  }
+  .root-tags{margin-top:24px;display:flex;flex-wrap:wrap;gap:10px;}
   .root-tag{
-    font-size:13px;
-    font-weight:500;
-    padding:15px 0;
-    color:var(--navy-950);
-    border-bottom:1px solid var(--line);
-    display:flex;
-    align-items:center;
-    gap:12px;
+    font-size:13px;font-weight:700;padding:9px 16px;color:var(--ink);background:#fff;
+    border:2px solid var(--ink);border-radius:14px 10px 16px 12px;box-shadow:2px 3px 0 rgba(34,37,43,0.12);
   }
-  .root-tag::before{content:"";width:5px;height:5px;background:var(--gold-500);border-radius:50%;flex:none;}
-  @media (max-width:860px){
-    .worldview-grid{grid-template-columns:1fr;gap:44px;}
-  }
+  @media (max-width:860px){.worldview-grid{grid-template-columns:1fr;gap:40px;}}
 
   /* ---------- MVV ---------- */
-  .mvv{background:var(--navy-950);color:#fff;}
-  .mvv .section-head p{color:rgba(255,255,255,0.55);}
-  .mvv .kicker{color:var(--gold-300);}
-  .mvv-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:1px;
-    background:var(--line-dark);
-    border:1px solid var(--line-dark);
-  }
+  .mvv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
   .mvv-card{
-    background:var(--navy-950);
-    padding:44px 38px;
-    position:relative;
+    background:var(--card);border:2.4px solid var(--ink);border-radius:18px 14px 20px 12px;
+    padding:34px 28px;box-shadow:4px 5px 0 rgba(34,37,43,0.14);position:relative;
   }
+  .mvv-card:nth-child(1){transform:rotate(-1.2deg);}
+  .mvv-card:nth-child(2){transform:rotate(0.8deg);margin-top:14px;}
+  .mvv-card:nth-child(3){transform:rotate(-0.6deg);}
   .mvv-card .roman{
-    font-family:var(--display);
-    font-style:italic;
-    font-size:44px;
-    color:rgba(255,255,255,0.14);
-    line-height:1;
+    font-family:var(--num);font-weight:600;font-size:34px;color:var(--pink-deep);
+    display:inline-flex;align-items:center;justify-content:center;
+    width:52px;height:52px;border:2px dashed var(--pen-blue);border-radius:50%;
   }
-  .mvv-card .label{
-    display:block;
-    margin-top:18px;
-    font-size:10.5px;
-    font-weight:600;
-    letter-spacing:.24em;
-    color:var(--gold-300);
-    text-transform:uppercase;
-  }
-  .mvv-card h3{
-    margin-top:14px;
-    font-size:19px;
-    font-weight:600;
-    color:#fff;
-    line-height:1.6;
-  }
-  .mvv-card p{
-    margin-top:16px;
-    font-size:13.5px;
-    color:rgba(255,255,255,0.55);
-    line-height:1.95;
-  }
-  @media (max-width:860px){
-    .mvv-grid{grid-template-columns:1fr;}
-  }
+  .mvv-card .label{display:block;margin-top:14px;font-family:var(--num);font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--pen-blue);text-transform:uppercase;}
+  .mvv-card h3{margin-top:10px;font-size:18px;font-weight:400;color:var(--pen-blue-dark);line-height:1.6;}
+  .mvv-card p{margin-top:14px;font-size:13.5px;color:var(--ink-soft);line-height:1.95;font-family:var(--maru);}
+  @media (max-width:860px){.mvv-grid{grid-template-columns:1fr;}.mvv-card{transform:none !important;margin-top:0 !important;}}
 
   /* ---------- Values ---------- */
-  .values-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
-  }
+  .values-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;}
   .value-card{
-    background:var(--card);
-    padding:40px;
-    display:flex;
-    gap:22px;
+    position:relative;background:var(--card);border:2.4px solid var(--ink);border-radius:16px 20px 14px 18px;
+    padding:30px 30px 28px;display:flex;gap:20px;box-shadow:4px 5px 0 rgba(34,37,43,0.13);
   }
+  .value-card:nth-child(odd){transform:rotate(-0.8deg);}
+  .value-card:nth-child(even){transform:rotate(0.9deg);margin-top:16px;}
+  .value-card .tape{
+    position:absolute;top:-12px;left:36px;width:64px;height:22px;background:var(--yellow);opacity:.75;
+    transform:rotate(-4deg);border-radius:3px;
+  }
+  .value-card:nth-child(even) .tape{background:var(--pink);left:auto;right:36px;transform:rotate(4deg);}
   .value-icon{
-    width:46px;height:46px;
-    border:1px solid var(--line-strong);
-    border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    flex:none;
-    color:var(--navy-800);
+    width:52px;height:52px;border:2px solid var(--ink);border-radius:50%;background:#fff;
+    display:flex;align-items:center;justify-content:center;flex:none;
   }
-  .value-card h3{font-size:16.5px;font-weight:600;margin-bottom:10px;}
-  .value-card p{font-size:13.5px;color:var(--ink-soft);line-height:1.95;}
+  .value-card h3{font-size:17px;font-weight:400;margin-bottom:8px;color:var(--pen-blue-dark);}
+  .value-card p{font-size:13.5px;color:var(--ink-soft);line-height:1.95;font-family:var(--maru);}
   @media (max-width:760px){
     .values-grid{grid-template-columns:1fr;}
-    .value-card{padding:30px;}
+    .value-card{transform:none !important;margin-top:0 !important;padding:26px;}
   }
 
   /* ---------- Courses ---------- */
-  .course-rail{
-    display:flex;
-    flex-direction:column;
-  }
-  .course-row{
-    display:grid;
-    grid-template-columns:64px 1fr;
-    gap:0;
-  }
-  .course-rail-col{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-  }
+  .course-rail{display:flex;flex-direction:column;}
+  .course-row{display:grid;grid-template-columns:60px 1fr;}
+  .course-rail-col{display:flex;flex-direction:column;align-items:center;}
   .course-dot{
-    width:11px;height:11px;
-    border-radius:50%;
-    background:var(--navy-950);
-    border:1px solid var(--navy-950);
-    margin-top:46px;
-    flex:none;
+    width:34px;height:34px;margin-top:36px;flex:none;border:2.4px solid var(--ink);border-radius:50%;
+    background:var(--yellow);display:flex;align-items:center;justify-content:center;font-family:var(--num);
+    font-weight:600;font-size:13px;color:var(--ink);
   }
-  .course-row.kids .course-dot{background:var(--gold-500);border-color:var(--gold-500);}
-  .course-line{
-    width:1px;
-    flex:1;
-    background:var(--line-strong);
-  }
+  .course-row.kids .course-dot{background:var(--pink);}
+  .course-row.jhs .course-dot{background:var(--mint);}
+  .course-line{width:2.4px;flex:1;background-image:linear-gradient(var(--ink) 60%, transparent 0%);background-size:2.4px 10px;background-repeat:repeat-y;}
   .course-row:last-child .course-line{display:none;}
   .course-card{
-    padding:34px 0 60px 36px;
-    display:flex;
-    flex-direction:column;
-    gap:16px;
+    margin:0 0 44px 22px;background:var(--card);border:2.4px solid var(--ink);border-radius:18px 14px 20px 16px;
+    padding:28px 30px 30px;box-shadow:4px 5px 0 rgba(34,37,43,0.13);display:flex;flex-direction:column;gap:14px;
   }
-  .course-stage-label{
-    font-size:11px;
-    font-weight:600;
-    letter-spacing:.2em;
-    text-transform:uppercase;
-    color:var(--gold-600);
-  }
-  .course-head{
-    display:flex;
-    align-items:baseline;
-    gap:16px;
-    flex-wrap:wrap;
-  }
-  .course-card h3{font-size:24px;font-weight:600;}
-  .course-target{font-size:12.5px;color:var(--ink-faint);font-weight:500;letter-spacing:.03em;}
-  .course-card p.desc{font-size:14.5px;color:var(--ink-soft);max-width:640px;line-height:2;}
-  .course-card ul{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:10px 30px;
-    margin-top:6px;
-    max-width:760px;
-  }
-  .course-card ul li{
-    font-size:13px;
-    color:var(--ink);
-    display:flex;
-    gap:10px;
-    align-items:flex-start;
-    line-height:1.7;
-  }
-  .course-card ul li::before{
-    content:"";
-    width:4px;height:4px;
-    margin-top:8px;
-    border-radius:50%;
-    background:var(--gold-500);
-    flex:none;
-  }
+  .course-stage-label{font-family:var(--num);font-size:12px;font-weight:600;color:var(--pink-deep);letter-spacing:.06em;}
+  .course-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;}
+  .course-card h3{font-size:23px;font-weight:400;color:var(--pen-blue-dark);}
+  .course-target{font-size:12.5px;color:var(--ink-faint);font-weight:700;font-family:var(--maru);}
+  .course-card p.desc{font-size:14.5px;color:var(--ink-soft);max-width:640px;line-height:2;font-family:var(--maru);}
+  .course-card ul{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 28px;margin-top:4px;max-width:760px;}
+  .course-card ul li{font-size:13px;color:var(--ink);display:flex;gap:9px;align-items:flex-start;line-height:1.7;font-family:var(--maru);}
+  .course-card ul li::before{content:"★";color:var(--pink-deep);font-size:11px;margin-top:3px;flex:none;}
   @media (max-width:640px){
     .course-card ul{grid-template-columns:1fr;}
-    .course-card{padding-left:26px;}
+    .course-card{margin-left:10px;padding:22px 20px 24px;}
     .course-row{grid-template-columns:40px 1fr;}
+    .course-dot{width:28px;height:28px;margin-top:26px;font-size:11px;}
   }
 
   .goal-banner{
-    margin-top:20px;
-    border-top:1px solid var(--line);
-    padding-top:44px;
-    display:flex;
-    align-items:center;
-    gap:30px;
-    flex-wrap:wrap;
-    justify-content:space-between;
+    margin-top:10px;background:var(--paper-alt);border:2.4px solid var(--ink);border-radius:20px 16px 22px 14px;
+    padding:34px 36px;display:flex;align-items:center;gap:26px;flex-wrap:wrap;justify-content:space-between;
+    box-shadow:4px 5px 0 rgba(34,37,43,0.13);
   }
-  .goal-banner strong{
-    font-family:var(--serif);
-    font-size:19px;
-    font-weight:600;
-    display:block;
-    margin-bottom:8px;
-    color:var(--navy-950);
-  }
-  .goal-banner p{font-size:13.5px;color:var(--ink-soft);max-width:520px;}
+  .goal-banner strong{font-family:var(--hand);font-size:19px;font-weight:400;display:block;margin-bottom:8px;color:var(--pen-blue-dark);}
+  .goal-banner p{font-size:13.5px;color:var(--ink-soft);max-width:480px;font-family:var(--maru);}
 
-  /* ---------- Growth line (stage timeline) ---------- */
-  .growthline{background:var(--navy-950);color:#fff;}
-  .growthline .kicker{color:var(--gold-300);}
-  .growthline .section-head p{color:rgba(255,255,255,0.55);}
-  .stage-track{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    border-top:1px solid var(--line-dark);
-    border-left:1px solid var(--line-dark);
-  }
+  /* ---------- Growth line ---------- */
+  .stage-track{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;}
   .stage-item{
-    border-right:1px solid var(--line-dark);
-    border-bottom:1px solid var(--line-dark);
-    padding:30px 22px;
+    background:var(--card);border:2.2px solid var(--ink);border-radius:16px 12px 18px 14px;
+    padding:22px 18px;box-shadow:3px 4px 0 rgba(34,37,43,0.13);
   }
+  .stage-item:nth-child(odd){transform:translateY(-6px);}
   .stage-item .stage-no{
-    font-family:var(--display);
-    font-style:italic;
-    font-size:26px;
-    color:var(--gold-300);
-    margin-bottom:16px;
+    font-family:var(--num);font-weight:600;font-size:22px;color:var(--pink-deep);margin-bottom:12px;
+    display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;
+    border:2px dashed var(--pen-blue);border-radius:50%;
   }
-  .stage-item h4{font-size:14px;font-weight:600;margin-bottom:10px;color:#fff;}
-  .stage-item p{font-size:12px;color:rgba(255,255,255,0.5);line-height:1.9;}
-  .stage-item .stage-theme{
-    font-size:10.5px;
-    font-weight:600;
-    letter-spacing:.1em;
-    color:rgba(255,255,255,0.4);
-    margin-bottom:10px;
-    display:block;
-    text-transform:uppercase;
-  }
-  @media (max-width:900px){
-    .stage-track{grid-template-columns:repeat(2,1fr);}
-  }
-  @media (max-width:520px){
-    .stage-track{grid-template-columns:1fr;}
-  }
+  .stage-item h4{font-size:13.5px;font-weight:400;margin-bottom:8px;color:var(--pen-blue-dark);}
+  .stage-item p{font-size:11.5px;color:var(--ink-soft);line-height:1.85;font-family:var(--maru);}
+  .stage-item .stage-theme{font-size:10.5px;font-weight:700;color:var(--pen-blue);margin-bottom:8px;display:block;}
+  @media (max-width:900px){.stage-track{grid-template-columns:repeat(2,1fr);}.stage-item:nth-child(odd){transform:none;}}
+  @media (max-width:520px){.stage-track{grid-template-columns:1fr;}}
 
-  .flow-strip{
-    margin-top:60px;
-    display:flex;
-    align-items:center;
-    gap:0;
-    overflow-x:auto;
-    padding-bottom:10px;
-  }
+  .flow-strip{margin-top:48px;display:flex;align-items:center;gap:8px;overflow-x:auto;padding:6px 4px 14px;}
   .flow-chip{
-    flex:none;
-    font-size:11.5px;
-    font-weight:500;
-    letter-spacing:.04em;
-    color:rgba(255,255,255,0.75);
-    white-space:nowrap;
-    padding:0 18px;
-    position:relative;
+    flex:none;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:9px 18px;
+    font-size:12.5px;font-weight:700;color:var(--pen-blue-dark);white-space:nowrap;font-family:var(--maru);
   }
-  .flow-chip.is-accent{color:var(--gold-300);font-weight:700;}
-  .flow-sep{color:rgba(255,255,255,0.25);flex:none;font-size:12px;}
+  .flow-chip.is-accent{background:var(--yellow);}
+  .flow-sep{color:var(--ink-faint);flex:none;font-size:14px;}
 
   /* ---------- Methods ---------- */
-  .methods-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
-  }
+  .methods-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
   .method-card{
-    background:var(--card);
-    padding:44px 36px;
+    background:var(--card);border:2.4px solid var(--ink);border-radius:18px 14px 20px 16px;
+    padding:32px 28px;box-shadow:4px 5px 0 rgba(34,37,43,0.13);
   }
+  .method-card:nth-child(2){transform:translateY(-10px);}
   .method-card .m-icon{
-    width:44px;height:44px;
-    border:1px solid var(--line-strong);
-    border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    margin-bottom:26px;
-    color:var(--navy-800);
+    width:50px;height:50px;border:2px solid var(--ink);border-radius:50%;background:#fff;
+    display:flex;align-items:center;justify-content:center;margin-bottom:22px;
   }
-  .method-card h3{font-size:19px;font-weight:600;margin-bottom:6px;}
-  .method-card .m-sub{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-600);margin-bottom:14px;display:block;}
-  .method-card p{font-size:13.5px;color:var(--ink-soft);line-height:2;}
-  @media (max-width:860px){
-    .methods-grid{grid-template-columns:1fr;}
-  }
-  .method-extra{
-    margin-top:0;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    border-top:1px solid var(--line);
-    border-left:1px solid var(--line);
-  }
+  .method-card h3{font-size:19px;font-weight:400;margin-bottom:6px;color:var(--pen-blue-dark);}
+  .method-card .m-sub{font-size:11.5px;font-weight:700;color:var(--pink-deep);margin-bottom:12px;display:block;}
+  .method-card p{font-size:13.5px;color:var(--ink-soft);line-height:2;font-family:var(--maru);}
+  @media (max-width:860px){.methods-grid{grid-template-columns:1fr;}.method-card{transform:none !important;}}
+
+  .method-extra{margin-top:30px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
   .method-extra span{
-    font-size:12px;
-    font-weight:500;
-    color:var(--ink-soft);
-    padding:20px 18px;
-    border-right:1px solid var(--line);
-    border-bottom:1px solid var(--line);
-    display:flex;
-    align-items:center;
-    gap:10px;
+    font-size:12px;font-weight:700;color:var(--ink);background:#fff;border:1.8px dashed var(--pen-blue);
+    padding:14px 14px;border-radius:12px;display:flex;align-items:center;gap:9px;font-family:var(--maru);
   }
-  @media (max-width:760px){
-    .method-extra{grid-template-columns:repeat(2,1fr);}
-  }
+  @media (max-width:760px){.method-extra{grid-template-columns:repeat(2,1fr);}}
 
   /* ---------- Team ---------- */
-  .team-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
-  }
+  .team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;}
   .team-card{
-    background:var(--card);
-    padding:44px 40px;
-    display:flex;
-    gap:24px;
+    background:var(--card);border:2.4px solid var(--ink);border-radius:18px 14px 20px 16px;
+    padding:32px 30px;display:flex;gap:22px;box-shadow:4px 5px 0 rgba(34,37,43,0.13);
   }
+  .team-card:nth-child(1){transform:rotate(-0.8deg);}
+  .team-card:nth-child(2){transform:rotate(0.8deg);}
   .team-avatar{
-    width:64px;height:64px;
-    border-radius:50%;
-    border:1px solid var(--line-strong);
-    flex:none;
-    display:flex;align-items:center;justify-content:center;
-    color:var(--navy-950);
-    font-family:var(--serif);
-    font-weight:600;
-    font-size:18px;
+    width:70px;height:70px;border-radius:50%;border:2.4px solid var(--ink);flex:none;background:var(--yellow);
+    display:flex;align-items:center;justify-content:center;color:var(--pen-blue-dark);font-family:var(--hand);font-size:16px;
   }
-  .team-card h3{font-size:18px;font-weight:600;}
-  .team-role{font-size:11.5px;font-weight:600;letter-spacing:.05em;color:var(--gold-600);margin-top:6px;display:block;}
-  .team-card p.bio{font-size:13px;color:var(--ink-soft);margin-top:14px;line-height:1.95;}
-  @media (max-width:760px){
-    .team-grid{grid-template-columns:1fr;}
-    .team-card{flex-direction:column;padding:34px;}
-  }
+  .team-card:nth-child(2) .team-avatar{background:var(--mint);}
+  .team-card h3{font-size:18px;font-weight:400;color:var(--pen-blue-dark);}
+  .team-role{font-size:12px;font-weight:700;color:var(--pink-deep);margin-top:6px;display:block;}
+  .team-card p.bio{font-size:13px;color:var(--ink-soft);margin-top:12px;line-height:1.95;font-family:var(--maru);}
+  @media (max-width:760px){.team-grid{grid-template-columns:1fr;}.team-card{flex-direction:column;transform:none !important;padding:26px;}}
 
   /* ---------- Steps ---------- */
-  .steps-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:0;
-  }
-  .step-card{
-    padding:0 26px 0 0;
-    position:relative;
-  }
-  .step-card:not(:last-child)::after{
-    content:"";
-    position:absolute;
-    top:16px;right:0;
-    width:26px;height:1px;
-    background:var(--line-strong);
-  }
+  .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .step-card{text-align:center;background:#fff;border:2.2px solid var(--ink);border-radius:16px;padding:26px 18px;box-shadow:3px 4px 0 rgba(34,37,43,0.12);}
+  .step-card:nth-child(2n){transform:translateY(-8px);}
   .step-num{
-    font-family:var(--display);
-    font-style:italic;
-    font-size:30px;
-    color:var(--gold-500);
-    margin-bottom:20px;
+    width:48px;height:48px;margin:0 auto 16px;border-radius:50%;background:var(--pink);border:2.2px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;font-family:var(--num);font-weight:600;color:var(--ink);font-size:16px;
   }
-  .step-card h4{font-size:15px;font-weight:600;margin-bottom:10px;}
-  .step-card p{font-size:12.5px;color:var(--ink-soft);line-height:1.9;}
-  @media (max-width:860px){
-    .steps-grid{grid-template-columns:repeat(2,1fr);row-gap:40px;}
-    .step-card:nth-child(2)::after{display:none;}
-  }
-  @media (max-width:520px){
-    .steps-grid{grid-template-columns:1fr;}
-    .step-card::after{display:none;}
-  }
+  .step-card:nth-child(2) .step-num{background:var(--yellow);}
+  .step-card:nth-child(3) .step-num{background:var(--mint);}
+  .step-card:nth-child(4) .step-num{background:var(--pink);}
+  .step-card h4{font-size:14.5px;font-weight:400;margin-bottom:8px;color:var(--pen-blue-dark);}
+  .step-card p{font-size:12px;color:var(--ink-soft);line-height:1.85;font-family:var(--maru);}
+  @media (max-width:860px){.steps-grid{grid-template-columns:repeat(2,1fr);row-gap:26px;}}
+  @media (max-width:520px){.steps-grid{grid-template-columns:1fr;}.step-card:nth-child(2n){transform:none;}}
 
   /* ---------- CTA banner ---------- */
   .cta-banner{
-    background:var(--navy-950);
-    color:#fff;
-    padding:64px 56px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:30px;
-    flex-wrap:wrap;
-    position:relative;
-    overflow:hidden;
+    background:var(--paper-alt);border:2.6px solid var(--ink);border-radius:24px 18px 26px 16px;
+    padding:48px 44px;display:flex;align-items:center;justify-content:space-between;gap:26px;flex-wrap:wrap;
+    box-shadow:5px 6px 0 rgba(34,37,43,0.13);
   }
-  .cta-banner::before{
-    content:"";
-    position:absolute;inset:0;
-    background:radial-gradient(ellipse 500px 300px at 90% 0%, rgba(185,138,62,0.2), transparent 65%);
-  }
-  .cta-banner > *{position:relative;z-index:1;}
-  .cta-banner h3{color:#fff;font-size:clamp(21px,3vw,28px);font-weight:600;max-width:480px;}
-  .cta-banner p{color:rgba(255,255,255,0.6);margin-top:14px;font-size:13.5px;max-width:440px;}
+  .cta-banner h3{color:var(--pen-blue-dark);font-size:clamp(20px,3vw,26px);font-weight:400;max-width:480px;}
+  .cta-banner p{color:var(--ink-soft);margin-top:12px;font-size:13.5px;max-width:420px;font-family:var(--maru);}
   .cta-actions{display:flex;gap:14px;flex-wrap:wrap;}
-  @media (max-width:760px){
-    .cta-banner{padding:44px 30px;}
-  }
+  @media (max-width:760px){.cta-banner{padding:34px 26px;}}
 
   /* ---------- Access ---------- */
-  .access-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
-  }
-  .access-card{
-    background:var(--card);
-    padding:8px 44px;
-  }
-  .access-row{
-    display:flex;
-    gap:14px;
-    padding:20px 0;
-    border-bottom:1px solid var(--line);
-  }
+  .access-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:stretch;}
+  .access-card{background:var(--card);border:2.4px solid var(--ink);border-radius:20px 16px 22px 14px;padding:12px 38px;box-shadow:4px 5px 0 rgba(34,37,43,0.13);}
+  .access-row{display:flex;gap:14px;padding:18px 0;border-bottom:1.6px dashed var(--line-blue);}
   .access-row:last-child{border-bottom:none;}
-  .access-row .label{
-    flex:none;
-    width:84px;
-    font-size:11px;
-    font-weight:600;
-    letter-spacing:.08em;
-    color:var(--gold-600);
-    text-transform:uppercase;
-    padding-top:2px;
-  }
-  .access-row .value{font-size:14px;color:var(--ink);line-height:1.8;}
-  .map-frame{
-    overflow:hidden;
-    border:none;
-    min-height:280px;
-  }
-  .map-frame iframe{width:100%;height:100%;min-height:280px;border:0;display:block;filter:grayscale(0.3) contrast(1.05);}
-  @media (max-width:860px){
-    .access-grid{grid-template-columns:1fr;}
-    .access-card{padding:8px 30px;}
-  }
+  .access-row .label{flex:none;width:80px;font-size:11.5px;font-weight:700;color:var(--pink-deep);padding-top:2px;font-family:var(--num);}
+  .access-row .value{font-size:14px;color:var(--ink);line-height:1.8;font-family:var(--maru);}
+  .map-frame{overflow:hidden;border:2.4px solid var(--ink);border-radius:20px 16px 22px 14px;min-height:280px;box-shadow:4px 5px 0 rgba(34,37,43,0.13);}
+  .map-frame iframe{width:100%;height:100%;min-height:280px;border:0;display:block;}
+  @media (max-width:860px){.access-grid{grid-template-columns:1fr;}.access-card{padding:8px 26px;}}
 
   /* ---------- Footer ---------- */
-  footer{
-    background:var(--navy-950);
-    color:rgba(255,255,255,0.55);
-    padding:80px 0 30px;
-  }
-  .footer-grid{
-    display:grid;
-    grid-template-columns:1.4fr repeat(3,1fr);
-    gap:40px;
-  }
+  footer{background:var(--pen-blue-dark);color:rgba(255,255,255,0.8);padding:64px 0 26px;border-top:3px solid var(--ink);}
+  .footer-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:36px;}
   .footer-brand .logo{color:#fff;}
-  .footer-brand .logo small{color:var(--gold-300);}
-  .footer-brand p{margin-top:18px;font-size:13px;color:rgba(255,255,255,0.4);max-width:280px;line-height:2;}
-  .footer-social{margin-top:24px;display:flex;gap:10px;}
+  .footer-brand .logo small{color:var(--yellow);}
+  .footer-brand p{margin-top:14px;font-size:13px;color:rgba(255,255,255,0.62);max-width:280px;line-height:2;font-family:var(--maru);}
+  .footer-social{margin-top:18px;display:flex;gap:10px;}
   .footer-social a{
-    width:36px;height:36px;
-    border-radius:50%;
-    border:1px solid var(--line-dark);
-    display:flex;align-items:center;justify-content:center;
-    color:rgba(255,255,255,0.6);
-    transition:border-color .2s ease, color .2s ease;
+    width:38px;height:38px;border-radius:50%;border:2px solid rgba(255,255,255,0.5);background:rgba(255,255,255,0.06);
+    display:flex;align-items:center;justify-content:center;color:#fff;
   }
-  .footer-social a:hover{border-color:var(--gold-300);color:var(--gold-300);}
-  .footer-social .ic{width:16px;height:16px;}
-  .footer-col h5{
-    font-size:11px;
-    font-weight:600;
-    color:#fff;
-    letter-spacing:.16em;
-    text-transform:uppercase;
-    margin-bottom:22px;
-  }
-  .footer-col ul{display:flex;flex-direction:column;gap:13px;}
-  .footer-col a{font-size:13px;color:rgba(255,255,255,0.5);}
-  .footer-col a:hover{color:var(--gold-300);}
-  .footer-bottom{
-    margin-top:64px;
-    padding-top:26px;
-    border-top:1px solid var(--line-dark);
-    display:flex;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:12px;
-    font-size:11.5px;
-    letter-spacing:.05em;
-    color:rgba(255,255,255,0.35);
-  }
-  @media (max-width:860px){
-    .footer-grid{grid-template-columns:1fr 1fr;}
-  }
-  @media (max-width:560px){
-    .footer-grid{grid-template-columns:1fr;}
-  }
+  .footer-social .ic{width:17px;height:17px;stroke:#fff;}
+  .footer-col h5{font-family:var(--num);font-size:12.5px;font-weight:600;color:#fff;letter-spacing:.06em;margin-bottom:16px;}
+  .footer-col ul{display:flex;flex-direction:column;gap:11px;}
+  .footer-col a{font-size:13.5px;color:rgba(255,255,255,0.68);font-family:var(--maru);}
+  .footer-col a:hover{color:var(--yellow);}
+  .footer-bottom{margin-top:48px;padding-top:22px;border-top:1.6px dashed rgba(255,255,255,0.25);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:rgba(255,255,255,0.5);font-family:var(--maru);}
+  @media (max-width:860px){.footer-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:560px){.footer-grid{grid-template-columns:1fr;}}
 
   .reveal{opacity:1;transform:none;transition:opacity .7s ease, transform .7s ease;}
   .js-ready .reveal{opacity:0;transform:translateY(16px);}
@@ -911,9 +474,9 @@
   <div class="header-inner">
     <a href="#top" class="logo">
       <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="20" cy="20" r="17.5" stroke="#152a42" stroke-width="1.2"/>
-        <path d="M20 8 L24.5 20 L20 32 L15.5 20 Z" fill="none" stroke="#b98a3e" stroke-width="1.2" stroke-linejoin="round"/>
-        <circle cx="20" cy="20" r="2" fill="#152a42"/>
+        <path d="M20 5c9 0 15 6.5 15 15 0 8.5-6.5 15-15 15C11 35 5 28.5 5 20 5 11.5 11.5 5 20 5Z" stroke="#2b4c9e" stroke-width="1.8"/>
+        <path d="M20 10 L25 20 L20 30 L15 20 Z" fill="none" stroke="#ff6fa8" stroke-width="1.8" stroke-linejoin="round"/>
+        <circle cx="20" cy="20" r="2" fill="#2b4c9e"/>
       </svg>
       <span>学習塾ComPass<small>MATSUYAMA JUKU COMPASS</small></span>
     </a>
@@ -950,14 +513,20 @@
 <main id="top">
 
   <!-- ================= HERO ================= -->
-  <section class="hero">
+  <section class="hero paper-lines">
+    <svg class="doodle" viewBox="0 0 40 40" style="width:34px;top:100px;left:6%;" aria-hidden="true"><path d="M20 4 L23 16 L35 16 L25 23 L29 35 L20 27 L11 35 L15 23 L5 16 L17 16 Z"/></svg>
+    <svg class="doodle" viewBox="0 0 40 40" style="width:26px;top:60%;left:3%;stroke:#ff6fa8;" aria-hidden="true"><path d="M20 34C8 26 4 18 9 12c4-4.5 9-3 11 1 2-4 7-5.5 11-1 5 6-1 14-11 22Z"/></svg>
     <div class="wrap hero-grid">
       <div>
         <span class="hero-tag">愛媛県松山市の学習塾 ／ 小1〜中3</span>
-        <h1>学びは、<br><em>未来を選べる力</em><br>になる。</h1>
+        <h1>
+          <span class="bubble" data-text="学びは、">学びは、</span><br>
+          <span class="bubble pink" data-text="未来を選べる力">未来を選べる力</span><br>
+          <span class="bubble" data-text="になる。">になる。</span>
+        </h1>
         <p class="hero-sub">
           学習塾ComPassは、「わかる」から「好きになる」へ。<br>
-          知識という枝葉だけでなく、思考力・自己信頼・戻ってこられる心という「根っこ」を育てる塾です。<br>
+          知識という枝葉だけでなく、<span class="mark">思考力・自己信頼・戻ってこられる心</span>という「根っこ」を育てる塾です。<br>
           受験を、自分史上最高の自分になるプロセスに。
         </p>
         <div class="hero-actions">
@@ -965,64 +534,48 @@
           <a href="#courses" class="btn btn-ghost">コースを見る</a>
         </div>
         <div class="hero-points">
-          <div class="hero-point"><span class="idx">01</span>小1〜中3の一貫教育ライン</div>
-          <div class="hero-point"><span class="idx">02</span>方眼ノート×THE FORCE</div>
-          <div class="hero-point"><span class="idx">03</span>公立トップ校受験に強い</div>
+          <div class="hero-point"><span class="dot"></span>小1〜中3の一貫教育ライン</div>
+          <div class="hero-point"><span class="dot"></span>方眼ノート×THE FORCE</div>
+          <div class="hero-point"><span class="dot"></span>公立トップ校受験に強い</div>
         </div>
       </div>
 
       <div class="compass-visual" aria-hidden="true">
         <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="150" cy="150" r="140" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
-          <circle cx="150" cy="150" r="112" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-          <circle cx="150" cy="150" r="84" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-          <g stroke="rgba(255,255,255,0.16)" stroke-width="1">
-            <line x1="150" y1="10" x2="150" y2="30"/>
-            <line x1="150" y1="270" x2="150" y2="290"/>
-            <line x1="10" y1="150" x2="30" y2="150"/>
-            <line x1="270" y1="150" x2="290" y2="150"/>
-          </g>
-          <path d="M150 62 L178 150 L150 238 L122 150 Z" fill="none" stroke="#e2c07d" stroke-width="1.1" stroke-linejoin="round"/>
-          <path d="M150 62 L178 150 L150 150 Z" fill="rgba(226,192,125,0.35)"/>
-          <circle cx="150" cy="150" r="7" fill="none" stroke="#e2c07d" stroke-width="1.2"/>
-          <circle cx="150" cy="150" r="2" fill="#e2c07d"/>
-          <text x="150" y="40" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="12" font-weight="600" font-family="Noto Sans JP, sans-serif" letter-spacing="2">N</text>
-          <text x="150" y="266" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="12" font-weight="600" font-family="Noto Sans JP, sans-serif" letter-spacing="2">S</text>
-          <text x="262" y="155" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="12" font-weight="600" font-family="Noto Sans JP, sans-serif" letter-spacing="2">E</text>
-          <text x="38" y="155" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="12" font-weight="600" font-family="Noto Sans JP, sans-serif" letter-spacing="2">W</text>
+          <path d="M150,32 C205,28 268,72 271,148 C274,222 214,270 150,268 C86,266 30,214 30,150 C30,84 92,36 150,32 Z"
+                fill="none" stroke="#2b4c9e" stroke-width="2.2"/>
+          <circle cx="150" cy="150" r="96" fill="none" stroke="#2b4c9e" stroke-width="1.4" stroke-dasharray="2 8"/>
+          <path d="M150 78 L173 150 L150 222 L127 150 Z" fill="#ffe066" stroke="#23262c" stroke-width="2.2" stroke-linejoin="round"/>
+          <path d="M150 78 L173 150 L150 150 Z" fill="#ff6fa8" stroke="#23262c" stroke-width="2.2" stroke-linejoin="round"/>
+          <circle cx="150" cy="150" r="9" fill="#fff" stroke="#23262c" stroke-width="2.2"/>
+          <text x="150" y="54" text-anchor="middle" fill="#2b4c9e" font-size="15" font-weight="700" font-family="Kosugi Maru, sans-serif">N</text>
+          <path class="doodle" d="M246 78 L256 66 L268 74" style="stroke:#ff6fa8;position:static;" />
         </svg>
       </div>
     </div>
   </section>
 
   <!-- ================= ABOUT / WORLDVIEW ================= -->
-  <section class="worldview" id="about">
+  <section class="worldview paper-grid" id="about">
     <div class="wrap worldview-grid">
       <div class="tree-visual" aria-hidden="true">
-        <svg viewBox="0 0 320 360" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#152a42" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-          <ellipse cx="160" cy="322" rx="108" ry="4" stroke="rgba(21,42,66,0.2)"/>
-          <line x1="160" y1="330" x2="160" y2="200" stroke="#8a6a45" stroke-width="1.4"/>
-          <path d="M160 210 C130 225 108 235 84 300" stroke="#8a6a45" stroke-width="1.1"/>
-          <path d="M160 210 C190 225 212 235 236 300" stroke="#8a6a45" stroke-width="1.1"/>
-          <path d="M160 250 C142 260 128 268 112 300" stroke="#8a6a45" stroke-width="1"/>
-          <path d="M160 250 C178 260 192 268 208 300" stroke="#8a6a45" stroke-width="1"/>
-          <circle cx="160" cy="108" r="92" stroke="rgba(21,42,66,0.55)"/>
-          <circle cx="98" cy="150" r="52" stroke="rgba(21,42,66,0.4)"/>
-          <circle cx="222" cy="150" r="52" stroke="rgba(21,42,66,0.4)"/>
-          <circle cx="160" cy="58" r="54" stroke="rgba(21,42,66,0.4)"/>
-          <line x1="112" y1="212" x2="128" y2="300" stroke="#b98a3e" stroke-width="1.3"/>
-          <line x1="160" y1="216" x2="163" y2="300" stroke="#b98a3e" stroke-width="1.3"/>
-          <line x1="205" y1="212" x2="192" y2="300" stroke="#b98a3e" stroke-width="1.3"/>
-          <text x="160" y="104" text-anchor="middle" font-size="13" font-weight="600" fill="#152a42" font-family="Shippori Mincho, serif" stroke="none">枝葉 ＝ 知識</text>
-          <text x="160" y="326" text-anchor="middle" font-size="13" font-weight="600" fill="#9c7231" font-family="Shippori Mincho, serif" stroke="none">根っこ ＝ 思考力・自己信頼</text>
+        <svg viewBox="0 0 320 360" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#2b4c9e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M160 330 C130 260 190 260 160 200" stroke="#c98b4a" stroke-width="2.4"/>
+          <path d="M160 214 C136 226 112 236 90 296" stroke="#c98b4a" stroke-width="1.8"/>
+          <path d="M160 214 C184 226 208 236 230 296" stroke="#c98b4a" stroke-width="1.8"/>
+          <path d="M104 128 C90 108 108 78 140 82 C146 58 186 56 196 82 C226 78 240 112 220 132 C232 154 210 182 180 174 C166 192 128 190 118 170 C88 174 78 142 104 128Z"/>
+          <path d="M112 216 L128 296 M160 220 L163 296 M204 214 L190 296" stroke="#ff6fa8" stroke-width="2.4"/>
+          <path d="M40 320 C110 336 210 336 280 320" stroke="#2b4c9e" stroke-width="1.4" stroke-dasharray="1 7"/>
+          <text x="160" y="128" text-anchor="middle" font-size="14" font-weight="700" fill="#1c3570" font-family="Kosugi Maru, sans-serif" stroke="none">枝葉＝知識</text>
+          <text x="160" y="322" text-anchor="middle" font-size="14" font-weight="700" fill="#ef4f92" font-family="Kosugi Maru, sans-serif" stroke="none">根っこ＝思考力・自己信頼</text>
         </svg>
       </div>
       <div class="worldview-copy">
         <span class="kicker">Worldview</span>
-        <h2 style="margin-top:18px;">教育とは、木を育てるようなもの。</h2>
-        <p class="lead" style="margin-top:26px;">枝葉は増やせる。でも、根は時間をかけて育てるしかない。</p>
+        <h2 style="margin-top:16px;">教育とは、<span class="bubble" data-text="木を育てるようなもの。">木を育てるようなもの。</span></h2>
+        <p class="lead">枝葉は増やせる。でも、根は時間をかけて育てるしかない。</p>
         <p>数学の公式や英単語の知識は、木で言えば枝葉。しかし枝葉だけでは、木は立ちません。その木を支えるのは根っこです。</p>
-        <p>定期テストの順位、模試の判定、入試本番のプレッシャー、周りの子が自分より賢く見える瞬間——そんな風の中でも立ち続けるために、ComPassはまず根を育てます。</p>
+        <p>定期テストの順位、模試の判定、入試本番のプレッシャー、周りの子が自分より賢く見える瞬間——そんな風の中でも<span class="mark pink">立ち続けるために</span>、ComPassはまず根を育てます。</p>
         <div class="root-tags">
           <span class="root-tag">思考整理</span>
           <span class="root-tag">自己信頼</span>
@@ -1034,11 +587,11 @@
   </section>
 
   <!-- ================= MVV ================= -->
-  <section class="mvv">
+  <section class="paper-lines">
     <div class="wrap">
       <div class="section-head center">
-        <span class="kicker" style="justify-content:center;">Purpose / Mission / Philosophy</span>
-        <h2>未来をひらく羅針盤として。</h2>
+        <span class="kicker">Purpose / Mission / Philosophy</span>
+        <h2 style="margin-top:8px;">未来をひらく<span class="bubble pink" data-text="羅針盤">羅針盤</span>として。</h2>
         <p>ComPassという名前には、二つの意味を込めています。子どもたちと共に歩むこと。そして、進む方向を示す羅針盤であること。</p>
       </div>
       <div class="mvv-grid">
@@ -1065,15 +618,16 @@
   </section>
 
   <!-- ================= VALUES ================= -->
-  <section>
+  <section class="paper-grid">
     <div class="wrap">
       <div class="section-head">
         <span class="kicker">Values</span>
-        <h2>ComPassが大切にしていること</h2>
+        <h2 style="margin-top:8px;">ComPassが大切にしていること</h2>
         <p>子どもと関わるときに、私たちが大切にしている行動指針です。</p>
       </div>
       <div class="values-grid">
         <div class="value-card reveal">
+          <span class="tape"></span>
           <div class="value-icon">
             <svg class="ic" viewBox="0 0 24 24"><path d="M12 21c0-6-3-9-7-10 0 7 3 10 7 10Z"/><path d="M12 21c0-8 4-12 9-13 0 8-4 13-9 13Z"/><path d="M12 21v-6"/></svg>
           </div>
@@ -1083,8 +637,9 @@
           </div>
         </div>
         <div class="value-card reveal">
+          <span class="tape"></span>
           <div class="value-icon">
-            <svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7 L14.5 12 L12 17 L9.5 12 Z"/></svg>
+            <svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5 14.5 12 12 16.5 9.5 12Z"/></svg>
           </div>
           <div>
             <h3>寄り添いすぎず、突き放さない</h3>
@@ -1092,6 +647,7 @@
           </div>
         </div>
         <div class="value-card reveal">
+          <span class="tape"></span>
           <div class="value-icon">
             <svg class="ic" viewBox="0 0 24 24"><path d="M12 3c3 2 5 5 5 8a5 5 0 0 1-10 0c0-3 2-6 5-8Z"/><path d="M12 16v5"/><path d="M9 21h6"/></svg>
           </div>
@@ -1101,6 +657,7 @@
           </div>
         </div>
         <div class="value-card reveal">
+          <span class="tape"></span>
           <div class="value-icon">
             <svg class="ic" viewBox="0 0 24 24"><path d="M12 2v6"/><path d="M6 9l6-6 6 6"/><path d="M5 13a7 7 0 0 0 14 0c0-3-2-5-3-8-1 2-1 4-3 4s-1-3-2-5c-2 3-6 5-6 9Z"/></svg>
           </div>
@@ -1114,18 +671,18 @@
   </section>
 
   <!-- ================= COURSES ================= -->
-  <section id="courses">
+  <section class="paper-lines" id="courses">
     <div class="wrap">
       <div class="section-head">
         <span class="kicker">Course</span>
-        <h2>コース紹介</h2>
+        <h2 style="margin-top:8px;">コース紹介</h2>
         <p>小1から中3まで、一本の軸でつながる教育ライン。学年に合わせて、育てる力が少しずつ変わっていきます。</p>
       </div>
 
       <div class="course-rail">
         <div class="course-row kids">
           <div class="course-rail-col">
-            <div class="course-dot"></div>
+            <div class="course-dot">00</div>
             <div class="course-line"></div>
           </div>
           <div class="course-card reveal">
@@ -1146,7 +703,7 @@
 
         <div class="course-row">
           <div class="course-rail-col">
-            <div class="course-dot"></div>
+            <div class="course-dot">01</div>
             <div class="course-line"></div>
           </div>
           <div class="course-card reveal">
@@ -1165,9 +722,9 @@
           </div>
         </div>
 
-        <div class="course-row">
+        <div class="course-row jhs">
           <div class="course-rail-col">
-            <div class="course-dot"></div>
+            <div class="course-dot">02</div>
           </div>
           <div class="course-card reveal">
             <span class="course-stage-label">Stage 2〜4 ｜ 中1〜3</span>
@@ -1197,11 +754,11 @@
   </section>
 
   <!-- ================= GROWTH LINE ================= -->
-  <section class="growthline" id="line">
+  <section class="paper-grid" id="line">
     <div class="wrap">
       <div class="section-head center">
-        <span class="kicker" style="justify-content:center;">Growth Line</span>
-        <h2>小1から中3まで、一貫した成長の設計</h2>
+        <span class="kicker">Growth Line</span>
+        <h2 style="margin-top:8px;">小1から中3まで、一貫した成長の設計</h2>
         <p>ComPassの教育は、楽しさから始まり、習慣・努力・思考・自己信頼・感情調整を経て、受験での発揮、そして未来の選択へとつながっています。</p>
       </div>
 
@@ -1239,30 +796,30 @@
       </div>
 
       <div class="flow-strip" aria-label="成長の流れ">
-        <span class="flow-chip">楽しさ</span><span class="flow-sep">―</span>
-        <span class="flow-chip">習慣</span><span class="flow-sep">―</span>
-        <span class="flow-chip">努力</span><span class="flow-sep">―</span>
-        <span class="flow-chip">思考整理</span><span class="flow-sep">―</span>
-        <span class="flow-chip">自己信頼</span><span class="flow-sep">―</span>
-        <span class="flow-chip">感情調整</span><span class="flow-sep">―</span>
-        <span class="flow-chip">受験で発揮</span><span class="flow-sep">―</span>
+        <span class="flow-chip">楽しさ</span><span class="flow-sep">→</span>
+        <span class="flow-chip">習慣</span><span class="flow-sep">→</span>
+        <span class="flow-chip">努力</span><span class="flow-sep">→</span>
+        <span class="flow-chip">思考整理</span><span class="flow-sep">→</span>
+        <span class="flow-chip">自己信頼</span><span class="flow-sep">→</span>
+        <span class="flow-chip">感情調整</span><span class="flow-sep">→</span>
+        <span class="flow-chip">受験で発揮</span><span class="flow-sep">→</span>
         <span class="flow-chip is-accent">未来選択</span>
       </div>
     </div>
   </section>
 
   <!-- ================= METHODS ================= -->
-  <section id="methods">
+  <section class="paper-lines" id="methods">
     <div class="wrap">
       <div class="section-head">
         <span class="kicker">Method</span>
-        <h2>根っこを育てる3つの仕組み</h2>
+        <h2 style="margin-top:8px;">根っこを育てる3つの仕組み</h2>
         <p>ComPassでは、知識の前に「学び方」と「心の技術」を大切にしています。</p>
       </div>
       <div class="methods-grid">
         <div class="method-card reveal">
           <div class="m-icon">
-            <svg class="ic" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M4 9h16M4 14h16M9 4v16M14 4v16"/></svg>
+            <svg class="ic" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9.5h16M4 14.5h16M9.5 4v16M14.5 4v16"/></svg>
           </div>
           <span class="m-sub">思考整理メソッド</span>
           <h3>方眼ノート</h3>
@@ -1270,7 +827,7 @@
         </div>
         <div class="method-card reveal">
           <div class="m-icon">
-            <svg class="ic" viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4V5Z"/><path d="M8 9h8M8 12h5"/></svg>
+            <svg class="ic" viewBox="0 0 24 24"><path d="M4 5.5h16v10.5H8.5l-3.5 3.5V5.5Z"/><path d="M8 9.5h8M8 12.5h5"/></svg>
           </div>
           <span class="m-sub">自己理解の時間</span>
           <h3>10min</h3>
@@ -1278,7 +835,7 @@
         </div>
         <div class="method-card reveal">
           <div class="m-icon">
-            <svg class="ic" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 13.6-5.7L20 8"/><path d="M20 4v4h-4"/><path d="M20 12a8 8 0 0 1-13.6 5.7L4 16"/><path d="M4 20v-4h4"/></svg>
+            <svg class="ic" viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 0 1 13-5.2L20 9"/><path d="M20 4.5v4.5h-4.5"/><path d="M19.5 12a7.5 7.5 0 0 1-13 5.2L4 15"/><path d="M4 19.5V15h4.5"/></svg>
           </div>
           <span class="m-sub">受験期メンタルプログラム</span>
           <h3>THE FORCE</h3>
@@ -1286,27 +843,27 @@
         </div>
       </div>
       <div class="method-extra">
-        <span><svg class="ic" style="width:16px;height:16px;" viewBox="0 0 24 24"><path d="M4 5c3-1 6-1 8 1 2-2 5-2 8-1v13c-3-1-6-1-8 1-2-2-5-2-8-1V5Z"/><path d="M12 6v13"/></svg>速読解トレーニング（全コース）</span>
-        <span><svg class="ic" style="width:16px;height:16px;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>アディショナルタイム（最大22:30まで）</span>
-        <span><svg class="ic" style="width:16px;height:16px;" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="1"/><path d="M8 21h8M12 17v4"/></svg>オンライン学習室（中3必修）</span>
-        <span><svg class="ic" style="width:16px;height:16px;" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 7h8M8 11h2M12 11h2M16 11h0M8 15h2M12 15h2M16 15h0"/></svg>400%学習法（コンパスキッズ）</span>
+        <span><svg class="ic" style="width:18px;height:18px;" viewBox="0 0 24 24"><path d="M4 5.5c3-1.2 6-1.2 8 1 2-2.2 5-2.2 8-1v12.5c-3-1.2-6-1.2-8 1-2-2.2-5-2.2-8-1V5.5Z"/><path d="M12 6.5v12.5"/></svg>速読解トレーニング（全コース）</span>
+        <span><svg class="ic" style="width:18px;height:18px;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></svg>アディショナルタイム（最大22:30まで）</span>
+        <span><svg class="ic" style="width:18px;height:18px;" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="12.5" rx="1.5"/><path d="M8 20.5h8M12 17v3.5"/></svg>オンライン学習室（中3必修）</span>
+        <span><svg class="ic" style="width:18px;height:18px;" viewBox="0 0 24 24"><rect x="4.5" y="3" width="15" height="18" rx="1.5"/><path d="M8 7.5h8M8 11.5h2M12 11.5h2M8 15.5h2M12 15.5h2"/></svg>400%学習法（コンパスキッズ）</span>
       </div>
     </div>
   </section>
 
   <!-- ================= TEAM ================= -->
-  <section id="team">
+  <section class="paper-grid" id="team">
     <div class="wrap">
       <div class="section-head">
         <span class="kicker">Our Team</span>
-        <h2>代表紹介</h2>
+        <h2 style="margin-top:8px;">代表紹介</h2>
         <p>子どもたちのそばで、共に歩む2人です。</p>
       </div>
       <div class="team-grid">
         <div class="team-card reveal">
           <div class="team-avatar">奈保</div>
           <div>
-            <h3>橘薗 奈保 <span style="font-family:var(--sans);font-size:12px;color:var(--ink-faint);font-weight:500;">Naho Tachibanazono</span></h3>
+            <h3>橘薗 奈保 <span style="font-family:var(--maru);font-size:12px;color:var(--ink-faint);font-weight:700;">Naho Tachibanazono</span></h3>
             <span class="team-role">代表／経営・授業・ブランド・マーケティング</span>
             <p class="bio">愛媛県松山市出身。久米中学校・松山東高校・愛媛大学卒。中・高の教員免許を取得後、神奈川県の大手集団塾「株式会社ステップ」に8年間講師として勤務（延べ900人以上を指導、優秀授業賞を3度受賞）。2019年、学習塾ComPassを開塾。方眼ノートシニアトレーナー、チャイルドコーチングアドバイザーの資格を持つ。</p>
           </div>
@@ -1314,7 +871,7 @@
         <div class="team-card reveal">
           <div class="team-avatar">直樹</div>
           <div>
-            <h3>橘薗 直樹 <span style="font-family:var(--sans);font-size:12px;color:var(--ink-faint);font-weight:500;">Naoki Tachibanazono</span></h3>
+            <h3>橘薗 直樹 <span style="font-family:var(--maru);font-size:12px;color:var(--ink-faint);font-weight:700;">Naoki Tachibanazono</span></h3>
             <span class="team-role">教材・カリキュラム・理数系担当</span>
             <p class="bio">千葉県出身。日本大学習志野高校・日本大学卒。中・高の教員免許を取得。神奈川県の大手集団塾「株式会社ステップ」に7年間講師として勤務後、本部にて10年間、教材・模試作成に携わる。2024年には「情報」の教員免許を新たに取得。</p>
           </div>
@@ -1324,11 +881,11 @@
   </section>
 
   <!-- ================= FLOW ================= -->
-  <section id="flow">
+  <section class="paper-lines" id="flow">
     <div class="wrap">
       <div class="section-head">
         <span class="kicker">Entry Flow</span>
-        <h2>入塾までの流れ</h2>
+        <h2 style="margin-top:8px;">入塾までの流れ</h2>
         <p>まずはお気軽にお問い合わせください。お子さまの様子を見ながら、丁寧にご案内します。</p>
       </div>
       <div class="steps-grid">
@@ -1357,55 +914,37 @@
   </section>
 
   <!-- ================= CTA BANNER ================= -->
-  <section id="contact-cta" style="padding-top:0;">
+  <section class="paper-grid" id="contact-cta">
     <div class="wrap">
       <div class="cta-banner reveal">
         <div>
-          <h3>まずは無料体験で、ComPassの学びを感じてください。</h3>
+          <h3><span class="bubble" data-text="まずは無料体験で、" style="font-size:.85em;">まずは無料体験で、</span><br>ComPassの学びを感じてください。</h3>
           <p>お電話・公式LINEにて「無料体験希望」とご連絡いただくだけで、日程を調整いたします。</p>
         </div>
         <div class="cta-actions">
           <a href="tel:0899977388" class="btn btn-primary">089-997-7388 に電話する</a>
-          <a href="#access" class="btn btn-ghost">アクセスを見る</a>
+          <a href="#access" class="btn btn-outline">アクセスを見る</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ================= ACCESS ================= -->
-  <section id="access">
+  <section class="paper-lines" id="access">
     <div class="wrap">
       <div class="section-head">
         <span class="kicker">Access</span>
-        <h2>教室案内・お問い合わせ</h2>
+        <h2 style="margin-top:8px;">教室案内・お問い合わせ</h2>
         <p>愛媛県松山市来住町にて、皆さまのご来塾・お問い合わせをお待ちしております。</p>
       </div>
       <div class="access-grid">
         <div class="access-card reveal">
-          <div class="access-row">
-            <span class="label">塾名</span>
-            <span class="value">学習塾ComPass</span>
-          </div>
-          <div class="access-row">
-            <span class="label">所在地</span>
-            <span class="value">愛媛県松山市来住町230-1</span>
-          </div>
-          <div class="access-row">
-            <span class="label">TEL</span>
-            <span class="value"><a href="tel:0899977388">089-997-7388</a></span>
-          </div>
-          <div class="access-row">
-            <span class="label">Mail</span>
-            <span class="value"><a href="mailto:info@compass-juku.com">info@compass-juku.com</a></span>
-          </div>
-          <div class="access-row">
-            <span class="label">受付時間</span>
-            <span class="value">14:00〜19:00（月曜定休）／公式LINEは24時間受付</span>
-          </div>
-          <div class="access-row">
-            <span class="label">Web</span>
-            <span class="value"><a href="https://compass-juku.com" target="_blank" rel="noopener">compass-juku.com</a></span>
-          </div>
+          <div class="access-row"><span class="label">塾名</span><span class="value">学習塾ComPass</span></div>
+          <div class="access-row"><span class="label">所在地</span><span class="value">愛媛県松山市来住町230-1</span></div>
+          <div class="access-row"><span class="label">TEL</span><span class="value"><a href="tel:0899977388">089-997-7388</a></span></div>
+          <div class="access-row"><span class="label">Mail</span><span class="value"><a href="mailto:info@compass-juku.com">info@compass-juku.com</a></span></div>
+          <div class="access-row"><span class="label">受付時間</span><span class="value">14:00〜19:00（月曜定休）／公式LINEは24時間受付</span></div>
+          <div class="access-row"><span class="label">Web</span><span class="value"><a href="https://compass-juku.com" target="_blank" rel="noopener">compass-juku.com</a></span></div>
         </div>
         <div class="map-frame reveal">
           <iframe
@@ -1425,19 +964,19 @@
       <div class="footer-brand">
         <a href="#top" class="logo">
           <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="20" cy="20" r="17.5" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
-            <path d="M20 8 L24.5 20 L20 32 L15.5 20 Z" fill="none" stroke="#e2c07d" stroke-width="1.2" stroke-linejoin="round"/>
-            <circle cx="20" cy="20" r="2" fill="#e2c07d"/>
+            <path d="M20 5c9 0 15 6.5 15 15 0 8.5-6.5 15-15 15C11 35 5 28.5 5 20 5 11.5 11.5 5 20 5Z" stroke="rgba(255,255,255,0.5)" stroke-width="1.8"/>
+            <path d="M20 10 L25 20 L20 30 L15 20 Z" fill="none" stroke="#ffe066" stroke-width="1.8" stroke-linejoin="round"/>
+            <circle cx="20" cy="20" r="2" fill="#ffe066"/>
           </svg>
           <span>学習塾ComPass</span>
         </a>
         <p>「わかる」から「好きになる」へ。根を育てる教育で、子どもが自分で人生を選べる力を育てます。</p>
         <div class="footer-social">
           <a href="https://www.instagram.com/compass_juku/" target="_blank" rel="noopener" aria-label="Instagram（塾全体）">
-            <svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/></svg>
+            <svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="#fff" stroke="none"/></svg>
           </a>
           <a href="https://www.instagram.com/compass19_kids/" target="_blank" rel="noopener" aria-label="Instagram（キッズ・小学部）">
-            <svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/></svg>
+            <svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="#fff" stroke="none"/></svg>
           </a>
         </div>
       </div>
@@ -1508,7 +1047,6 @@
         }
       });
     }
-    // フォールバック：何らかの理由でアニメーションが完了しない要素は必ず表示する
     window.setTimeout(function(){
       revealEls.forEach(function(el){ el.classList.add('is-visible'); });
     }, 2500);
