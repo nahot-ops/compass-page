@@ -3,7 +3,7 @@
 //   node export.mjs stills 1.5 6 ...  → 指定秒数の静止画を stills/ に保存
 import { chromium } from 'playwright';
 import { spawn } from 'node:child_process';
-import { mkdirSync } from 'node:fs';
+import { mkdirSync, renameSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -25,7 +25,7 @@ if (mode === 'stills') {
     await stage.screenshot({ path: path.join(dir, 'stills', `t${(+t).toFixed(2)}.png`) });
   }
 } else {
-  const out = path.join(dir, 'compass-ad.mp4');
+  const out = path.join(dir, 'compass-ad.tmp.mp4');
   const ff = spawn('ffmpeg', ['-y', '-v', 'error', '-f', 'image2pipe', '-framerate', String(FPS), '-c:v', 'png', '-i', '-',
     '-c:v', 'libx264', '-preset', 'slow', '-crf', '18', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', out], { stdio: ['pipe', 'inherit', 'inherit'] });
   const total = Math.round(DURATION * FPS);
@@ -37,6 +37,8 @@ if (mode === 'stills') {
   }
   ff.stdin.end();
   await new Promise(r => ff.on('close', r));
-  console.log('done:', out);
+  // 最後まで書き出せたときだけ本番ファイルに置き換える
+  renameSync(out, path.join(dir, 'compass-ad.mp4'));
+  console.log('done');
 }
 await browser.close();
