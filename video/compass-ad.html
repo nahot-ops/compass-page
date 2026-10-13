@@ -40,6 +40,7 @@
   .chip.light{background:#fff;color:var(--navy);font-size:26px;padding:8px 22px;box-shadow:0 6px 18px rgba(28,53,112,.12)}
   .chip.solid{background:var(--blue);color:#fff;font-size:26px;padding:10px 24px}
   .chip.grey{background:#f1f3f7;color:var(--grey);font-size:22px;padding:6px 16px;font-weight:500}
+  .tree{left:450px;top:330px;width:1020px;height:680px}
   svg.full{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:visible}
 
   /* S1 */
@@ -136,27 +137,18 @@
     <div class="label" data-a="fade" data-s="0"><b>01</b>根を育てる</div>
     <div class="h2 l1"><span class="mask"><span class="in" data-a="rise" data-s="0.12">知識は、枝葉。</span></span></div>
     <div class="h2 l2"><span class="mask"><span class="in" data-a="rise" data-s="1.7">だから、根っこから育てる。</span></span></div>
-    <svg class="full">
-      <line id="ground" x1="420" y1="640" x2="1500" y2="640" stroke="#d6dfee" stroke-width="4" stroke-linecap="round"/>
-      <ellipse id="canopy" cx="960" cy="480" rx="300" ry="130" fill="#e7effc"/>
-      <rect id="trunk" x="944" y="560" width="32" height="80" rx="6" fill="#1c3570"/>
-      <g fill="none" stroke="#2f6fd6" stroke-width="7" stroke-linecap="round">
-        <path class="root" d="M960 640 C 950 720, 760 760, 650 860"/>
-        <path class="root" d="M960 640 C 955 740, 880 820, 840 900"/>
-        <path class="root" d="M960 640 C 965 740, 1040 820, 1080 900"/>
-        <path class="root" d="M960 640 C 970 720, 1160 760, 1270 860"/>
-      </g>
-    </svg>
-    <div class="chip light" data-a="pop" data-s="0.6" style="left:760px;top:420px">英単語</div>
-    <div class="chip light" data-a="pop" data-s="0.72" style="left:910px;top:380px">公式</div>
-    <div class="chip light" data-a="pop" data-s="0.84" style="left:1040px;top:420px">漢字</div>
-    <div class="chip light" data-a="pop" data-s="0.96" style="left:830px;top:490px">年号</div>
-    <div class="chip light" data-a="pop" data-s="1.08" style="left:980px;top:490px">解き方</div>
-    <div class="chip solid" data-a="pop" data-s="2.45" style="left:578px;top:870px">思考整理</div>
-    <div class="chip solid" data-a="pop" data-s="2.55" style="left:768px;top:910px">自己信頼</div>
-    <div class="chip solid" data-a="pop" data-s="2.65" style="left:1008px;top:910px">感情調整</div>
-    <div class="chip solid" data-a="pop" data-s="2.75" style="left:1170px;top:870px">戻ってこられる心</div>
-    <div class="note" data-a="fade" data-s="2.9" style="left:1440px;top:1000px">思考力・自己信頼・心の土台を育てます。</div>
+    <img id="treeTop" class="abs tree" src="assets/tree.webp" alt="">
+    <img id="treeRoot" class="abs tree" src="assets/tree.webp" alt="">
+    <div class="chip light" data-a="pop" data-s="0.75" style="left:828px;top:452px">英単語</div>
+    <div class="chip light" data-a="pop" data-s="0.87" style="left:948px;top:420px">公式</div>
+    <div class="chip light" data-a="pop" data-s="0.99" style="left:1036px;top:478px">漢字</div>
+    <div class="chip light" data-a="pop" data-s="1.11" style="left:848px;top:540px">年号</div>
+    <div class="chip light" data-a="pop" data-s="1.23" style="left:984px;top:556px">解き方</div>
+    <div class="chip solid" data-a="pop" data-s="2.6" style="left:520px;top:770px">思考整理</div>
+    <div class="chip solid" data-a="pop" data-s="2.85" style="left:700px;top:890px">自己信頼</div>
+    <div class="chip solid" data-a="pop" data-s="2.85" style="left:1050px;top:890px">感情調整</div>
+    <div class="chip solid" data-a="pop" data-s="2.6" style="left:1180px;top:770px">戻ってこられる心</div>
+    <div class="note" data-a="fade" data-s="3.0" style="left:1440px;top:1000px">思考力・自己信頼・心の土台を育てます。</div>
   </section>
 
   <!-- S4 02 方眼ノート -->
@@ -208,20 +200,11 @@
 
   <!-- S7 エンディング -->
   <section class="scene" id="s7" data-start="26.4" data-end="33">
+    <img id="ending" class="abs" src="assets/ending.webp" alt="" style="left:120px;top:100px;width:880px;height:880px">
     <svg class="full">
-      <g transform="translate(560 540)">
-        <circle id="disk" r="300" fill="#e7effc"/>
-        <circle id="ring" r="350" fill="none" stroke="#2f6fd6" stroke-width="4" transform="rotate(-90)"/>
-        <circle id="ringDot" r="9" fill="#2f6fd6"/>
-        <g id="ticks" font-family="Montserrat" font-weight="800" font-size="40" fill="#1c3570" text-anchor="middle" dominant-baseline="central">
-          <text y="-245">N</text><text x="245">E</text><text y="245">S</text><text x="-245">W</text>
-        </g>
-        <circle r="200" fill="none" stroke="#cddcf5" stroke-width="3"/>
-        <g id="needle">
-          <polygon points="0,-210 26,0 -26,0" fill="#ffc93c"/>
-          <polygon points="0,210 26,0 -26,0" fill="#1c3570"/>
-          <circle r="16" fill="#fff" stroke="#1c3570" stroke-width="6"/>
-        </g>
+      <circle id="glint" cx="674" cy="704" r="10" fill="none" stroke="#fff" stroke-width="6"/>
+      <g id="spark" transform="translate(674 704)" fill="#ffc93c">
+        <path d="M0 -34 L7 -7 L34 0 L7 7 L0 34 L-7 7 L-34 0 L-7 -7 Z"/>
       </g>
     </svg>
     <div class="abs hand copy">
@@ -317,15 +300,21 @@ function s2(t) {
 }
 
 // ---------- S3 ----------
+// 画像の地面の位置（上から52.4%）で、地上と地下を切り分ける
+const GROUND = 52.4;
 function s3(t) {
-  const g = $('#ground'), gp = E.out(P(t, 1.4, .6));
-  g.setAttribute('x1', 960 - 540 * gp); g.setAttribute('x2', 960 + 540 * gp);
-  const cp = P(t, .4, .5);
-  $('#canopy').style.transformOrigin = '960px 480px';
-  $('#canopy').style.transform = `scale(${cp <= 0 ? 0 : E.back(cp)})`;
-  $('#trunk').style.transformOrigin = '960px 640px';
-  $('#trunk').style.transform = `scaleY(${E.out(P(t, .3, .5))})`;
-  $$('#s3 .root').forEach((r, i) => draw(r, E.out(P(t, 1.85 + i * .08, .7))));
+  const top = $('#treeTop'), root = $('#treeRoot');
+  const tp = P(t, .3, .6);
+  top.style.clipPath = `inset(0 0 ${100 - GROUND}% 0)`;
+  top.style.transformOrigin = `50% ${GROUND}%`;
+  top.style.transform = `scale(${tp <= 0 ? 0 : .6 + .4 * E.back(tp)})`;
+  top.style.opacity = C(tp * 3);
+  // 根は地面から下へ、じわっと伸びていく
+  const rp = E.inout(P(t, 1.75, 1.2));
+  const edge = GROUND + rp * (100 - GROUND + 8);
+  root.style.clipPath = `inset(${GROUND - .3}% 0 0 0)`;
+  root.style.webkitMaskImage = root.style.maskImage =
+    `linear-gradient(to bottom, #000 ${edge - 8}%, transparent ${edge}%)`;
 }
 
 // ---------- S4 ----------
@@ -433,18 +422,17 @@ function s6(t) {
 
 // ---------- S7 ----------
 function s7(t) {
-  const dp = P(t, 0, .6);
-  $('#disk').style.transform = `scale(${dp <= 0 ? 0 : E.back(dp)})`;
-  const rp = E.inout(P(t, .2, 1.3));
-  draw($('#ring'), rp);
-  const a = -Math.PI / 2 + rp * Math.PI * 2;
-  $('#ringDot').setAttribute('cx', 350 * Math.cos(a)); $('#ringDot').setAttribute('cy', 350 * Math.sin(a));
-  $('#ringDot').style.opacity = rp > 0 && rp < 1 ? 1 : 0;
-  $('#ticks').style.opacity = E.out(P(t, .5, .5));
-  // 迷っていた針が、行き先を指して止まる
-  const np = P(t, .1, 2.2);
-  const ang = 38 - 1080 * (1 - E.expo(np)) + 9 * Math.sin(np * 22) * (1 - np) * (np > .35);
-  $('#needle').setAttribute('transform', `rotate(${ang}) scale(${E.out(P(t, .1, .5))})`);
+  // イラストが丸く広がりながら出てくる
+  const ip = E.out(P(t, 0, 1.0)), img = $('#ending');
+  img.style.clipPath = `circle(${ip * 72}% at 43% 52%)`;
+  img.style.opacity = C(ip * 2);
+  img.style.transform = `scale(${1.06 - .06 * E.out(P(t, 0, 3))})`;
+  img.style.filter = ip < 1 ? `blur(${(1 - ip) * 8}px)` : 'none';
+  // 手元のコンパスが一瞬光る（行き先を決めた瞬間）
+  const gp = P(t, 1.9, .7), g = $('#glint');
+  g.setAttribute('r', 10 + gp * 70); g.style.opacity = gp > 0 ? (1 - gp) * .9 : 0;
+  const sp = P(t, 1.85, .8);
+  $('#spark').setAttribute('transform', `translate(674 704) rotate(${sp * 90}) scale(${Math.sin(sp * Math.PI) * 1.1})`);
   // 手書き風コピーを左から書くように出す
   [['#c1', .9, .7], ['#c2', 1.5, 1.0]].forEach(([id, s, d]) => {
     const p = P(t, s, d);
