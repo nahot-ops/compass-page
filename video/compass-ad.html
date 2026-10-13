@@ -65,7 +65,8 @@
   #s2 .logo{left:0;width:1920px;top:210px}
   #s2 .logo .word{font-size:200px;margin-top:18px}
   #s2 .logo .sub{font-size:26px;margin-top:22px;padding-left:.42em}
-  #s2 .wipe{left:0;top:190px;width:14px;height:420px;background:var(--blue)}
+  #s2 .logo .logo-img{display:block;width:1000px;margin:22px auto 0}
+  #s2 .wipe{left:0;top:190px;width:14px;height:450px;background:var(--blue)}
   #s2 .years{left:0;width:1920px;top:650px;text-align:center;font-size:44px;font-weight:900;line-height:1}
   #s2 .years .num{font-family:"Montserrat";font-weight:800;font-size:150px;color:var(--blue);display:inline-block;width:110px;vertical-align:-18px}
   #s2 .catch{left:0;width:1920px;top:850px;text-align:center;font-size:40px;font-weight:700}
@@ -86,14 +87,14 @@
   /* S7 */
   #s7 .copy{left:1010px;top:250px;font-size:86px;color:var(--blue);line-height:1.5}
   #s7 .copy .ln{display:block;white-space:nowrap}
-  #s7 .logo{left:1010px;top:560px;text-align:left}
+  #s7 .logo{left:1010px;top:548px;text-align:left}
   #s7 .logo .pre{font-size:22px;letter-spacing:.1em;border-bottom-width:2px;padding:0 0 6px}
-  #s7 .logo .word{font-size:104px;margin-top:14px}
-  #s7 .cta{left:1010px;top:770px;display:flex;align-items:center;gap:28px}
+  #s7 .logo .logo-img{display:block;width:480px;margin:16px 0 0 -8px}
+  #s7 .cta{left:1010px;top:790px;display:flex;align-items:center;gap:28px}
   #s7 .cta .btn{background:var(--navy);color:#fff;font-size:32px;font-weight:900;padding:16px 40px;border-radius:999px}
   #s7 .cta .tel{font-family:"Montserrat";font-weight:800;font-size:40px;color:var(--navy)}
   #s7 .cta .tel small{font-family:"Noto Sans JP";font-size:22px;font-weight:700;margin-right:10px;color:var(--grey)}
-  #s7 .web{left:1010px;top:870px;font-size:26px;color:var(--grey);font-weight:500}
+  #s7 .web{left:1010px;top:890px;font-size:26px;color:var(--grey);font-weight:500}
   #s7 .web b{font-family:"Montserrat";color:var(--navy);font-weight:700;margin-right:18px}
 </style>
 </head>
@@ -121,9 +122,8 @@
   <!-- S2 ロゴ＋数字 -->
   <section class="scene" id="s2" data-start="4.6" data-end="8.8">
     <div class="logo" id="s2logo">
-      <div class="pre">愛媛県松山市の学習塾</div>
-      <div class="word">Com<span>Pass</span></div>
-      <div class="sub">MATSUYAMA JUKU COMPASS</div>
+      <div class="pre">愛媛県松山市の学習塾 ｜ 小1〜中3</div>
+      <img class="logo-img" src="assets/logo.jpg" alt="学習塾ComPass">
     </div>
     <div class="abs wipe" id="s2wipe"></div>
     <div class="abs years" data-a="fade" data-s="1.3">小1から中3まで<span class="num" id="s2num">1</span>年間の一貫教育</div>
@@ -212,7 +212,7 @@
     </div>
     <div class="logo" data-a="fade" data-s="2.6">
       <div class="pre">愛媛県松山市の学習塾 ｜ 小1〜中3</div>
-      <div class="word">Com<span>Pass</span></div>
+      <img class="logo-img" src="assets/logo.jpg" alt="学習塾ComPass">
     </div>
     <div class="abs cta" data-a="fade" data-s="3.2">
       <div class="btn">まずは無料体験へ</div>
