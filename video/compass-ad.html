@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ComPass 広告動画</title>
+<link rel="stylesheet" href="fonts/fonts.local.css">
+<style>
+  :root{
+    --navy:#1c3570;
+    --blue:#2f6fd6;
+    --sky:#e7effc;
+    --sky2:#cddcf5;
+    --yellow:#ffc93c;
+    --ink:#23262c;
+    --grey:#767c88;
+    --line:#d6dfee;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#0d1426;overflow:hidden;height:100%}
+  body{font-family:"Noto Sans JP",sans-serif;color:var(--navy)}
+  #stage{position:absolute;left:0;top:0;width:1920px;height:1080px;background:#fff;overflow:hidden;transform-origin:0 0}
+  .scene{position:absolute;inset:0;display:none}
+  .abs{position:absolute}
+  .mask{display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em}
+  .mask>.in{display:block;will-change:transform}
+  .en{font-family:"Montserrat",sans-serif}
+  .hand{font-family:"Klee One",serif;font-weight:600}
+
+  /* 共通パーツ */
+  .label{position:absolute;left:140px;top:104px;background:var(--sky);color:var(--blue);
+    font-size:24px;font-weight:700;padding:6px 18px;border-radius:999px;letter-spacing:.04em}
+  .label b{font-family:"Montserrat";font-weight:800;margin-right:10px}
+  .h2{position:absolute;left:140px;font-size:68px;font-weight:900;line-height:1.25;letter-spacing:.01em}
+  .h2.l1{top:160px}
+  .h2.l2{top:250px;color:var(--blue)}
+  .note{position:absolute;left:140px;top:1000px;font-size:24px;font-weight:500;color:var(--grey)}
+  .chip{position:absolute;white-space:nowrap;font-weight:700;border-radius:999px;transform-origin:50% 50%}
+  .chip .c{display:inline-block}
+  .chip.light{background:#fff;color:var(--navy);font-size:26px;padding:8px 22px;box-shadow:0 6px 18px rgba(28,53,112,.12)}
+  .chip.solid{background:var(--blue);color:#fff;font-size:26px;padding:10px 24px}
+  .chip.grey{background:#f1f3f7;color:var(--grey);font-size:22px;padding:6px 16px;font-weight:500}
+  svg.full{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:visible}
+
+  /* S1 */
+  #s1 .lead{left:140px;top:290px;font-size:30px;font-weight:500;color:var(--ink)}
+  #s1 .big{left:140px;top:350px;font-size:104px;font-weight:900;line-height:1.3}
+  #s1 .q{left:140px;top:690px;font-size:52px;font-weight:900;color:var(--blue)}
+  .dot{position:absolute;width:10px;height:10px;border-radius:50%;margin:-5px 0 0 -5px;background:#d3dbe8}
+  .dot.b{background:var(--blue)}
+
+  /* ロゴ */
+  .logo{position:absolute;text-align:center}
+  .logo .pre{font-size:30px;font-weight:700;letter-spacing:.12em;display:inline-block;padding:0 6px 8px;border-bottom:3px solid var(--navy)}
+  .logo .word{font-family:"Montserrat";font-weight:800;line-height:1;letter-spacing:-.01em}
+  .logo .word span{color:var(--blue)}
+  .logo .sub{font-family:"Montserrat";font-weight:700;letter-spacing:.42em;color:var(--navy)}
+
+  /* S2 */
+  #s2 .logo{left:0;width:1920px;top:210px}
+  #s2 .logo .word{font-size:200px;margin-top:18px}
+  #s2 .logo .sub{font-size:26px;margin-top:22px;padding-left:.42em}
+  #s2 .wipe{left:0;top:190px;width:14px;height:420px;background:var(--blue)}
+  #s2 .years{left:0;width:1920px;top:650px;text-align:center;font-size:44px;font-weight:900;line-height:1}
+  #s2 .years .num{font-family:"Montserrat";font-weight:800;font-size:150px;color:var(--blue);display:inline-block;width:110px;vertical-align:-18px}
+  #s2 .catch{left:0;width:1920px;top:850px;text-align:center;font-size:40px;font-weight:700}
+  #s2 .tags{left:0;width:1920px;top:930px;text-align:center;font-size:24px;color:var(--grey);font-weight:500;letter-spacing:.06em}
+
+  /* S4 ノート */
+  #note{position:absolute;left:460px;top:400px;width:1000px;height:500px;background-color:#fff;border-radius:20px;
+    box-shadow:0 18px 50px rgba(28,53,112,.14);overflow:hidden;
+    background-image:linear-gradient(rgba(47,111,214,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(47,111,214,.10) 1px,transparent 1px);
+    background-size:25px 25px}
+  #note .col-h{position:absolute;top:28px;width:333px;text-align:center;font-size:30px;font-weight:900}
+  #note .vl{position:absolute;top:0;width:3px;height:500px;background:var(--navy);transform-origin:50% 0}
+  #note .hl{position:absolute;left:30px;right:30px;top:92px;height:3px;background:var(--navy);transform-origin:0 50%}
+  #note .bar{position:absolute;height:12px;border-radius:6px;background:#a8b9d8;transform-origin:0 50%}
+  #note .hi{position:absolute;height:30px;border-radius:4px;background:rgba(255,201,60,.7);transform-origin:0 50%}
+  #s4 .wakatta{left:1340px;top:330px;font-size:46px;color:var(--blue);transform-origin:50% 50%}
+
+  /* S7 */
+  #s7 .copy{left:1010px;top:250px;font-size:86px;color:var(--blue);line-height:1.5}
+  #s7 .copy .ln{display:block;white-space:nowrap}
+  #s7 .logo{left:1010px;top:560px;text-align:left}
+  #s7 .logo .pre{font-size:22px;letter-spacing:.1em;border-bottom-width:2px;padding:0 0 6px}
+  #s7 .logo .word{font-size:104px;margin-top:14px}
+  #s7 .cta{left:1010px;top:770px;display:flex;align-items:center;gap:28px}
+  #s7 .cta .btn{background:var(--navy);color:#fff;font-size:32px;font-weight:900;padding:16px 40px;border-radius:999px}
+  #s7 .cta .tel{font-family:"Montserrat";font-weight:800;font-size:40px;color:var(--navy)}
+  #s7 .cta .tel small{font-family:"Noto Sans JP";font-size:22px;font-weight:700;margin-right:10px;color:var(--grey)}
+  #s7 .web{left:1010px;top:870px;font-size:26px;color:var(--grey);font-weight:500}
+  #s7 .web b{font-family:"Montserrat";color:var(--navy);font-weight:700;margin-right:18px}
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- S1 問題提起 -->
+  <section class="scene" id="s1" data-start="0" data-end="4.6">
+    <div id="dots"></div>
+    <svg class="full" id="s1svg">
+      <g id="s1comp" transform="translate(1480 520)">
+        <circle r="150" fill="#fff" stroke="#2f6fd6" stroke-width="6"/>
+        <circle r="118" fill="none" stroke="#cddcf5" stroke-width="2"/>
+        <g id="s1needle">
+          <polygon points="0,-112 16,0 -16,0" fill="#ffc93c"/>
+          <polygon points="0,112 16,0 -16,0" fill="#1c3570"/>
+          <circle r="9" fill="#fff" stroke="#1c3570" stroke-width="4"/>
+        </g>
+      </g>
+      <text id="s1q" x="1640" y="380" font-family="Montserrat" font-weight="800" font-size="120" fill="#2f6fd6">?</text>
+    </svg>
+    <div class="abs lead" data-a="fade" data-s="0.05">お子さまの塾選び、何で決めていますか。</div>
+    <div class="abs big">
+      <span class="mask"><span class="in" data-a="rise" data-s="0.25">合格者数だけでは、</span></span>
+      <span class="mask"><span class="in" data-a="rise" data-s="0.6">わからない。</span></span>
+    </div>
+    <div class="abs q"><span class="mask"><span class="in" data-a="rise" data-s="1.9">わが子が「根っこから」伸びる塾は？</span></span></div>
+  </section>
+
+  <!-- S2 ロゴ＋数字 -->
+  <section class="scene" id="s2" data-start="4.6" data-end="8.8">
+    <div class="logo" id="s2logo">
+      <div class="pre">愛媛県松山市の学習塾</div>
+      <div class="word">Com<span>Pass</span></div>
+      <div class="sub">MATSUYAMA JUKU COMPASS</div>
+    </div>
+    <div class="abs wipe" id="s2wipe"></div>
+    <div class="abs years" data-a="fade" data-s="1.3">小1から中3まで<span class="num" id="s2num">1</span>年間の一貫教育</div>
+    <div class="abs catch" data-a="fade" data-s="2.1">「わかる」から「好きになる」へ。</div>
+    <div class="abs tags" data-a="fade" data-s="2.5">方眼ノート ｜ THE FORCE ｜ 公立トップ校受験に強い</div>
+  </section>
+
+  <!-- S3 01 根を育てる -->
+  <section class="scene" id="s3" data-start="8.8" data-end="13.2">
+    <div class="label" data-a="fade" data-s="0"><b>01</b>根を育てる</div>
+    <div class="h2 l1"><span class="mask"><span class="in" data-a="rise" data-s="0.12">知識は、枝葉。</span></span></div>
+    <div class="h2 l2"><span class="mask"><span class="in" data-a="rise" data-s="1.7">だから、根っこから育てる。</span></span></div>
+    <svg class="full">
+      <line id="ground" x1="420" y1="640" x2="1500" y2="640" stroke="#d6dfee" stroke-width="4" stroke-linecap="round"/>
+      <ellipse id="canopy" cx="960" cy="480" rx="300" ry="130" fill="#e7effc"/>
+      <rect id="trunk" x="944" y="560" width="32" height="80" rx="6" fill="#1c3570"/>
+      <g fill="none" stroke="#2f6fd6" stroke-width="7" stroke-linecap="round">
+        <path class="root" d="M960 640 C 950 720, 760 760, 650 860"/>
+        <path class="root" d="M960 640 C 955 740, 880 820, 840 900"/>
+        <path class="root" d="M960 640 C 965 740, 1040 820, 1080 900"/>
+        <path class="root" d="M960 640 C 970 720, 1160 760, 1270 860"/>
+      </g>
+    </svg>
+    <div class="chip light" data-a="pop" data-s="0.6" style="left:760px;top:420px">英単語</div>
+    <div class="chip light" data-a="pop" data-s="0.72" style="left:910px;top:380px">公式</div>
+    <div class="chip light" data-a="pop" data-s="0.84" style="left:1040px;top:420px">漢字</div>
+    <div class="chip light" data-a="pop" data-s="0.96" style="left:830px;top:490px">年号</div>
+    <div class="chip light" data-a="pop" data-s="1.08" style="left:980px;top:490px">解き方</div>
+    <div class="chip solid" data-a="pop" data-s="2.45" style="left:578px;top:870px">思考整理</div>
+    <div class="chip solid" data-a="pop" data-s="2.55" style="left:768px;top:910px">自己信頼</div>
+    <div class="chip solid" data-a="pop" data-s="2.65" style="left:1008px;top:910px">感情調整</div>
+    <div class="chip solid" data-a="pop" data-s="2.75" style="left:1170px;top:870px">戻ってこられる心</div>
+    <div class="note" data-a="fade" data-s="2.9" style="left:1440px;top:1000px">思考力・自己信頼・心の土台を育てます。</div>
+  </section>
+
+  <!-- S4 02 方眼ノート -->
+  <section class="scene" id="s4" data-start="13.2" data-end="17.6">
+    <div class="label" data-a="fade" data-s="0"><b>02</b>思考整理メソッド</div>
+    <div class="h2 l1"><span class="mask"><span class="in" data-a="rise" data-s="0.12">頭の中を、ノートに出す。</span></span></div>
+    <div class="h2 l2"><span class="mask"><span class="in" data-a="rise" data-s="1.9">自分で考え、自分で決める子へ。</span></span></div>
+    <div id="note">
+      <div class="col-h" style="left:0" data-a="fade" data-s="0.55">板書</div>
+      <div class="col-h" style="left:333px" data-a="fade" data-s="0.65">気づき</div>
+      <div class="col-h" style="left:667px" data-a="fade" data-s="0.75">まとめ</div>
+      <div class="hl"></div>
+      <div class="vl" style="left:332px"></div>
+      <div class="vl" style="left:665px"></div>
+      <div id="bars"></div>
+    </div>
+    <div class="abs hand wakatta">わかった！</div>
+    <div class="note" data-a="fade" data-s="2.6">高橋政史氏の「方眼ノート」メソッドを活用しています。</div>
+  </section>
+
+  <!-- S5 03 THE FORCE -->
+  <section class="scene" id="s5" data-start="17.6" data-end="22">
+    <div class="label" data-a="fade" data-s="0"><b>03</b>受験期メンタル THE FORCE</div>
+    <div class="h2 l1"><span class="mask"><span class="in" data-a="rise" data-s="0.12">崩れない心、ではなく。</span></span></div>
+    <div class="h2 l2"><span class="mask"><span class="in" data-a="rise" data-s="2.0">崩れても、戻れる心を。</span></span></div>
+    <svg class="full">
+      <line id="axis" x1="320" y1="950" x2="1640" y2="950" stroke="#d6dfee" stroke-width="4" stroke-linecap="round"/>
+      <path id="curve" d="M360 800 C 480 760, 600 600, 720 610 S 820 840, 900 850 S 980 700, 1020 720 S 1080 820, 1120 815 S 1400 500, 1580 470"
+        fill="none" stroke="#2f6fd6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle id="tip" r="16" fill="#2f6fd6" stroke="#fff" stroke-width="6"/>
+      <circle id="tipGlow" r="16" fill="none" stroke="#2f6fd6" stroke-width="4"/>
+    </svg>
+    <div class="chip grey" id="dip1" style="left:830px;top:880px">テストの失敗</div>
+    <div class="chip grey" id="dip2" style="left:1060px;top:845px">本番の緊張</div>
+    <div class="chip solid" data-a="pop" data-s="2.7" style="left:1180px;top:390px">心・思考・行動を、自分で整える</div>
+    <div class="note" data-a="fade" data-s="2.9">辻秀一氏のライフスキル理論を活用した実践プログラム。</div>
+  </section>
+
+  <!-- S6 04 一貫ライン -->
+  <section class="scene" id="s6" data-start="22" data-end="26.4">
+    <div class="label" data-a="fade" data-s="0"><b>04</b>小1〜中3の一貫ライン</div>
+    <div class="h2 l1"><span class="mask"><span class="in" data-a="rise" data-s="0.12">受験は、競争じゃない。</span></span></div>
+    <div class="h2 l2"><span class="mask"><span class="in" data-a="rise" data-s="1.9">昨日の自分を、超える挑戦だ。</span></span></div>
+    <svg class="full"><polyline id="stairs" fill="none" stroke="#cddcf5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div id="steps"></div>
+    <canvas id="confetti" width="1920" height="1080" class="abs" style="left:0;top:0"></canvas>
+    <div class="note" data-a="fade" data-s="2.8">受験を、自分史上最高の自分になるプロセスに。</div>
+  </section>
+
+  <!-- S7 エンディング -->
+  <section class="scene" id="s7" data-start="26.4" data-end="33">
+    <svg class="full">
+      <g transform="translate(560 540)">
+        <circle id="disk" r="300" fill="#e7effc"/>
+        <circle id="ring" r="350" fill="none" stroke="#2f6fd6" stroke-width="4" transform="rotate(-90)"/>
+        <circle id="ringDot" r="9" fill="#2f6fd6"/>
+        <g id="ticks" font-family="Montserrat" font-weight="800" font-size="40" fill="#1c3570" text-anchor="middle" dominant-baseline="central">
+          <text y="-245">N</text><text x="245">E</text><text y="245">S</text><text x="-245">W</text>
+        </g>
+        <circle r="200" fill="none" stroke="#cddcf5" stroke-width="3"/>
+        <g id="needle">
+          <polygon points="0,-210 26,0 -26,0" fill="#ffc93c"/>
+          <polygon points="0,210 26,0 -26,0" fill="#1c3570"/>
+          <circle r="16" fill="#fff" stroke="#1c3570" stroke-width="6"/>
+        </g>
+      </g>
+    </svg>
+    <div class="abs hand copy">
+      <span class="ln" id="c1">未来を、</span>
+      <span class="ln" id="c2">自分で選べる子に。</span>
+    </div>
+    <div class="logo" data-a="fade" data-s="2.6">
+      <div class="pre">愛媛県松山市の学習塾 ｜ 小1〜中3</div>
+      <div class="word">Com<span>Pass</span></div>
+    </div>
+    <div class="abs cta" data-a="fade" data-s="3.2">
+      <div class="btn">まずは無料体験へ</div>
+      <div class="tel"><small>TEL</small>089-997-7388</div>
+    </div>
+    <div class="abs web" data-a="fade" data-s="3.5"><b>compass-juku.com</b>公式LINEは24時間受付</div>
+  </section>
+</div>
+
+<script>
+const FPS = 30, DURATION = 33;
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const C = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const P = (t, s, d) => C((t - s) / d);
+const E = {
+  out: x => 1 - Math.pow(1 - x, 3),
+  inout: x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2,
+  expo: x => x >= 1 ? 1 : 1 - Math.pow(2, -10 * x),
+  back: x => { const c1 = 1.9, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); },
+};
+// 決定的な乱数（毎回同じ絵になるように）
+function rng(seed) { return () => (seed = (seed * 16807) % 2147483647) / 2147483647; }
+
+// ---------- 汎用アニメーション（data-a 属性） ----------
+const ANIM = {
+  rise(el, p) { const e = E.expo(p); el.style.transform = `translateY(${(1 - e) * 110}%)`; },
+  fade(el, p) {
+    const e = E.out(p);
+    el.style.opacity = e;
+    el.style.transform = `translateY(${(1 - e) * 26}px)`;
+    el.style.filter = e < 1 ? `blur(${(1 - e) * 10}px)` : 'none';
+  },
+  pop(el, p) { el.style.opacity = C(p * 4); el.style.transform = `scale(${p <= 0 ? 0 : E.back(p)})`; },
+};
+const DUR = { rise: .7, fade: .55, pop: .45 };
+function animateGeneric(scene, t) {
+  for (const el of scene._anims) {
+    const a = el.dataset.a, s = +el.dataset.s, d = +(el.dataset.d || DUR[a]);
+    ANIM[a](el, P(t, s, d));
+  }
+}
+function draw(path, p) {
+  if (!path._len) { path._len = path.getTotalLength(); path.style.strokeDasharray = path._len; }
+  path.style.strokeDashoffset = path._len * (1 - p);
+}
+
+// ---------- S1 ----------
+const dots = [];
+(() => {
+  const r = rng(7), box = $('#dots');
+  for (let y = 0; y < 9; y++) for (let x = 0; x < 11; x++) {
+    const d = document.createElement('div');
+    d.className = 'dot' + (r() < .14 ? ' b' : '');
+    d.style.left = (1180 + x * 60) + 'px'; d.style.top = (250 + y * 60) + 'px';
+    box.appendChild(d); dots.push({ el: d, s: r() * 1.1, tw: r() * 6 });
+  }
+})();
+function s1(t) {
+  for (const d of dots) {
+    const p = E.out(P(t, d.s, .5));
+    d.el.style.opacity = p * (.55 + .45 * Math.sin(t * 2.4 + d.tw) ** 2);
+    d.el.style.transform = `scale(${p})`;
+  }
+  const comp = $('#s1comp'), cp = P(t, 1.0, .55);
+  const sc = cp <= 0 ? 0 : E.back(cp);
+  comp.setAttribute('transform', `translate(1480 520) scale(${sc})`);
+  // 方角が定まらず、迷っている針
+  const ang = t * 260 + 70 * Math.sin(t * 5.3) + 40 * Math.sin(t * 9.1);
+  $('#s1needle').setAttribute('transform', `rotate(${ang})`);
+  const qp = P(t, 1.35, .45), q = $('#s1q');
+  q.style.opacity = C(qp * 3);
+  q.setAttribute('transform', `translate(1660 330) scale(${qp <= 0 ? 0 : E.back(qp)}) rotate(${10 * Math.sin(t * 3)}) translate(-1660 -330)`);
+}
+
+// ---------- S2 ----------
+function s2(t) {
+  const p = E.inout(P(t, 0, .7));
+  const x = 380 + p * 1160;
+  $('#s2wipe').style.transform = `translateX(${x}px)`;
+  $('#s2wipe').style.opacity = 1 - P(t, .75, .25);
+  $('#s2logo').style.clipPath = `inset(0 ${1920 - x}px 0 0)`;
+  $('#s2num').textContent = Math.max(1, Math.round(1 + 8 * E.out(P(t, 1.35, 1.0))));
+}
+
+// ---------- S3 ----------
+function s3(t) {
+  const g = $('#ground'), gp = E.out(P(t, 1.4, .6));
+  g.setAttribute('x1', 960 - 540 * gp); g.setAttribute('x2', 960 + 540 * gp);
+  const cp = P(t, .4, .5);
+  $('#canopy').style.transformOrigin = '960px 480px';
+  $('#canopy').style.transform = `scale(${cp <= 0 ? 0 : E.back(cp)})`;
+  $('#trunk').style.transformOrigin = '960px 640px';
+  $('#trunk').style.transform = `scaleY(${E.out(P(t, .3, .5))})`;
+  $$('#s3 .root').forEach((r, i) => draw(r, E.out(P(t, 1.85 + i * .08, .7))));
+}
+
+// ---------- S4 ----------
+const BARS = [];
+(() => {
+  const r = rng(3), box = $('#bars');
+  const cols = [[40, 300], [373, 300], [707, 260]];
+  let s = .95;
+  cols.forEach(([x0, w], ci) => {
+    for (let i = 0; i < 4; i++) {
+      const y = 140 + i * 72;
+      if (ci === 2 && i === 1) {
+        const h = document.createElement('div'); h.className = 'hi';
+        h.style.cssText = `left:${x0 - 6}px;top:${y - 9}px;width:${w + 12}px`;
+        box.appendChild(h); BARS.push({ el: h, s: 2.3, d: .35 });
+      }
+      const b = document.createElement('div'); b.className = 'bar';
+      const bw = w * (.55 + r() * .45);
+      b.style.cssText = `left:${x0}px;top:${y}px;width:${bw}px`;
+      if (ci === 2) b.style.background = '#1c3570';
+      box.appendChild(b); BARS.push({ el: b, s, d: .22 });
+      s += .1;
+    }
+  });
+})();
+function s4(t) {
+  $('#note .hl').style.transform = `scaleX(${E.out(P(t, .35, .5))})`;
+  $$('#note .vl').forEach((v, i) => v.style.transform = `scaleY(${E.out(P(t, .4 + i * .1, .5))})`);
+  for (const b of BARS) b.el.style.transform = `scaleX(${E.out(P(t, b.s, b.d))})`;
+  const n = $('#note'), np = E.out(P(t, 0, .5));
+  n.style.opacity = np; n.style.transform = `translateY(${(1 - np) * 30}px)`;
+  const w = $('#s4 .wakatta'), wp = P(t, 2.6, .45);
+  w.style.opacity = C(wp * 4);
+  w.style.transform = `rotate(-8deg) scale(${wp <= 0 ? 0 : E.back(wp)})`;
+}
+
+// ---------- S5 ----------
+function s5(t) {
+  $('#axis').style.opacity = E.out(P(t, .2, .4));
+  const curve = $('#curve'), p = E.inout(P(t, .35, 2.2));
+  draw(curve, p);
+  const pt = curve.getPointAtLength(curve._len * p);
+  const tip = $('#tip'), glow = $('#tipGlow');
+  tip.setAttribute('cx', pt.x); tip.setAttribute('cy', pt.y);
+  glow.setAttribute('cx', pt.x); glow.setAttribute('cy', pt.y);
+  tip.style.opacity = P(t, .35, .1);
+  // 最後に到達したら波紋
+  const rp = P(t, 2.55, .9);
+  glow.setAttribute('r', 16 + rp * 50); glow.style.opacity = rp > 0 ? 1 - rp : 0;
+  // 谷に来たときだけラベルが出る
+  [['#dip1', .26], ['#dip2', .55]].forEach(([id, at]) => {
+    const el = $(id), q = C((p - at) / .08);
+    el.style.opacity = q; el.style.transform = `translateY(${(1 - q) * 12}px)`;
+  });
+}
+
+// ---------- S6 ----------
+const STEPS = ['楽しさ', '習慣', '努力', '思考整理', '自己信頼', '感情調整', '受験で発揮', '未来選択'];
+const stepEls = [];
+(() => {
+  const box = $('#steps'), pts = [];
+  STEPS.forEach((txt, i) => {
+    const cx = 330 + i * 182, cy = 900 - i * 64;
+    const el = document.createElement('div');
+    el.className = 'chip ' + (i === 7 ? 'solid' : 'light');
+    el.textContent = txt;
+    if (i === 7) el.style.fontSize = '32px';
+    box.appendChild(el);
+    stepEls.push({ el, cx, cy });
+    pts.push(`${cx},${cy}`);
+  });
+  $('#stairs').setAttribute('points', pts.join(' '));
+})();
+const confetti = (() => {
+  const r = rng(11), arr = [];
+  const cols = ['#2f6fd6', '#ffc93c', '#1c3570', '#9fc0f2'];
+  for (let i = 0; i < 46; i++) {
+    const a = -Math.PI / 2 + (r() - .5) * 2.6, v = 380 + r() * 520;
+    arr.push({ vx: Math.cos(a) * v, vy: Math.sin(a) * v, c: cols[i % 4], s: 6 + r() * 8, rot: r() * 6, sq: r() < .5 });
+  }
+  return arr;
+})();
+function s6(t) {
+  for (const s of stepEls) {
+    if (!s.w) { s.w = s.el.offsetWidth; s.h = s.el.offsetHeight; s.el.style.left = (s.cx - s.w / 2) + 'px'; s.el.style.top = (s.cy - s.h / 2) + 'px'; }
+  }
+  stepEls.forEach((s, i) => ANIM.pop(s.el, P(t, .45 + i * .2, .45)));
+  draw($('#stairs'), C(P(t, .45, 1.55)));
+  const ctx = $('#confetti').getContext('2d');
+  ctx.clearRect(0, 0, 1920, 1080);
+  const ct = t - 2.0;
+  if (ct > 0) {
+    const o = stepEls[7];
+    for (const c of confetti) {
+      const x = o.cx + c.vx * ct, y = o.cy + c.vy * ct + 900 * ct * ct;
+      ctx.globalAlpha = C(1 - ct / 1.6);
+      ctx.fillStyle = c.c;
+      ctx.save(); ctx.translate(x, y); ctx.rotate(c.rot + ct * 6);
+      if (c.sq) ctx.fillRect(-c.s / 2, -c.s / 4, c.s, c.s / 2);
+      else { ctx.beginPath(); ctx.arc(0, 0, c.s / 2, 0, Math.PI * 2); ctx.fill(); }
+      ctx.restore();
+    }
+  }
+}
+
+// ---------- S7 ----------
+function s7(t) {
+  const dp = P(t, 0, .6);
+  $('#disk').style.transform = `scale(${dp <= 0 ? 0 : E.back(dp)})`;
+  const rp = E.inout(P(t, .2, 1.3));
+  draw($('#ring'), rp);
+  const a = -Math.PI / 2 + rp * Math.PI * 2;
+  $('#ringDot').setAttribute('cx', 350 * Math.cos(a)); $('#ringDot').setAttribute('cy', 350 * Math.sin(a));
+  $('#ringDot').style.opacity = rp > 0 && rp < 1 ? 1 : 0;
+  $('#ticks').style.opacity = E.out(P(t, .5, .5));
+  // 迷っていた針が、行き先を指して止まる
+  const np = P(t, .1, 2.2);
+  const ang = 38 - 1080 * (1 - E.expo(np)) + 9 * Math.sin(np * 22) * (1 - np) * (np > .35);
+  $('#needle').setAttribute('transform', `rotate(${ang}) scale(${E.out(P(t, .1, .5))})`);
+  // 手書き風コピーを左から書くように出す
+  [['#c1', .9, .7], ['#c2', 1.5, 1.0]].forEach(([id, s, d]) => {
+    const p = P(t, s, d);
+    $(id).style.clipPath = `inset(-10% ${100 - p * 100}% -10% 0)`;
+  });
+}
+
+const FN = { s1, s2, s3, s4, s5, s6, s7 };
+const scenes = $$('.scene').map(el => {
+  el._start = +el.dataset.start; el._end = +el.dataset.end;
+  el._anims = $$('[data-a]', el);
+  return el;
+});
+
+function render(t) {
+  for (const sc of scenes) {
+    const on = t >= sc._start && t < sc._end || (sc.id === 's7' && t >= sc._start);
+    sc.style.display = on ? 'block' : 'none';
+    if (!on) continue;
+    const lt = t - sc._start;
+    animateGeneric(sc, lt);
+    FN[sc.id](lt);
+    // シーン終わりは軽くフェードアウト
+    const out = sc.id === 's7' ? 0 : P(lt, sc._end - sc._start - .28, .28);
+    sc.style.opacity = 1 - out;
+    sc.style.filter = out > 0 ? `blur(${out * 6}px)` : 'none';
+  }
+}
+window.render = render;
+window.DURATION = DURATION; window.FPS = FPS;
+
+// フォントを全部読み込んでから準備完了にする
+window.ready = (async () => {
+  scenes.forEach(s => s.style.display = 'block');
+  await document.fonts.ready;
+  await new Promise(r => setTimeout(r, 300));
+  await document.fonts.ready;
+  render(0);
+  return true;
+})();
+
+// プレビュー（?export が無いときだけ再生）
+if (!location.search.includes('export')) {
+  const fit = () => {
+    const s = Math.min(innerWidth / 1920, innerHeight / 1080);
+    const st = $('#stage');
+    st.style.transform = `scale(${s})`;
+    st.style.left = (innerWidth - 1920 * s) / 2 + 'px';
+    st.style.top = (innerHeight - 1080 * s) / 2 + 'px';
+  };
+  addEventListener('resize', fit); fit();
+  window.ready.then(() => {
+    const t0 = performance.now();
+    const loop = now => { render(((now - t0) / 1000) % DURATION); requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+  });
+}
+</script>
+</body>
+</html>
