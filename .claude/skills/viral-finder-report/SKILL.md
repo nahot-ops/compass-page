@@ -46,6 +46,10 @@ Google Drive コネクタの `search_files` で
 - 画像・Googleドキュメント・スプレッドシート・PDF → `read_file_content`
 - CSV・テキスト → `download_file_content` で取得してデコード
 - 画像は写っている文字と数字だけを使う。読めない数字は欠損扱い
+- 画像は `download_file_content` で保存されたファイルをデコードし、縮小して目で見る。
+  文字読み取り（`read_file_content`）は数字の並びが崩れやすいので補助に使う
+- 5MBを超える画像は、ダウンロードで接続が切れることがある。
+  切れたら `read_file_content` の文字読み取りで対応し、その旨をレポートに書く
 - 同じ投稿のスクショが複数枚あれば、アカウント名と内容で1件にまとめる
 - InstagramなどのURLだけの場合は、WebFetchで読めるか一度だけ試す。
   ログイン画面などで読めなければ、URLとメモだけで分かる範囲で扱い、
