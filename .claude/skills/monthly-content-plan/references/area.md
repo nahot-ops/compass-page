@@ -64,7 +64,7 @@ Nahoが高校の説明会で聞いた内容を、保護者向けにまとめる�
 
 資料はGoogleドライブ「地元の高校資料」（`1lvPeI9AJsrNAMgc9BtbzPu8UwowwqR1V`）にある。
 
-- 01_公立（`1B4Vt1a13Qk3tnbIv7muf__27wQdjkW8C`）、02_私立（`1XfiH19_duNwrvRZ-16IDVj_XehLpM4TE`）に学校ごとのフォルダ
+- 01_国公立（`1B4Vt1a13Qk3tnbIv7muf__27wQdjkW8C`）、02_私立（`1XfiH19_duNwrvRZ-16IDVj_XehLpM4TE`）に学校ごとのフォルダ
 - 03_記事/下書き（`1r1XSyKSRQ0dPr3WXZ7vYVTBeacygKO49`）に記事の下書きを置く
 - 使い方とルールは、フォルダ内の「00_使い方メモ」
 
