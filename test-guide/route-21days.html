@@ -18,6 +18,7 @@
   --orange-tint: #FFF5E9;
   --yellow: #F9D02B;
   --yellow-tint: #FFF9DC;
+  --coppy: #6F96D1;
   --ink: #1E2B3C;
   --ink-soft: #4A5566;
   --paper: #FFFFFF;
@@ -64,12 +65,12 @@ body { font-family: var(--f-body); color: var(--ink); -webkit-print-color-adjust
 .chara { position: absolute; right: 0; top: 16mm; width: 38mm; }
 .bubble {
   position: absolute; right: 30mm; top: 2mm; z-index: 2;
-  background: #fff; border: .6mm solid var(--ink); border-radius: 5mm;
-  padding: 1.4mm 3.4mm; font-weight: 900; font-size: 10.5pt; line-height: 1.4; color: var(--blue-deep); text-align: center;
+  background: #fff; border: .6mm solid var(--coppy); border-radius: 5mm;
+  padding: 1.4mm 3.4mm; font-weight: 900; font-size: 10.5pt; line-height: 1.4; color: var(--ink); text-align: center;
 }
 .bubble::after {
   content: ""; position: absolute; right: 6mm; bottom: -2mm; width: 3.4mm; height: 3.4mm;
-  background: #fff; border-right: .6mm solid var(--ink); border-bottom: .6mm solid var(--ink);
+  background: #fff; border-right: .6mm solid var(--coppy); border-bottom: .6mm solid var(--coppy);
   transform: rotate(45deg);
 }
 

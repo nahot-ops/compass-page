@@ -17,6 +17,7 @@
   --orange-deep: #E0700C;
   --orange-tint: #FFF5E9;
   --yellow: #F9D02B;
+  --coppy: #6F96D1;
   --ink: #1E2B3C;
   --ink-soft: #4A5566;
   --paper: #FFFFFF;
@@ -64,12 +65,12 @@ body { font-family: var(--f-body); color: var(--ink); -webkit-print-color-adjust
 .chara img { width: 100%; display: block; }
 .bubble {
   position: absolute; right: 33mm; top: 0; z-index: 2;
-  background: #fff; border: .6mm solid var(--ink); border-radius: 5mm;
-  padding: 1.2mm 3mm; font-weight: 900; font-size: 11pt; white-space: nowrap; color: var(--c-deep);
+  background: #fff; border: .6mm solid var(--coppy); border-radius: 5mm;
+  padding: 1.2mm 3mm; font-weight: 900; font-size: 11pt; white-space: nowrap; color: var(--ink);
 }
 .bubble::after {
   content: ""; position: absolute; right: -2.6mm; bottom: 1.6mm; width: 3.4mm; height: 3.4mm;
-  background: #fff; border-right: .6mm solid var(--ink); border-bottom: .6mm solid var(--ink);
+  background: #fff; border-right: .6mm solid var(--coppy); border-bottom: .6mm solid var(--coppy);
   transform: rotate(-45deg);
 }
 
