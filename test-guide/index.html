@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title>テスト前道場 ComPass</title>
+<title>テスト前の羅針盤</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,20 +47,20 @@ body { font-family: var(--f-body); color: var(--ink); -webkit-print-color-adjust
 .logo { position: absolute; left: 0; top: 0; width: 44mm; z-index: 3; background: #fff; border-radius: 2mm; padding: 1mm; }
 .title { position: absolute; left: 0; right: 0; top: 5mm; text-align: center; }
 .title .hot {
-  display: inline-block; font-family: var(--f-display); font-size: 25mm; line-height: 1;
+  display: inline-block; font-family: var(--f-display); font-size: 13mm; line-height: 1;
   color: var(--orange); letter-spacing: 1mm;
-  transform: rotate(-4deg) translateX(-14mm);
+  transform: rotate(-4deg) translateX(-8mm);
   text-shadow: 1.3mm 1.3mm 0 var(--ink);
 }
 .title .main {
-  display: block; margin-top: -2mm;
-  font-family: var(--f-display); font-size: 19mm; line-height: 1.05; letter-spacing: .3mm;
+  display: block; margin-top: 3mm;
+  font-family: var(--f-display); font-size: 15mm; line-height: 1.05; letter-spacing: .3mm;
   color: var(--ink);
   text-shadow: 0 1.4mm 0 var(--blue);
-  transform: translateX(-12mm);
+  transform: translateX(-14mm);
 }
-.swoosh { position: absolute; left: 34mm; top: 50mm; width: 112mm; }
-.burst { position: absolute; left: 30mm; top: 8mm; width: 118mm; }
+.swoosh { position: absolute; left: 22mm; top: 41mm; width: 116mm; }
+.burst { display: none; }
 .chara { position: absolute; right: 0; top: 6mm; width: 42mm; }
 .chara img { width: 100%; display: block; }
 .bubble {
@@ -96,7 +96,7 @@ body { font-family: var(--f-body); color: var(--ink); -webkit-print-color-adjust
   position: absolute; right: -.7mm; top: -.7mm;
   width: 13mm; height: 10mm; background: var(--c); color: #fff;
   border-radius: 0 4mm 0 4mm; display: grid; place-items: center;
-  font-weight: 900; font-size: 15pt;
+  font-weight: 900; font-size: 17pt; font-family: var(--f-display);
 }
 .card h3 {
   grid-column: 1 / -1; margin: 0; padding-right: 12mm;
@@ -140,9 +140,8 @@ body { font-family: var(--f-body); color: var(--ink); -webkit-print-color-adjust
       <circle cx="40" cy="170" r="7" fill="#F9D02B"/>
     </symbol>
     <symbol id="ban" viewBox="0 0 40 40">
-      <circle cx="20" cy="20" r="16.5" fill="#fff" stroke="currentColor" stroke-width="3.6"/>
-      <path d="M14 27 V15 M17.5 26 V11.5 M21 26 V11 M24.5 26.5 V13 M14 27 Q16 32 22 31.5 Q27 31 28 24 L28 19" fill="none" stroke="#1E2B3C" stroke-width="2.2" stroke-linecap="round"/>
-      <line x1="8.5" y1="8.5" x2="31.5" y2="31.5" stroke="currentColor" stroke-width="3.6" stroke-linecap="round"/>
+      <circle cx="20" cy="20" r="17" fill="currentColor" stroke="#1E2B3C" stroke-width="2.4"/>
+      <rect x="8.5" y="16.5" width="23" height="7" rx="1.5" fill="#fff"/>
     </symbol>
     <symbol id="ok" viewBox="0 0 40 40">
       <circle cx="20" cy="20" r="16.5" fill="#fff" stroke="currentColor" stroke-width="3.6"/>
@@ -167,24 +166,24 @@ body { font-family: var(--f-body); color: var(--ink); -webkit-print-color-adjust
       </g>
     </svg>
     <div class="title">
-      <span class="hot">熱血</span>
-      <span class="main">テスト前道場</span>
+      <span class="hot">迷わない！</span>
+      <span class="main">テスト前の羅針盤</span>
     </div>
     <svg class="swoosh" viewBox="0 0 300 20" aria-hidden="true">
       <path d="M6 14 Q150 0 294 10" fill="none" stroke="#F39221" stroke-width="7" stroke-linecap="round"/>
       <path d="M40 18 Q160 8 260 15" fill="none" stroke="#F9D02B" stroke-width="3.5" stroke-linecap="round"/>
     </svg>
-    <div class="bubble">ちょっと待った！</div>
+    <div class="bubble">そっちは遠回り！</div>
     <div class="chara"><img src="img/bird-wave.png" alt=""></div>
   </div>
 
-  <div class="badge"><svg class="needle"><use href="#needle"/></svg>禁じ手 六ヶ条</div>
-  <div class="lead">勉強を<em>「作業」</em>にしない。</div>
-  <div class="sub">「できないことをできるようにする」これが全ての基本です。</div>
+  <div class="badge"><svg class="needle"><use href="#needle"/></svg>遠回りルート 6つ</div>
+  <div class="lead">その勉強、<em>遠回り</em>してない？</div>
+  <div class="sub">ゴールへの近道は「できないことを、できるようにする」。これだけです。</div>
 
   <div class="grid">
     <article class="card">
-      <span class="no">一</span>
+      <span class="no">1</span>
       <h3>眺めるだけ<svg style="color:var(--c)"><use href="#ban"/></svg></h3>
       <h4>見ただけでは、覚えていない</h4>
       <p>眺めるだけの勉強は、思い出せるかを一度も試していない。教科書を閉じて、言えるかどうかが本番。</p>
@@ -198,7 +197,7 @@ body { font-family: var(--f-body); color: var(--ink); -webkit-print-color-adjust
     </article>
 
     <article class="card">
-      <span class="no">二</span>
+      <span class="no">2</span>
       <h3>まとめるだけ<svg style="color:var(--c)"><use href="#ban"/></svg></h3>
       <h4>きれいなノートは、点にならない</h4>
       <p>ノートに写すのは作業。仕上がっても、問題が解けるようになったわけではない。まとめる前に解く。</p>
@@ -214,7 +213,7 @@ body { font-family: var(--f-body); color: var(--ink); -webkit-print-color-adjust
     </article>
 
     <article class="card">
-      <span class="no">三</span>
+      <span class="no">3</span>
       <h3>埋めるだけ<svg style="color:var(--c)"><use href="#ban"/></svg></h3>
       <h4>教科書を見ながらは、練習じゃない</h4>
       <p>見ながら問題を埋めるのは、答えを探しているだけ。テストで教科書は開けない。何も見ずに解く。</p>
@@ -230,7 +229,7 @@ body { font-family: var(--f-body); color: var(--ink); -webkit-print-color-adjust
     </article>
 
     <article class="card">
-      <span class="no">四</span>
+      <span class="no">4</span>
       <h3>答え写すだけ<svg style="color:var(--c)"><use href="#ban"/></svg></h3>
       <h4>写した答えは、自分の答えじゃない</h4>
       <p>丸付けのあと、赤で答えを書き写して終わりにしない。なぜ間違えたかを書き、もう一度自分で解く。</p>
@@ -247,7 +246,7 @@ body { font-family: var(--f-body); color: var(--ink); -webkit-print-color-adjust
     </article>
 
     <article class="card">
-      <span class="no">五</span>
+      <span class="no">5</span>
       <h3>1回解くだけ<svg style="color:var(--c)"><use href="#ban"/></svg></h3>
       <h4>1周では、できないままが残る</h4>
       <p>問題集を1回解いて終わりにしない。できなかった問題をできるようにするのが、2周目からの仕事。</p>
@@ -264,7 +263,7 @@ body { font-family: var(--f-body); color: var(--ink); -webkit-print-color-adjust
     </article>
 
     <article class="card">
-      <span class="no">六</span>
+      <span class="no">6</span>
       <h3>後でまとめて<svg style="color:var(--c)"><use href="#ban"/></svg></h3>
       <h4>丸付けは、あとでやらない</h4>
       <p>まとめて後回しにすると、間違いに気づくのが遅れる。まちがったやり方のまま、何問も解いてしまう。</p>
@@ -280,7 +279,7 @@ body { font-family: var(--f-body); color: var(--ink); -webkit-print-color-adjust
   </div>
 
   <div class="foot">
-    <div class="msg"><span>ひとつでも当てはまったら、<b>今日から</b>やめよう。　→ 裏面の「六ノ型」へ</span></div>
+    <div class="msg"><span>ひとつでも当てはまったら、<b>今日から</b>ルート変更。　→ 裏面の「道しるべ」へ</span></div>
     <img class="pair" src="img/bird-pair.png" alt="">
   </div>
 </section>
@@ -297,24 +296,24 @@ body { font-family: var(--f-body); color: var(--ink); -webkit-print-color-adjust
       </g>
     </svg>
     <div class="title">
-      <span class="hot">熱血</span>
-      <span class="main">テスト前道場</span>
+      <span class="hot">迷わない！</span>
+      <span class="main">テスト前の羅針盤</span>
     </div>
     <svg class="swoosh" viewBox="0 0 300 20" aria-hidden="true">
       <path d="M6 14 Q150 0 294 10" fill="none" stroke="#2BA9E1" stroke-width="7" stroke-linecap="round"/>
       <path d="M40 18 Q160 8 260 15" fill="none" stroke="#F9D02B" stroke-width="3.5" stroke-linecap="round"/>
     </svg>
-    <div class="bubble">押忍！やるぞ！</div>
+    <div class="bubble">この順で進もう！</div>
     <div class="chara" style="width:46mm;top:9mm"><img src="img/bird-study.png" alt=""></div>
   </div>
 
-  <div class="badge"><svg class="needle"><use href="#needle"/></svg>コンパス式 六ノ型</div>
-  <div class="lead">できないことを、<em>できるように</em>する。</div>
-  <div class="sub">これが正しい勉強法。まずは型を守って450点突破を目指そう！</div>
+  <div class="badge"><svg class="needle"><use href="#needle"/></svg>コンパス式 6つの道しるべ</div>
+  <div class="lead">迷ったら、<em>この順番</em>に戻る。</div>
+  <div class="sub">できないことを、できるようにする。道しるべどおりに進んで450点突破を目指そう！</div>
 
   <div class="grid">
     <article class="card">
-      <span class="no">一</span>
+      <span class="no">1</span>
       <h3>まずは読む<svg style="color:var(--c)"><use href="#ok"/></svg></h3>
       <p>教科書やワークのまとめページを、時間（1ページ5分など）を決めて読んでみる。全範囲を一気に読まずに、単元ごとに細かく区切る。</p>
       <svg class="ill" viewBox="0 0 120 100">
@@ -329,7 +328,7 @@ body { font-family: var(--f-body); color: var(--ink); -webkit-print-color-adjust
     </article>
 
     <article class="card">
-      <span class="no">二</span>
+      <span class="no">2</span>
       <h3>やってみる<svg style="color:var(--c)"><use href="#ok"/></svg></h3>
       <p>まだできないからと止まってないで、まず問題を解いてみる。解いてみないと、何がわかっていて何がわからないのかすら、わからない。</p>
       <svg class="ill" viewBox="0 0 120 100">
@@ -342,7 +341,7 @@ body { font-family: var(--f-body); color: var(--ink); -webkit-print-color-adjust
     </article>
 
     <article class="card">
-      <span class="no">三</span>
+      <span class="no">3</span>
       <h3>確認する<svg style="color:var(--c)"><use href="#ok"/></svg></h3>
       <p>マルつけして、理解していないことを見つけ出す。間違えた問題が見つかってからが、本当の勉強のスタートです。</p>
       <svg class="ill" viewBox="0 0 120 100">
@@ -355,7 +354,7 @@ body { font-family: var(--f-body); color: var(--ink); -webkit-print-color-adjust
     </article>
 
     <article class="card">
-      <span class="no">四</span>
+      <span class="no">4</span>
       <h3>やり直す<svg style="color:var(--c)"><use href="#ok"/></svg></h3>
       <p>間違えた問題には印（マーク）をつけて、自分の力でできるまで何度も解き直す。暗記モノは全部答えられるまで、手で隠して言ってみる。</p>
       <svg class="ill" viewBox="0 0 120 100">
@@ -369,7 +368,7 @@ body { font-family: var(--f-body); color: var(--ink); -webkit-print-color-adjust
     </article>
 
     <article class="card">
-      <span class="no">五</span>
+      <span class="no">5</span>
       <h3>調べて質問<svg style="color:var(--c)"><use href="#ok"/></svg></h3>
       <p>自分で調べてわからなければ、必ず質問。絶対わからないままにしない。聞くべきことは答えではなく、どうすれば自分でできるのか。</p>
       <svg class="ill" viewBox="0 0 120 100">
@@ -383,7 +382,7 @@ body { font-family: var(--f-body); color: var(--ink); -webkit-print-color-adjust
     </article>
 
     <article class="card">
-      <span class="no">六</span>
+      <span class="no">6</span>
       <h3>テストする<svg style="color:var(--c)"><use href="#ok"/></svg></h3>
       <p>本当にできるのか、最後に必ず自分でテスト。大切なのはテスト本番、自分だけで正解にたどり着けるのか。</p>
       <svg class="ill" viewBox="0 0 120 100">
@@ -400,7 +399,7 @@ body { font-family: var(--f-body); color: var(--ink); -webkit-print-color-adjust
   <div class="foot">
     <div class="msg">
       <svg class="steps" viewBox="0 0 60 20" aria-hidden="true"><g fill="#2BA9E1"><circle cx="6" cy="14" r="3.5"/><circle cx="20" cy="7" r="3.5"/><circle cx="34" cy="14" r="3.5"/><circle cx="48" cy="7" r="3.5"/></g></svg>
-      <span>一〜六を、<b>この順番で</b>。一歩ずつ、450点へ。</span>
+      <span>1〜6を、<b>この順番で</b>。一歩ずつ、450点へ。</span>
     </div>
     <img class="pair" src="img/bird-walk.png" alt="">
   </div>
