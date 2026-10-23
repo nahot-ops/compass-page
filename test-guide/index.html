@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>テスト前道場 ComPass</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Dela+Gothic+One&display=swap">
+<style>
+/* A4縦2枚。1枚目＝禁じ手（オレンジ）、2枚目＝正しい型（ブルー）。ロゴの2色で表裏を分ける */
+:root {
+  --blue: #2BA9E1;
+  --blue-deep: #1A86BE;
+  --blue-tint: #EEF7FD;
+  --orange: #F39221;
+  --orange-deep: #E0700C;
+  --orange-tint: #FFF5E9;
+  --yellow: #F9D02B;
+  --ink: #1E2B3C;
+  --ink-soft: #4A5566;
+  --paper: #FFFFFF;
+  --f-display: "Dela Gothic One", "M PLUS Rounded 1c", sans-serif;
+  --f-body: "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", sans-serif;
+  color-scheme: light;
+}
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #DDE3EA; }
+body { font-family: var(--f-body); color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+.sheet {
+  --c: var(--orange); --c-deep: var(--orange-deep); --c-tint: var(--orange-tint);
+  position: relative; overflow: hidden;
+  width: 210mm; height: 297mm; margin: 8mm auto;
+  padding: 7mm 9mm 5mm;
+  background: var(--paper);
+  display: flex; flex-direction: column;
+}
+.sheet.kata { --c: var(--blue); --c-deep: var(--blue-deep); --c-tint: var(--blue-tint); }
+@media print { html, body { background: none; } .sheet { margin: 0; break-after: page; } }
+
+/* 左上の透かし：羅針盤 */
+.watermark { position: absolute; left: -34mm; top: -6mm; width: 95mm; height: 95mm; opacity: .13; pointer-events: none; }
+
+.head { position: relative; height: 62mm; }
+.logo { position: absolute; left: 0; top: 0; width: 44mm; z-index: 3; background: #fff; border-radius: 2mm; padding: 1mm; }
+.title { position: absolute; left: 0; right: 0; top: 5mm; text-align: center; }
+.title .hot {
+  display: inline-block; font-family: var(--f-display); font-size: 25mm; line-height: 1;
+  color: var(--orange); letter-spacing: 1mm;
+  transform: rotate(-4deg) translateX(-14mm);
+  text-shadow: 1.3mm 1.3mm 0 var(--ink);
+}
+.title .main {
+  display: block; margin-top: -2mm;
+  font-family: var(--f-display); font-size: 19mm; line-height: 1.05; letter-spacing: .3mm;
+  color: var(--ink);
+  text-shadow: 0 1.4mm 0 var(--blue);
+  transform: translateX(-12mm);
+}
+.swoosh { position: absolute; left: 34mm; top: 50mm; width: 112mm; }
+.burst { position: absolute; left: 30mm; top: 8mm; width: 118mm; }
+.chara { position: absolute; right: 0; top: 6mm; width: 42mm; }
+.chara img { width: 100%; display: block; }
+.bubble {
+  position: absolute; right: 33mm; top: 0; z-index: 2;
+  background: #fff; border: .6mm solid var(--ink); border-radius: 5mm;
+  padding: 1.2mm 3mm; font-weight: 900; font-size: 11pt; white-space: nowrap; color: var(--c-deep);
+}
+.bubble::after {
+  content: ""; position: absolute; right: -2.6mm; bottom: 1.6mm; width: 3.4mm; height: 3.4mm;
+  background: #fff; border-right: .6mm solid var(--ink); border-bottom: .6mm solid var(--ink);
+  transform: rotate(-45deg);
+}
+
+.badge {
+  align-self: center; margin-top: 1mm;
+  background: var(--c); color: #fff; border-radius: 3mm;
+  padding: 2mm 13mm 2.4mm; font-weight: 900; font-size: 21pt; letter-spacing: 2.4mm;
+  display: flex; align-items: center; gap: 4mm;
+}
+.badge .needle { width: 8mm; height: 8mm; }
+.lead { text-align: center; margin-top: 3.4mm; font-weight: 900; font-size: 29pt; letter-spacing: .5mm; line-height: 1.2; }
+.lead em { font-style: normal; color: var(--c-deep); }
+.sub { text-align: center; margin-top: 1.4mm; font-weight: 700; font-size: 11.5pt; color: var(--ink-soft); }
+
+.grid { margin-top: 4.5mm; flex: 1; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 1fr); gap: 4mm; }
+.card {
+  position: relative; min-width: 0;
+  border: .7mm solid var(--c); border-radius: 4mm; background: var(--c-tint);
+  padding: 3.6mm 4mm 3mm 4.4mm;
+  display: grid; grid-template-columns: 1fr 31mm; grid-template-rows: auto auto 1fr; column-gap: 2.5mm;
+}
+.no {
+  position: absolute; right: -.7mm; top: -.7mm;
+  width: 13mm; height: 10mm; background: var(--c); color: #fff;
+  border-radius: 0 4mm 0 4mm; display: grid; place-items: center;
+  font-weight: 900; font-size: 15pt;
+}
+.card h3 {
+  grid-column: 1 / -1; margin: 0; padding-right: 12mm;
+  display: flex; align-items: center; gap: 2mm;
+  font-weight: 900; font-size: 19pt; line-height: 1.2; color: var(--c-deep);
+}
+.card h3 svg { width: 8.6mm; height: 8.6mm; flex: none; }
+.card h4 { grid-column: 1 / -1; margin: 1.4mm 0 0; font-weight: 900; font-size: 11pt; color: var(--ink); }
+.card p { margin: 1.6mm 0 0; font-weight: 500; font-size: 9.6pt; line-height: 1.75; letter-spacing: .25mm; color: var(--ink-soft); }
+.card .ill { align-self: center; width: 31mm; }
+
+.foot { margin-top: 2mm; display: flex; align-items: center; justify-content: space-between; height: 17mm; }
+.foot .msg { font-weight: 900; font-size: 12pt; color: var(--ink); display: flex; align-items: center; gap: 2.4mm; }
+.foot .msg b { color: var(--c-deep); }
+.foot .steps { height: 5mm; }
+.foot small { font-weight: 700; font-size: 8.5pt; color: var(--ink-soft); }
+.foot .pair { height: 19mm; }
+
+/* イラスト共通 */
+.ill * { stroke-linecap: round; stroke-linejoin: round; }
+.k { fill: none; stroke: var(--ink); stroke-width: 3.6; }
+.kf { fill: #fff; stroke: var(--ink); stroke-width: 3.6; }
+.a { fill: none; stroke: var(--c); stroke-width: 3.6; }
+.af { fill: var(--c); }
+.g { fill: none; stroke: #9AA4B2; stroke-width: 2.6; }
+.r { fill: none; stroke: var(--orange-deep); stroke-width: 3.6; }
+.b { fill: none; stroke: var(--blue); stroke-width: 3.6; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <!-- ロゴの羅針盤を簡略化した透かし -->
+    <symbol id="compass" viewBox="0 0 200 200">
+      <path d="M118 30 A72 72 0 1 1 52 52" fill="none" stroke="#2BA9E1" stroke-width="14" stroke-linecap="round"/>
+      <line x1="128" y1="34" x2="72" y2="166" stroke="#F39221" stroke-width="16" stroke-linecap="round"/>
+      <circle cx="100" cy="100" r="13" fill="#2BA9E1"/>
+      <circle cx="140" cy="12" r="9" fill="#F39221"/><circle cx="170" cy="40" r="8" fill="#F9D02B"/>
+      <circle cx="186" cy="80" r="7" fill="#F39221"/><circle cx="20" cy="130" r="8" fill="#F39221"/>
+      <circle cx="40" cy="170" r="7" fill="#F9D02B"/>
+    </symbol>
+    <symbol id="ban" viewBox="0 0 40 40">
+      <circle cx="20" cy="20" r="16.5" fill="#fff" stroke="currentColor" stroke-width="3.6"/>
+      <path d="M14 27 V15 M17.5 26 V11.5 M21 26 V11 M24.5 26.5 V13 M14 27 Q16 32 22 31.5 Q27 31 28 24 L28 19" fill="none" stroke="#1E2B3C" stroke-width="2.2" stroke-linecap="round"/>
+      <line x1="8.5" y1="8.5" x2="31.5" y2="31.5" stroke="currentColor" stroke-width="3.6" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="ok" viewBox="0 0 40 40">
+      <circle cx="20" cy="20" r="16.5" fill="#fff" stroke="currentColor" stroke-width="3.6"/>
+      <path d="M12 20.5 L18 26.5 L28.5 14" fill="none" stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="needle" viewBox="0 0 40 40">
+      <circle cx="20" cy="20" r="16" fill="none" stroke="#fff" stroke-width="3.4"/>
+      <path d="M26 9 L17 22 L23 18 Z M14 31 L23 18 L17 22 Z" fill="#fff"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ===================== 1枚目：禁じ手 六ヶ条 ===================== -->
+<section class="sheet kinji">
+  <svg class="watermark"><use href="#compass"/></svg>
+  <div class="head">
+    <img class="logo" src="img/logo.png" alt="学習塾コンパス ComPass">
+    <svg class="burst" viewBox="0 0 260 60" aria-hidden="true">
+      <g stroke="#F39221" stroke-width="5" stroke-linecap="round">
+        <line x1="40" y1="44" x2="12" y2="30"/><line x1="50" y1="28" x2="30" y2="8"/>
+        <line x1="198" y1="30" x2="222" y2="10"/><line x1="208" y1="44" x2="238" y2="32"/>
+      </g>
+    </svg>
+    <div class="title">
+      <span class="hot">熱血</span>
+      <span class="main">テスト前道場</span>
+    </div>
+    <svg class="swoosh" viewBox="0 0 300 20" aria-hidden="true">
+      <path d="M6 14 Q150 0 294 10" fill="none" stroke="#F39221" stroke-width="7" stroke-linecap="round"/>
+      <path d="M40 18 Q160 8 260 15" fill="none" stroke="#F9D02B" stroke-width="3.5" stroke-linecap="round"/>
+    </svg>
+    <div class="bubble">ちょっと待った！</div>
+    <div class="chara"><img src="img/bird-wave.png" alt=""></div>
+  </div>
+
+  <div class="badge"><svg class="needle"><use href="#needle"/></svg>禁じ手 六ヶ条</div>
+  <div class="lead">勉強を<em>「作業」</em>にしない。</div>
+  <div class="sub">「できないことをできるようにする」これが全ての基本です。</div>
+
+  <div class="grid">
+    <article class="card">
+      <span class="no">一</span>
+      <h3>眺めるだけ<svg style="color:var(--c)"><use href="#ban"/></svg></h3>
+      <h4>見ただけでは、覚えていない</h4>
+      <p>眺めるだけの勉強は、思い出せるかを一度も試していない。教科書を閉じて、言えるかどうかが本番。</p>
+      <svg class="ill" viewBox="0 0 120 100">
+        <path class="kf" d="M10 22 Q35 14 60 24 Q85 14 110 22 V82 Q85 74 60 84 Q35 74 10 82 Z"/>
+        <line class="k" x1="60" y1="24" x2="60" y2="84"/>
+        <path class="g" d="M18 36 H50 M70 36 H102 M18 70 H50 M70 70 H102"/>
+        <path class="kf" d="M16 53 Q34 38 52 53 Q34 68 16 53 Z"/><circle cx="34" cy="53" r="6" fill="#1E2B3C"/>
+        <path class="kf" d="M68 53 Q86 38 104 53 Q86 68 68 53 Z"/><circle cx="86" cy="53" r="6" fill="#1E2B3C"/>
+      </svg>
+    </article>
+
+    <article class="card">
+      <span class="no">二</span>
+      <h3>まとめるだけ<svg style="color:var(--c)"><use href="#ban"/></svg></h3>
+      <h4>きれいなノートは、点にならない</h4>
+      <p>ノートに写すのは作業。仕上がっても、問題が解けるようになったわけではない。まとめる前に解く。</p>
+      <svg class="ill" viewBox="0 0 120 100">
+        <rect class="kf" x="8" y="14" width="78" height="76" rx="5"/>
+        <rect class="af" x="16" y="22" width="44" height="8" rx="2"/>
+        <path class="g" d="M16 40 H76 M50 56 H76 M50 66 H76 M50 76 H76"/>
+        <path class="k" d="M16 80 V54"/><rect class="af" x="22" y="68" width="6" height="12"/><rect class="af" x="31" y="60" width="6" height="20"/><rect class="af" x="40" y="64" width="6" height="16"/>
+        <path class="k" d="M16 80 H48"/>
+        <path class="kf" d="M98 8 L110 16 L80 64 L70 70 L70 58 Z"/>
+        <path class="a" d="M92 18 L104 26"/>
+      </svg>
+    </article>
+
+    <article class="card">
+      <span class="no">三</span>
+      <h3>埋めるだけ<svg style="color:var(--c)"><use href="#ban"/></svg></h3>
+      <h4>教科書を見ながらは、練習じゃない</h4>
+      <p>見ながら問題を埋めるのは、答えを探しているだけ。テストで教科書は開けない。何も見ずに解く。</p>
+      <svg class="ill" viewBox="0 0 120 100">
+        <path class="kf" d="M6 16 Q24 10 42 18 Q60 10 78 16 V56 Q60 50 42 58 Q24 50 6 56 Z"/>
+        <line class="k" x1="42" y1="18" x2="42" y2="58"/>
+        <path class="g" d="M12 28 H34 M12 38 H34 M50 28 H72"/>
+        <text x="60" y="44" text-anchor="middle" font-size="10" font-weight="900" fill="#1E2B3C" font-family="M PLUS Rounded 1c">教科書</text>
+        <path class="a" d="M62 60 Q70 66 78 70"/><path class="af" d="M84 74 L72 74 L80 64 Z"/>
+        <rect class="kf" x="36" y="74" width="78" height="22" rx="4"/>
+        <path class="g" d="M44 85 H64"/><path class="a" d="M74 81 H104 M74 89 H96"/>
+      </svg>
+    </article>
+
+    <article class="card">
+      <span class="no">四</span>
+      <h3>答え写すだけ<svg style="color:var(--c)"><use href="#ban"/></svg></h3>
+      <h4>写した答えは、自分の答えじゃない</h4>
+      <p>丸付けのあと、赤で答えを書き写して終わりにしない。なぜ間違えたかを書き、もう一度自分で解く。</p>
+      <svg class="ill" viewBox="0 0 120 100">
+        <path class="kf" d="M6 12 Q24 6 42 14 Q60 6 78 12 V50 Q60 44 42 52 Q24 44 6 50 Z"/>
+        <line class="k" x1="42" y1="14" x2="42" y2="52"/>
+        <path class="g" d="M12 24 H34 M12 34 H34"/>
+        <text x="60" y="38" text-anchor="middle" font-size="11" font-weight="900" fill="#1E2B3C" font-family="M PLUS Rounded 1c">解答</text>
+        <rect class="kf" x="22" y="64" width="80" height="30" rx="4"/>
+        <path class="a" d="M30 74 Q36 69 42 74 Q48 79 54 74 Q60 69 66 74 M30 84 Q36 79 42 84 Q48 89 54 84"/>
+        <path class="af" d="M60 58 L52 64 L50 54 Z"/><path class="a" d="M66 50 L54 60"/>
+        <path class="kf" d="M108 40 L116 46 L90 82 L82 86 L84 77 Z"/>
+      </svg>
+    </article>
+
+    <article class="card">
+      <span class="no">五</span>
+      <h3>1回解くだけ<svg style="color:var(--c)"><use href="#ban"/></svg></h3>
+      <h4>1周では、できないままが残る</h4>
+      <p>問題集を1回解いて終わりにしない。できなかった問題をできるようにするのが、2周目からの仕事。</p>
+      <svg class="ill" viewBox="0 0 120 100">
+        <path class="k" d="M34 52 H90 L84 96 H40 Z"/><path class="k" d="M30 52 H94"/>
+        <path class="g" d="M52 62 V88 M62 62 V88 M72 62 V88"/>
+        <g transform="rotate(-18 64 28)">
+          <path class="kf" d="M40 12 Q52 8 64 14 Q76 8 88 12 V42 Q76 38 64 44 Q52 38 40 42 Z"/>
+          <line class="k" x1="64" y1="14" x2="64" y2="44"/>
+          <path class="a" d="M47 20 L57 30 M57 20 L47 30 M71 22 L81 32 M81 22 L71 32"/>
+        </g>
+        <path class="g" d="M10 30 Q18 22 28 24 M14 40 Q20 34 28 34"/>
+      </svg>
+    </article>
+
+    <article class="card">
+      <span class="no">六</span>
+      <h3>後でまとめて<svg style="color:var(--c)"><use href="#ban"/></svg></h3>
+      <h4>丸付けは、あとでやらない</h4>
+      <p>まとめて後回しにすると、間違いに気づくのが遅れる。まちがったやり方のまま、何問も解いてしまう。</p>
+      <svg class="ill" viewBox="0 0 120 100">
+        <rect class="kf" x="20" y="38" width="88" height="54" rx="5"/>
+        <rect class="kf" x="14" y="28" width="88" height="54" rx="5"/>
+        <rect class="kf" x="8" y="18" width="88" height="54" rx="5"/>
+        <circle class="a" cx="24" cy="34" r="7"/><path class="a" d="M18 50 L30 62 M30 50 L18 62"/>
+        <path class="g" d="M40 34 H84 M40 56 H84"/>
+        <path class="kf" d="M74 6 L112 8 L112 15 L74 13 Z"/>
+      </svg>
+    </article>
+  </div>
+
+  <div class="foot">
+    <div class="msg"><span>ひとつでも当てはまったら、<b>今日から</b>やめよう。　→ 裏面の「六ノ型」へ</span></div>
+    <img class="pair" src="img/bird-pair.png" alt="">
+  </div>
+</section>
+
+<!-- ===================== 2枚目：コンパス式 六ノ型 ===================== -->
+<section class="sheet kata">
+  <svg class="watermark"><use href="#compass"/></svg>
+  <div class="head">
+    <img class="logo" src="img/logo.png" alt="学習塾コンパス ComPass">
+    <svg class="burst" viewBox="0 0 260 60" aria-hidden="true">
+      <g stroke="#2BA9E1" stroke-width="5" stroke-linecap="round">
+        <line x1="40" y1="44" x2="12" y2="30"/><line x1="50" y1="28" x2="30" y2="8"/>
+        <line x1="198" y1="30" x2="222" y2="10"/><line x1="208" y1="44" x2="238" y2="32"/>
+      </g>
+    </svg>
+    <div class="title">
+      <span class="hot">熱血</span>
+      <span class="main">テスト前道場</span>
+    </div>
+    <svg class="swoosh" viewBox="0 0 300 20" aria-hidden="true">
+      <path d="M6 14 Q150 0 294 10" fill="none" stroke="#2BA9E1" stroke-width="7" stroke-linecap="round"/>
+      <path d="M40 18 Q160 8 260 15" fill="none" stroke="#F9D02B" stroke-width="3.5" stroke-linecap="round"/>
+    </svg>
+    <div class="bubble">押忍！やるぞ！</div>
+    <div class="chara" style="width:46mm;top:9mm"><img src="img/bird-study.png" alt=""></div>
+  </div>
+
+  <div class="badge"><svg class="needle"><use href="#needle"/></svg>コンパス式 六ノ型</div>
+  <div class="lead">できないことを、<em>できるように</em>する。</div>
+  <div class="sub">これが正しい勉強法。まずは型を守って450点突破を目指そう！</div>
+
+  <div class="grid">
+    <article class="card">
+      <span class="no">一</span>
+      <h3>まずは読む<svg style="color:var(--c)"><use href="#ok"/></svg></h3>
+      <p>教科書やワークのまとめページを、時間（1ページ5分など）を決めて読んでみる。全範囲を一気に読まずに、単元ごとに細かく区切る。</p>
+      <svg class="ill" viewBox="0 0 120 100">
+        <path class="kf" d="M4 22 Q22 16 40 24 Q58 16 76 22 V78 Q58 72 40 80 Q22 72 4 78 Z"/>
+        <line class="k" x1="40" y1="24" x2="40" y2="80"/>
+        <rect class="af" x="12" y="10" width="8" height="14" rx="1.5"/><rect x="26" y="10" width="8" height="12" rx="1.5" fill="#BFE3F5"/><rect x="48" y="10" width="8" height="12" rx="1.5" fill="#BFE3F5"/>
+        <rect class="a" x="10" y="32" width="24" height="12" rx="2"/>
+        <path class="g" d="M10 54 H32 M10 64 H32 M48 34 H70 M48 44 H70 M48 54 H70"/>
+        <circle class="kf" cx="92" cy="70" r="20"/><path class="a" d="M92 50 A20 20 0 0 1 110 78"/>
+        <path class="k" d="M92 58 V70 L100 76 M88 46 H96 M92 46 V50"/>
+      </svg>
+    </article>
+
+    <article class="card">
+      <span class="no">二</span>
+      <h3>やってみる<svg style="color:var(--c)"><use href="#ok"/></svg></h3>
+      <p>まだできないからと止まってないで、まず問題を解いてみる。解いてみないと、何がわかっていて何がわからないのかすら、わからない。</p>
+      <svg class="ill" viewBox="0 0 120 100">
+        <rect class="kf" x="6" y="30" width="84" height="56" rx="4"/>
+        <path class="a" d="M16 46 Q22 40 28 46 Q34 52 40 46 Q46 40 52 46 Q58 52 64 46 Q70 40 76 46"/>
+        <path class="g" d="M16 60 H80 M16 72 H80"/>
+        <path class="kf" d="M104 8 L112 14 L86 50 L78 54 L80 45 Z"/><path class="af" d="M104 8 L112 14 L108 19 L100 13 Z"/>
+        <path class="g" d="M106 40 L94 58 M114 46 L102 64"/>
+      </svg>
+    </article>
+
+    <article class="card">
+      <span class="no">三</span>
+      <h3>確認する<svg style="color:var(--c)"><use href="#ok"/></svg></h3>
+      <p>マルつけして、理解していないことを見つけ出す。間違えた問題が見つかってからが、本当の勉強のスタートです。</p>
+      <svg class="ill" viewBox="0 0 120 100">
+        <rect class="kf" x="8" y="6" width="70" height="88" rx="4"/>
+        <circle class="r" cx="22" cy="22" r="6"/><circle class="r" cx="22" cy="42" r="6"/>
+        <path class="r" d="M16 56 L28 68 M28 56 L16 68"/><circle class="r" cx="22" cy="82" r="6"/>
+        <path class="g" d="M36 22 H68 M36 42 H68 M36 62 H68 M36 82 H68"/>
+        <path class="a" d="M112 62 H40" stroke-width="5"/><path class="af" d="M34 62 L46 54 L46 70 Z"/>
+      </svg>
+    </article>
+
+    <article class="card">
+      <span class="no">四</span>
+      <h3>やり直す<svg style="color:var(--c)"><use href="#ok"/></svg></h3>
+      <p>間違えた問題には印（マーク）をつけて、自分の力でできるまで何度も解き直す。暗記モノは全部答えられるまで、手で隠して言ってみる。</p>
+      <svg class="ill" viewBox="0 0 120 100">
+        <path class="kf" d="M6 30 Q24 24 42 32 Q60 24 78 30 V84 Q60 78 42 86 Q24 78 6 84 Z"/>
+        <line class="k" x1="42" y1="32" x2="42" y2="86"/>
+        <rect class="af" x="14" y="18" width="8" height="14" rx="1.5"/><rect class="af" x="28" y="18" width="8" height="12" rx="1.5"/><rect class="af" x="50" y="18" width="8" height="12" rx="1.5"/>
+        <path class="g" d="M12 46 H34 M12 58 H34 M50 46 H70 M50 58 H70"/>
+        <path class="a" d="M100 40 A30 30 0 1 0 96 82" stroke-width="7"/>
+        <path class="af" d="M108 30 L110 50 L92 44 Z"/>
+      </svg>
+    </article>
+
+    <article class="card">
+      <span class="no">五</span>
+      <h3>調べて質問<svg style="color:var(--c)"><use href="#ok"/></svg></h3>
+      <p>自分で調べてわからなければ、必ず質問。絶対わからないままにしない。聞くべきことは答えではなく、どうすれば自分でできるのか。</p>
+      <svg class="ill" viewBox="0 0 120 100">
+        <rect class="kf" x="4" y="40" width="56" height="44" rx="4"/>
+        <path class="g" d="M12 52 H38 M12 62 H30"/>
+        <circle class="kf" cx="38" cy="66" r="13"/><path class="k" d="M47 75 L58 86" stroke-width="6"/>
+        <path class="af" d="M64 58 L74 52 L74 64 Z"/>
+        <path class="kf" d="M76 12 H114 V52 H94 L84 62 L86 52 H76 Z"/>
+        <text x="95" y="44" text-anchor="middle" font-size="34" font-weight="900" fill="#2BA9E1" font-family="M PLUS Rounded 1c">?</text>
+      </svg>
+    </article>
+
+    <article class="card">
+      <span class="no">六</span>
+      <h3>テストする<svg style="color:var(--c)"><use href="#ok"/></svg></h3>
+      <p>本当にできるのか、最後に必ず自分でテスト。大切なのはテスト本番、自分だけで正解にたどり着けるのか。</p>
+      <svg class="ill" viewBox="0 0 120 100">
+        <rect class="kf" x="50" y="8" width="62" height="84" rx="4"/>
+        <path class="a" d="M58 24 Q64 18 70 24 Q76 30 82 24 Q88 18 94 24 M58 42 Q64 36 70 42 Q76 48 82 42 Q88 36 94 42 M58 60 Q64 54 70 60"/>
+        <path class="g" d="M58 76 H104"/>
+        <circle class="kf" cx="24" cy="32" r="18"/><path class="k" d="M24 22 V32 L31 37"/>
+        <rect class="kf" x="6" y="64" width="40" height="18" rx="3"/><path class="g" d="M6 72 H46"/>
+        <text x="26" y="60" text-anchor="middle" font-size="10" font-weight="900" fill="#4A5566" font-family="M PLUS Rounded 1c">見ない</text>
+      </svg>
+    </article>
+  </div>
+
+  <div class="foot">
+    <div class="msg">
+      <svg class="steps" viewBox="0 0 60 20" aria-hidden="true"><g fill="#2BA9E1"><circle cx="6" cy="14" r="3.5"/><circle cx="20" cy="7" r="3.5"/><circle cx="34" cy="14" r="3.5"/><circle cx="48" cy="7" r="3.5"/></g></svg>
+      <span>一〜六を、<b>この順番で</b>。一歩ずつ、450点へ。</span>
+    </div>
+    <img class="pair" src="img/bird-walk.png" alt="">
+  </div>
+</section>
+
+</body>
+</html>
