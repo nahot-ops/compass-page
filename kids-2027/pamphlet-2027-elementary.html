@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>2027年度 小学生のご案内｜学習塾ComPass</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap">
+<style>
+/* A4縦3ページ。1＝理念と5つの教室、2＝注記・時間割・月謝、3＝公立中総合進学コースと入会時の費用。
+   色はロゴの青とオレンジ。敷き色は薄く、文字は濃紺で落ち着かせる（新小1チラシと共通） */
+:root {
+  --blue: #2BA9E1;
+  --blue-deep: #1A7FB4;
+  --blue-tint: #EEF7FD;
+  --blue-line: #BFE3F5;
+  --orange: #F39221;
+  --orange-deep: #D9700F;
+  --orange-tint: #FFF5E9;
+  --orange-line: #F8D3A6;
+  --ink: #1E2B3C;
+  --ink-soft: #4A5566;
+  --ink-faint: #7A8494;
+  --rule: #DDE3EA;
+  --ph: #E4E7EB;
+  --ph-line: #A9B1BC;
+  --paper: #FFFFFF;
+  --f: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  color-scheme: light;
+}
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #DDE3EA; }
+body {
+  font-family: var(--f); color: var(--ink); font-size: 9.5pt; line-height: 1.7;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+p, li { margin: 0; text-wrap: pretty; }
+table { border-collapse: collapse; width: 100%; }
+h1, h2, h3 { margin: 0; }
+
+/* 外側12mmの余白（家庭用プリンタの非印字域を避ける） */
+.sheet {
+  position: relative; overflow: hidden;
+  width: 210mm; height: 297mm; margin: 8mm auto;
+  padding: 12mm 12mm 11mm;
+  background: var(--paper);
+  display: flex; flex-direction: column;
+}
+@media print {
+  html, body { background: none; }
+  .sheet { margin: 0; break-after: page; }
+  .sheet:last-child { break-after: auto; }
+}
+.folio { margin-top: auto; padding-top: 2mm; display: flex; justify-content: space-between; font-size: 7.5pt; color: var(--ink-faint); border-top: .3mm solid var(--rule); }
+
+/* プレースホルダ（画像が入る場所） */
+.ph {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--ph); border: .3mm dashed var(--ph-line); border-radius: 1.5mm;
+  color: #6B7480; font-weight: 700; font-size: 10pt; line-height: 1.3; text-align: center; flex: none;
+}
+.ph small { display: block; font-weight: 500; font-size: 7.5pt; margin-top: .8mm; }
+
+.sec-h { font-weight: 700; font-size: 11.5pt; line-height: 1.5; color: var(--ink); display: flex; align-items: center; gap: 2.5mm; margin-bottom: 1.5mm; }
+.sec-h::before { content: ""; width: 1.4mm; height: 5mm; background: var(--blue); border-radius: .7mm; flex: none; }
+.note { font-size: 8.4pt; line-height: 1.65; color: var(--ink-soft); }
+.note p { padding-left: 1em; text-indent: -1em; }
+.note p + p { margin-top: .6mm; }
+
+/* ---------- 1ページ目 ---------- */
+.cover { display: flex; gap: 6mm; align-items: flex-start; }
+.cover .ph { width: 44mm; height: 16mm; }
+.cover-txt { flex: 1; }
+.school-name { font-weight: 700; font-size: 10.5pt; color: var(--blue-deep); letter-spacing: .06em; }
+.title { margin-top: .5mm; font-weight: 900; font-size: 22pt; line-height: 1.25; letter-spacing: .03em; }
+.title .yr { color: var(--blue-deep); margin-right: .4em; }
+.tagline { margin-top: 1.5mm; font-weight: 500; font-size: 11pt; color: var(--ink-soft); letter-spacing: .12em; }
+.tagline::before { content: ""; display: inline-block; width: 8mm; height: .6mm; background: var(--orange); vertical-align: middle; margin-right: 3mm; }
+
+.lead { margin-top: 4mm; padding: 3mm 6mm; border-left: 1.2mm solid var(--orange); background: var(--orange-tint); border-radius: 0 3mm 3mm 0; }
+.lead p { font-size: 9.6pt; line-height: 1.7; }
+.lead p:first-child { font-weight: 700; font-size: 10.5pt; }
+
+.kids-h { margin-top: 4mm; }
+.kids-h h2 { font-weight: 700; font-size: 13pt; line-height: 1.5; color: var(--ink); }
+.kids-h h2 small { font-size: 10pt; font-weight: 500; color: var(--ink-soft); margin-left: .3em; }
+.kids-h p { margin-top: .5mm; font-size: 9.5pt; }
+
+.cards { margin: 3mm 0 3mm; flex: 1; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 1fr); gap: 3mm; min-height: 0; }
+.card { border: .4mm solid var(--blue-line); border-radius: 3mm; padding: 2.4mm 3.6mm 2.2mm; display: flex; flex-direction: column; min-width: 0; }
+.card h3 { font-weight: 700; font-size: 12pt; line-height: 1.3; color: var(--blue-deep); }
+.card .copy { margin-top: .3mm; font-weight: 700; font-size: 8.8pt; color: var(--ink); }
+.card .spec { margin-top: 1mm; font-size: 8pt; line-height: 1.5; color: var(--ink); background: var(--blue-tint); border-radius: 1.5mm; padding: .9mm 2.5mm; }
+.card .spec span { display: inline-block; margin-right: .6em; }
+.card ol { list-style: none; margin: 1.2mm 0 0; padding: 0; font-size: 8pt; line-height: 1.45; }
+.card li { display: grid; grid-template-columns: 9.2mm 1fr; }
+.card li + li { margin-top: .5mm; }
+.card li b { color: var(--orange-deep); font-weight: 700; }
+.card.for { background: var(--orange-tint); border-color: var(--orange-line); justify-content: center; }
+.card.for h3 { color: var(--orange-deep); }
+.card.for ul { list-style: none; margin: 2mm 0 0; padding: 0; font-size: 9.2pt; line-height: 1.7; }
+.card.for li { display: block; padding-left: 1em; text-indent: -1em; }
+.card.for li + li { margin-top: .6mm; }
+.card.for .foot-txt { margin-top: 2.5mm; padding-top: 2mm; border-top: .3mm solid var(--orange-line); font-size: 8.4pt; color: var(--ink-soft); }
+
+/* ---------- 2ページ目 ---------- */
+.p2 > * + * { margin-top: 3mm; }
+.box-notes { background: #F7F9FB; border-radius: 2mm; padding: 1.6mm 4mm; }
+.box-notes.note { font-size: 7.9pt; line-height: 1.5; }
+.box-notes.note p + p { margin-top: .4mm; }
+.box-notes .note { color: var(--ink); }
+.read { background: var(--blue-tint); border-radius: 2mm; padding: 2mm 4mm; display: flex; gap: 5mm; align-items: center; }
+.read .txt { flex: 1; }
+.read h3 { font-weight: 700; font-size: 10pt; color: var(--blue-deep); margin-bottom: .5mm; }
+.read p { font-size: 8.8pt; line-height: 1.7; }
+.read .ph { width: 36mm; height: 21mm; background: #DCE6EE; }
+
+.tt { font-size: 8pt; table-layout: fixed; }
+.tt th, .tt td { border: .3mm solid var(--rule); padding: .7mm 1.4mm; text-align: center; vertical-align: middle; line-height: 1.45; }
+.tt thead th { background: var(--blue-tint); font-size: 8.5pt; font-weight: 700; }
+.tt tbody th { width: 25mm; font-weight: 700; font-size: 8.3pt; white-space: nowrap; background: #F7F9FB; }
+.tt .on { background: #fff; }
+.tt .maybe { background: #FAFBFC; color: var(--ink-soft); }
+.tt .none { background: #F0F2F5; color: var(--ink-faint); }
+.tt .mk { font-size: 8.5pt; margin-right: .2em; }
+.tt .on .mk { color: var(--blue-deep); }
+.tt .cls span { display: inline-block; }
+.tt .split { padding: 0; }
+.tt .split div { padding: .7mm 1.4mm; }
+.tt .split .prog { border-top: .3mm dashed var(--blue-line); background: var(--blue-tint); color: var(--blue-deep); font-weight: 700; }
+.legend { margin-top: 1.5mm; font-size: 8.5pt; display: flex; gap: 6mm; }
+.legend b { color: var(--blue-deep); }
+
+.fees { font-size: 8.6pt; }
+.fees th, .fees td { border-bottom: .3mm solid var(--rule); padding: .7mm 2.5mm; vertical-align: middle; }
+.fees thead th { background: var(--blue-tint); font-size: 8.3pt; font-weight: 700; border-bottom: .4mm solid var(--blue-line); text-align: right; white-space: nowrap; }
+.fees thead th:first-child { text-align: left; }
+.fees td { text-align: right; white-space: nowrap; }
+.fees td:first-child { text-align: left; font-weight: 700; }
+.fees .set { color: var(--orange-deep); font-weight: 700; }
+.fees-after { margin-top: 1mm; }
+.set-note { margin-top: 1.5mm; background: var(--orange-tint); border-radius: 2mm; padding: 1.2mm 4mm; font-size: 9pt; font-weight: 500; }
+
+.combo-row { display: flex; gap: 5mm; align-items: stretch; }
+.combo-row .set-note { margin: 0; width: 52mm; flex: none; display: flex; flex-direction: column; justify-content: center; padding: 3mm 4mm; line-height: 1.7; }
+.combo-row .set-note b { display: block; color: var(--orange-deep); font-weight: 700; font-size: 10.5pt; margin-bottom: 1mm; }
+.combo-box { flex: 1; min-width: 0; }
+.combo { font-size: 8.6pt; }
+.combo th, .combo td { border-bottom: .3mm solid var(--rule); padding: .7mm 2.5mm; vertical-align: middle; text-align: left; }
+.combo thead th { background: var(--blue-tint); font-size: 8.3pt; font-weight: 700; border-bottom: .4mm solid var(--blue-line); }
+.combo .c { text-align: center; white-space: nowrap; }
+.combo .r { text-align: right; white-space: nowrap; font-weight: 700; }
+
+/* ---------- 3ページ目 ---------- */
+.course-head { display: flex; gap: 6mm; align-items: stretch; }
+.course-head .txt { flex: 1; }
+.course-head .ph { width: 62mm; height: 44mm; }
+.course-label { font-weight: 700; font-size: 10pt; color: var(--blue-deep); letter-spacing: .05em; }
+.course-title { margin-top: .5mm; font-weight: 900; font-size: 20pt; line-height: 1.3; }
+.course-title small { font-size: 11pt; font-weight: 500; color: var(--ink-soft); margin-left: .3em; }
+.course-copy { margin-top: 2.5mm; font-weight: 700; font-size: 11.5pt; color: var(--orange-deep); line-height: 1.5; }
+
+.feats { margin-top: 6mm; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3.5mm; }
+.feat { background: var(--orange-tint); border-radius: 3mm; padding: 3.5mm 4mm; }
+.feat b { display: block; font-weight: 700; font-size: 9.5pt; color: var(--orange-deep); margin-bottom: 1mm; }
+.feat p { font-size: 9.3pt; line-height: 1.75; }
+
+.sched { margin-top: 7mm; font-size: 10pt; }
+.sched th, .sched td { border-bottom: .3mm solid var(--rule); padding: 2.2mm 3mm; text-align: left; vertical-align: middle; }
+.sched thead th { background: var(--blue-tint); font-size: 8.8pt; font-weight: 700; border-bottom: .4mm solid var(--blue-line); }
+.sched td:first-child { font-weight: 700; }
+.sched .r { text-align: right; white-space: nowrap; font-weight: 700; }
+.course-notes { margin-top: 3mm; }
+.course-notes p + p { margin-top: 1mm; }
+.course-notes.note { font-size: 8.7pt; color: var(--ink); }
+
+.entry { margin-top: 10mm; }
+.entry table { font-size: 9.5pt; }
+.entry th, .entry td { border-bottom: .3mm solid var(--rule); padding: 2.2mm 3mm; text-align: left; vertical-align: middle; }
+.entry thead th { background: var(--blue-tint); font-size: 8.8pt; font-weight: 700; border-bottom: .4mm solid var(--blue-line); }
+.entry td:first-child { font-weight: 700; white-space: nowrap; }
+.entry td:nth-child(2) { white-space: nowrap; }
+
+.contact { margin-top: auto; display: flex; align-items: center; gap: 6mm; border-top: .5mm solid var(--ink); padding-top: 4mm; }
+.contact .ph { width: 44mm; height: 16mm; }
+.contact .info { flex: 1; }
+.contact .name { font-weight: 700; font-size: 11pt; }
+.contact .name small { font-size: 9pt; font-weight: 500; color: var(--ink-soft); margin-left: .8em; letter-spacing: .1em; }
+.contact .tel { font-weight: 900; font-size: 18pt; line-height: 1.3; letter-spacing: .03em; }
+.contact .tel span { font-size: 10pt; color: var(--blue-deep); margin-right: 2mm; }
+.contact .addr { font-size: 9pt; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<!-- ======================= 1ページ目 ======================= -->
+<section class="sheet">
+  <header class="cover">
+    <div class="cover-txt">
+      <p class="school-name">学習塾ComPass</p>
+      <h1 class="title"><span class="yr">2027年度</span>小学生のご案内</h1>
+      <p class="tagline">未来をひらく羅針盤</p>
+    </div>
+    <div class="ph">ロゴ<small>44×16mm</small></div>
+  </header>
+
+  <div class="lead">
+    <p>「わかる」が増えると、勉強は少しずつ好きになる。</p>
+    <p>ComPassは、そんな学びを大切にしています。</p>
+    <p>知識は、木でいえば枝や葉。それを支える根は、自分で考える力と、自分を信じる力です。</p>
+    <p>小学生の6年間は、その根を育てる時期。</p>
+    <p>子どもが自分の力で学び、選び、進めるように。ComPassは、その土台を育てます。</p>
+  </div>
+
+  <div class="kids-h">
+    <h2>コンパスキッズ　習い事コース<small>（小1〜小6）</small></h2>
+    <p>1コマ50分。週1コマから、開講枠の中で5つの教室を自由に組み合わせて選べます。</p>
+  </div>
+
+  <div class="cards">
+    <article class="card">
+      <h3>算国教室</h3>
+      <p class="copy">＜自分のペースで、学びの土台をつくる教室＞</p>
+      <div class="spec">
+        <p><span>【対象】小1〜小6</span><span>【定員】6名</span></p>
+        <p>【1コマ】目と脳のたいそう10分＋算数・国語40分</p>
+        <p>【月謝】週1回 6,600円（税込）</p>
+      </div>
+      <ol>
+        <li><b>特長①</b><span>学年にしばられず、今の理解に合うところから始めます。</span></li>
+        <li><b>特長②</b><span>得意は先へ、苦手は戻って。一人ひとりのペースで進めます。</span></li>
+        <li><b>特長③</b><span>曜日と時間を選べるから、習い事と両立して続けられます。</span></li>
+      </ol>
+    </article>
+
+    <article class="card">
+      <h3>プログラミング教室</h3>
+      <p class="copy">＜つくって、試して、考える教室＞</p>
+      <div class="spec">
+        <p><span>【対象】小1〜小6</span><span>【定員】2名</span></p>
+        <p>【1コマ】目と脳のたいそう10分＋マインクラフト40分</p>
+        <p>【月謝】週1回 7,150円（税込）</p>
+      </div>
+      <ol>
+        <li><b>特長①</b><span>マインクラフト®を使うから、遊びの延長で夢中になれます。</span></li>
+        <li><b>特長②</b><span>思ったとおりに動かない。「なぜ？」を自分で考え、試し直します。</span></li>
+        <li><b>特長③</b><span>はじめの10分は目と脳のたいそう。記憶力と言葉の力も育てます。</span></li>
+      </ol>
+    </article>
+
+    <article class="card">
+      <h3>速読解教室</h3>
+      <p class="copy">＜読む力を育てて、「わかる」を増やす教室＞</p>
+      <div class="spec">
+        <p><span>【対象】小1〜小6</span><span>【定員】4名</span></p>
+        <p>【1コマ】速読解トレーニング50分</p>
+        <p>【月謝】週1回 6,600円（税込）</p>
+      </div>
+      <ol>
+        <li><b>特長①</b><span>読む速さと、内容を正確に読み取る力を、同時に育てます。</span></li>
+        <li><b>特長②</b><span>目の動き、視野の広さ、記憶する力を土台から育てます。</span></li>
+        <li><b>特長③</b><span>読む速さと理解度を毎回記録。伸びを自分で確かめられます。</span></li>
+      </ol>
+    </article>
+
+    <article class="card">
+      <h3>そろばん教室</h3>
+      <p class="copy">＜そろばんを弾いて、計算の土台を育てる教室＞</p>
+      <div class="spec">
+        <p><span>【対象】小1〜小6</span><span>【定員】3名</span></p>
+        <p>【1コマ】そろばん50分</p>
+        <p>【月謝】週1回 5,500円（税込）</p>
+      </div>
+      <ol>
+        <li><b>特長①</b><span>実際のそろばんを弾き、指の使い方から四則演算まで学びます。</span></li>
+        <li><b>特長②</b><span>百ます計算で知られる陰山英男先生の監修。数の力を幅広く育てます。</span></li>
+        <li><b>特長③</b><span>検定で級が上がるたびに、がんばりが形になって残ります。</span></li>
+      </ol>
+    </article>
+
+    <article class="card">
+      <h3>英語教室</h3>
+      <p class="copy">＜聞いて、まねて、英語に親しむ教室＞</p>
+      <div class="spec">
+        <p><span>【対象】小1〜小6</span><span>【定員】3名</span></p>
+        <p>【1コマ】目と脳のたいそう10分＋英語40分</p>
+        <p>【月謝】週1回 6,600円（税込）</p>
+      </div>
+      <ol>
+        <li><b>特長①</b><span>タッチペンで正しい音を聞き、まねながら英語に親しみます。</span></li>
+        <li><b>特長②</b><span>単語から文へ、文から会話へ。級が上がるほど、できることが広がります。</span></li>
+        <li><b>特長③</b><span>中学英語が始まる前に、「聞けばわかる」の感覚を育てます。</span></li>
+      </ol>
+    </article>
+
+    <article class="card for">
+      <h3>こんなお子さまに</h3>
+      <ul>
+        <li>・勉強の「できた」を少しずつ増やしたい</li>
+        <li>・習い事と両立しながら、学ぶ習慣をつけたい</li>
+        <li>・中学に向けて、読む・考える力を育てたい</li>
+      </ul>
+      <p class="foot-txt">1コマ50分。週1コマから、開講枠の中で組み合わせて選べます。</p>
+    </article>
+  </div>
+
+  <div class="folio"><span>学習塾ComPass　2027年度 小学生のご案内</span><span>1 / 3</span></div>
+</section>
+
+<!-- ======================= 2ページ目 ======================= -->
+<section class="sheet">
+  <div class="p2">
+    <div>
+      <h2 class="sec-h">教室についてのご案内</h2>
+      <div class="box-notes note">
+        <p>※「目と脳のたいそう」はフラッシュ速読のトレーニングです。算国・プログラミング・英語の教室につきます。</p>
+        <p>※そろばん教室・プログラミング教室は使うパソコンの台数に限りがあります。主教室が合計7名に達した枠も含め、定員に達し次第、締め切らせていただきます。</p>
+        <p>※そろばん教室で使う「デジそろ」は、運指のお手本と丸つけを画面が担います。待つ時間がないので、一人ひとりの進度で、たくさんの問題に取り組めます。検定は15級から1級まであり、合格すると認定書が出ます。</p>
+        <p>※英語教室のタッチペンは、ご家庭でも使えるようご購入いただきます。</p>
+      </div>
+    </div>
+
+    <div>
+      <h2 class="sec-h">定員について</h2>
+      <div class="box-notes note">
+        <p>※主教室（算国・速読解・そろばん・英語）は同じ教室で行います。1つの時間帯に合わせて7名まで。各教室の定員は、その内数です。</p>
+        <p>※プログラミングは、木曜・金曜の16:15〜17:05のみ、別室で開講します（定員2名）。</p>
+        <p>※ご希望が増えた場合は、1枠2名のまま、開講する枠を増やして対応します。</p>
+        <p>※プログラミングを開講する時間帯は、担当講師がそろばん・速読解もあわせて見ます。</p>
+      </div>
+    </div>
+
+    <div class="read">
+      <div class="txt">
+        <h3>速読解教室について</h3>
+        <p>学年が上がるほど、読む文章は長く、難しくなります。読むことに時間がかかると、考える時間が少なくなります。速読解教室では、限られた時間の中で文章の要点を正確につかむ力を育てます。</p>
+      </div>
+      <div class="ph">写真<small>36×21mm</small></div>
+    </div>
+
+    <div>
+      <h2 class="sec-h">時間割</h2>
+      <table class="tt">
+        <thead><tr><th style="width:25mm">時間</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th></tr></thead>
+        <tbody>
+          <tr>
+            <th>15:15〜16:05</th>
+            <td class="none">―</td>
+            <td class="on"><span class="cls"><span><span class="mk">●</span>算国／速読解</span>　<span>そろばん／英語</span></span></td>
+            <td class="none">―</td>
+            <td class="on"><span class="cls"><span><span class="mk">●</span>算国／速読解</span>　<span>そろばん／英語</span></span></td>
+            <td class="none">―</td>
+          </tr>
+          <tr>
+            <th>16:15〜17:05</th>
+            <td class="maybe"><span class="cls"><span><span class="mk">○</span>算国／速読解</span>　<span>そろばん／英語</span></span></td>
+            <td class="on"><span class="cls"><span><span class="mk">●</span>算国／速読解</span>　<span>そろばん／英語</span></span></td>
+            <td class="maybe"><span class="cls"><span><span class="mk">○</span>算国／速読解</span>　<span>そろばん／英語</span></span></td>
+            <td class="on split"><div><span class="cls"><span><span class="mk">●</span>算国／速読解</span>　<span>そろばん／英語</span></span></div><div class="prog">●プログラミング<br>（別室）</div></td>
+            <td class="on split"><div><span class="cls"><span><span class="mk">●</span>算国／速読解</span>　<span>そろばん／英語</span></span></div><div class="prog">●プログラミング<br>（別室）</div></td>
+          </tr>
+          <tr>
+            <th>17:15〜18:05</th>
+            <td class="maybe"><span class="cls"><span><span class="mk">○</span>算国／速読解</span>　<span>そろばん／英語</span></span></td>
+            <td class="maybe"><span class="cls"><span><span class="mk">○</span>算国／速読解</span>　<span>そろばん／英語</span></span></td>
+            <td class="maybe"><span class="cls"><span><span class="mk">○</span>算国／速読解</span>　<span>そろばん／英語</span></span></td>
+            <td class="maybe"><span class="cls"><span><span class="mk">○</span>算国／速読解</span>　<span>そろばん／英語</span></span></td>
+            <td class="on"><span class="cls"><span><span class="mk">●</span>算国／速読解</span>　<span>そろばん／英語</span></span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="legend"><span><b>●</b>＝開講する枠</span><span>○＝3名以上のお申し込みで開講する枠</span></p>
+    </div>
+
+    <div>
+      <h2 class="sec-h">月謝</h2>
+      <table class="fees">
+        <thead><tr><th>教室</th><th>週1回</th><th>週1回（セット）</th><th>週2回</th><th>週2回（セット）</th></tr></thead>
+        <tbody>
+          <tr><td>算国教室</td><td>6,600円</td><td class="set">5,500円</td><td>11,000円</td><td class="set">9,900円</td></tr>
+          <tr><td>プログラミング教室</td><td>7,150円</td><td class="set">6,050円</td><td>12,100円</td><td class="set">11,000円</td></tr>
+          <tr><td>速読解教室</td><td>6,600円</td><td class="set">5,500円</td><td>11,000円</td><td class="set">9,900円</td></tr>
+          <tr><td>そろばん教室</td><td>5,500円</td><td class="set">4,400円</td><td>7,700円</td><td class="set">6,600円</td></tr>
+          <tr><td>英語教室</td><td>6,600円</td><td class="set">5,500円</td><td>11,000円</td><td class="set">9,900円</td></tr>
+        </tbody>
+      </table>
+      <div class="note fees-after"><p>※すべて税込。教材費とシステム利用料を含みます。</p></div>
+    </div>
+
+    <div class="combo-row">
+      <p class="set-note"><b>セット割</b>2つ目の教室からは、1教室につき月1,000円引きになります。</p>
+      <div class="combo-box">
+      <h2 class="sec-h">組み合わせの例</h2>
+      <table class="combo">
+        <thead><tr><th>組み合わせの例</th><th class="c">教室数</th><th class="r">月謝（税込）</th></tr></thead>
+        <tbody>
+          <tr><td>算国 週1 ＋ 速読解 週1</td><td class="c">2教室</td><td class="r">11,000円</td></tr>
+          <tr><td>算国 週2 ＋ 速読解 週1</td><td class="c">2教室</td><td class="r">15,400円</td></tr>
+          <tr><td>算国 週1 ＋ 速読解 週1 ＋ そろばん 週1</td><td class="c">3教室</td><td class="r">15,400円</td></tr>
+          <tr><td>算国 週1 のみ</td><td class="c">1教室</td><td class="r">6,600円</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="folio"><span>学習塾ComPass　2027年度 小学生のご案内</span><span>2 / 3</span></div>
+</section>
+
+<!-- ======================= 3ページ目 ======================= -->
+<section class="sheet">
+  <div class="course-head">
+    <div class="txt">
+      <p class="course-label">小5・小6</p>
+      <h2 class="course-title">小学部 公立中総合進学コース</h2>
+      <p class="course-copy">＜国語・算数・英語で、中学のトップランナーを育てるコース＞</p>
+    </div>
+    <div class="ph">写真<small>62×44mm</small></div>
+  </div>
+
+  <div class="feats">
+    <div class="feat"><b>特長①</b><p>地元の公立中学に進み、学習上位を目指したい子のためのコースです。</p></div>
+    <div class="feat"><b>特長②</b><p>3教科の基礎を固め、考える力と学ぶ習慣を育てます。</p></div>
+    <div class="feat"><b>特長③</b><p>中学につながる内容にもふれ、間違いをそのままにせず、直しと家庭学習を積み重ね、わかるまで取り組みます。</p></div>
+  </div>
+
+  <table class="sched">
+    <thead><tr><th>学年</th><th>曜日</th><th>時間</th><th class="r">月謝（税込）</th></tr></thead>
+    <tbody>
+      <tr><td>小6</td><td>月曜日・水曜日</td><td>17:15〜19:00</td><td class="r">15,900円</td></tr>
+      <tr><td>小5</td><td>火曜日・木曜日</td><td>17:15〜19:00</td><td class="r">15,900円</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note course-notes">
+    <p>※「トップランナー」とは、地元の公立中学で学習上位を目指し、自分で考え、努力を重ねる子のことです。現在の成績だけで判断するものではありません。</p>
+    <p>※週2日、決まった曜日に通います。105分のうち、50分の授業を2コマと5分の休憩です。</p>
+    <p>※週の時間配分は、算数100分・国語50分・英語50分です。</p>
+    <p>※3教科セットでのご受講が標準です。単科でのご受講は、面談でご相談ください。</p>
+    <p>※中学受験（愛大附属中・松山西中等教育学校など）には対応していません。</p>
+    <p>※コースを受講中の方は、速読解教室が月4,400円（週1回）になります。コースと合わせて月20,300円です。</p>
+  </div>
+
+  <div class="entry">
+    <h2 class="sec-h">入会時の費用</h2>
+    <table>
+      <thead><tr><th>項目</th><th>金額（税込）</th><th>備考</th></tr></thead>
+      <tbody>
+        <tr><td>入会金</td><td>11,000円</td><td>ごきょうだいは2人目以降無料</td></tr>
+        <tr><td>道具・教材</td><td>教室により異なります</td><td>そろばん本体、英語のタッチペンなど</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer class="contact">
+    <div class="ph">ロゴ<small>44×16mm</small></div>
+    <div class="info">
+      <p class="name">学習塾ComPass<small>未来をひらく羅針盤</small></p>
+      <p class="tel"><span>TEL</span>089-997-7388</p>
+      <p class="addr">愛媛県松山市来住町230-1　https://compass-juku.com</p>
+    </div>
+  </footer>
+  <div class="folio" style="margin-top:4mm"><span>学習塾ComPass　2027年度 小学生のご案内</span><span>3 / 3</span></div>
+</section>
+
+</body>
+</html>
