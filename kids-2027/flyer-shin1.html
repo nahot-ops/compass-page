@@ -26,9 +26,13 @@
   --ph: #E4E7EB;
   --ph-line: #A9B1BC;
   --paper: #FFFFFF;
-  --f: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  --f: "ComPassYuGo", "Noto Sans JP", sans-serif;
   color-scheme: light;
 }
+/* 游ゴシック。Windowsの標準（Regular）は細く、印刷でかすれるため、本文はMedium、太字はBoldを当てる。
+   游ゴシックのない環境（Linuxなど）では Noto Sans JP で表示される */
+@font-face { font-family: "ComPassYuGo"; font-weight: 100 600; src: local("Yu Gothic Medium"), local("YuGothic-Medium"), local("游ゴシック Medium"), local("游ゴシック体 ミディアム"); }
+@font-face { font-family: "ComPassYuGo"; font-weight: 700 900; src: local("Yu Gothic Bold"), local("YuGothic-Bold"), local("游ゴシック Bold"), local("游ゴシック体 ボールド"); }
 @page { size: A4; margin: 0; }
 * { box-sizing: border-box; }
 html, body { margin: 0; background: #DDE3EA; }

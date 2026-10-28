@@ -26,9 +26,13 @@
   --ph: #E4E7EB;
   --ph-line: #A9B1BC;
   --paper: #FFFFFF;
-  --f: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  --f: "ComPassYuGo", "Noto Sans JP", sans-serif;
   color-scheme: light;
 }
+/* 游ゴシック。Windowsの標準（Regular）は細く、印刷でかすれるため、本文はMedium、太字はBoldを当てる。
+   游ゴシックのない環境（Linuxなど）では Noto Sans JP で表示される */
+@font-face { font-family: "ComPassYuGo"; font-weight: 100 600; src: local("Yu Gothic Medium"), local("YuGothic-Medium"), local("游ゴシック Medium"), local("游ゴシック体 ミディアム"); }
+@font-face { font-family: "ComPassYuGo"; font-weight: 700 900; src: local("Yu Gothic Bold"), local("YuGothic-Bold"), local("游ゴシック Bold"), local("游ゴシック体 ボールド"); }
 @page { size: A4; margin: 0; }
 * { box-sizing: border-box; }
 html, body { margin: 0; background: #DDE3EA; }
@@ -316,7 +320,7 @@ h1, h2, h3 { margin: 0; }
       <h2 class="sec-h">教室についてのご案内</h2>
       <div class="box-notes note">
         <p>※「目と脳のたいそう」はフラッシュ速読のトレーニングです。算国・プログラミング・英語の教室につきます。</p>
-        <p>※そろばん教室・プログラミング教室は使うパソコンの台数に限りがあります。主教室が合計7名に達した枠も含め、定員に達し次第、締め切らせていただきます。</p>
+        <p>※プログラミング教室は使うパソコンの台数に限りがあります。主教室が合計7名に達した枠も含め、定員に達し次第、締め切らせていただきます。</p>
         <p>※そろばん教室で使う「デジそろ」は、運指のお手本と丸つけを画面が担います。待つ時間がないので、一人ひとりの進度で、たくさんの問題に取り組めます。検定は15級から1級まであり、合格すると認定書が出ます。</p>
         <p>※英語教室のタッチペンは、ご家庭でも使えるようご購入いただきます。</p>
       </div>
