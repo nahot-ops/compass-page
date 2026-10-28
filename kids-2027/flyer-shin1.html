@@ -133,15 +133,15 @@ table { border-collapse: collapse; width: 100%; }
 .sec-h::before { content: ""; width: 1.4mm; height: 5mm; background: var(--blue); border-radius: .7mm; }
 
 .classes { margin-top: 4mm; font-size: 9.5pt; }
-.classes th, .classes td { border-bottom: .3mm solid var(--rule); padding: 1.4mm 2.5mm; text-align: left; vertical-align: middle; }
+.classes th, .classes td { border-bottom: .3mm solid var(--rule); padding: 1.1mm 2.5mm; text-align: left; vertical-align: middle; }
 .classes thead th { background: var(--blue-tint); font-size: 8.5pt; font-weight: 700; border-bottom: .4mm solid var(--blue-line); }
 .classes td:first-child { font-weight: 700; white-space: nowrap; }
 .classes .c { text-align: center; white-space: nowrap; }
 .classes .r { text-align: right; white-space: nowrap; font-weight: 700; }
 .after-table { margin-top: 2mm; }
-.set-note { margin-top: 2.5mm; background: var(--orange-tint); border-radius: 2mm; padding: 2mm 4mm; font-size: 9.5pt; font-weight: 500; }
+.set-note { margin-top: 2mm; background: var(--orange-tint); border-radius: 2mm; padding: 2mm 4mm; font-size: 9.5pt; font-weight: 500; }
 
-.tt-wrap { margin-top: 4.5mm; }
+.tt-wrap { margin-top: 4mm; }
 .tt { font-size: 8pt; table-layout: fixed; }
 .tt th, .tt td { border: .3mm solid var(--rule); padding: 1.4mm 1.6mm; text-align: center; vertical-align: middle; line-height: 1.45; }
 .tt thead th { background: var(--blue-tint); font-size: 8.5pt; font-weight: 700; }
@@ -159,12 +159,12 @@ table { border-collapse: collapse; width: 100%; }
 .legend b { color: var(--blue-deep); }
 .tt-wrap .note { margin-top: 1.5mm; }
 
-.school { margin-top: 4mm; display: flex; gap: 5mm; align-items: stretch; }
+.school { margin: 4mm 0 3.5mm; display: flex; gap: 5mm; align-items: stretch; }
 .school .txt { flex: 1; font-size: 9.8pt; line-height: 1.75; }
 .school .txt p + p { margin-top: 1mm; }
 .school .ph { width: 46mm; height: 30mm; align-self: flex-end; }
 
-.policy { margin-top: auto; background: var(--orange-tint); border-radius: 4mm; padding: 4mm 7mm; }
+.policy { margin-top: auto; position: relative; top: 0; background: var(--orange-tint); border-radius: 4mm; padding: 4mm 7mm; }
 .policy h2 { margin: 0 0 1mm; font-weight: 700; font-size: 12pt; color: var(--orange-deep); }
 .policy p { font-size: 10.3pt; line-height: 1.8; }
 </style>
@@ -187,7 +187,7 @@ table { border-collapse: collapse; width: 100%; }
     <div class="main-body">
       <div class="txt">
         <p>学年ではなく、今の理解度から始めます。得意は先へ、苦手は戻って。一人ひとりのペースで進みます。</p>
-        <p>はじめの10分は「目と脳のたいそう」。そのあと40分で、算数と国語に取り組みます。</p>
+        <p>はじめの5分は「脳トレ」。そのあと45分で、算数と国語に取り組みます。</p>
       </div>
       <div class="ph">写真<small>54×33mm</small></div>
     </div>
@@ -203,7 +203,7 @@ table { border-collapse: collapse; width: 100%; }
           <td class="price">週1回 6,600円／週2回 11,000円</td>
         </tr></tbody>
       </table>
-      <div class="note"><p>※ほかに、プログラミング・速読解・そろばん・英語の教室があります。2つ目からは1教室につき月1,000円引きです。</p></div>
+      <div class="note"><p>※ほかに、プログラミング・速読解・そろばん・英語の教室があります。2つ目からは1教室につき月1,100円引きです。</p></div>
     </div>
   </div>
 
@@ -241,15 +241,15 @@ table { border-collapse: collapse; width: 100%; }
   <table class="classes">
     <thead><tr><th>教室</th><th>1コマの中身</th><th class="c">定員</th><th class="r">週1回</th></tr></thead>
     <tbody>
-      <tr><td>算国教室</td><td>目と脳のたいそう10分＋算数・国語40分</td><td class="c">6名</td><td class="r">6,600円</td></tr>
-      <tr><td>プログラミング教室</td><td>目と脳のたいそう10分＋マインクラフト40分</td><td class="c">2名</td><td class="r">7,150円</td></tr>
+      <tr><td>算国教室</td><td>脳トレ5分＋算数・国語45分</td><td class="c">6名</td><td class="r">6,600円</td></tr>
+      <tr><td>プログラミング教室</td><td>脳トレ5分＋マインクラフト45分</td><td class="c">2名</td><td class="r">7,150円</td></tr>
       <tr><td>速読解教室</td><td>速読解トレーニング50分</td><td class="c">4名</td><td class="r">6,600円</td></tr>
       <tr><td>そろばん教室</td><td>そろばん50分</td><td class="c">3名</td><td class="r">5,500円</td></tr>
-      <tr><td>英語教室</td><td>目と脳のたいそう10分＋英語40分</td><td class="c">3名</td><td class="r">6,600円</td></tr>
+      <tr><td>英語教室</td><td>脳トレ5分＋英語45分</td><td class="c">3名</td><td class="r">6,600円</td></tr>
     </tbody>
   </table>
   <div class="note after-table"><p>※すべて税込。教材費とシステム利用料を含みます。</p></div>
-  <p class="set-note">セット割　2つ目の教室からは、1教室につき月1,000円引きになります。</p>
+  <p class="set-note">セット割　2つ目の教室からは、1教室につき月1,100円引き（税込）になります。<br>月謝がいちばん高い教室は通常料金です。</p>
 
   <div class="tt-wrap">
     <h2 class="sec-h">時間割</h2>

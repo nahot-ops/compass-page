@@ -143,14 +143,16 @@ h1, h2, h3 { margin: 0; }
 .fees thead th:first-child { text-align: left; }
 .fees td { text-align: right; white-space: nowrap; }
 .fees td:first-child { text-align: left; font-weight: 700; }
-.fees .set { color: var(--orange-deep); font-weight: 700; }
 .fees-after { margin-top: 1mm; }
-.set-note { margin-top: 1.5mm; background: var(--orange-tint); border-radius: 2mm; padding: 1.2mm 4mm; font-size: 9pt; font-weight: 500; }
+.set-note { background: var(--orange-tint); border-radius: 2mm; padding: 2.2mm 4mm; font-size: 9pt; font-weight: 500; }
 
-.combo-row { display: flex; gap: 5mm; align-items: stretch; }
-.combo-row .set-note { margin: 0; width: 52mm; flex: none; display: flex; flex-direction: column; justify-content: center; padding: 3mm 4mm; line-height: 1.7; }
-.combo-row .set-note b { display: block; color: var(--orange-deep); font-weight: 700; font-size: 10.5pt; margin-bottom: 1mm; }
+.money-row { display: flex; gap: 5mm; align-items: flex-start; }
+.fee-box { width: 74mm; flex: none; }
 .combo-box { flex: 1; min-width: 0; }
+.set-note { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 4mm; }
+.set-note b { color: var(--orange-deep); font-weight: 700; font-size: 10.5pt; }
+.set-note p { flex: 1; min-width: 0; }
+.set-note .ex { flex-basis: 100%; margin-top: .5mm; font-size: 8.6pt; color: var(--ink-soft); }
 .combo { font-size: 8.6pt; }
 .combo th, .combo td { border-bottom: .3mm solid var(--rule); padding: .7mm 2.5mm; vertical-align: middle; text-align: left; }
 .combo thead th { background: var(--blue-tint); font-size: 8.3pt; font-weight: 700; border-bottom: .4mm solid var(--blue-line); }
@@ -229,7 +231,7 @@ h1, h2, h3 { margin: 0; }
       <p class="copy">＜自分のペースで、学びの土台をつくる教室＞</p>
       <div class="spec">
         <p><span>【対象】小1〜小6</span><span>【定員】6名</span></p>
-        <p>【1コマ】目と脳のたいそう10分＋算数・国語40分</p>
+        <p>【1コマ】脳トレ5分＋算数・国語45分</p>
         <p>【月謝】週1回 6,600円（税込）</p>
       </div>
       <ol>
@@ -244,13 +246,13 @@ h1, h2, h3 { margin: 0; }
       <p class="copy">＜つくって、試して、考える教室＞</p>
       <div class="spec">
         <p><span>【対象】小1〜小6</span><span>【定員】2名</span></p>
-        <p>【1コマ】目と脳のたいそう10分＋マインクラフト40分</p>
+        <p>【1コマ】脳トレ5分＋マインクラフト45分</p>
         <p>【月謝】週1回 7,150円（税込）</p>
       </div>
       <ol>
         <li><b>特長①</b><span>マインクラフト®を使うから、遊びの延長で夢中になれます。</span></li>
         <li><b>特長②</b><span>思ったとおりに動かない。「なぜ？」を自分で考え、試し直します。</span></li>
-        <li><b>特長③</b><span>はじめの10分は目と脳のたいそう。記憶力と言葉の力も育てます。</span></li>
+        <li><b>特長③</b><span>はじめの5分は脳トレ。記憶力と言葉の力も育てます。</span></li>
       </ol>
     </article>
 
@@ -289,7 +291,7 @@ h1, h2, h3 { margin: 0; }
       <p class="copy">＜聞いて、まねて、英語に親しむ教室＞</p>
       <div class="spec">
         <p><span>【対象】小1〜小6</span><span>【定員】3名</span></p>
-        <p>【1コマ】目と脳のたいそう10分＋英語40分</p>
+        <p>【1コマ】脳トレ5分＋英語45分</p>
         <p>【月謝】週1回 6,600円（税込）</p>
       </div>
       <ol>
@@ -319,7 +321,7 @@ h1, h2, h3 { margin: 0; }
     <div>
       <h2 class="sec-h">教室についてのご案内</h2>
       <div class="box-notes note">
-        <p>※「目と脳のたいそう」はフラッシュ速読のトレーニングです。算国・プログラミング・英語の教室につきます。</p>
+        <p>※「脳トレ」は、5分間で5種類のトレーニングを自動で行うシステムです。算国・プログラミング・英語の教室につきます。</p>
         <p>※プログラミング教室は使うパソコンの台数に限りがあります。主教室が合計7名に達した枠も含め、定員に達し次第、締め切らせていただきます。</p>
         <p>※そろばん教室で使う「デジそろ」は、運指のお手本と丸つけを画面が担います。待つ時間がないので、一人ひとりの進度で、たくさんの問題に取り組めます。検定は15級から1級まであり、合格すると認定書が出ます。</p>
         <p>※英語教室のタッチペンは、ご家庭でも使えるようご購入いただきます。</p>
@@ -378,35 +380,39 @@ h1, h2, h3 { margin: 0; }
       <p class="legend"><span><b>●</b>＝開講する枠</span><span>○＝3名以上のお申し込みで開講する枠</span></p>
     </div>
 
-    <div>
-      <h2 class="sec-h">月謝</h2>
-      <table class="fees">
-        <thead><tr><th>教室</th><th>週1回</th><th>週1回（セット）</th><th>週2回</th><th>週2回（セット）</th></tr></thead>
-        <tbody>
-          <tr><td>算国教室</td><td>6,600円</td><td class="set">5,500円</td><td>11,000円</td><td class="set">9,900円</td></tr>
-          <tr><td>プログラミング教室</td><td>7,150円</td><td class="set">6,050円</td><td>12,100円</td><td class="set">11,000円</td></tr>
-          <tr><td>速読解教室</td><td>6,600円</td><td class="set">5,500円</td><td>11,000円</td><td class="set">9,900円</td></tr>
-          <tr><td>そろばん教室</td><td>5,500円</td><td class="set">4,400円</td><td>7,700円</td><td class="set">6,600円</td></tr>
-          <tr><td>英語教室</td><td>6,600円</td><td class="set">5,500円</td><td>11,000円</td><td class="set">9,900円</td></tr>
-        </tbody>
-      </table>
-      <div class="note fees-after"><p>※すべて税込。教材費とシステム利用料を含みます。</p></div>
+    <div class="money-row">
+      <div class="fee-box">
+        <h2 class="sec-h">月謝</h2>
+        <table class="fees">
+          <thead><tr><th>教室</th><th>週1回</th><th>週2回</th></tr></thead>
+          <tbody>
+            <tr><td>算国教室</td><td>6,600円</td><td>11,000円</td></tr>
+            <tr><td>プログラミング教室</td><td>7,150円</td><td>12,100円</td></tr>
+            <tr><td>速読解教室</td><td>6,600円</td><td>11,000円</td></tr>
+            <tr><td>そろばん教室</td><td>5,500円</td><td>7,700円</td></tr>
+            <tr><td>英語教室</td><td>6,600円</td><td>11,000円</td></tr>
+          </tbody>
+        </table>
+        <div class="note fees-after"><p>※すべて税込。教材費とシステム利用料を含みます。</p></div>
+      </div>
+      <div class="combo-box">
+        <h2 class="sec-h">組み合わせの例</h2>
+        <table class="combo">
+          <thead><tr><th>組み合わせの例</th><th class="c">教室数</th><th class="r">月謝（税込）</th></tr></thead>
+          <tbody>
+            <tr><td>算国 週1 ＋ 速読解 週1</td><td class="c">2教室</td><td class="r">12,100円</td></tr>
+            <tr><td>算国 週2 ＋ 速読解 週1</td><td class="c">2教室</td><td class="r">16,500円</td></tr>
+            <tr><td>算国 週1 ＋ 速読解 週1 ＋ そろばん 週1</td><td class="c">3教室</td><td class="r">16,500円</td></tr>
+            <tr><td>算国 週1 のみ</td><td class="c">1教室</td><td class="r">6,600円</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <div class="combo-row">
-      <p class="set-note"><b>セット割</b>2つ目の教室からは、1教室につき月1,000円引きになります。</p>
-      <div class="combo-box">
-      <h2 class="sec-h">組み合わせの例</h2>
-      <table class="combo">
-        <thead><tr><th>組み合わせの例</th><th class="c">教室数</th><th class="r">月謝（税込）</th></tr></thead>
-        <tbody>
-          <tr><td>算国 週1 ＋ 速読解 週1</td><td class="c">2教室</td><td class="r">11,000円</td></tr>
-          <tr><td>算国 週2 ＋ 速読解 週1</td><td class="c">2教室</td><td class="r">15,400円</td></tr>
-          <tr><td>算国 週1 ＋ 速読解 週1 ＋ そろばん 週1</td><td class="c">3教室</td><td class="r">15,400円</td></tr>
-          <tr><td>算国 週1 のみ</td><td class="c">1教室</td><td class="r">6,600円</td></tr>
-        </tbody>
-      </table>
-      </div>
+    <div class="set-note">
+      <b>セット割</b>
+      <p>2つ目の教室からは、1教室につき月1,100円引き（税込）になります。<br>月謝がいちばん高い教室は通常料金です。</p>
+      <p class="ex">例：算国 週1（6,600円）とそろばん 週1（5,500円）なら、6,600円＋4,400円（5,500円−1,100円）＝月11,000円です。</p>
     </div>
   </div>
 
