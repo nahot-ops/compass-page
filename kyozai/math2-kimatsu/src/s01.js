@@ -208,7 +208,7 @@ const hw2 = [
 // ============ 宿題の解答解説 ============
 const A = (no, ans, steps, o = {}) => [
   P(`${no}　**答え　${ans}**`, { before: 80, after: 20, keepNext: true }),
-  ...steps.map(s => P(s, { indent: 500, after: 10, size: 21 })),
+  ...steps.map(s => P(s, { indent: 500, after: 10, size: 21, keepNext: o.keepNext })),
 ];
 const kai = [
   bandTitle("第1回　宿題　解答解説", ""),
@@ -266,13 +266,17 @@ const kai2 = [
   }),
   qHead(6, "連立方程式の利用"),
   ...A("（1）", "鉛筆8本、ノート4冊", ["鉛筆を$x$本、ノートを$y$冊とする。$x+y=12$……①、$60x+150y=1080$……②", "②÷30：$2x+5y=36$。①×2をひくと$3y=12$、$y=4$、$x=8$。問題にあっている。"]),
-  ...A("（2）", "男子100人、女子140人", ["昨年の男子を$x$人、女子を$y$人とする。増えた人数と減った人数を表に整理する。"]),
+  ...A("（2）", "男子100人、女子140人", ["昨年の男子を$x$人、女子を$y$人とする。増えた人数と減った人数を表に整理する。"], { keepNext: true }),
   new d.Table({
     width: { size: 7600, type: d.WidthType.DXA }, columnWidths: [2200, 1800, 1800, 1800], indent: { size: 500, type: d.WidthType.DXA },
-    rows: [["", "男子", "女子", "合計"], ["昨年（人）", "$x$", "$y$", "240"], ["増減（人）", "$+{10/100}x$", "$−{5/100}y$", "$+3$"]].map((r, k) => new d.TableRow({ children: r.map((t, i) => new d.TableCell({ borders: L.BOX, width: { size: [2200, 1800, 1800, 1800][i], type: d.WidthType.DXA }, shading: k === 0 ? { type: d.ShadingType.CLEAR, fill: "E7E6E6", color: "auto" } : undefined, children: [P(t, { after: 0, align: d.AlignmentType.CENTER })] })) })),
+    rows: [["", "男子", "女子", "合計"], ["昨年（人）", "$x$", "$y$", "240"], ["増減（人）", "$+{10/100}x$", "$−{5/100}y$", "$+3$"]].map((r, k) => new d.TableRow({ children: r.map((t, i) => new d.TableCell({ borders: L.BOX, width: { size: [2200, 1800, 1800, 1800][i], type: d.WidthType.DXA }, shading: k === 0 ? { type: d.ShadingType.CLEAR, fill: "E7E6E6", color: "auto" } : undefined, children: [P(t, { after: 0, align: d.AlignmentType.CENTER, keepNext: true })] })) })),
   }),
   P("$x+y=240$……①、${10/100}x−{5/100}y=3$……②。②×100：$10x−5y=300$ → $2x−y=60$……②′", { indent: 500, before: 60, size: 21 }),
-  P("①＋②′：$3x=300$、$x=100$、$y=140$。今年は男子110人、女子133人で合計243人。問題にあっている。", { indent: 500, size: 21 }),
+  P("①＋②′：$3x=300$、$x=100$。①に代入して$y=140$。", { indent: 500, size: 21 }),
+  P("【答えの確かめ】求めた昨年の人数から、今年の人数を計算する。", { indent: 500, size: 21 }),
+  P("今年の男子：昨年の100人から10％増えたので、$100+100×{10/100}=100+10=110$（人）", { indent: 700, size: 21 }),
+  P("今年の女子：昨年の140人から5％減ったので、$140−140×{5/100}=140−7=133$（人）", { indent: 700, size: 21 }),
+  P("合計は$110+133=243$（人）で、問題の「全体で243人」と同じなので、問題にあっている。", { indent: 700, size: 21 }),
   ...A("★（3）", "自転車12km、歩き2km", ["自転車の道のりを$x$km、歩いた道のりを$y$kmとして、線分図に整理する。"]),
   imgP("h_speed.png", 430),
   P("道のり：$x+y=14$……①　時間：${x/12}+{y/4}={3/2}$……②（1時間30分＝${3/2}$時間）", { indent: 500, size: 21 }),
