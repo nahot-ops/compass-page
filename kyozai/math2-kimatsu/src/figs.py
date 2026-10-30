@@ -126,7 +126,7 @@ f.save("h_graph_ans.png")
 
 
 # ---------- 2直線と三角形 ----------
-def trifig(name, xlim, ylim, L1, L2, A, B, C, size, extra=None, shade=False):
+def trifig(name, xlim, ylim, L1, L2, A, B, C, size, extra=None, shade=False, names=("A", "B", "C")):
     f = Fig(size, xlim, ylim)
     x0, x1 = xlim[0] + 0.3, xlim[1] - 0.6
     y0, y1 = ylim[0] + 0.2, ylim[1] - 0.6
@@ -136,13 +136,13 @@ def trifig(name, xlim, ylim, L1, L2, A, B, C, size, extra=None, shade=False):
     if extra: extra(f)
     for p in (A, B, C): f.dot(p)
     pts = around(0.8, 16, np.pi / 16)
-    f.text("A", A, pts); f.text("B", B, pts); f.text("C", C, pts)
+    for p, nm in zip((A, B, C), names): f.text(nm, p, pts)
     for (s, e) in ((L1[2], e1), (L2[2], e2)):
         ex, ey = (e[2], e[3]) if e[3] > e[1] else (e[0], e[1])
         f.text(s, (ex, ey), around(0.6, 12), size=13, style="italic", family=("IPAGothic" if s == "ℓ" else "serif"), r=0.4)
     f.text("x", (xlim[1] - 0.3, 0), [(0.1, -0.55), (0.1, 0.55)], size=13, style="italic")
     f.text("y", (0, ylim[1] - 0.2), [(0.5, -0.1), (-0.5, -0.1)], size=13, style="italic")
-    f.text("O", (0, 0), [(-0.45, -0.55), (0.45, -0.55), (-0.5, 0.5)], size=11, r=0.3)
+    if "O" not in names: f.text("O", (0, 0), [(-0.45, -0.55), (0.45, -0.55), (-0.5, 0.5)], size=11, r=0.3)
     f.save(name)
 
 T1 = dict(xlim=(-4.5, 9.2), ylim=(-1.6, 8.2), L1=(2, 4, "ℓ"), L2=(-1, 7, "m"), A=(1, 6), B=(-2, 0), C=(7, 0), size=(3.4, 2.6))
@@ -182,23 +182,56 @@ def arc(ax, x0, x1, y0, h, up=True, gap=0.0):
     else:
         ax.plot(xs, ys, "k", lw=1.1)
 
-fig, ax = plt.subplots(figsize=(5.0, 3.2))
-X0, XM, X1 = 0, 5.5, 10
-ax.plot([X0, X1], [0, 0], "k", lw=1.6)
-for x in (X0, XM, X1): ax.plot([x, x], [-0.18, 0.18], "k", lw=1.4)
-ax.text(X0 - 0.35, 0, "家", fontsize=11, ha="right", va="center")
-ax.text(X1 + 0.35, 0, "公園", fontsize=11, ha="left", va="center")
-# 上：道のり
-arc(ax, X0, XM, 0.05, 1.0, gap=1.0); ax.text((X0 + XM) / 2, 1.05, "$x$ km", fontsize=12, ha="center", va="center")
-arc(ax, XM, X1, 0.05, 1.0, gap=0.9); ax.text((XM + X1) / 2, 1.05, "$y$ km", fontsize=12, ha="center", va="center")
-arc(ax, X0, X1, 0.05, 2.1, gap=0.9); ax.text((X0 + X1) / 2, 2.15, "14km", fontsize=12, ha="center", va="center")
-# 下：速さ（矢印）と時間
-for xa, xb, sp in ((X0, XM, "時速12km"), (XM, X1, "時速4km")):
-    c = (xa + xb) / 2
-    ax.annotate("", xy=(c + 0.7, -0.35), xytext=(c - 0.7, -0.35), arrowprops=dict(arrowstyle="-|>", lw=1.1, color="k"))
-    ax.text(c, -0.75, sp, fontsize=10, ha="center", va="center")
-arc(ax, X0, XM, -0.05, 1.6, up=False, gap=1.4); ax.text((X0 + XM) / 2, -1.8, r"$\frac{x}{12}$ 時間", fontsize=14, ha="center", va="center")
-arc(ax, XM, X1, -0.05, 1.6, up=False, gap=1.3); ax.text((XM + X1) / 2, -1.8, r"$\frac{y}{4}$ 時間", fontsize=14, ha="center", va="center")
-arc(ax, X0, X1, -0.05, 3.1, up=False, gap=1.4); ax.text((X0 + X1) / 2, -3.15, "1時間30分", fontsize=12, ha="center", va="center")
-ax.set_xlim(-1.4, 11.8); ax.set_ylim(-3.45, 2.5); ax.set_aspect("equal"); ax.axis("off")
-fig.savefig(OUT + "h_speed.png", dpi=200, bbox_inches="tight", pad_inches=0.05); plt.close(fig)
+def speed(name, start, goal, dist, v1, v2, t1, t2, total, split=5.5):
+    fig, ax = plt.subplots(figsize=(5.0, 3.2))
+    X0, XM, X1 = 0, split, 10
+    ax.plot([X0, X1], [0, 0], "k", lw=1.6)
+    for x in (X0, XM, X1): ax.plot([x, x], [-0.18, 0.18], "k", lw=1.4)
+    ax.text(X0 - 0.35, 0, start, fontsize=11, ha="right", va="center")
+    ax.text(X1 + 0.35, 0, goal, fontsize=11, ha="left", va="center")
+    # 上：道のり
+    arc(ax, X0, XM, 0.05, 1.0, gap=1.0); ax.text((X0 + XM) / 2, 1.05, "$x$ km", fontsize=12, ha="center", va="center")
+    arc(ax, XM, X1, 0.05, 1.0, gap=0.9); ax.text((XM + X1) / 2, 1.05, "$y$ km", fontsize=12, ha="center", va="center")
+    arc(ax, X0, X1, 0.05, 2.1, gap=0.9); ax.text((X0 + X1) / 2, 2.15, dist, fontsize=12, ha="center", va="center")
+    # 下：速さ（矢印）と時間
+    for xa, xb, sp in ((X0, XM, v1), (XM, X1, v2)):
+        c = (xa + xb) / 2
+        ax.annotate("", xy=(c + 0.7, -0.35), xytext=(c - 0.7, -0.35), arrowprops=dict(arrowstyle="-|>", lw=1.1, color="k"))
+        ax.text(c, -0.75, sp, fontsize=10, ha="center", va="center")
+    arc(ax, X0, XM, -0.05, 1.6, up=False, gap=1.4); ax.text((X0 + XM) / 2, -1.8, t1 + " 時間", fontsize=14, ha="center", va="center")
+    arc(ax, XM, X1, -0.05, 1.6, up=False, gap=1.3); ax.text((XM + X1) / 2, -1.8, t2 + " 時間", fontsize=14, ha="center", va="center")
+    arc(ax, X0, X1, -0.05, 3.1, up=False, gap=1.4); ax.text((X0 + X1) / 2, -3.15, total, fontsize=12, ha="center", va="center")
+    ax.set_xlim(-1.6, 12.0); ax.set_ylim(-3.45, 2.5); ax.set_aspect("equal"); ax.axis("off")
+    fig.savefig(OUT + name, dpi=200, bbox_inches="tight", pad_inches=0.05); plt.close(fig)
+
+speed("h_speed.png", "家", "公園", "14km", "時速12km", "時速4km", r"$\frac{x}{12}$", r"$\frac{y}{4}$", "1時間30分")
+
+
+# ======================= 第2回 =======================
+graph("j2_read.png", [(-3, 2), (2 / 3, -1)], ["①", "②"])
+
+T3 = dict(xlim=(-3.2, 6.8), ylim=(-1.4, 9.9), L1=(-2, 8, "ℓ"), L2=(1, 2, "m"), A=(2, 4), B=(0, 8), C=(0, 2), size=(2.9, 3.0))
+trifig("o2_tri.png", **T3)
+
+# 宿題：グラフをかく（③は x=−2）
+f, ends = gridfig([(-1.5, 3, {}), (1.5, -2, {})])
+f.seg(-3, -LIM, -3, LIM)
+f.seg(0, 3, 2, 3, ls=":", lw=1.3); f.seg(2, 3, 2, 0, ls=":", lw=1.3)
+for p in [(0, 3), (2, 0), (0, -2), (2, 1)]: f.dot(p)
+f.text("右へ2", (1, 3), [(0, 0.45), (0, -0.45)], size=8, family="IPAGothic", r=0.3)
+f.text("下へ3", (2, 1.5), [(1.3, -0.6), (1.3, -1.2)], size=8, family="IPAGothic", r=0.3)
+for s_, e in zip(["①", "②"], ends): linelabel(f, s_, e)
+linelabel(f, "③", (-3, -LIM, -3, LIM))
+gridlabels(f)
+f.save("h2_graph_ans.png")
+
+speed("h2_speed.png", "A地点", "B地点", "18km", "時速4km", "時速6km", r"$\frac{x}{4}$", r"$\frac{y}{6}$", "4時間", split=6)
+
+T4 = dict(xlim=(-3.2, 7.2), ylim=(-1.4, 7.6), L1=(-1, 6, "ℓ"), L2=(2, 0, "m"), A=(2, 4), B=(0, 6), C=(0, 0), size=(2.9, 2.6), names=("A", "B", "O"))
+trifig("h2_tri.png", **T4)
+def ex3(f):
+    f.seg(0, 0, 1.25, 6.25, ls="-.", lw=1.2)   # O と AB の中点 N を通る直線
+    f.dot((1, 5), "s", 3)
+    f.text("N", (1, 5), around(0.6, 16, np.pi / 16), size=10)
+    f.seg(0, 4, 2, 4, ls="--", lw=1)          # 高さ（Aのx座標）
+trifig("h2_tri_ans.png", **T4, extra=ex3, shade=True)
