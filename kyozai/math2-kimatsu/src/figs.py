@@ -235,3 +235,78 @@ def ex3(f):
     f.text("N", (1, 5), around(0.6, 16, np.pi / 16), size=10)
     f.seg(0, 4, 2, 4, ls="--", lw=1)          # 高さ（Aのx座標）
 trifig("h2_tri_ans.png", **T4, extra=ex3, shade=True)
+
+
+# ======================= 第2回（一次関数の後半） =======================
+def dia(name, xmax, ymax, xgrid, ygrid, xticks, yticks, paths=(), size=(3.4, 3.0), ylab="(m)", xlab="(分)",
+        places=(), extra=None, labels=()):
+    """ダイヤグラム：横が時間、縦が道のり。方眼つき"""
+    sx, sy = 10 / xmax, 10 * 0.85 / ymax  # 縦横の見た目をそろえる
+    f = Fig(size, (-4.3, 11.9), (-1.6, 10 * 0.85 + 1.3))
+    f.white = True
+    for v in np.arange(0, xmax + 1e-9, xgrid): f.ax.plot([v * sx] * 2, [0, ymax * sy], color="#b0b0b0", lw=0.6, zorder=0)
+    for v in np.arange(0, ymax + 1e-9, ygrid): f.ax.plot([0, xmax * sx], [v * sy] * 2, color="#b0b0b0", lw=0.6, zorder=0)
+    f.arrow(0, 0, xmax * sx + 0.8, 0); f.arrow(0, 0, 0, ymax * sy + 0.8)
+    for (pts, kw) in paths:
+        for (x1, y1), (x2, y2) in zip(pts[:-1], pts[1:]):
+            f.seg(x1 * sx, y1 * sy, x2 * sx, y2 * sy, lw=kw.get("lw", 1.8), ls=kw.get("ls", "-"))
+    if extra: extra(f, sx, sy)
+    for t in xticks: f.ax.text(t * sx, -0.45, str(t), fontsize=9, ha="center", va="center", family="serif")
+    for t in yticks: f.ax.text(-0.25, t * sy, str(t), fontsize=9, ha="right", va="center", family="serif")
+    for (t, s) in places: f.ax.text(-2.7, t * sy, s, fontsize=9, ha="right", va="center")
+    f.ax.text(-0.3, -0.45, "O", fontsize=10, ha="center", va="center", family="serif")
+    f.ax.text(xmax * sx + 1.0, 0.45, "$x$", fontsize=12, ha="center", va="center")
+    f.ax.text(xmax * sx + 1.15, -1.0, xlab, fontsize=8, ha="center", va="center")
+    f.ax.text(0, ymax * sy + 1.15, ylab + " $y$", fontsize=10, ha="center", va="center")
+    for (s, p, cands) in labels: f.text(s, (p[0] * sx, p[1] * sy), cands, size=10, family="IPAGothic", r=0.45)
+    f.save(name)
+
+# 基本＜2＞：家→（分速80m）→800mで10分止まる→分速120mで2000m
+dia("j2b_dia.png", 30, 2000, 2, 200, [10, 20, 30], [400, 800, 1200, 1600, 2000],
+    paths=[([(0, 0), (10, 800), (20, 800), (30, 2000)], {})], places=[(2000, "駅"), (0, "家")])
+
+# 応用＜1＞：弟は分速60mで2400m先の駅へ（兄の線は生徒がかかない）
+dia("o2b_dia.png", 45, 2400, 5, 300, [10, 20, 30, 40], [600, 1200, 1800, 2400],
+    paths=[([(0, 0), (40, 2400)], {})], places=[(2400, "駅"), (0, "家")],
+    labels=[("弟", (28, 1680), [(1.0, -0.6), (-0.9, 0.6)])])
+
+# 宿題＜1＞：姉は家→公園（分速100m）、妹は公園→家（分速50m）
+H1 = dict(name="h2b_dia.png", xmax=30, ymax=1500, xgrid=2, ygrid=100, xticks=[10, 20, 30], yticks=[500, 1000, 1500],
+          paths=[([(0, 0), (15, 1500)], {}), ([(0, 1500), (30, 0)], {})], places=[(1500, "公園"), (0, "家")],
+          labels=[("姉", (6, 600), [(-0.9, 0.5), (0.9, -0.5)]), ("妹", (24, 300), [(0.9, 0.5), (-0.9, -0.5)])])
+dia(**H1)
+def cross(f, sx, sy):
+    f.seg(10 * sx, 0, 10 * sx, 1000 * sy, ls="--", lw=1); f.seg(0, 1000 * sy, 10 * sx, 1000 * sy, ls="--", lw=1)
+    f.dot((10 * sx, 1000 * sy))
+dia(**{**H1, "name": "h2b_dia_ans.png", "extra": cross})
+
+
+def rect(name, w, h, tri, pname, ppos, arrow, labels=True, size=(2.3, 1.9)):
+    """長方形ABCD（A左上、B左下、C右下、D右上）と動く点P。tri の三角形をグレーにぬる"""
+    fig, ax = plt.subplots(figsize=size)
+    ax.add_patch(Polygon(tri, closed=True, color="#bfbfbf", zorder=0))
+    ax.plot([0, 0, w, w, 0], [h, 0, 0, h, h], "k", lw=1.5)
+    ax.plot(*zip(*(tri + [tri[0]])), "k", lw=1.0)
+    for s, (x, y), (dx, dy) in (("A", (0, h), (-0.35, 0.3)), ("B", (0, 0), (-0.35, -0.35)), ("C", (w, 0), (0.35, -0.35)), ("D", (w, h), (0.35, 0.3))):
+        ax.text(x + dx, y + dy, s, fontsize=11, ha="center", va="center", family="serif")
+    ax.plot(*ppos, "ko", ms=3.5, zorder=5)
+    ax.text(ppos[0] + arrow[2], ppos[1] + arrow[3], pname, fontsize=11, ha="center", va="center", family="serif")
+    ax.annotate("", xy=(ppos[0] + arrow[0], ppos[1] + arrow[1]), xytext=ppos, arrowprops=dict(arrowstyle="-|>", lw=1, color="k"))
+    if labels:
+        ax.text(w + 0.55, h / 2, f"{h}cm", fontsize=9, ha="center", va="center", rotation=90)
+        ax.text(w / 2, h + 0.45, f"{w}cm", fontsize=9, ha="center", va="center")
+    ax.set_xlim(-1.2, w + 1.1); ax.set_ylim(-1.0, h + 0.9); ax.set_aspect("equal"); ax.axis("off")
+    fig.savefig(OUT + name, dpi=200, bbox_inches="tight", pad_inches=0.05); plt.close(fig)
+
+# 基本＜3＞：AB=6、BC=8。PはBからCへ。△ABP
+rect("j2b_rect.png", 8, 6, [(0, 6), (0, 0), (3, 0)], "P", (3, 0), (1.2, 0, 0, -0.45))
+# 応用＜2＞：AB=4、BC=6。PはA→B→C→D。△APD（PがAB上）
+rect("o2b_rect.png", 6, 4, [(0, 4), (0, 1.5), (6, 4)], "P", (0, 1.5), (0, -0.9, -0.4, 0), size=(2.1, 1.7))
+# 宿題＜2＞：AB=4、BC=6。PはB→C→D。△ABP（PがBC上）
+rect("h2b_rect.png", 6, 4, [(0, 4), (0, 0), (2.5, 0)], "P", (2.5, 0), (1.0, 0, 0, -0.45), size=(2.1, 1.7))
+
+# 宿題＜2＞(3)：グラフをかく方眼（x：0〜12秒、y：0〜14cm²）と、その答え
+def areagrid(name, lines=()):
+    dia(name, 12, 14, 1, 1, [2, 4, 6, 8, 10, 12], [2, 4, 6, 8, 10, 12, 14], paths=lines, ylab="(cm²)", xlab="(秒)", size=(3.0, 3.0))
+areagrid("h2b_grid.png")
+areagrid("h2b_graph_ans.png", [([(0, 0), (6, 12), (10, 12)], {})])
