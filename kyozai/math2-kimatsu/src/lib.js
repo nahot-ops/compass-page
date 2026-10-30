@@ -50,7 +50,7 @@ const M = s => omath(mbody(s));
 // 連立方程式 ｛ 2行
 const SYS = (rows, tags = true) => omath(
   `<m:d><m:dPr><m:begChr m:val="{"/><m:endChr m:val=""/></m:dPr><m:e><m:eqArr>` +
-  rows.map((r, i) => `<m:e>${mbody(r)}${tags ? mrp("　……" + "①②③"[i]) : ""}</m:e>`).join("") +
+  rows.map((r, i) => `<m:e>${mbody(r)}${Array.isArray(tags) ? mrp("　……" + tags[i]) : tags ? mrp("　……" + "①②③"[i]) : ""}</m:e>`).join("") +
   `</m:eqArr></m:e></m:d>`);
 
 // ---------- 文字 ----------
