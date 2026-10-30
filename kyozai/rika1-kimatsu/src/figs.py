@@ -289,7 +289,118 @@ def fig_eth():
     save(fig, "eth_ans.png")
 
 
+# ---------- アンモニアの噴水 ----------
+def fig_funsui():
+    fig, ax = blank(3.0, 3.3, (-3.6, 4.6), (-0.6, 8.6))
+    ax.add_patch(Circle((0, 6.2), 1.6, facecolor="white", edgecolor=K, lw=1.3, zorder=2))   # 丸底フラスコ（逆さ）
+    ax.add_patch(Rectangle((-0.35, 3.9), 0.7, 0.8, facecolor="white", edgecolor=K, lw=1.3, zorder=3))  # 首
+    ax.add_patch(Rectangle((-0.42, 3.4), 0.84, 0.55, facecolor="#999999", edgecolor=K, lw=1.1, zorder=4))  # ゴム栓
+    for gx in (0.1, 0.25):   # ガラス管（フラスコの中まで通す）
+        ax.plot([gx, gx], [0.4, 7.2], color=K, lw=1.0, zorder=5)
+    ax.add_patch(Rectangle((-0.3, 2.6), 0.24, 1.9, facecolor="white", edgecolor=K, lw=1.0, zorder=5))  # スポイト（栓を通す）
+    ax.add_patch(Ellipse((-0.18, 2.35), 0.46, 0.55, facecolor="#BBBBBB", edgecolor=K, lw=1.0, zorder=5))
+    ax.add_patch(Rectangle((-2.6, -0.4), 5.2, 1.3, facecolor="#E3E3E3", edgecolor="none"))   # 水槽の水
+    ax.plot([-2.6, -2.6, 2.6, 2.6], [1.6, -0.4, -0.4, 1.6], color=K, lw=1.3)
+    ax.plot([1.2, 2.0], [7.0, 7.7], color=K, lw=0.7); ax.text(2.05, 7.75, "アンモニア", ha="left", va="center", fontsize=9)
+    ax.plot([-0.42, -1.2], [2.4, 2.9], color=K, lw=0.7); ax.text(-1.25, 2.95, "水の入った\nスポイト", ha="right", va="center", fontsize=9)
+    ax.plot([0.25, 1.4], [2.6, 3.0], color=K, lw=0.7); ax.text(1.45, 3.05, "ガラス管", ha="left", va="center", fontsize=9)
+    ax.plot([1.6, 2.9], [0.3, 0.3], color=K, lw=0.7); ax.text(2.95, 0.3, "フェノール\nフタレイン溶液\nを加えた水", ha="left", va="center", fontsize=8.5)
+    save(fig, "funsui.png")
+
+
+# ---------- 作図用のビーカー（粒子／ロウ／氷） ----------
+def beaker_frame(ax, level=2.4, dashed=False):
+    ax.plot([0, 0, 3.0, 3.0], [3.4, 0, 0, 3.4], color=K, lw=1.4)
+    if dashed:
+        ax.plot([0, 3.0], [level, level], color=K, lw=1.0, ls="--")
+    else:
+        ax.plot([0, 3.0], [level, level], color=K, lw=1.0)
+
+
+def fig_sakuzu():
+    # 砂糖がとけたあと（作図用）と答え
+    for name, ans in (("ryuushi_sakuzu.png", False), ("ryuushi_sakuzu_ans.png", True)):
+        fig, ax = blank(1.5, 1.6, (-0.3, 3.4), (-0.3, 3.6))
+        beaker_frame(ax)
+        ax.text(1.5, 2.6, "水", ha="center", va="bottom", fontsize=9)
+        if ans:
+            rnd = random.Random(5)
+            for i in range(5):
+                for j in range(4):
+                    ax.add_patch(Circle((0.35 + i * 0.58 + rnd.uniform(-0.08, 0.08), 0.3 + j * 0.58 + rnd.uniform(-0.06, 0.06)), 0.1, facecolor="#555555", edgecolor=K, lw=0.5))
+        save(fig, name)
+    # ロウ・氷（点線は液体のときの液面）
+    for name, mode in (("rou_sakuzu.png", None), ("rou_ans.png", "rou"), ("koori_ans.png", "koori")):
+        fig, ax = blank(1.9, 1.7, (-0.3, 4.6), (-0.3, 3.8))
+        lv = 2.2
+        if mode:
+            x = np.linspace(0, 3.0, 60)
+            dip = -0.55 if mode == "rou" else 0.45
+            y = (lv - 0.25 if mode == "rou" else lv + 0.1) + dip * np.exp(-((x - 1.5) / 0.5) ** 2)
+            ax.fill_between(x, 0, y, color="#CCCCCC", zorder=1)
+            ax.plot(x, y, color=K, lw=1.2, zorder=2)
+        beaker_frame(ax, lv, dashed=True)
+        ax.plot([3.0, 3.35], [lv, 2.95], color=K, lw=0.7)
+        ax.text(3.4, 3.0, "液体の\nときの\n液面", ha="left", va="bottom", fontsize=8)
+        save(fig, name)
+
+
+# ---------- 3つの物質の溶解度曲線（ア～ウ） ----------
+MYO = [5.7, 7.6, 11.4, 23.8, 57.4]
+def fig_youkaido3():
+    fig, ax = plt.subplots(figsize=(3.2, 2.7))
+    ax.set_xlim(0, 60); ax.set_ylim(0, 120)
+    ax.set_xticks(range(0, 61, 20)); ax.set_yticks(range(0, 121, 20))
+    ax.set_xticks(range(0, 61, 10), minor=True); ax.set_yticks(range(0, 121, 10), minor=True)
+    ax.grid(which="both", color="#BBBBBB", lw=0.5); ax.tick_params(labelsize=9)
+    ax.set_xlabel("水の温度〔℃〕", fontsize=10); ax.set_ylabel("100gの水にとける質量〔g〕", fontsize=9)
+    x, y = smooth(T[:5], np.log(KNO3[:5])); ax.plot(x, np.exp(y), color=K, lw=1.8)
+    x, y = smooth(T[:5], NACL[:5]); ax.plot(x, y, color=K, lw=1.8, ls="--")
+    x, y = smooth([0, 10, 20, 40, 60], np.log(MYO)); ax.plot(x, np.exp(y), color=K, lw=1.8, ls="-.")
+    for (tx, ty, lb) in ((47, 92, "ア"), (10, 46, "イ"), (52, 30, "ウ")):
+        ax.text(tx, ty, lb, ha="center", va="center", fontsize=11, bbox=dict(fc="white", ec="none", pad=1))
+    save(fig, "youkaido3.png")
+
+
+# ---------- 水とエタノールの混合物の加熱（①～③） ----------
+def fig_mix():
+    fig, ax = plt.subplots(figsize=(3.2, 2.4))
+    xs = [0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 14, 16, 18, 20]
+    ys = [20, 33, 46, 59, 71, 79, 82, 85, 88, 91, 94, 97, 98, 98]
+    x, y = smooth(xs, ys); ax.plot(x, y, color=K, lw=1.8)
+    ax.set_xlim(0, 20); ax.set_ylim(0, 100)
+    ax.set_xticks(range(0, 21, 5)); ax.set_yticks(range(0, 101, 20))
+    ax.grid(color="#BBBBBB", lw=0.5); ax.tick_params(labelsize=9)
+    ax.set_xlabel("加熱した時間〔分〕", fontsize=10); ax.set_ylabel("温度〔℃〕", fontsize=10)
+    for (tx, ty, lb) in ((1.6, 62, "①"), (8.5, 72, "②"), (16.5, 84, "③")):
+        ax.text(tx, ty, lb, ha="center", va="center", fontsize=11, bbox=dict(fc="white", ec="none", pad=1))
+    save(fig, "mix.png")
+
+
+# ---------- ガスバーナー（ねじを回す向き X・Y つき） ----------
+# 上から見て反時計回り（手前が右へ動く）がねじを開く向き。Xを開く向きにしている。
+def fig_burner_xy():
+    fig, ax = blank(2.0, 3.0, (-2.6, 2.8), (-0.6, 7.0))
+    ax.add_patch(Polygon([(-1.6, 0), (1.6, 0), (1.1, 0.7), (-1.1, 0.7)], closed=True, facecolor="white", edgecolor=K, lw=1.3))
+    ax.add_patch(Rectangle((-0.35, 0.7), 0.7, 5.3, facecolor="white", edgecolor=K, lw=1.3))
+    ax.add_patch(Rectangle((-0.6, 1.5), 1.2, 0.55, facecolor="#BBBBBB", edgecolor=K, lw=1.2))
+    ax.add_patch(Rectangle((-0.55, 2.6), 1.1, 0.75, facecolor="#E5E5E5", edgecolor=K, lw=1.2))
+    for yy in (2.75, 2.95, 3.15):
+        ax.plot([-0.55, 0.55], [yy, yy], color=K, lw=0.6)
+    ax.plot([0.6, 2.0], [1.0, 1.0], color=K, lw=1.3); ax.plot([0.6, 2.0], [1.3, 1.3], color=K, lw=1.3)
+    ax.plot([0.35, 0.6], [1.0, 1.0], color=K, lw=1.3); ax.plot([0.35, 0.6], [1.3, 1.3], color=K, lw=1.3)
+    # 回す向きの矢印（ねじAの手前）
+    ax.annotate("", xy=(1.05, 3.75), xytext=(-1.05, 3.75), arrowprops=dict(arrowstyle="-|>", color=K, lw=1.1, connectionstyle="arc3,rad=0.25"))
+    ax.annotate("", xy=(-1.05, 4.55), xytext=(1.05, 4.55), arrowprops=dict(arrowstyle="-|>", color=K, lw=1.1, connectionstyle="arc3,rad=-0.25"))
+    ax.text(1.2, 3.75, "X", ha="left", va="center", fontsize=11)
+    ax.text(-1.2, 4.55, "Y", ha="right", va="center", fontsize=11)
+    ax.plot([0.6, 1.3], [2.98, 2.98], color=K, lw=0.8); ax.text(1.4, 2.98, "ねじA", ha="left", va="center", fontsize=9)
+    ax.plot([0.65, 1.3], [1.78, 1.9], color=K, lw=0.8); ax.text(1.4, 1.95, "ねじB", ha="left", va="center", fontsize=9)
+    save(fig, "burner_xy.png")
+
+
 if __name__ == "__main__":
     fig_mess(); fig_burner(); fig_atsume(); fig_youkaido(); fig_youkaido_ans(); fig_youkaido_ans(60, "youkaido_ans60.png")
     fig_water(); fig_ryuushi(); fig_ryuushi(("solid", "liquid", "gas"), ("固体", "液体", "気体"), "ryuushi_yoten.png"); fig_model(); fig_jouryuu(); fig_eth()
+    fig_funsui(); fig_burner_xy(); fig_sakuzu(); fig_youkaido3(); fig_mix()
     print("ok")
