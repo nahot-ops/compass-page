@@ -1,4 +1,5 @@
-// 第2回（11/4）総ざらい②　連立方程式＋一次関数の前半（数字を変えて）
+// 予備プリント　総ざらい②　連立方程式＋一次関数の前半（第1回と同じ範囲で数字を変えたもの）
+// もとは第2回の予定だったが、日程の見直しでカット。欠席者や追加練習用に残す。
 const L = require("./lib");
 const { d, P, space, imgP, ansBox, qgrid, bandTitle, qHead, frame, SYS, runs, CW } = L;
 const OUT = require("path").join(__dirname, "..");
@@ -15,7 +16,7 @@ const row2 = (w1, left, right, m1, m2) => new d.Table({
 
 // ============ 授業プリント ============
 const kihon = [
-  bandTitle("第2回　授業プリント①　＜基本＞", NAME + "得点　　　／50点"),
+  bandTitle("予備　授業プリント①　＜基本＞", NAME + "得点　　　／50点"),
   P("目安10分。解き終わったら提出しましょう。答えは最も簡単な形で書きましょう。", { before: 80, size: 20 }),
 
   qHead(1, "次の連立方程式を解きなさい。", "（4点×5）"),
@@ -58,7 +59,7 @@ const kihon = [
 ];
 
 const ouyo = [
-  bandTitle("第2回　授業プリント②　＜応用＞", NAME + "得点　　　／50点"),
+  bandTitle("予備　授業プリント②　＜応用＞", NAME + "得点　　　／50点"),
   P("大問ごとに時間を区切って解き、解説を聞きます。★は100点をねらう問題です。", { before: 80, size: 20 }),
 
   qHead(1, "2直線と三角形", "目安5分　（22点）"),
@@ -99,7 +100,7 @@ function keyTable(rows) {
     rows: [["番号", "答え", "配点"], ...rows].map((r, k) => new d.TableRow({ cantSplit: true, children: r.map((t, i) => c(t, i, k === 0)) })) });
 }
 const key = [
-  bandTitle("第2回　採点用の解答", "先生用"),
+  bandTitle("予備　採点用の解答", "先生用"),
   qHead("授業プリント①", "基本（50点）"),
   keyTable([
     ["1（1）", "$(x,y)=(2,3)$", "4"], ["1（2）", "$(x,y)=(−2,3)$", "4"], ["1（3）", "$(x,y)=(5,1)$", "4"],
@@ -123,8 +124,8 @@ const key = [
 
 // ============ 宿題（B4×1） ============
 const hw = [
-  bandTitle("第2回　宿題", NAME + "提出日　　／　　"),
-  P("11/6（金）の授業までに、解き終わったら解答解説で丸つけをして、まちがえた問題は直しノートを作りましょう。", { before: 80, size: 20 }),
+  bandTitle("予備　宿題", NAME + "提出日　　／　　"),
+  P("解き終わったら解答解説で丸つけをして、まちがえた問題は直しノートを作りましょう。", { before: 80, size: 20 }),
   qHead(1, "次の連立方程式を解きなさい。"),
   qgrid([
     { q: [sysP("（1）", ["3x+y=10", "x−2y=1"])], work: 950, ans: XY, ansW: 3600 },
@@ -164,7 +165,7 @@ const A = (no, ans, steps, o = {}) => [
   ...steps.map(s => P(s, { indent: 500, after: 10, size: 21, keepNext: o.keepNext })),
 ];
 const kai = [
-  bandTitle("第2回　宿題　解答解説", ""),
+  bandTitle("予備　宿題　解答解説", ""),
   P("**〇かどうかわからない場合は、適当に〇をつけずに必ず先生に確認しましょう**", { before: 120, after: 120, size: 24 }),
   qHead(1, "連立方程式"),
   ...A("（1）", "$(x,y)=(3,1)$", ["①×2＋②で$y$を消す（加減法）。$6x+2y=20$と$x−2y=1$をたして$7x=21$、$x=3$。", "②に代入して$3−2y=1$、$y=1$。"]),
@@ -205,8 +206,8 @@ const kai2 = [
 
 // ============ 書き出し ============
 Promise.all([
-  L.save(`${OUT}/第2回_授業プリント.docx`, [sec("第2回 授業プリント", kihon), sec("第2回 授業プリント", ouyo)]),
-  L.save(`${OUT}/第2回_採点用解答.docx`, [sec("第2回 採点用の解答", key)]),
-  L.save(`${OUT}/第2回_宿題.docx`, [sec("第2回 宿題", hw)]),
-  L.save(`${OUT}/第2回_宿題_解答解説.docx`, [sec("第2回 宿題 解答解説", [...kai, ...kai2])]),
+  L.save(`${OUT}/予備_総ざらい②_授業プリント.docx`, [sec("予備 総ざらい② 授業プリント", kihon), sec("予備 総ざらい② 授業プリント", ouyo)]),
+  L.save(`${OUT}/予備_総ざらい②_採点用解答.docx`, [sec("予備 総ざらい② 採点用の解答", key)]),
+  L.save(`${OUT}/予備_総ざらい②_宿題.docx`, [sec("予備 総ざらい② 宿題", hw)]),
+  L.save(`${OUT}/予備_総ざらい②_宿題_解答解説.docx`, [sec("予備 総ざらい② 宿題 解答解説", [...kai, ...kai2])]),
 ]).then(() => console.log("ok"));
