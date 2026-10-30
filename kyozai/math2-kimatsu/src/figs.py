@@ -281,29 +281,45 @@ def cross(f, sx, sy):
 dia(**{**H1, "name": "h2b_dia_ans.png", "extra": cross})
 
 
-def rect(name, w, h, tri, pname, ppos, arrow, labels=True, size=(2.3, 1.9)):
-    """長方形ABCD（A左上、B左下、C右下、D右上）と動く点P。tri の三角形をグレーにぬる"""
+def dimarc(ax, p, q, bulge, text, gap):
+    """2点 p, q を外側にふくらんだ弧でつなぎ、まん中に長さを書く（手書きの寸法線と同じ形）"""
+    (x0, y0), (x1, y1) = p, q
+    mx, my = (x0 + x1) / 2, (y0 + y1) / 2
+    L = np.hypot(x1 - x0, y1 - y0); ux, uy = (x1 - x0) / L, (y1 - y0) / L
+    nx, ny = uy, -ux  # 進む向きの右側にふくらむ
+    t = np.linspace(-1, 1, 300)
+    xs = mx + ux * t * L / 2 + nx * bulge * (1 - t ** 2)
+    ys = my + uy * t * L / 2 + ny * bulge * (1 - t ** 2)
+    k = np.abs(t) * L / 2 > gap
+    ax.plot(xs[(t < 0) & k], ys[(t < 0) & k], "k", lw=1)
+    ax.plot(xs[(t > 0) & k], ys[(t > 0) & k], "k", lw=1)
+    ax.text(mx + nx * bulge * 1.15, my + ny * bulge * 1.15, text, fontsize=10, ha="center", va="center")
+
+def rect(name, w, h, tri, ppos, plab, parrow, size=(2.4, 2.0)):
+    """長方形ABCD（A左上、B左下、C右下、D右上）と動く点P。
+    tri の三角形は斜線。辺の長さは弧でつないで書く。
+    plab：点Pの名前の位置（点からのずれ）、parrow：動く向きの矢印（始点と終点、点からのずれ）"""
+    plt.rcParams["hatch.linewidth"] = 0.8
     fig, ax = plt.subplots(figsize=size)
-    ax.add_patch(Polygon(tri, closed=True, color="#bfbfbf", zorder=0))
-    ax.plot([0, 0, w, w, 0], [h, 0, 0, h, h], "k", lw=1.5)
-    ax.plot(*zip(*(tri + [tri[0]])), "k", lw=1.0)
-    for s, (x, y), (dx, dy) in (("A", (0, h), (-0.35, 0.3)), ("B", (0, 0), (-0.35, -0.35)), ("C", (w, 0), (0.35, -0.35)), ("D", (w, h), (0.35, 0.3))):
-        ax.text(x + dx, y + dy, s, fontsize=11, ha="center", va="center", family="serif")
-    ax.plot(*ppos, "ko", ms=3.5, zorder=5)
-    ax.text(ppos[0] + arrow[2], ppos[1] + arrow[3], pname, fontsize=11, ha="center", va="center", family="serif")
-    ax.annotate("", xy=(ppos[0] + arrow[0], ppos[1] + arrow[1]), xytext=ppos, arrowprops=dict(arrowstyle="-|>", lw=1, color="k"))
-    if labels:
-        ax.text(w + 0.55, h / 2, f"{h}cm", fontsize=9, ha="center", va="center", rotation=90)
-        ax.text(w / 2, h + 0.45, f"{w}cm", fontsize=9, ha="center", va="center")
-    ax.set_xlim(-1.2, w + 1.1); ax.set_ylim(-1.0, h + 0.9); ax.set_aspect("equal"); ax.axis("off")
+    ax.add_patch(Polygon(tri, closed=True, fill=False, hatch="////", edgecolor="k", lw=1.2, zorder=1))
+    ax.plot([0, 0, w, w, 0], [h, 0, 0, h, h], "k", lw=1.5, zorder=2)
+    for s_, (x, y), (dx, dy) in (("A", (0, h), (-0.5, 0.3)), ("B", (0, 0), (-0.5, -0.45)), ("C", (w, 0), (0.5, -0.45)), ("D", (w, h), (0.5, 0.3))):
+        ax.text(x + dx, y + dy, s_, fontsize=11, ha="center", va="center", family="serif")
+    dimarc(ax, (0, h), (w, h), -0.85, f"{w}cm", 0.75)   # 上の辺 AD（上にふくらむ）
+    dimarc(ax, (w, h), (w, 0), -0.85, f"{h}cm", 0.85)    # 右の辺 DC（右にふくらむ）
+    ax.plot(*ppos, "ko", ms=4.5, zorder=5)
+    ax.text(ppos[0] + plab[0], ppos[1] + plab[1], "P", fontsize=11, ha="center", va="center", family="serif")
+    (ax0, ay0), (ax1, ay1) = parrow
+    ax.annotate("", xy=(ppos[0] + ax1, ppos[1] + ay1), xytext=(ppos[0] + ax0, ppos[1] + ay0), arrowprops=dict(arrowstyle="->", lw=1.1, color="k"))
+    ax.set_xlim(-1.4, w + 1.8); ax.set_ylim(-1.7, h + 1.4); ax.set_aspect("equal"); ax.axis("off")
     fig.savefig(OUT + name, dpi=200, bbox_inches="tight", pad_inches=0.05); plt.close(fig)
 
 # 基本＜3＞：AB=6、BC=8。PはBからCへ。△ABP
-rect("j2b_rect.png", 8, 6, [(0, 6), (0, 0), (3, 0)], "P", (3, 0), (1.2, 0, 0, -0.45))
+rect("j2b_rect.png", 8, 6, [(0, 6), (0, 0), (3, 0)], (3, 0), (0, -0.8), ((-0.4, -1.5), (1.1, -1.5)))
 # 応用＜2＞：AB=4、BC=6。PはA→B→C→D。△APD（PがAB上）
-rect("o2b_rect.png", 6, 4, [(0, 4), (0, 1.5), (6, 4)], "P", (0, 1.5), (0, -0.9, -0.4, 0), size=(2.1, 1.7))
+rect("o2b_rect.png", 6, 4, [(0, 4), (0, 1.5), (6, 4)], (0, 1.5), (-0.5, 0), ((-1.0, 0.6), (-1.0, -0.8)), size=(2.2, 1.9))
 # 宿題＜2＞：AB=4、BC=6。PはB→C→D。△ABP（PがBC上）
-rect("h2b_rect.png", 6, 4, [(0, 4), (0, 0), (2.5, 0)], "P", (2.5, 0), (1.0, 0, 0, -0.45), size=(2.1, 1.7))
+rect("h2b_rect.png", 6, 4, [(0, 4), (0, 0), (2.5, 0)], (2.5, 0), (0, -0.8), ((-0.4, -1.5), (1.1, -1.5)), size=(2.2, 1.9))
 
 # 宿題＜2＞(3)：グラフをかく方眼（x：0〜12秒、y：0〜14cm²）と、その答え
 def areagrid(name, lines=()):

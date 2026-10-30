@@ -51,7 +51,7 @@ const kihon = [
       { q: [P("（2）$y$を$x$の式で表しなさい。")], work: 800, ans: "$y$＝", ansW: 2600 },
       { q: [P("（3）$y$の変域を求めなさい。")], work: 800, ans: "", ansW: 2600 },
     ], 3, { width: CW - 3300 }),
-  ], [imgP("j2b_rect.png", 175)]),
+  ], [imgP("j2b_rect.png", 212)]),
 
   qHead(4, "2直線$y=x+2$と$y=−x+6$について、次の問いに答えなさい。", "（6点×2）"),
   qgrid([
@@ -83,7 +83,7 @@ const ouyo = [
       { q: [P("（1）$x=3$のときの$y$の値を求めなさい。（5点）")], work: 400, ans: "", ansW: 2400 },
       { q: [P("（2）点Pが辺CD上を動くとき、$y$を$x$の式で表しなさい。また、$x$の変域も書きなさい。（完全正答6点）")], work: 900, ans: "$y$＝　　　　　（　　　　　）", ansW: 4300 },
     ], 2, { width: CW - 3200 }),
-  ], [imgP("o2b_rect.png", 160)]),
+  ], [imgP("o2b_rect.png", 205)]),
   P("★（3）△APDの面積が6cm²になるのは、点PがAを出発してから何秒後ですか。すべて求めなさい。（完全正答6点）"),
   space(1300), ansBox("", 3600),
 
@@ -143,7 +143,7 @@ const hw = [
   qHead(2, "動く点と面積"),
   P("下の図のような長方形ABCDで、点PはBを出発して、辺BC、CD上をDまで毎秒1cmの速さで動きます。点PがBを出発してから$x$秒後の△ABPの面積を$y$cm²とします。"),
   row2(CW - 4800, [
-    imgP("h2b_rect.png", 170, d.AlignmentType.LEFT),
+    imgP("h2b_rect.png", 215, d.AlignmentType.LEFT),
     P("（1）$x=3$のときの$y$の値を求めなさい。", { before: 60 }), space(500), ansBox("", 2600),
     P("（2）点Pが辺CD上にあるとき、$y$の値を求めなさい。", { before: 60 }), space(500), ansBox("", 2600),
     P("（3）$0≦x≦10$のときの$x$と$y$の関係を表すグラフを、右の図にかきなさい。", { before: 60 }),
