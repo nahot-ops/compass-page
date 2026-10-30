@@ -170,15 +170,35 @@ trifig("h_tri_ans.png", **T2, extra=ex2, shade=True)
 
 
 # ---------- 線分図（速さ） ----------
-fig, ax = plt.subplots(figsize=(5.2, 1.3))
-ax.plot([0, 10], [0, 0], "k", lw=1.6)
-for x in (0, 7.5, 10): ax.plot([x, x], [-0.15, 0.15], "k", lw=1.4)
-ax.text(-0.3, -0.55, "家", fontsize=10); ax.text(9.6, -0.55, "公園", fontsize=10)
-ax.annotate("", xy=(0, 0.55), xytext=(7.5, 0.55), arrowprops=dict(arrowstyle="<->", lw=1))
-ax.annotate("", xy=(7.5, 0.55), xytext=(10, 0.55), arrowprops=dict(arrowstyle="<->", lw=1))
-ax.text(2.0, 0.7, "自転車　時速12km　x km", fontsize=9)
-ax.text(7.6, 0.7, "歩き 時速4km y km", fontsize=8)
-ax.annotate("", xy=(0, -0.85), xytext=(10, -0.85), arrowprops=dict(arrowstyle="<->", lw=1))
-ax.text(3.6, -1.3, "全部で14km　／　1時間30分", fontsize=9)
-ax.set_xlim(-0.8, 10.8); ax.set_ylim(-1.5, 1.1); ax.axis("off")
+# 線分の上に道のり、下に速さと時間。区間ごとの弧と、全体の大きな弧（手書きの図と同じ形）
+def arc(ax, x0, x1, y0, h, up=True, gap=0.0):
+    t = np.linspace(0, np.pi, 300)
+    xs = (x0 + x1) / 2 - (x1 - x0) / 2 * np.cos(t)
+    ys = y0 + (h if up else -h) * np.sin(t)
+    if gap:  # まん中を文字のためにあける
+        k = np.abs(xs - (x0 + x1) / 2) > gap
+        left = xs < (x0 + x1) / 2
+        ax.plot(xs[k & left], ys[k & left], "k", lw=1.1); ax.plot(xs[k & ~left], ys[k & ~left], "k", lw=1.1)
+    else:
+        ax.plot(xs, ys, "k", lw=1.1)
+
+fig, ax = plt.subplots(figsize=(5.0, 3.2))
+X0, XM, X1 = 0, 5.5, 10
+ax.plot([X0, X1], [0, 0], "k", lw=1.6)
+for x in (X0, XM, X1): ax.plot([x, x], [-0.18, 0.18], "k", lw=1.4)
+ax.text(X0 - 0.35, 0, "家", fontsize=11, ha="right", va="center")
+ax.text(X1 + 0.35, 0, "公園", fontsize=11, ha="left", va="center")
+# 上：道のり
+arc(ax, X0, XM, 0.05, 1.0, gap=1.0); ax.text((X0 + XM) / 2, 1.05, "$x$ km", fontsize=12, ha="center", va="center")
+arc(ax, XM, X1, 0.05, 1.0, gap=0.9); ax.text((XM + X1) / 2, 1.05, "$y$ km", fontsize=12, ha="center", va="center")
+arc(ax, X0, X1, 0.05, 2.1, gap=0.9); ax.text((X0 + X1) / 2, 2.15, "14km", fontsize=12, ha="center", va="center")
+# 下：速さ（矢印）と時間
+for xa, xb, sp in ((X0, XM, "時速12km"), (XM, X1, "時速4km")):
+    c = (xa + xb) / 2
+    ax.annotate("", xy=(c + 0.7, -0.35), xytext=(c - 0.7, -0.35), arrowprops=dict(arrowstyle="-|>", lw=1.1, color="k"))
+    ax.text(c, -0.75, sp, fontsize=10, ha="center", va="center")
+arc(ax, X0, XM, -0.05, 1.6, up=False, gap=1.4); ax.text((X0 + XM) / 2, -1.8, r"$\frac{x}{12}$ 時間", fontsize=14, ha="center", va="center")
+arc(ax, XM, X1, -0.05, 1.6, up=False, gap=1.3); ax.text((XM + X1) / 2, -1.8, r"$\frac{y}{4}$ 時間", fontsize=14, ha="center", va="center")
+arc(ax, X0, X1, -0.05, 3.1, up=False, gap=1.4); ax.text((X0 + X1) / 2, -3.15, "1時間30分", fontsize=12, ha="center", va="center")
+ax.set_xlim(-1.4, 11.8); ax.set_ylim(-3.45, 2.5); ax.set_aspect("equal"); ax.axis("off")
 fig.savefig(OUT + "h_speed.png", dpi=200, bbox_inches="tight", pad_inches=0.05); plt.close(fig)
