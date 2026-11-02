@@ -11,18 +11,20 @@ OUT = "img/"
 def save(fig, name):
     fig.savefig(OUT + name, dpi=200, bbox_inches="tight", pad_inches=0.05); plt.close(fig)
 
-def dimarc(ax, p, q, bulge, text, gap):
+def dimarc(ax, p, q, bulge, text, gap, pw=1.0, fs=10, toff=0.0):
     (x0, y0), (x1, y1) = p, q
     mx, my = (x0 + x1) / 2, (y0 + y1) / 2
     L = np.hypot(x1 - x0, y1 - y0); ux, uy = (x1 - x0) / L, (y1 - y0) / L
     nx, ny = uy, -ux
     t = np.linspace(-1, 1, 300)
-    xs = mx + ux * t * L / 2 + nx * bulge * (1 - t ** 2)
-    ys = my + uy * t * L / 2 + ny * bulge * (1 - t ** 2)
+    f = (1 - t ** 2) ** pw  # pw<1 で両はしが立ち上がった形
+    xs = mx + ux * t * L / 2 + nx * bulge * f
+    ys = my + uy * t * L / 2 + ny * bulge * f
     k = np.abs(t) * L / 2 > gap
     ax.plot(xs[(t < 0) & k], ys[(t < 0) & k], "k", lw=1)
     ax.plot(xs[(t > 0) & k], ys[(t > 0) & k], "k", lw=1)
-    ax.text(mx + nx * bulge * 1.15, my + ny * bulge * 1.15, text, fontsize=10, ha="center", va="center")
+    k2 = (bulge * 1.15 if pw == 1.0 else bulge) + (toff if bulge > 0 else -toff)
+    ax.text(mx + nx * k2, my + ny * k2, text, fontsize=fs, ha="center", va="center")
 
 def corners(ax, w, h):
     for s_, (x, y), (dx, dy) in (("A", (0, h), (-0.6, 0.35)), ("B", (0, 0), (-0.6, -0.5)), ("C", (w, 0), (0.6, -0.5)), ("D", (w, h), (0.6, 0.35))):
@@ -104,3 +106,35 @@ def para(name, ans=False, size=(2.3, 2.7)):
     ax.set_xlim(-3.6, 4.3); ax.set_ylim(-1.2, 11.3); ax.set_aspect(0.55); ax.axis("off")
     save(fig, name)
 para("h1_para.png"); para("h1_para_ans.png", ans=True)
+
+# ---- 道はばの解説：道をはしに寄せる図（上：もとの図 → 下：寄せた図）
+def road_move(name, w=20, h=12, d=2.6, size=(2.9, 4.6)):
+    fig, ax = plt.subplots(figsize=size)
+    oy = h + 11  # 上の図の位置
+    # 上：もとの図
+    vx, hy = 8, 5
+    for (x0, x1) in ((0, vx), (vx + d, w)):
+        for (y0, y1) in ((0, hy), (hy + d, h)):
+            ax.add_patch(Rectangle((x0, oy + y0), x1 - x0, y1 - y0, fill=False, hatch="////", edgecolor="k", lw=1.2))
+    ax.plot([0, w, w, 0, 0], [oy, oy, oy + h, oy + h, oy], "k", lw=1.5)
+    ax.text(vx + d / 2, oy + hy + d / 2, "道", fontsize=9, ha="center", va="center")
+    dimarc(ax, (0, oy + h), (w, oy + h), -1.6, "20m", 1.3)
+    dimarc(ax, (w, oy + h), (w, oy), -1.6, "12m", 1.3)
+    # 矢印
+    ax.annotate("", xy=(w / 2, h + 5.0), xytext=(w / 2, oy - 1.0), arrowprops=dict(arrowstyle="->", lw=1.3, color="k"))
+    ax.text(w / 2 + 1.0, (h + 5.0 + oy - 1.0) / 2, "道を左と下のはしに寄せる", fontsize=8, ha="left", va="center")
+    # 下：寄せた図
+    d = 4.2
+    ax.add_patch(Rectangle((d, d), w - d, h - d, fill=False, hatch="////", edgecolor="k", lw=1.2))
+    ax.plot([0, w, w, 0, 0], [0, 0, h, h, 0], "k", lw=1.5)
+    ax.plot([d, d, w], [h, d, d], "k", lw=1.2)
+    ax.text(d / 2 + 1.5, d / 2, "道", fontsize=9, ha="center", va="center")
+    dimarc(ax, (0, h), (d, h), -1.3, "$x$m", 1.4, pw=0.5, fs=9)
+    dimarc(ax, (d, h), (w, h), -1.3, "$(20−x)$m", 4.0, pw=0.5, fs=9)
+    dimarc(ax, (0, h), (w, h), -3.6, "20m", 1.6, pw=0.35)
+    dimarc(ax, (w, h), (w, d), -1.0, "$(12−x)$m", 0, pw=0.5, fs=9, toff=3.9)
+    dimarc(ax, (w, d), (w, 0), -1.0, "$x$m", 0, pw=0.5, fs=9, toff=1.8)
+    dimarc(ax, (w, h), (w, 0), -10.2, "12m", 1.4, pw=0.35)
+    ax.set_xlim(-1, w + 12.5); ax.set_ylim(-1, oy + h + 2.6); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+road_move("h1_road_ans.png")
