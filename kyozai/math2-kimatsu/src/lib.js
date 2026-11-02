@@ -23,11 +23,24 @@ const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&
 const mr = t => `<m:r><m:t xml:space="preserve">${esc(t)}</m:t></m:r>`;
 const mrp = t => `<m:r><m:rPr><m:sty m:val="p"/></m:rPr><m:t xml:space="preserve">${esc(t)}</m:t></m:r>`;
 // 数式の中身：{分子/分母} を分数に、[…] は立体（ふつうの文字）
+// 根号：√(…) または √ のあとに続く数字・文字を、横線つきの根号にする
+const rad = inner => `<m:rad><m:radPr><m:degHide m:val="1"/></m:radPr><m:deg/><m:e>${inner}</m:e></m:rad>`;
 function mbody(s) {
+  s = s.replace(/\^2/g, "²").replace(/\^3/g, "³");
   let out = "", i = 0;
   while (i < s.length) {
     const c = s[i];
-    if (c === "{") {
+    if (c === "√") {
+      if (s[i + 1] === "(") {
+        let depth = 1, j = i + 2;
+        while (depth) { if (s[j] === "(") depth++; if (s[j] === ")") depth--; j++; }
+        out += rad(mbody(s.slice(i + 2, j - 1))); i = j;
+      } else {
+        let j = i + 1;
+        while (j < s.length && /[0-9a-zA-Z.]/.test(s[j])) j++;
+        out += rad(mr(s.slice(i + 1, j))); i = j;
+      }
+    } else if (c === "{") {
       let depth = 1, j = i + 1;
       while (depth) { if (s[j] === "{") depth++; if (s[j] === "}") depth--; j++; }
       const inner = s.slice(i + 1, j - 1);
@@ -39,14 +52,19 @@ function mbody(s) {
       out += mrp(s.slice(i + 1, j)); i = j + 1;
     } else {
       let j = i;
-      while (j < s.length && !"{[".includes(s[j])) j++;
+      while (j < s.length && !"{[√".includes(s[j])) j++;
       out += mr(s.slice(i, j)); i = j;
     }
   }
   return out;
 }
 const omath = inner => d.ImportedXmlComponent.fromXmlString(`<m:oMath ${NS}>${inner}</m:oMath>`).root[0];
-const M = s => omath(mbody(s));
+// size（半ポイント）を指定すると、数式の文字の大きさをそろえる
+const M = (s, size) => {
+  let x = mbody(s);
+  if (size) x = x.replace(/<m:r>(<m:rPr>.*?<\/m:rPr>)?/g, (m0, p) => `<m:r>${p || ""}<w:rPr><w:sz w:val="${size}"/><w:szCs w:val="${size}"/></w:rPr>`);
+  return omath(x);
+};
 // 連立方程式 ｛ 2行
 const SYS = (rows, tags = true) => omath(
   `<m:d><m:dPr><m:begChr m:val="{"/><m:endChr m:val=""/></m:dPr><m:e><m:eqArr>` +
@@ -65,7 +83,7 @@ function runs(str, o = {}) {
     if (part.startsWith("**")) part = part.slice(2, -2);
     part.split(/(\$[^$]*\$)/).forEach(seg => {
       if (!seg) return;
-      if (seg.startsWith("$")) out.push(M(seg.slice(1, -1)));
+      if (seg.startsWith("$")) out.push(M(seg.slice(1, -1), o.mathSize));
       else out.push(new d.TextRun({ text: seg, font, size, bold }));
     });
   });
@@ -94,6 +112,17 @@ const imgP = (file, w, align = d.AlignmentType.CENTER) => new d.Paragraph({ chil
 
 // ---------- 枠 ----------
 // 解答の枠（右寄せ）
+// 記述欄：途中の式を書く大きな枠。答えの枠は枠の中の右下に置く
+function writeBox(h, ans, ansW = 3400, w = CW) {
+  return new d.Table({
+    width: { size: w, type: d.WidthType.DXA }, columnWidths: [w],
+    rows: [new d.TableRow({ height: { value: h, rule: d.HeightRule.EXACT }, children: [new d.TableCell({
+      borders: { top: { style: d.BorderStyle.SINGLE, size: 6, color: "000000" }, bottom: { style: d.BorderStyle.SINGLE, size: 6, color: "000000" }, left: { style: d.BorderStyle.SINGLE, size: 6, color: "000000" }, right: { style: d.BorderStyle.SINGLE, size: 6, color: "000000" } },
+      width: { size: w, type: d.WidthType.DXA }, verticalAlign: d.VerticalAlign.BOTTOM, margins: { left: 100, right: 100, bottom: 80 },
+      children: ans === null ? [P("")] : [ansBox(ans, ansW)],
+    })] })],
+  });
+}
 function ansBox(text, w = 3400, h = 560) {
   return new d.Table({
     alignment: d.AlignmentType.RIGHT,
@@ -135,8 +164,8 @@ function bandTitle(left, right) {
   });
 }
 // 大問の見出し ＜1＞ …（目安〇分）
-const qHead = (no, text, note = "") => new d.Paragraph({
-  children: [...runs(`＜${no}＞`, { font: GOT, bold: true, size: 26 }), ...runs("　" + text, { font: GOT, size: 23, bold: true }),
+const qHead = (no, text, note = "", o = {}) => new d.Paragraph({
+  children: [...runs(`＜${no}＞`, { font: GOT, bold: true, size: o.s1 || 26 }), ...runs("　" + text, { font: GOT, size: o.s2 || 23, bold: true, mathSize: o.s2 }),
     ...(note ? [new d.TextRun({ children: [new d.PositionalTab({ alignment: d.PositionalTabAlignment.RIGHT, relativeTo: d.PositionalTabRelativeTo.MARGIN, leader: d.PositionalTabLeader.NONE })] }), ...runs(note, { size: 20 })] : [])],
   spacing: { before: 120, after: 60 }, keepNext: true,
   border: { bottom: { style: d.BorderStyle.SINGLE, size: 6, color: "000000", space: 2 } },
@@ -172,4 +201,4 @@ function save(file, sections) {
   return d.Packer.toBuffer(doc).then(b => fs.writeFileSync(file, b));
 }
 
-module.exports = { d, MIN, GOT, CW, NOB, BOX, LINE, NONE, M, SYS, runs, P, Gothic, space, img, imgP, ansBox, qgrid, bandTitle, qHead, frame, header, footer, sectionProps, save };
+module.exports = { writeBox, d, MIN, GOT, CW, NOB, BOX, LINE, NONE, M, SYS, runs, P, Gothic, space, img, imgP, ansBox, qgrid, bandTitle, qHead, frame, header, footer, sectionProps, save };
