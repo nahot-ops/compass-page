@@ -339,3 +339,29 @@ tri_pair("h2_tripair.png")
 pfig("s2_p1_ans.png", 0.5, (-4.5, 6), (-1.2, 10.5), [("A", (-2, 2), (-0.5, 0.5)), ("B", (4, 8), (-0.6, 0.6)), ("C", (0, 4), (-0.5, 0.4)), ("M", (1, 5), (-0.5, 0.5))],
      lines=[(1, 4, -4.2, 5.5)], segs=[((-2, 2), (0, 0)), ((0, 0), (4, 8))], dashed=[((0, 0), (1.2, 6))], hatch=[(0, 0), (-2, 2), (1, 5)],
      eqs=[("$y=\\frac{1}{2}x^2$", (-3.0, 9.6))], aspect=0.6)
+
+# 第2回 応用＜1＞の解説図（手書きの形）：△OABを、底辺がx軸上の三角形に変形。中点M(1,5)とy=5x
+def para_ans2(name, size=(3.0, 3.1)):
+    fig, ax = plt.subplots(figsize=size)
+    ax.add_patch(Polygon([(-2, 0), (0, 4), (4, 0)], closed=True, fill=False, hatch="////", edgecolor="k", lw=1.1, zorder=1))
+    ax.annotate("", xy=(5.6, 0), xytext=(-5.0, 0), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+    ax.annotate("", xy=(0, 11.0), xytext=(0, -1.6), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+    xs = np.linspace(-4.3, 4.6, 300); ax.plot(xs, xs ** 2 / 2, "k", lw=1.5)
+    lx = np.linspace(-4.8, 5.4, 10); ax.plot(lx, lx + 4, "k", lw=1.3)          # 直線AB
+    ox = np.linspace(-0.3, 2.0, 10); ax.plot(ox, 5 * ox, "k", lw=1.0)           # y=5x（Oと中点Mを通る）
+    ax.plot([-2, 0, 4], [2, 0, 8], "k", lw=1.0)                                 # もとの△OAB
+    for (x0, y0) in ((-2, 2), (4, 8)):
+        ax.annotate("", xy=(x0, 0.15), xytext=(x0, y0 - 0.25), arrowprops=dict(arrowstyle="->", lw=1, ls="--", color="k"))
+    for p in ((-2, 2), (4, 8), (0, 4), (1, 5), (-2, 0), (4, 0)): ax.plot(*p, "ko", ms=3.5, zorder=5)
+    ax.text(-2.3, 2.5, "A(−2, 2)", fontsize=9, ha="right", va="center")
+    ax.text(4.55, 7.3, "B(4, 8)", fontsize=9, ha="left", va="center")
+    ax.text(-0.25, 4.6, "C(0, 4)", fontsize=9, ha="right", va="center")
+    ax.text(0.75, 6.5, "M(1, 5)", fontsize=9, ha="right", va="center", bbox=dict(boxstyle="square,pad=0.05", fc="white", ec="none"), zorder=6)
+    ax.text(2.1, 10.3, "$y=5x$", fontsize=9, ha="left", va="center")
+    ax.text(-0.95, -1.05, "O", fontsize=10, family="serif")
+    ax.text(5.4, -0.9, "x", fontsize=12, style="italic", family="serif")
+    ax.text(0.3, 10.7, "y", fontsize=12, style="italic", family="serif")
+    ax.text(-4.4, 10.0, "$y=\\frac{1}{2}x^2$", fontsize=9)
+    ax.set_xlim(-5.4, 7.2); ax.set_ylim(-1.8, 11.4); ax.set_aspect(0.65); ax.axis("off")
+    save(fig, name)
+para_ans2("s2_p1_ans.png")
