@@ -49,12 +49,14 @@ def pq(name, w=20, h=10, px=4, qx=8, size=(3.0, 1.9)):
 pq("s1_pq.png")
 
 # ---- 第1回 宿題＜2＞：縦12m、横20mの土地と、たて・よこの道
-def road(name, w=20, h=12, d=2, size=(2.6, 1.7)):
+def road(name, w=20, h=12, d=2, vx=8, hy=5, size=(2.6, 1.7)):
+    """道は白、花だん4つは斜線（手書きの図と同じ形）"""
     fig, ax = plt.subplots(figsize=size)
-    ax.add_patch(Rectangle((0, 0), w, h, fill=False, lw=1.5))
-    ax.add_patch(Rectangle((8, 0), d, h, facecolor="#d0d0d0", edgecolor="k", lw=1))
-    ax.add_patch(Rectangle((0, 6), w, d, facecolor="#d0d0d0", edgecolor="k", lw=1))
-    ax.text(9, 7, "道", fontsize=9, ha="center", va="center")
+    for (x0, x1) in ((0, vx), (vx + d, w)):
+        for (y0, y1) in ((0, hy), (hy + d, h)):
+            ax.add_patch(Rectangle((x0, y0), x1 - x0, y1 - y0, fill=False, hatch="////", edgecolor="k", lw=1.2))
+    ax.plot([0, w, w, 0, 0], [0, 0, h, h, 0], "k", lw=1.5)
+    ax.text(vx + d / 2, hy + d / 2, "道", fontsize=9, ha="center", va="center")
     dimarc(ax, (0, h), (w, h), -1.6, f"{w}m", 1.3)
     dimarc(ax, (w, h), (w, 0), -1.6, f"{h}m", 1.3)
     ax.set_xlim(-1, w + 3.2); ax.set_ylim(-1, h + 2.6); ax.set_aspect("equal"); ax.axis("off")
