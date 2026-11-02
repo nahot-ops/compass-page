@@ -138,3 +138,29 @@ def road_move(name, w=20, h=12, d=2.6, size=(2.9, 4.6)):
     ax.set_xlim(-1, w + 12.5); ax.set_ylim(-1, oy + h + 2.6); ax.set_aspect("equal"); ax.axis("off")
     save(fig, name)
 road_move("h1_road_ans.png")
+
+# ---- 放物線と直線の解説：△AOBを、底辺がx軸上の三角形に変形する（手書きの図と同じ形）
+def para_ans(name, size=(2.9, 3.2)):
+    fig, ax = plt.subplots(figsize=size)
+    ax.add_patch(Polygon([(-1, 0), (0, 3), (3, 0)], closed=True, fill=False, hatch="////", edgecolor="k", lw=1.2, zorder=1))
+    xs = np.linspace(-3.1, 3.25, 300)
+    ax.annotate("", xy=(4.4, 0), xytext=(-3.6, 0), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+    ax.annotate("", xy=(0, 11.2), xytext=(0, -1.4), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+    ax.plot(xs, xs ** 2, "k", lw=1.5)
+    lx = np.linspace(-2.3, 3.7, 10); ax.plot(lx, 2 * lx + 3, "k", lw=1.3)
+    ax.plot([-1, 0, 3], [1, 0, 9], "k", lw=1.0)                 # もとの△AOB
+    for (x0, y0) in ((-1, 1), (3, 9)):                            # 底辺に下ろす矢印
+        ax.annotate("", xy=(x0, 0.15), xytext=(x0, y0 - 0.2), arrowprops=dict(arrowstyle="->", lw=1, ls="--", color="k"))
+    for p in ((-1, 1), (3, 9), (0, 3), (-1, 0), (3, 0)): ax.plot(*p, "ko", ms=3.5, zorder=5)
+    ax.text(-1.6, 1.6, "A(−1, 1)", fontsize=9, ha="right", va="center")
+    ax.text(3.25, 9.0, "B(3, 9)", fontsize=9, ha="left", va="center")
+    ax.text(-0.3, 3.4, "C", fontsize=10, ha="right", va="center", family="serif")
+    ax.text(-0.3, 5.5, "(0, 3)", fontsize=9, ha="right", va="center")
+    ax.text(-0.6, -1.0, "O", fontsize=10, family="serif")
+    ax.text(4.3, -0.75, "x", fontsize=12, style="italic", family="serif")
+    ax.text(0.25, 10.8, "y", fontsize=12, style="italic", family="serif")
+    ax.text(-3.4, 10.6, "$y=x^2$", fontsize=9)
+    ax.text(3.75, 10.7, "$y=2x+3$", fontsize=9, ha="left")
+    ax.set_xlim(-4.2, 6.6); ax.set_ylim(-1.6, 11.5); ax.set_aspect(0.55); ax.axis("off")
+    save(fig, name)
+para_ans("h1_para_ans.png")
