@@ -164,3 +164,77 @@ def para_ans(name, size=(2.9, 3.2)):
     ax.set_xlim(-4.2, 6.6); ax.set_ylim(-1.6, 11.5); ax.set_aspect(0.55); ax.axis("off")
     save(fig, name)
 para_ans("h1_para_ans.png")
+
+
+# ======================= 第2回（関数 y=ax^2） =======================
+def pfig(name, a, xr, yr, pts, segs=(), lines=(), hatch=None, dashed=(), eqs=(), size=(2.4, 2.6), aspect=None):
+    """放物線 y=ax^2 と点・線分。pts: [(名前, (x,y), (dx,dy))]、lines: 直線 (m,b,x0,x1)"""
+    fig, ax = plt.subplots(figsize=size)
+    if hatch: ax.add_patch(Polygon(hatch, closed=True, fill=False, hatch="////", edgecolor="k", lw=1.0, zorder=1))
+    (x0, x1), (y0, y1) = xr, yr
+    ax.annotate("", xy=(x1, 0), xytext=(x0, 0), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+    ax.annotate("", xy=(0, y1), xytext=(0, y0), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+    xs = np.linspace(x0 + 0.3, x1 - 0.5, 400); ys = a * xs ** 2; k = (ys <= y1 - 0.6 * (y1 - y0) / 12) & (ys >= y0)
+    ax.plot(xs[k], ys[k], "k", lw=1.5)
+    for (m, b, lx0, lx1) in lines:
+        ax.plot([lx0, lx1], [m * lx0 + b, m * lx1 + b], "k", lw=1.2)
+    for (p, q) in segs: ax.plot([p[0], q[0]], [p[1], q[1]], "k", lw=1.0)
+    for (p, q) in dashed: ax.plot([p[0], q[0]], [p[1], q[1]], "k--", lw=1.0)
+    for (s_, p, o) in pts:
+        ax.plot(*p, "ko", ms=3.5, zorder=5)
+        if s_: ax.text(p[0] + o[0], p[1] + o[1], s_, fontsize=10, ha="center", va="center", family="serif")
+    for (s_, p) in eqs: ax.text(*p, s_, fontsize=9, ha="center", va="center")
+    dy = (y1 - y0) / 22
+    ax.text(x1 - 0.1, -1.6 * dy, "x", fontsize=12, style="italic", family="serif")
+    ax.text(0.15 * (x1 - x0) / 8, y1 - dy, "y", fontsize=12, style="italic", family="serif", ha="left")
+    ax.text(-0.35 * (x1 - x0) / 8, -1.6 * dy, "O", fontsize=10, family="serif", ha="right")
+    ax.set_xlim(x0, x1 + 0.3); ax.set_ylim(y0, y1)
+    if aspect: ax.set_aspect(aspect)
+    ax.axis("off"); save(fig, name)
+
+# 応用＜1＞：y=1/2x^2、A(-2,2)、B(4,8)
+pfig("s2_p1.png", 0.5, (-4.5, 6), (-1.2, 10.5), [("A", (-2, 2), (-0.5, 0.5)), ("B", (4, 8), (-0.6, 0.6))],
+     lines=[(1, 4, -4.2, 5.5)], eqs=[("$y=\\frac{1}{2}x^2$", (-3.0, 9.6))], aspect=0.6)
+# 応用＜3＞：y=x^2、A(-1,1)、B(2,4)、C(1,1)
+pfig("s2_p3.png", 1.0, (-2.6, 3.2), (-0.8, 5.6), [("A", (-1, 1), (-0.35, 0.3)), ("B", (2, 4), (-0.35, 0.35)), ("C", (1, 1), (0.35, -0.3))],
+     segs=[((-1, 1), (1, 1)), ((1, 1), (2, 4)), ((-1, 1), (2, 4))], eqs=[("$y=x^2$", (-1.9, 5.0))], aspect=0.75)
+pfig("s2_p3_ans.png", 1.0, (-2.6, 3.2), (-0.8, 5.6), [("A", (-1, 1), (-0.35, 0.3)), ("B", (2, 4), (-0.35, 0.35)), ("C", (1, 1), (0.35, -0.3)), ("M", (1.5, 2.5), (0.4, -0.1))],
+     segs=[((-1, 1), (1, 1)), ((1, 1), (2, 4)), ((-1, 1), (2, 4))], dashed=[((-1, 1), (1.5, 2.5))], hatch=[(-1, 1), (1, 1), (1.5, 2.5)],
+     eqs=[("$y=x^2$", (-1.9, 5.0))], aspect=0.75)
+# 宿題＜3＞：y=1/2x^2、A(-2,2)、B(6,18)
+pfig("h2_p.png", 0.5, (-5, 8), (-2, 21), [("A", (-2, 2), (-1.2, 0.2)), ("B", (6, 18), (-0.9, 0.9))],
+     lines=[(2, 6, -4.6, 7.3)], eqs=[("$y=\\frac{1}{2}x^2$", (-3.3, 19.5))], aspect=0.45, size=(2.4, 3.4))
+pfig("h2_p_ans.png", 0.5, (-5, 8), (-2, 21), [("A", (-2, 2), (-1.2, 0.2)), ("B", (6, 18), (-0.9, 0.9)), ("M", (2, 10), (-0.8, 0.9))],
+     lines=[(2, 6, -4.6, 7.3)], segs=[((-2, 2), (0, 0)), ((0, 0), (6, 18))], dashed=[((0, 0), (2, 10))], hatch=[(0, 0), (-2, 2), (2, 10)],
+     eqs=[("$y=\\frac{1}{2}x^2$", (-3.3, 19.5))], aspect=0.45, size=(2.4, 3.4))
+
+# 応用＜2＞：正方形ABCD（1辺6cm）。PはA→B、QはA→D。△APQ
+def sq(name, s=6, px=2.5, size=(2.0, 2.0)):
+    fig, ax = plt.subplots(figsize=size)
+    ax.add_patch(Polygon([(0, s), (0, s - px), (px, s)], closed=True, fill=False, hatch="////", edgecolor="k", lw=1.2))
+    ax.plot([0, 0, s, s, 0], [s, 0, 0, s, s], "k", lw=1.5)
+    corners(ax, s, s)
+    dimarc(ax, (s, s), (s, 0), -1.0, f"{s}cm", 0.9)
+    point(ax, (0, s - px), "P", (-0.7, 0), ((-1.5, 0.6), (-1.5, -0.9)))
+    point(ax, (px, s), "Q", (0, 0.65), ((-0.6, 1.6), (0.9, 1.6)))
+    ax.set_ylim(-1.0, s + 2.4)
+    ax.set_xlim(-2.4, s + 2.0); ax.set_ylim(-1.0, s + 2.0); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+sq("s2_sq.png")
+
+# 宿題＜6＞：DE//BC の三角形
+def tri_par(name, size=(2.4, 1.9)):
+    fig, ax = plt.subplots(figsize=size)
+    A, B, C = (2.2, 6), (0, 0), (7, 0); t = 4 / 6
+    D = (A[0] + (B[0] - A[0]) * t, A[1] + (B[1] - A[1]) * t); E = (A[0] + (C[0] - A[0]) * t, A[1] + (C[1] - A[1]) * t)
+    ax.plot([A[0], B[0], C[0], A[0]], [A[1], B[1], C[1], A[1]], "k", lw=1.5); ax.plot([D[0], E[0]], [D[1], E[1]], "k", lw=1.3)
+    for s_, p, o in (("A", A, (0, 0.5)), ("B", B, (-0.4, -0.4)), ("C", C, (0.4, -0.4)), ("D", D, (-0.45, 0.1)), ("E", E, (0.45, 0.1))):
+        ax.text(p[0] + o[0], p[1] + o[1], s_, fontsize=10, ha="center", va="center", family="serif")
+    for p, q, txt, side in ((A, D, "4cm", -1), (D, B, "2cm", -1), (A, E, "6cm", 1), (E, C, "$x$cm", 1)):
+        mx, my = (p[0] + q[0]) / 2, (p[1] + q[1]) / 2; L = np.hypot(q[0] - p[0], q[1] - p[1]); nx, ny = (q[1] - p[1]) / L, -(q[0] - p[0]) / L
+        ax.text(mx - side * nx * 0.75, my - side * ny * 0.75, txt, fontsize=9, ha="center", va="center")
+    ax.text((D[0] + E[0]) / 2, D[1] + 0.35, "$y$cm", fontsize=9, ha="center", va="bottom")
+    ax.text(3.5, -0.6, "9cm", fontsize=9, ha="center", va="center")
+    ax.set_xlim(-1.4, 8.4); ax.set_ylim(-1.1, 6.9); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+tri_par("h2_tri.png")
