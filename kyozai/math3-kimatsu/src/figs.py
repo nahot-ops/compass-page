@@ -78,3 +78,27 @@ def cards(name, rows=4, size=(2.6, 1.6)):
     ax.set_xlim(-rows - 2.6, rows + 0.2); ax.set_ylim(-rows - 1.5, -0.3); ax.set_aspect("equal"); ax.axis("off")
     save(fig, name)
 cards("s1_cards.png")
+
+# ---- 放物線と直線（y=x^2、A(-1,1)、B(3,9)）
+def para(name, ans=False, size=(2.3, 2.7)):
+    fig, ax = plt.subplots(figsize=size)
+    xs = np.linspace(-3.1, 3.25, 300)
+    if ans:
+        ax.add_patch(Polygon([(0, 0), (-1, 1), (3, 9)], closed=True, facecolor="#d0d0d0", edgecolor="none", zorder=0))
+        ax.plot([0, 0], [0, 3], "k--", lw=1)
+        ax.plot([-1, 0, 3], [1, 0, 9], "k", lw=1)
+        ax.plot(0, 3, "ks", ms=3.5, zorder=5)
+        ax.text(-0.35, 3.0, "C", fontsize=10, ha="right", va="center", family="serif")
+    ax.annotate("", xy=(3.9, 0), xytext=(-3.4, 0), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+    ax.annotate("", xy=(0, 11.0), xytext=(0, -0.8), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+    ax.plot(xs, xs ** 2, "k", lw=1.5)
+    lx = np.linspace(-2.2, 3.5, 10); ax.plot(lx, 2 * lx + 3, "k", lw=1.3)
+    for p, s_, o in (((-1, 1), "A", (-0.7, 0.05)), ((3, 9), "B", (-0.7, 0.7))):
+        ax.plot(*p, "ko", ms=3.5, zorder=5); ax.text(p[0] + o[0], p[1] + o[1], s_, fontsize=11, ha="center", va="center", family="serif")
+    ax.text(3.85, -0.6, "x", fontsize=12, style="italic", family="serif")
+    ax.text(0.25, 10.6, "y", fontsize=12, style="italic", family="serif")
+    ax.text(-0.75, -0.75, "O", fontsize=10, family="serif")
+    ax.text(-3.4, 10.4, "$y=x^2$", fontsize=9)
+    ax.set_xlim(-3.6, 4.3); ax.set_ylim(-1.2, 11.3); ax.set_aspect(0.55); ax.axis("off")
+    save(fig, name)
+para("h1_para.png"); para("h1_para_ans.png", ans=True)
