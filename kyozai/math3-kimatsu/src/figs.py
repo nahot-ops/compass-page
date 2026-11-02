@@ -254,3 +254,64 @@ def quads(name, size=(3.0, 1.7)):
     ax.set_xlim(-0.9, 11.1); ax.set_ylim(-0.9, 5.2); ax.set_aspect("equal"); ax.axis("off")
     save(fig, name)
 quads("h2_quads.png")
+
+# ---- 比を「〇・□・△の数字」と「×3」で表す解説の図
+def mark(ax, kind, digit, p, fs=9):
+    x, y = p
+    if kind == "circle":
+        ax.add_patch(matplotlib.patches.Circle((x, y), 0.34, fill=False, lw=1.0))
+    elif kind == "box":
+        ax.add_patch(Rectangle((x - 0.32, y - 0.32), 0.64, 0.64, fill=False, lw=1.0))
+    else:  # triangle
+        ax.add_patch(Polygon([(x - 0.45, y - 0.3), (x + 0.45, y - 0.3), (x, y + 0.45)], closed=True, fill=False, lw=1.0))
+        y -= 0.05
+    ax.text(x, y, digit, fontsize=fs, ha="center", va="center", family="serif")
+
+def times(ax, p, q, txt, rad=-0.5, tp=None):
+    ax.annotate("", xy=q, xytext=p, arrowprops=dict(arrowstyle="->", lw=0.9, color="k", connectionstyle=f"arc3,rad={rad}"))
+    if tp: ax.text(*tp, txt, fontsize=9, ha="center", va="center")
+
+def tri_par_ans(name, size=(3.0, 2.9)):
+    fig, ax = plt.subplots(figsize=size)
+    A, B, C = (4.0, 7.5), (1.0, 0), (8.0, 0); t = 4 / 6
+    D = (A[0] + (B[0] - A[0]) * t, A[1] + (B[1] - A[1]) * t); E = (A[0] + (C[0] - A[0]) * t, A[1] + (C[1] - A[1]) * t)
+    ax.plot([A[0], B[0], C[0], A[0]], [A[1], B[1], C[1], A[1]], "k", lw=1.5); ax.plot([D[0], E[0]], [D[1], E[1]], "k", lw=1.3)
+    for p in (D, E): ax.plot(*p, "ko", ms=3.5, zorder=5)
+    for s_, p, o in (("A", A, (0, 0.55)), ("B", B, (-0.3, -0.55)), ("C", C, (0.35, -0.55)), ("D", D, (-1.7, 0.3)), ("E", E, (1.7, 0.3))):
+        ax.text(p[0] + o[0], p[1] + o[1], s_, fontsize=11, ha="center", va="center", family="serif")
+    dimarc(ax, A, D, 1.2, "4cm", 1.0); dimarc(ax, D, B, 1.2, "2cm", 0.75)
+    dimarc(ax, A, E, -1.2, "6cm", 1.0); dimarc(ax, E, C, -1.2, "$x$cm", 0.8)
+    dimarc(ax, D, E, 0.6, "$y$cm", 0.8); dimarc(ax, B, C, 0.8, "9cm", 0.8)
+    # AD：DB＝②：①
+    mark(ax, "circle", "2", (0.4, 6.9)); mark(ax, "circle", "1", (-1.6, 3.3))
+    # AE：EC＝[2]：[1]（×3）
+    mark(ax, "box", "2", (7.0, 7.6)); times(ax, (7.4, 7.5), (7.2, 6.0), "×3", -0.9, (8.3, 7.0))
+    mark(ax, "box", "1", (9.9, 3.4)); times(ax, (10.3, 3.3), (10.0, 1.95), "×3", -0.9, (11.1, 2.8))
+    # DE：BC＝△2：△3（×3）
+    mark(ax, "tri", "2", (3.7, 3.4)); times(ax, (4.2, 3.3), (4.2, 1.75), "×3", -0.9, (5.3, 3.2))
+    mark(ax, "tri", "3", (2.6, -2.3)); times(ax, (3.1, -2.3), (3.75, -1.25), "×3", 0.7, (4.3, -2.5))
+    ax.set_xlim(-2.4, 12.0); ax.set_ylim(-3.0, 8.6); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+tri_par_ans("h2_tri_ans.png")
+
+def quads_ans(name, size=(3.6, 2.2)):
+    fig, ax = plt.subplots(figsize=size)
+    base = [(0.4, 2.0), (0, 0), (3.2, 0), (2.0, 3.0)]
+    P1 = [(x, y) for x, y in base]; P2 = [(7.6 + x * 1.5, y * 1.5) for x, y in base]
+    for names, pts in ((("A", "B", "C", "D"), P1), (("E", "F", "G", "H"), P2)):
+        ax.plot([p[0] for p in pts + pts[:1]], [p[1] for p in pts + pts[:1]], "k", lw=1.5)
+        for s_, p, o in zip(names, pts, ((-0.45, 0.25), (-0.35, -0.4), (0.35, -0.4), (0.1, 0.45))):
+            ax.text(p[0] + o[0], p[1] + o[1], s_, fontsize=11, ha="center", va="center", family="serif")
+    # AB と EF、CD と GH に弧
+    dimarc(ax, P1[0], P1[1], 0.5, "", 0); ax.text(-1.0, 0.7, "4cm", fontsize=9, ha="center", va="center")
+    dimarc(ax, P1[3], P1[2], -0.5, "", 0)
+    dimarc(ax, P2[0], P2[1], 0.6, "", 0)
+    dimarc(ax, P2[3], P2[2], -0.6, "", 0); ax.text(12.9, 2.6, "9cm", fontsize=9, ha="center", va="center")
+    # 相似比 ②：③（×2）、[2]：[3]（×3）
+    mark(ax, "circle", "2", (-1.0, 2.1)); times(ax, (-1.4, 2.0), (-1.35, 0.85), "×2", 0.9, (-2.75, 1.5))
+    mark(ax, "box", "2", (3.6, 2.6)); times(ax, (4.0, 2.5), (3.95, 1.3), "×3", -0.9, (5.0, 1.9))
+    mark(ax, "circle", "3", (6.9, 4.4)); times(ax, (6.5, 4.3), (6.4, 2.6), "×2", 0.9, (6.0, 4.9))
+    mark(ax, "box", "3", (12.9, 4.0)); times(ax, (13.3, 3.9), (13.25, 2.85), "×3", -0.9, (14.2, 3.5))
+    ax.set_xlim(-2.8, 14.8); ax.set_ylim(-0.9, 5.6); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+quads_ans("h2_quads_ans.png")
