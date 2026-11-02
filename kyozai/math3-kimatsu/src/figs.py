@@ -308,27 +308,29 @@ def quads_ans(name, size=(3.6, 2.2)):
     dimarc(ax, P1[0], P1[1], 0.5, "", 0); ax.text(-1.0, 0.7, "4cm", fontsize=9, ha="center", va="center")
     dimarc(ax, P1[3], P1[2], -0.5, "", 0)
     dimarc(ax, P2[0], P2[1], 0.6, "", 0)
-    dimarc(ax, P2[3], P2[2], -0.6, "", 0); ax.text(12.9, 2.6, "9cm", fontsize=9, ha="center", va="center")
+    dimarc(ax, P2[3], P2[2], -0.6, "", 0); ax.text(12.9, 2.6, "10cm", fontsize=9, ha="center", va="center")
     # 相似比 ②：③（×2）、[2]：[3]（×3）
     mark(ax, "circle", "2", (-1.4, 2.4)); times(ax, (-1.95, 2.3), (-1.6, 0.85), "×2", 0.9, (-3.1, 1.7))
-    mark(ax, "box", "2", (3.9, 2.7)); times(ax, (4.45, 2.5), (4.2, 1.3), "×3", -0.9, (5.5, 1.9))
+    mark(ax, "box", "2", (4.5, 2.9)); times(ax, (5.05, 2.7), (4.8, 1.5), "", -0.9); ax.text(6.0, 2.0, r"$\times\frac{10}{3}$", fontsize=10, ha="center", va="center")
     mark(ax, "circle", "3", (6.9, 4.5)); times(ax, (6.35, 4.3), (6.4, 2.6), "×2", 0.9, (5.7, 4.9))
-    mark(ax, "box", "3", (12.9, 4.1)); times(ax, (13.45, 3.9), (13.35, 2.85), "×3", -0.9, (14.6, 3.4))
-    ax.set_xlim(-3.6, 15.2); ax.set_ylim(-0.9, 5.6); ax.set_aspect("equal"); ax.axis("off")
+    mark(ax, "box", "3", (12.9, 4.1)); times(ax, (13.45, 3.9), (13.35, 2.85), "", -0.9); ax.text(14.8, 3.4, r"$\times\frac{10}{3}$", fontsize=10, ha="center", va="center")
+    ax.set_xlim(-3.6, 15.8); ax.set_ylim(-0.9, 5.6); ax.set_aspect("equal"); ax.axis("off")
     save(fig, name)
 quads_ans("h2_quads_ans.png")
 
 # 宿題＜4＞：△ABC と △DEF（3辺 6,8,10 と 9,12,15）。辺の長さは弧で示す
-def tri_pair(name, size=(3.6, 2.2)):
+def tri_pair(name, size=(4.2, 2.3)):
+    """△ABC（AB=6, BC=12, CA=9）と △DEF（DE=10, EF=20, FD=15）。辺の長さは弧で示す"""
     fig, ax = plt.subplots(figsize=size)
-    for names, k, ox, lens in ((("A", "B", "C"), 1.0, 0, ("6cm", "8cm", "10cm")), (("D", "E", "F"), 1.5, 11.5, ("9cm", "12cm", "15cm"))):
-        A, B, C = (ox, 6 * k), (ox, 0), (ox + 8 * k, 0)
+    ax0 = 4.125; ay0 = (36 - ax0 ** 2) ** 0.5
+    for names, k, ox, lens in ((("A", "B", "C"), 1.0, 0, ("6cm", "12cm", "9cm")), (("D", "E", "F"), 5 / 3, 17.5, ("10cm", "20cm", "15cm"))):
+        A, B, C = (ox + ax0 * k, ay0 * k), (ox, 0), (ox + 12 * k, 0)
         ax.plot([A[0], B[0], C[0], A[0]], [A[1], B[1], C[1], A[1]], "k", lw=1.5)
-        for s_, p, o in zip(names, (A, B, C), ((-0.1, 0.7), (-0.7, -0.6), (0.8, -0.6))):
+        for s_, p, o in zip(names, (A, B, C), ((0, 2.0), (-1.1, -0.4), (1.1, -0.4))):
             ax.text(p[0] + o[0], p[1] + o[1], s_, fontsize=11, ha="center", va="center", family="serif")
-        dimarc(ax, A, B, 1.5, lens[0], 1.3)
-        dimarc(ax, B, C, 1.4, lens[1], 1.6)
-        dimarc(ax, C, A, 2.0 * k, lens[2], 1.9)
-    ax.set_xlim(-3.6, 27.8); ax.set_ylim(-3.0, 12.0); ax.set_aspect("equal"); ax.axis("off")
+        dimarc(ax, A, B, 2.3, lens[0], 1.9, fs=9)
+        dimarc(ax, B, C, 2.0, lens[1], 2.3, fs=9)
+        dimarc(ax, C, A, 2.3, lens[2], 1.9, fs=9)
+    ax.set_xlim(-4.6, 42.0); ax.set_ylim(-4.0, 12.4); ax.set_aspect("equal"); ax.axis("off")
     save(fig, name)
 tri_pair("h2_tripair.png")
