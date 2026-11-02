@@ -238,3 +238,16 @@ def tri_par(name, size=(2.4, 1.9)):
     ax.set_xlim(-1.4, 8.4); ax.set_ylim(-1.1, 6.9); ax.set_aspect("equal"); ax.axis("off")
     save(fig, name)
 tri_par("h2_tri.png")
+
+# 宿題＜5＞：相似な四角形 ABCD と EFGH（相似比 2：3）
+def quads(name, size=(3.0, 1.7)):
+    fig, ax = plt.subplots(figsize=size)
+    base = [(0.4, 2.0), (0, 0), (3.2, 0), (2.0, 3.0)]  # A B C D
+    for names, k, ox in ((("A", "B", "C", "D"), 1.0, 0), (("E", "F", "G", "H"), 1.5, 5.8)):
+        pts = [(ox + x * k, y * k) for x, y in base]
+        ax.plot([p[0] for p in pts + pts[:1]], [p[1] for p in pts + pts[:1]], "k", lw=1.5)
+        for s_, p, o in zip(names, pts, ((-0.45, 0.1), (-0.35, -0.4), (0.35, -0.4), (0.1, 0.45))):
+            ax.text(p[0] + o[0], p[1] + o[1], s_, fontsize=11, ha="center", va="center", family="serif")
+    ax.set_xlim(-0.9, 11.1); ax.set_ylim(-0.9, 5.2); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+quads("h2_quads.png")
