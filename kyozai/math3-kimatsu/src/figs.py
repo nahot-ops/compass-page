@@ -60,3 +60,21 @@ def road(name, w=20, h=12, d=2, size=(2.6, 1.7)):
     ax.set_xlim(-1, w + 3.2); ax.set_ylim(-1, h + 2.6); ax.set_aspect("equal"); ax.axis("off")
     save(fig, name)
 road("h1_road.png")
+
+# ---- 第1回 応用＜3＞：カードを1段目から1枚、3枚、5枚…と並べる
+def cards(name, rows=4, size=(2.6, 1.6)):
+    fig, ax = plt.subplots(figsize=size)
+    num = 1
+    for r in range(1, rows + 1):
+        cnt = 2 * r - 1
+        y = -r
+        for k in range(cnt):
+            x = k - (cnt - 1) / 2
+            ax.add_patch(Rectangle((x - 0.5, y - 0.5), 1, 1, fill=False, lw=1))
+            ax.text(x, y, str(num), fontsize=8, ha="center", va="center", family="serif")
+            num += 1
+        ax.text(-rows - 0.6, y, f"{r}段目", fontsize=8, ha="right", va="center")
+    for dy in (0.75, 1.0, 1.25): ax.plot(0, -rows - dy, "ko", ms=1.2)
+    ax.set_xlim(-rows - 2.6, rows + 0.2); ax.set_ylim(-rows - 1.5, -0.3); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+cards("s1_cards.png")
