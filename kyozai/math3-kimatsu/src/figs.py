@@ -223,19 +223,22 @@ def sq(name, s=6, px=2.5, size=(2.0, 2.0)):
 sq("s2_sq.png")
 
 # 宿題＜6＞：DE//BC の三角形
-def tri_par(name, size=(2.4, 1.9)):
+def tri_par(name, size=(2.6, 2.6)):
+    """DE//BC の三角形。辺の長さは弧で両はしをつないで書く（手書きの図と同じ形）"""
     fig, ax = plt.subplots(figsize=size)
-    A, B, C = (2.2, 6), (0, 0), (7, 0); t = 4 / 6
+    A, B, C = (4.0, 7.5), (1.0, 0), (8.0, 0); t = 4 / 6
     D = (A[0] + (B[0] - A[0]) * t, A[1] + (B[1] - A[1]) * t); E = (A[0] + (C[0] - A[0]) * t, A[1] + (C[1] - A[1]) * t)
     ax.plot([A[0], B[0], C[0], A[0]], [A[1], B[1], C[1], A[1]], "k", lw=1.5); ax.plot([D[0], E[0]], [D[1], E[1]], "k", lw=1.3)
-    for s_, p, o in (("A", A, (0, 0.5)), ("B", B, (-0.4, -0.4)), ("C", C, (0.4, -0.4)), ("D", D, (-0.45, 0.1)), ("E", E, (0.45, 0.1))):
-        ax.text(p[0] + o[0], p[1] + o[1], s_, fontsize=10, ha="center", va="center", family="serif")
-    for p, q, txt, side in ((A, D, "4cm", -1), (D, B, "2cm", -1), (A, E, "6cm", 1), (E, C, "$x$cm", 1)):
-        mx, my = (p[0] + q[0]) / 2, (p[1] + q[1]) / 2; L = np.hypot(q[0] - p[0], q[1] - p[1]); nx, ny = (q[1] - p[1]) / L, -(q[0] - p[0]) / L
-        ax.text(mx - side * nx * 0.75, my - side * ny * 0.75, txt, fontsize=9, ha="center", va="center")
-    ax.text((D[0] + E[0]) / 2, D[1] + 0.35, "$y$cm", fontsize=9, ha="center", va="bottom")
-    ax.text(3.5, -0.6, "9cm", fontsize=9, ha="center", va="center")
-    ax.set_xlim(-1.4, 8.4); ax.set_ylim(-1.1, 6.9); ax.set_aspect("equal"); ax.axis("off")
+    for p in (D, E): ax.plot(*p, "ko", ms=3.5, zorder=5)
+    for s_, p, o in (("A", A, (0, 0.55)), ("B", B, (-0.3, -0.55)), ("C", C, (0.35, -0.55)), ("D", D, (-1.7, 0.3)), ("E", E, (1.7, 0.3))):
+        ax.text(p[0] + o[0], p[1] + o[1], s_, fontsize=11, ha="center", va="center", family="serif")
+    dimarc(ax, A, D, 1.2, "4cm", 1.0)
+    dimarc(ax, D, B, 1.2, "2cm", 0.75)
+    dimarc(ax, A, E, -1.2, "6cm", 1.0)
+    dimarc(ax, E, C, -1.2, "$x$cm", 0.8)
+    dimarc(ax, D, E, 0.6, "$y$cm", 0.8)
+    dimarc(ax, B, C, 0.8, "9cm", 0.8)
+    ax.set_xlim(-2.4, 11.4); ax.set_ylim(-1.6, 8.5); ax.set_aspect("equal"); ax.axis("off")
     save(fig, name)
 tri_par("h2_tri.png")
 
