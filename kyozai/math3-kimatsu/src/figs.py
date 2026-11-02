@@ -256,15 +256,17 @@ def quads(name, size=(3.0, 1.7)):
 quads("h2_quads.png")
 
 # ---- 比を「〇・□・△の数字」と「×3」で表す解説の図
-def mark(ax, kind, digit, p, fs=9):
+def mark(ax, kind, digit, p, fs=8, r=0.5):
+    """比の記号（〇・□・△）の中に数字。記号は数字より十分大きくする"""
     x, y = p
     if kind == "circle":
-        ax.add_patch(matplotlib.patches.Circle((x, y), 0.34, fill=False, lw=1.0))
+        ax.add_patch(matplotlib.patches.Circle((x, y), r, fill=False, lw=0.9))
     elif kind == "box":
-        ax.add_patch(Rectangle((x - 0.32, y - 0.32), 0.64, 0.64, fill=False, lw=1.0))
-    else:  # triangle
-        ax.add_patch(Polygon([(x - 0.45, y - 0.3), (x + 0.45, y - 0.3), (x, y + 0.45)], closed=True, fill=False, lw=1.0))
-        y -= 0.05
+        ax.add_patch(Rectangle((x - r, y - r), 2 * r, 2 * r, fill=False, lw=0.9))
+    else:  # triangle：数字は下寄りに置く
+        h = 2.2 * r
+        ax.add_patch(Polygon([(x - 1.25 * r, y - 0.45 * h), (x + 1.25 * r, y - 0.45 * h), (x, y + 0.75 * h)], closed=True, fill=False, lw=0.9))
+        y -= 0.12 * h
     ax.text(x, y, digit, fontsize=fs, ha="center", va="center", family="serif")
 
 def times(ax, p, q, txt, rad=-0.5, tp=None):
@@ -285,12 +287,12 @@ def tri_par_ans(name, size=(3.0, 2.9)):
     # AD：DB＝②：①
     mark(ax, "circle", "2", (0.4, 6.9)); mark(ax, "circle", "1", (-1.6, 3.3))
     # AE：EC＝[2]：[1]（×3）
-    mark(ax, "box", "2", (7.0, 7.6)); times(ax, (7.4, 7.5), (7.2, 6.0), "×3", -0.9, (8.3, 7.0))
-    mark(ax, "box", "1", (9.9, 3.4)); times(ax, (10.3, 3.3), (10.0, 1.95), "×3", -0.9, (11.1, 2.8))
+    mark(ax, "box", "2", (6.9, 7.7)); times(ax, (7.45, 7.5), (7.3, 6.0), "×3", -0.9, (8.7, 6.9))
+    mark(ax, "box", "1", (9.9, 3.5)); times(ax, (10.45, 3.3), (10.1, 1.95), "×3", -0.9, (11.5, 2.7))
     # DE：BC＝△2：△3（×3）
-    mark(ax, "tri", "2", (3.7, 3.4)); times(ax, (4.2, 3.3), (4.2, 1.75), "×3", -0.9, (5.3, 3.2))
-    mark(ax, "tri", "3", (2.6, -2.3)); times(ax, (3.1, -2.3), (3.75, -1.25), "×3", 0.7, (4.3, -2.5))
-    ax.set_xlim(-2.4, 12.0); ax.set_ylim(-3.0, 8.6); ax.set_aspect("equal"); ax.axis("off")
+    mark(ax, "tri", "2", (3.4, 3.5)); times(ax, (4.1, 3.3), (4.3, 1.75), "×3", -0.9, (5.5, 3.1))
+    mark(ax, "tri", "3", (2.4, -2.3)); times(ax, (3.1, -2.3), (3.75, -1.25), "×3", 0.7, (4.5, -2.5))
+    ax.set_xlim(-2.4, 12.4); ax.set_ylim(-3.0, 8.7); ax.set_aspect("equal"); ax.axis("off")
     save(fig, name)
 tri_par_ans("h2_tri_ans.png")
 
@@ -308,10 +310,10 @@ def quads_ans(name, size=(3.6, 2.2)):
     dimarc(ax, P2[0], P2[1], 0.6, "", 0)
     dimarc(ax, P2[3], P2[2], -0.6, "", 0); ax.text(12.9, 2.6, "9cm", fontsize=9, ha="center", va="center")
     # 相似比 ②：③（×2）、[2]：[3]（×3）
-    mark(ax, "circle", "2", (-1.0, 2.1)); times(ax, (-1.4, 2.0), (-1.35, 0.85), "×2", 0.9, (-2.75, 1.5))
-    mark(ax, "box", "2", (3.6, 2.6)); times(ax, (4.0, 2.5), (3.95, 1.3), "×3", -0.9, (5.0, 1.9))
-    mark(ax, "circle", "3", (6.9, 4.4)); times(ax, (6.5, 4.3), (6.4, 2.6), "×2", 0.9, (6.0, 4.9))
-    mark(ax, "box", "3", (12.9, 4.0)); times(ax, (13.3, 3.9), (13.25, 2.85), "×3", -0.9, (14.2, 3.5))
-    ax.set_xlim(-2.8, 14.8); ax.set_ylim(-0.9, 5.6); ax.set_aspect("equal"); ax.axis("off")
+    mark(ax, "circle", "2", (-1.4, 2.4)); times(ax, (-1.95, 2.3), (-1.6, 0.85), "×2", 0.9, (-3.1, 1.7))
+    mark(ax, "box", "2", (3.9, 2.7)); times(ax, (4.45, 2.5), (4.2, 1.3), "×3", -0.9, (5.5, 1.9))
+    mark(ax, "circle", "3", (6.9, 4.5)); times(ax, (6.35, 4.3), (6.4, 2.6), "×2", 0.9, (5.7, 4.9))
+    mark(ax, "box", "3", (12.9, 4.1)); times(ax, (13.45, 3.9), (13.35, 2.85), "×3", -0.9, (14.6, 3.4))
+    ax.set_xlim(-3.6, 15.2); ax.set_ylim(-0.9, 5.6); ax.set_aspect("equal"); ax.axis("off")
     save(fig, name)
 quads_ans("h2_quads_ans.png")
