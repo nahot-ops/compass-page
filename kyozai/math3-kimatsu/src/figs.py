@@ -554,3 +554,33 @@ def h3_par(name, ans=False, size=(2.6, 2.6)):
     ax.set_xlim(-2.4, 11.0 if ans else 10.6); ax.set_ylim(-3.0 if ans else -1.6, 8.7); ax.set_aspect("equal"); ax.axis("off")
     save(fig, name)
 h3_par("h3_par.png"); h3_par("h3_par_ans.png", ans=True)
+
+# 宿題＜4＞：△ABC、AB上のD、AC上のE（AD=4, AB=12, AE=6, AC=8）。角の印なし、長さは問題文で示す
+def h3_sas(name, size=(2.4, 2.1)):
+    fig, ax = plt.subplots(figsize=size)
+    A, B, C = (3.0, 6.0), (0, 0), (9.0, 0)
+    D = (A[0] + (B[0] - A[0]) * 0.45, A[1] + (B[1] - A[1]) * 0.45); E = (A[0] + (C[0] - A[0]) * 0.35, A[1] + (C[1] - A[1]) * 0.35)
+    seg(ax, A, B, C, A); seg(ax, D, E, lw=1.2)
+    for p in (D, E): ax.plot(*p, "ko", ms=3.5, zorder=5)
+    lab(ax, "A", A, (0, 0.55)); lab(ax, "B", B, (-0.45, -0.45)); lab(ax, "C", C, (0.45, -0.45)); lab(ax, "D", D, (-0.5, 0.1)); lab(ax, "E", E, (0.45, 0.25))
+    ax.set_xlim(-1.2, 10.2); ax.set_ylim(-1.1, 7.0); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+h3_sas("h3_sas.png")
+
+# 宿題＜5＞：台形ABCD（AD//BC）、AD=6, BC=12、AE：EB=1：2、EF//BC。解説は対角線ACとEFの交点G
+def h3_trap(name, ans=False, size=(2.8, 2.1)):
+    fig, ax = plt.subplots(figsize=size)
+    A, D, B, C = (3.0, 6.0), (9.0, 6.0), (0, 0), (12.0, 0)
+    t = 1 / 3
+    E = (A[0] + (B[0] - A[0]) * t, A[1] + (B[1] - A[1]) * t); F = (D[0] + (C[0] - D[0]) * t, D[1] + (C[1] - D[1]) * t)
+    seg(ax, A, D, C, B, A); seg(ax, E, F, lw=1.3)
+    for p in (E, F): ax.plot(*p, "ko", ms=3.5, zorder=5)
+    lab(ax, "A", A, (-0.3, 0.5)); lab(ax, "D", D, (0.3, 0.5)); lab(ax, "B", B, (-0.45, -0.45)); lab(ax, "C", C, (0.45, -0.45))
+    lab(ax, "E", E, (-0.6, 0)); lab(ax, "F", F, (0.6, 0))
+    dimarc(ax, A, D, -1.0, "6cm", 0.9, fs=9); dimarc(ax, B, C, 1.0, "12cm", 1.1, fs=9)
+    if ans:
+        seg(ax, A, C, lw=1.0, ls="--")
+        G = (A[0] + (C[0] - A[0]) * t, A[1] + (C[1] - A[1]) * t); ax.plot(*G, "ko", ms=3.5, zorder=5); lab(ax, "G", G, (0.1, 0.55))
+    ax.set_xlim(-1.4, 13.6); ax.set_ylim(-2.0, 7.6); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+h3_trap("h3_trap.png"); h3_trap("h3_trap_ans.png", ans=True)
