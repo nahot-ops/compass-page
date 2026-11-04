@@ -424,3 +424,133 @@ def para_ans_h2(name, size=(3.0, 3.6)):
     ax.set_xlim(-7.4, 9.6); ax.set_ylim(-2.8, 22.6); ax.set_aspect(0.5); ax.axis("off")
     save(fig, name)
 para_ans_h2("h2_p_ans.png")
+
+
+# ======================= 第3回（相似） =======================
+def lab(ax, s_, p, o, fs=11):
+    ax.text(p[0] + o[0], p[1] + o[1], s_, fontsize=fs, ha="center", va="center", family="serif")
+
+def seg(ax, *pts, lw=1.5, ls="-"):
+    ax.plot([p[0] for p in pts], [p[1] for p in pts], "k", lw=lw, ls=ls)
+
+def angle_mark(ax, v, p, q, r=0.7, n=1):
+    """頂点vで、v→p と v→q のあいだに角の印（弧）を n 本"""
+    a1 = np.arctan2(p[1] - v[1], p[0] - v[0]); a2 = np.arctan2(q[1] - v[1], q[0] - v[0])
+    if a2 < a1: a1, a2 = a2, a1
+    if a2 - a1 > np.pi: a1, a2 = a2, a1 + 2 * np.pi
+    for k in range(n):
+        t = np.linspace(a1, a2, 50); rr = r + 0.18 * k
+        ax.plot(v[0] + rr * np.cos(t), v[1] + rr * np.sin(t), "k", lw=0.9)
+
+# 基本＜5＞(1)：DE//BC、AD=6, DB=3, AE=4, EC=x
+def k5_tri(name, size=(2.2, 2.2)):
+    fig, ax = plt.subplots(figsize=size)
+    A, B, C = (3.5, 7.5), (0, 0), (8, 0); t = 6 / 9
+    D = (A[0] + (B[0] - A[0]) * t, A[1] + (B[1] - A[1]) * t); E = (A[0] + (C[0] - A[0]) * t, A[1] + (C[1] - A[1]) * t)
+    seg(ax, A, B, C, A); seg(ax, D, E, lw=1.3)
+    for p in (D, E): ax.plot(*p, "ko", ms=3.5, zorder=5)
+    lab(ax, "A", A, (0, 0.6)); lab(ax, "B", B, (-0.4, -0.55)); lab(ax, "C", C, (0.4, -0.55)); lab(ax, "D", D, (-1.4, 0.35)); lab(ax, "E", E, (1.4, 0.35))
+    dimarc(ax, A, D, 1.2, "6cm", 1.0); dimarc(ax, D, B, 1.0, "3cm", 0.7)
+    dimarc(ax, A, E, -1.2, "4cm", 1.0); dimarc(ax, E, C, -1.0, "$x$cm", 0.75)
+    ax.set_xlim(-2.4, 10.4); ax.set_ylim(-1.3, 8.4); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+k5_tri("s3_k5a.png")
+
+# 基本＜5＞(3)：ℓ//m//n と2本の直線。4cm, 6cm と 6cm, x cm
+def k5_par(name, size=(2.4, 2.0)):
+    fig, ax = plt.subplots(figsize=size)
+    ys = (6, 3.6, 0)
+    for y, nm in zip(ys, ("ℓ", "m", "n")):
+        ax.plot([-0.5, 9.5], [y, y], "k", lw=1.3); ax.text(9.9, y, nm, fontsize=11, style="italic", ha="left", va="center", family="IPAGothic" if nm == "ℓ" else "serif")
+    P = [(1.6, 6), (2.4, 3.6), (3.6, 0)]; Q = [(6.0, 6), (6.9, 3.6), (8.25, 0)]
+    seg(ax, (1.3, 6.9), (3.9, -0.9), lw=1.2); seg(ax, (5.65, 7.0), (8.6, -1.0), lw=1.2)
+    dimarc(ax, P[0], P[1], 0.9, "4cm", 0.65, fs=9); dimarc(ax, P[1], P[2], 0.9, "6cm", 0.8, fs=9)
+    dimarc(ax, Q[0], Q[1], -0.9, "6cm", 0.65, fs=9); dimarc(ax, Q[1], Q[2], -0.9, "$x$cm", 0.85, fs=9)
+    ax.set_xlim(-1.4, 11.0); ax.set_ylim(-1.4, 7.4); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+k5_par("s3_k5c.png")
+
+# 応用＜1＞：△ABC、辺AC上の点D、∠ABD＝∠ACB
+def o1_proof(name, ans=False, size=(2.6, 2.2)):
+    fig, ax = plt.subplots(figsize=size)
+    A, B, C = (3.0, 6.0), (0, 0), (9.0, 0)
+    D = (A[0] + (C[0] - A[0]) * 4 / 9, A[1] + (C[1] - A[1]) * 4 / 9)   # AD=4, AC=9
+    seg(ax, A, B, C, A); seg(ax, B, D, lw=1.2)
+    ax.plot(*D, "ko", ms=3.5, zorder=5)
+    lab(ax, "A", A, (0, 0.55)); lab(ax, "B", B, (-0.45, -0.45)); lab(ax, "C", C, (0.45, -0.45)); lab(ax, "D", D, (0.45, 0.4))
+    angle_mark(ax, B, A, D, 1.1); angle_mark(ax, C, A, B, 1.1)
+    if ans:
+        angle_mark(ax, A, B, C, 0.75, 2)
+        dimarc(ax, A, B, 1.0, "6cm", 0.8, fs=9); dimarc(ax, C, A, 1.3, "9cm", 0.9, fs=9)
+    ax.set_xlim(-1.6, 10.4); ax.set_ylim(-1.1, 7.0); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+o1_proof("s3_o1.png"); o1_proof("s3_o1_ans.png", ans=True)
+
+# 応用＜2＞：台形ABCD（AD//BC）、AD=4, BC=6、対角線の交点O、Oを通りBCに平行な直線とAB、DCの交点E、F
+def o2_trap(name, ans=False, size=(2.8, 2.1)):
+    fig, ax = plt.subplots(figsize=size)
+    A, D, B, C = (2.5, 5.0), (6.5, 5.0), (1.5, 0), (7.5, 0)
+    # 交点 O：AO:OC = 4:6
+    O = (A[0] + (C[0] - A[0]) * 0.4, A[1] + (C[1] - A[1]) * 0.4)
+    E = (A[0] + (B[0] - A[0]) * 0.4, A[1] + (B[1] - A[1]) * 0.4); F = (D[0] + (C[0] - D[0]) * 0.4, D[1] + (C[1] - D[1]) * 0.4)
+    seg(ax, A, D, C, B, A); seg(ax, A, C, lw=1.1); seg(ax, B, D, lw=1.1); seg(ax, E, F, lw=1.3)
+    for p in (O, E, F): ax.plot(*p, "ko", ms=3.5, zorder=5)
+    lab(ax, "A", A, (-0.3, 0.45)); lab(ax, "D", D, (0.3, 0.45)); lab(ax, "B", B, (-0.4, -0.45)); lab(ax, "C", C, (0.4, -0.45))
+    lab(ax, "O", O, (0, 0.55)); lab(ax, "E", E, (-0.5, 0)); lab(ax, "F", F, (0.5, 0))
+    dimarc(ax, A, D, -0.9, "4cm", 0.8, fs=9); dimarc(ax, B, C, 0.9, "6cm", 0.8, fs=9)
+    ax.set_xlim(0.0, 9.2); ax.set_ylim(-1.6, 6.6); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+o2_trap("s3_o2.png")
+
+# 応用＜3＞：平行四辺形ABCD、AE:ED=2:1、BEとACの交点F、BEの延長とCDの延長の交点G
+def o3_para(name, size=(3.0, 2.4)):
+    fig, ax = plt.subplots(figsize=size)
+    A, B, C, D = (2.0, 5.0), (0, 0), (9.0, 0), (11.0, 5.0)
+    E = (A[0] + (D[0] - A[0]) * 2 / 3, 5.0)
+    # 直線BEとCDの延長の交点G
+    def inter(p1, p2, p3, p4):
+        x1, y1 = p1; x2, y2 = p2; x3, y3 = p3; x4, y4 = p4
+        den = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4)
+        t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / den
+        return (x1 + t * (x2 - x1), y1 + t * (y2 - y1))
+    F = inter(B, E, A, C); G = inter(B, E, C, D)
+    seg(ax, A, B, C, D, A); seg(ax, A, C, lw=1.1); seg(ax, B, G, lw=1.1); seg(ax, D, G, lw=1.1, ls="--")
+    for p in (E, F, G): ax.plot(*p, "ko", ms=3.5, zorder=5)
+    lab(ax, "A", A, (-0.3, 0.45)); lab(ax, "B", B, (-0.4, -0.45)); lab(ax, "C", C, (0.4, -0.45)); lab(ax, "D", D, (0.5, -0.2))
+    lab(ax, "E", E, (-0.2, 0.5)); lab(ax, "F", F, (-0.1, -0.6)); lab(ax, "G", G, (0.45, 0.2))
+    ax.set_xlim(-1.2, 14.0); ax.set_ylim(-1.2, G[1] + 0.9); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+    return G
+print("G", o3_para("s3_o3.png"))
+
+# 宿題＜1＞：△ABC、AB上のD、AC上のE、∠ADE＝∠ACB
+def h3_anti(name, size=(2.4, 2.1)):
+    fig, ax = plt.subplots(figsize=size)
+    A, B, C = (3.0, 6.0), (0, 0), (9.0, 0)
+    D = (A[0] + (B[0] - A[0]) * 0.55, A[1] + (B[1] - A[1]) * 0.55); E = (A[0] + (C[0] - A[0]) * 0.33, A[1] + (C[1] - A[1]) * 0.33)
+    seg(ax, A, B, C, A); seg(ax, D, E, lw=1.2)
+    for p in (D, E): ax.plot(*p, "ko", ms=3.5, zorder=5)
+    lab(ax, "A", A, (0, 0.55)); lab(ax, "B", B, (-0.45, -0.45)); lab(ax, "C", C, (0.45, -0.45)); lab(ax, "D", D, (-0.5, 0.1)); lab(ax, "E", E, (0.45, 0.25))
+    angle_mark(ax, D, A, E, 0.8); angle_mark(ax, C, A, B, 1.1)
+    ax.set_xlim(-1.2, 10.2); ax.set_ylim(-1.1, 7.0); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+h3_anti("h3_anti.png")
+
+# 宿題＜2＞：DE//BC、AD=4, DB=2, AE=5, EC=x, DE=6, BC=y
+def h3_par(name, ans=False, size=(2.6, 2.6)):
+    fig, ax = plt.subplots(figsize=size)
+    A, B, C = (4.0, 7.5), (1.0, 0), (8.0, 0); t = 4 / 6
+    D = (A[0] + (B[0] - A[0]) * t, A[1] + (B[1] - A[1]) * t); E = (A[0] + (C[0] - A[0]) * t, A[1] + (C[1] - A[1]) * t)
+    seg(ax, A, B, C, A); seg(ax, D, E, lw=1.3)
+    for p in (D, E): ax.plot(*p, "ko", ms=3.5, zorder=5)
+    lab(ax, "A", A, (0, 0.55)); lab(ax, "B", B, (-0.3, -0.55)); lab(ax, "C", C, (0.35, -0.55)); lab(ax, "D", D, (-1.7, 0.3)); lab(ax, "E", E, (1.7, 0.3))
+    dimarc(ax, A, D, 1.2, "4cm", 1.0); dimarc(ax, D, B, 1.2, "2cm", 0.75)
+    dimarc(ax, A, E, -1.2, "5cm", 1.0); dimarc(ax, E, C, -1.2, "$x$cm", 0.8)
+    dimarc(ax, D, E, 0.6, "6cm", 0.8); dimarc(ax, B, C, 0.8, "$y$cm", 0.8)
+    if ans:
+        mark(ax, "circle", "2", (0.4, 6.9)); mark(ax, "circle", "1", (-1.6, 3.3))
+        mark(ax, "box", "2", (6.9, 7.7)); mark(ax, "box", "1", (9.9, 3.5))
+        mark(ax, "tri", "2", (3.4, 3.5)); mark(ax, "tri", "3", (2.4, -2.3))
+    ax.set_xlim(-2.4, 11.0 if ans else 10.6); ax.set_ylim(-3.0 if ans else -1.6, 8.7); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+h3_par("h3_par.png"); h3_par("h3_par_ans.png", ans=True)
