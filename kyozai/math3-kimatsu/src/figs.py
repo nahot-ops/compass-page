@@ -644,3 +644,81 @@ def two_types(name, size=(4.4, 2.6)):
     ax.set_xlim(-3.0, 19.2); ax.set_ylim(-3.1, 8.6); ax.set_aspect("equal"); ax.axis("off")
     save(fig, name)
 two_types("s3_types.png")
+
+
+# ======================= 第3回（作り直し：相似の証明まで） =======================
+def right_mark(ax, v, p, q, s=0.45):
+    """頂点vの直角の印（v→p、v→q の方向に s だけの小さな四角）"""
+    ux, uy = (p[0] - v[0]), (p[1] - v[1]); L = np.hypot(ux, uy); ux, uy = ux / L * s, uy / L * s
+    wx, wy = (q[0] - v[0]), (q[1] - v[1]); M_ = np.hypot(wx, wy); wx, wy = wx / M_ * s, wy / M_ * s
+    ax.plot([v[0] + ux, v[0] + ux + wx, v[0] + wx], [v[1] + uy, v[1] + uy + wy, v[1] + wy], "k", lw=0.9)
+
+# 応用＜1＞：∠BAC＝90°の△ABC、AからBCに垂線AD。AB=6, BC=10
+def o1_rt(name, size=(2.8, 1.9)):
+    fig, ax = plt.subplots(figsize=size)
+    B, C, A = (0, 0), (10, 0), (3.6, 4.8); D = (3.6, 0)
+    seg(ax, A, B, C, A); seg(ax, A, D, lw=1.2)
+    ax.plot(*D, "ko", ms=3.5, zorder=5)
+    right_mark(ax, A, B, C); right_mark(ax, D, A, C)
+    lab(ax, "A", A, (0, 0.55)); lab(ax, "B", B, (-0.45, -0.4)); lab(ax, "C", C, (0.45, -0.4)); lab(ax, "D", D, (0, -0.55))
+    dimarc(ax, A, B, 1.0, "6cm", 0.8, fs=9); dimarc(ax, B, C, 1.5, "10cm", 1.0, fs=9)
+    ax.set_xlim(-1.6, 11.2); ax.set_ylim(-2.4, 5.8); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+o1_rt("s3b_o1.png")
+
+# 応用＜2＞：y=x^2、A(-1,1)、B(3,9)、直線AB。解説：Oを通りABに平行な直線 y=2x とPの位置、Q(0,6)
+def o2_eq(name, ans=False, size=(2.6, 3.0)):
+    fig, ax = plt.subplots(figsize=size)
+    ax.annotate("", xy=(4.3, 0), xytext=(-3.0, 0), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+    ax.annotate("", xy=(0, 11.4), xytext=(0, -1.2), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+    xs = np.linspace(-2.6, 3.25, 300); ax.plot(xs, xs ** 2, "k", lw=1.5)
+    lx = np.linspace(-2.3, 3.8, 10); ax.plot(lx, 2 * lx + 3, "k", lw=1.3)
+    ax.plot([-1, 0, 3], [1, 0, 9], "k", lw=1.0)
+    pts = [(-1, 1), (3, 9)]
+    ax.text(-1.25, 1.3, "A", fontsize=11, ha="right", va="center", family="serif")
+    ax.text(2.75, 9.4, "B", fontsize=11, ha="right", va="center", family="serif")
+    if ans:
+        ox = np.linspace(-0.6, 3.4, 10); ax.plot(ox, 2 * ox, "k--", lw=1.0)
+        pts += [(2, 4), (0, 3), (0, 6)]
+        ax.text(2.25, 3.6, "P", fontsize=11, ha="left", va="center", family="serif")
+        ax.text(-0.2, 3.0, "C", fontsize=11, ha="right", va="center", family="serif")
+        ax.text(-0.2, 6.0, "Q", fontsize=11, ha="right", va="center", family="serif")
+        ax.text(3.45, 6.4, "$y=2x$", fontsize=9, ha="left", va="center")
+    for p in pts: ax.plot(*p, "ko", ms=3.5, zorder=5)
+    ax.text(-0.45, -0.75, "O", fontsize=10, family="serif")
+    ax.text(4.15, -0.8, "x", fontsize=12, style="italic", family="serif")
+    ax.text(0.2, 11.0, "y", fontsize=12, style="italic", family="serif")
+    ax.text(-2.8, 10.4, "$y=x^2$", fontsize=9)
+    ax.set_xlim(-3.4, 5.0); ax.set_ylim(-1.4, 11.8); ax.set_aspect(0.55); ax.axis("off")
+    save(fig, name)
+o2_eq("s3b_o2.png"); o2_eq("s3b_o2_ans.png", ans=True)
+
+# 応用＜3＞：平行四辺形ABCD、AD上のE（AE：ED＝2：1）、BEとACの交点F
+def o3_pf(name, ans=False, size=(2.8, 1.8)):
+    fig, ax = plt.subplots(figsize=size)
+    A, B, C, D = (2.0, 5.0), (0, 0), (9.0, 0), (11.0, 5.0)
+    E = (A[0] + (D[0] - A[0]) * 2 / 3, 5.0)
+    F = (A[0] + (C[0] - A[0]) * 0.4, A[1] + (C[1] - A[1]) * 0.4)
+    seg(ax, A, B, C, D, A); seg(ax, A, C, lw=1.1); seg(ax, B, E, lw=1.1)
+    for p in (E, F): ax.plot(*p, "ko", ms=3.5, zorder=5)
+    lab(ax, "A", A, (-0.3, 0.45)); lab(ax, "B", B, (-0.4, -0.45)); lab(ax, "C", C, (0.4, -0.45)); lab(ax, "D", D, (0.4, 0.45))
+    lab(ax, "E", E, (0, 0.5)); lab(ax, "F", F, (0.05, -0.65))
+    if ans:
+        angle_mark(ax, E, F, A, 0.8); angle_mark(ax, B, F, C, 1.1)          # 錯角（●）
+        angle_mark(ax, A, F, E, 0.8, 2); angle_mark(ax, C, F, B, 0.9, 2)    # 錯角（〇〇）
+    ax.set_xlim(-1.2, 12.2); ax.set_ylim(-1.2, 6.0); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+o3_pf("s3b_o3.png"); o3_pf("s3b_o3_ans.png", ans=True)
+
+# 宿題＜5＞：∠ACB＝90°の△ABC、CからABに垂線CH。AC=6, AB=9
+def h3_rt(name, size=(2.6, 1.8)):
+    fig, ax = plt.subplots(figsize=size)
+    A, B = (0, 0), (9, 0); C = (4.0, 20 ** 0.5); H = (4.0, 0)
+    seg(ax, A, B, C, A); seg(ax, C, H, lw=1.2)
+    ax.plot(*H, "ko", ms=3.5, zorder=5)
+    right_mark(ax, C, A, B); right_mark(ax, H, C, B)
+    lab(ax, "A", A, (-0.45, -0.4)); lab(ax, "B", B, (0.45, -0.4)); lab(ax, "C", C, (0, 0.55)); lab(ax, "H", H, (0, -0.55))
+    dimarc(ax, C, A, 1.0, "6cm", 0.8, fs=9); dimarc(ax, A, B, 1.4, "9cm", 0.9, fs=9)
+    ax.set_xlim(-1.6, 10.4); ax.set_ylim(-2.3, 5.6); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+h3_rt("h3b_rt.png")
