@@ -548,10 +548,13 @@ def h3_par(name, ans=False, size=(2.6, 2.6)):
     dimarc(ax, A, E, -1.2, "5cm", 1.0); dimarc(ax, E, C, -1.2, "$x$cm", 0.8)
     dimarc(ax, D, E, 0.6, "6cm", 0.8); dimarc(ax, B, C, 0.8, "$y$cm", 0.8)
     if ans:
-        mark(ax, "circle", "2", (0.4, 6.9)); mark(ax, "circle", "1", (-1.6, 3.3))
-        mark(ax, "box", "2", (6.9, 7.7)); mark(ax, "box", "1", (9.9, 3.5))
-        mark(ax, "tri", "2", (3.4, 3.5)); mark(ax, "tri", "3", (2.4, -2.3))
-    ax.set_xlim(-2.4, 11.0 if ans else 10.6); ax.set_ylim(-3.0 if ans else -1.6, 8.7); ax.set_aspect("equal"); ax.axis("off")
+        mark(ax, "circle", "2", (0.2, 6.9)); times(ax, (0.75, 6.85), (1.15, 5.75), "", -0.9); ax.text(1.6, 7.3, "×2", fontsize=9, ha="center", va="center")
+        mark(ax, "circle", "1", (-1.9, 3.3)); times(ax, (-1.35, 3.25), (-0.95, 2.15), "", -0.9); ax.text(-0.6, 3.7, "×2", fontsize=9, ha="center", va="center")
+        mark(ax, "box", "2", (7.6, 7.6)); times(ax, (7.05, 7.6), (6.55, 6.75), "", 0.9); ax.text(8.8, 8.0, r"$\times\frac{5}{2}$", fontsize=10, ha="center", va="center")
+        mark(ax, "box", "1", (10.3, 3.6)); times(ax, (9.75, 3.6), (9.3, 2.7), "", 0.9); ax.text(11.5, 4.0, r"$\times\frac{5}{2}$", fontsize=10, ha="center", va="center")
+        mark(ax, "tri", "2", (3.0, 3.0)); times(ax, (3.55, 3.0), (4.1, 4.0), "", 0.6); ax.text(4.7, 3.1, "×3", fontsize=9, ha="center", va="center")
+        mark(ax, "tri", "3", (2.4, -2.4)); times(ax, (3.0, -2.5), (3.85, -1.35), "", 0.7); ax.text(4.5, -2.6, "×3", fontsize=9, ha="center", va="center")
+    ax.set_xlim(-2.8, 12.4 if ans else 10.6); ax.set_ylim(-3.0 if ans else -1.6, 8.7); ax.set_aspect("equal"); ax.axis("off")
     save(fig, name)
 h3_par("h3_par.png"); h3_par("h3_par_ans.png", ans=True)
 
@@ -568,19 +571,50 @@ def h3_sas(name, size=(2.4, 2.1)):
 h3_sas("h3_sas.png")
 
 # 宿題＜5＞：台形ABCD（AD//BC）、AD=6, BC=12、AE：EB=1：2、EF//BC。解説は対角線ACとEFの交点G
-def h3_trap(name, ans=False, size=(2.8, 2.1)):
+def h3_trap(name, ans=False, size=(2.8, 2.3)):
+    """台形ABCD（AD//BC）、AD=6, BC=12、AE：EB=1：2、EF//BC。解説はAからDCに平行な線AH（EFとの交点G）"""
     fig, ax = plt.subplots(figsize=size)
-    A, D, B, C = (3.0, 6.0), (9.0, 6.0), (0, 0), (12.0, 0)
-    t = 1 / 3
-    E = (A[0] + (B[0] - A[0]) * t, A[1] + (B[1] - A[1]) * t); F = (D[0] + (C[0] - D[0]) * t, D[1] + (C[1] - D[1]) * t)
+    A, D, B, C = (3.0, 9.0), (9.0, 9.0), (0, 0), (12.0, 0)
+    E, F = (2.0, 6.0), (10.0, 6.0)
     seg(ax, A, D, C, B, A); seg(ax, E, F, lw=1.3)
     for p in (E, F): ax.plot(*p, "ko", ms=3.5, zorder=5)
-    lab(ax, "A", A, (-0.3, 0.5)); lab(ax, "D", D, (0.3, 0.5)); lab(ax, "B", B, (-0.45, -0.45)); lab(ax, "C", C, (0.45, -0.45))
-    lab(ax, "E", E, (-0.6, 0)); lab(ax, "F", F, (0.6, 0))
-    dimarc(ax, A, D, -1.0, "6cm", 0.9, fs=9); dimarc(ax, B, C, 1.0, "12cm", 1.1, fs=9)
+    lab(ax, "A", A, (-0.3, 0.6)); lab(ax, "D", D, (0.3, 0.6)); lab(ax, "B", B, (-0.5, -0.5)); lab(ax, "C", C, (0.5, -0.5))
+    lab(ax, "E", E, (-0.7, 0)); lab(ax, "F", F, (0.7, 0))
+    dimarc(ax, A, D, -1.1, "6cm", 0.9, fs=9); dimarc(ax, B, C, 1.6, "12cm", 1.2, fs=9)
     if ans:
-        seg(ax, A, C, lw=1.0, ls="--")
-        G = (A[0] + (C[0] - A[0]) * t, A[1] + (C[1] - A[1]) * t); ax.plot(*G, "ko", ms=3.5, zorder=5); lab(ax, "G", G, (0.1, 0.55))
-    ax.set_xlim(-1.4, 13.6); ax.set_ylim(-2.0, 7.6); ax.set_aspect("equal"); ax.axis("off")
+        G, H = (4.0, 6.0), (6.0, 0)
+        seg(ax, A, H, lw=1.1, ls="--")
+        for p in (G, H): ax.plot(*p, "ko", ms=3.5, zorder=5)
+        lab(ax, "G", G, (0.55, -0.6)); lab(ax, "H", H, (0, -0.6))
+        dimarc(ax, E, G, 0.8, "2cm", 0.6, fs=8); dimarc(ax, G, F, -0.9, "6cm", 0.9, fs=8)
+        dimarc(ax, B, H, -0.8, "6cm", 0.8, fs=8); dimarc(ax, H, C, -0.8, "6cm", 0.8, fs=8)
+        mark(ax, "circle", "1", (1.0, 8.4), r=0.5); mark(ax, "circle", "2", (-0.7, 3.4), r=0.5)
+        mark(ax, "box", "1", (3.0, 7.2), r=0.42); times(ax, (3.45, 7.1), (3.1, 5.35), "", -0.9); ax.text(4.5, 7.5, "×2", fontsize=9, ha="center", va="center")
+        mark(ax, "box", "3", (2.4, 2.6), r=0.42); times(ax, (2.85, 2.5), (3.0, 1.15), "", -0.9); ax.text(4.0, 2.7, "×2", fontsize=9, ha="center", va="center")
+    ax.set_xlim(-1.8, 13.8); ax.set_ylim(-2.5, 10.3); ax.set_aspect("equal"); ax.axis("off")
     save(fig, name)
 h3_trap("h3_trap.png"); h3_trap("h3_trap_ans.png", ans=True)
+
+
+# 平行線と線分の比の2つの型（タケノコ型・チョウチョ型）
+def two_types(name, size=(4.2, 2.2)):
+    fig, ax = plt.subplots(figsize=size)
+    # タケノコ型
+    A, B, C = (3.0, 6.0), (0, 0), (6.0, 0); t = 2 / 3
+    D = (A[0] + (B[0] - A[0]) * t, A[1] + (B[1] - A[1]) * t); E = (A[0] + (C[0] - A[0]) * t, A[1] + (C[1] - A[1]) * t)
+    seg(ax, A, B, C, A); seg(ax, D, E, lw=1.3)
+    mark(ax, "circle", "2", (0.6, 4.4), r=0.42); mark(ax, "circle", "1", (-0.3, 1.0), r=0.42)
+    mark(ax, "box", "2", (5.4, 4.4), r=0.42); mark(ax, "box", "1", (6.3, 1.0), r=0.42)
+    mark(ax, "tri", "2", (3.0, 2.6), r=0.42); mark(ax, "tri", "3", (3.0, -0.9), r=0.42)
+    ax.text(3.0, -2.3, "タケノコ型", fontsize=11, ha="center", va="center", family="IPAGothic")
+    # チョウチョ型（上の辺が短い）
+    ox = 9.5
+    P, Q, R, S = (ox + 1.0, 6.0), (ox + 5.0, 6.0), (ox + 0, 0), (ox + 6.0, 0)
+    seg(ax, P, Q); seg(ax, R, S); seg(ax, P, S, lw=1.2); seg(ax, Q, R, lw=1.2)
+    mark(ax, "circle", "2", (ox + 3.0, 6.9), r=0.42); mark(ax, "circle", "3", (ox + 3.0, -0.9), r=0.42)
+    mark(ax, "box", "2", (ox + 1.2, 4.2), r=0.42); mark(ax, "box", "3", (ox + 5.6, 2.0), r=0.42)
+    mark(ax, "tri", "2", (ox + 4.9, 4.3), r=0.42); mark(ax, "tri", "3", (ox + 0.4, 2.0), r=0.42)
+    ax.text(ox + 3.0, -2.3, "チョウチョ型", fontsize=11, ha="center", va="center", family="IPAGothic")
+    ax.set_xlim(-1.4, 17.2); ax.set_ylim(-3.0, 7.6); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+two_types("s3_types.png")
