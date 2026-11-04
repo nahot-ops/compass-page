@@ -548,13 +548,13 @@ def h3_par(name, ans=False, size=(2.6, 2.6)):
     dimarc(ax, A, E, -1.2, "5cm", 1.0); dimarc(ax, E, C, -1.2, "$x$cm", 0.8)
     dimarc(ax, D, E, 0.6, "6cm", 0.8); dimarc(ax, B, C, 0.8, "$y$cm", 0.8)
     if ans:
-        mark(ax, "circle", "2", (0.2, 6.9)); times(ax, (0.75, 6.85), (1.15, 5.75), "", -0.9); ax.text(1.6, 7.3, "×2", fontsize=9, ha="center", va="center")
-        mark(ax, "circle", "1", (-1.9, 3.3)); times(ax, (-1.35, 3.25), (-0.95, 2.15), "", -0.9); ax.text(-0.6, 3.7, "×2", fontsize=9, ha="center", va="center")
-        mark(ax, "box", "2", (7.6, 7.6)); times(ax, (7.05, 7.6), (6.55, 6.75), "", 0.9); ax.text(8.8, 8.0, r"$\times\frac{5}{2}$", fontsize=10, ha="center", va="center")
-        mark(ax, "box", "1", (10.3, 3.6)); times(ax, (9.75, 3.6), (9.3, 2.7), "", 0.9); ax.text(11.5, 4.0, r"$\times\frac{5}{2}$", fontsize=10, ha="center", va="center")
-        mark(ax, "tri", "2", (3.0, 3.0)); times(ax, (3.55, 3.0), (4.1, 4.0), "", 0.6); ax.text(4.7, 3.1, "×3", fontsize=9, ha="center", va="center")
-        mark(ax, "tri", "3", (2.4, -2.4)); times(ax, (3.0, -2.5), (3.85, -1.35), "", 0.7); ax.text(4.5, -2.6, "×3", fontsize=9, ha="center", va="center")
-    ax.set_xlim(-2.8, 12.4 if ans else 10.6); ax.set_ylim(-3.0 if ans else -1.6, 8.7); ax.set_aspect("equal"); ax.axis("off")
+        mark(ax, "circle", "2", (-0.6, 6.6)); times(ax, (-0.1, 6.4), (1.05, 5.8), "", -0.4); ax.text(0.5, 7.4, "×2", fontsize=9, ha="center", va="center")
+        mark(ax, "circle", "1", (-2.3, 3.0)); times(ax, (-1.8, 2.75), (-0.75, 2.1), "", -0.4); ax.text(-1.3, 3.75, "×2", fontsize=9, ha="center", va="center")
+        mark(ax, "box", "2", (9.1, 7.0)); times(ax, (8.6, 6.8), (7.35, 5.85), "", 0.4); ax.text(10.4, 7.5, r"$\times\frac{5}{2}$", fontsize=10, ha="center", va="center")
+        mark(ax, "box", "1", (11.2, 3.3)); times(ax, (10.7, 3.05), (9.8, 2.2), "", 0.4); ax.text(12.5, 3.8, r"$\times\frac{5}{2}$", fontsize=10, ha="center", va="center")
+        mark(ax, "tri", "2", (3.5, 0.7)); times(ax, (4.1, 0.75), (4.35, 1.4), "", 0.0); ax.text(5.5, 0.8, "×3", fontsize=9, ha="center", va="center")
+        mark(ax, "tri", "3", (2.0, -2.4)); times(ax, (2.65, -2.4), (3.7, -1.3), "", 0.5); ax.text(4.6, -2.7, "×3", fontsize=9, ha="center", va="center")
+    ax.set_xlim(-3.4 if ans else -2.4, 13.6 if ans else 10.6); ax.set_ylim(-3.0 if ans else -1.6, 8.7); ax.set_aspect("equal"); ax.axis("off")
     save(fig, name)
 h3_par("h3_par.png"); h3_par("h3_par_ans.png", ans=True)
 
@@ -596,25 +596,51 @@ def h3_trap(name, ans=False, size=(2.8, 2.3)):
 h3_trap("h3_trap.png"); h3_trap("h3_trap_ans.png", ans=True)
 
 
-# 平行線と線分の比の2つの型（タケノコ型・チョウチョ型）
-def two_types(name, size=(4.2, 2.2)):
+# 平行線と線分の比の2つの型（タケノコ型・チョウチョ型）。Naho の手書きの図と同じ形：
+# 辺ごとに弧をかき、弧のまん中に〇・□・△の記号。全体の辺は外側の大きな弧。平行な辺には向きの印（＜）
+def arcmark(ax, p, q, bulge, kind, digit, gap=0.55, pw=0.6):
+    (x0, y0), (x1, y1) = p, q
+    mx, my = (x0 + x1) / 2, (y0 + y1) / 2
+    L = np.hypot(x1 - x0, y1 - y0); ux, uy = (x1 - x0) / L, (y1 - y0) / L
+    nx, ny = uy, -ux
+    t = np.linspace(-1, 1, 300); f = (1 - t ** 2) ** pw
+    xs = mx + ux * t * L / 2 + nx * bulge * f; ys = my + uy * t * L / 2 + ny * bulge * f
+    k = np.abs(t) * L / 2 > gap
+    ax.plot(xs[(t < 0) & k], ys[(t < 0) & k], "k", lw=0.9); ax.plot(xs[(t > 0) & k], ys[(t > 0) & k], "k", lw=0.9)
+    mark(ax, kind, digit, (mx + nx * bulge, my + ny * bulge), r=0.38)
+
+def para_arrow(ax, p, q):
+    """平行の印：線分のまん中に「＜」"""
+    mx, my = (p[0] + q[0]) / 2, (p[1] + q[1]) / 2
+    ux, uy = (q[0] - p[0]), (q[1] - p[1]); L = np.hypot(ux, uy); ux, uy = ux / L, uy / L
+    for s_ in (1, -1):
+        ax.plot([mx, mx + 0.45 * ux + s_ * 0.3 * (-uy)], [my, my + 0.45 * uy + s_ * 0.3 * ux], "k", lw=1.0)
+
+def two_types(name, size=(4.4, 2.6)):
     fig, ax = plt.subplots(figsize=size)
     # タケノコ型
-    A, B, C = (3.0, 6.0), (0, 0), (6.0, 0); t = 2 / 3
+    A, B, C = (3.5, 7.0), (0, 0), (7.0, 0); t = 2 / 3
     D = (A[0] + (B[0] - A[0]) * t, A[1] + (B[1] - A[1]) * t); E = (A[0] + (C[0] - A[0]) * t, A[1] + (C[1] - A[1]) * t)
     seg(ax, A, B, C, A); seg(ax, D, E, lw=1.3)
-    mark(ax, "circle", "2", (0.6, 4.4), r=0.42); mark(ax, "circle", "1", (-0.3, 1.0), r=0.42)
-    mark(ax, "box", "2", (5.4, 4.4), r=0.42); mark(ax, "box", "1", (6.3, 1.0), r=0.42)
-    mark(ax, "tri", "2", (3.0, 2.6), r=0.42); mark(ax, "tri", "3", (3.0, -0.9), r=0.42)
-    ax.text(3.0, -2.3, "タケノコ型", fontsize=11, ha="center", va="center", family="IPAGothic")
+    para_arrow(ax, D, E); para_arrow(ax, B, C)
+    arcmark(ax, A, D, 0.9, "circle", "2"); arcmark(ax, D, B, 0.8, "circle", "1", 0.45)
+    arcmark(ax, A, B, 2.2, "circle", "3", 0.6, 0.45)
+    arcmark(ax, A, E, -0.9, "box", "2"); arcmark(ax, E, C, -0.8, "box", "1", 0.45)
+    arcmark(ax, A, C, -2.2, "box", "3", 0.6, 0.45)
+    arcmark(ax, D, E, 0.8, "tri", "2", 0.6); arcmark(ax, B, C, 0.9, "tri", "3", 0.7)
+    ax.text(3.5, -2.4, "タケノコ型", fontsize=11, ha="center", va="center", family="IPAGothic")
     # チョウチョ型（上の辺が短い）
-    ox = 9.5
-    P, Q, R, S = (ox + 1.0, 6.0), (ox + 5.0, 6.0), (ox + 0, 0), (ox + 6.0, 0)
+    ox = 11.5
+    P, Q, R, S = (ox + 1.4, 7.0), (ox + 4.6, 7.0), (ox + 0, 0), (ox + 6.0, 0)
     seg(ax, P, Q); seg(ax, R, S); seg(ax, P, S, lw=1.2); seg(ax, Q, R, lw=1.2)
-    mark(ax, "circle", "2", (ox + 3.0, 6.9), r=0.42); mark(ax, "circle", "3", (ox + 3.0, -0.9), r=0.42)
-    mark(ax, "box", "2", (ox + 1.2, 4.2), r=0.42); mark(ax, "box", "3", (ox + 5.6, 2.0), r=0.42)
-    mark(ax, "tri", "2", (ox + 4.9, 4.3), r=0.42); mark(ax, "tri", "3", (ox + 0.4, 2.0), r=0.42)
-    ax.text(ox + 3.0, -2.3, "チョウチョ型", fontsize=11, ha="center", va="center", family="IPAGothic")
-    ax.set_xlim(-1.4, 17.2); ax.set_ylim(-3.0, 7.6); ax.set_aspect("equal"); ax.axis("off")
+    O = (ox + 3.0, 7.0 * 2 / 5 + 0.0 + 7.0 * 0)  # 交点（上：下 = 2：3）
+    O = (P[0] + (S[0] - P[0]) * 0.4, P[1] + (S[1] - P[1]) * 0.4)
+    para_arrow(ax, P, Q); para_arrow(ax, R, S)
+    arcmark(ax, P, Q, -0.9, "circle", "2", 0.5); arcmark(ax, R, S, 0.9, "circle", "3", 0.6)
+    arcmark(ax, P, O, 0.8, "box", "2", 0.45); arcmark(ax, O, S, -0.9, "box", "3", 0.5)
+    arcmark(ax, Q, O, -0.8, "tri", "2", 0.45)
+    arcmark(ax, O, R, 0.9, "tri", "3", 0.5)
+    ax.text(ox + 3.0, -2.4, "チョウチョ型", fontsize=11, ha="center", va="center", family="IPAGothic")
+    ax.set_xlim(-3.0, 19.2); ax.set_ylim(-3.1, 8.6); ax.set_aspect("equal"); ax.axis("off")
     save(fig, name)
 two_types("s3_types.png")
