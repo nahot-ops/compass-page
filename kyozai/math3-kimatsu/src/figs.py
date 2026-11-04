@@ -722,3 +722,63 @@ def h3_rt(name, size=(2.6, 1.8)):
     ax.set_xlim(-1.6, 10.4); ax.set_ylim(-2.3, 5.6); ax.set_aspect("equal"); ax.axis("off")
     save(fig, name)
 h3_rt("h3b_rt.png")
+
+
+# ======================= 第3回 発展プリント =======================
+# ＜1＞ y=x^2、A(-1,1)、B(2,4)、直線ABとx軸の交点C(-2,0)。△OBCをx軸のまわりに回転
+def adv1(name, ans=False, size=(2.6, 2.4)):
+    fig, ax = plt.subplots(figsize=size)
+    ax.annotate("", xy=(3.4, 0), xytext=(-3.2, 0), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+    ax.annotate("", xy=(0, 5.4 if not ans else 5.4), xytext=(0, -4.6 if ans else -0.8), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+    xs = np.linspace(-2.2, 2.25, 300); ax.plot(xs, xs ** 2, "k", lw=1.5)
+    lx = np.linspace(-2.6, 2.8, 10); ax.plot(lx, lx + 2, "k", lw=1.3)
+    ax.add_patch(Polygon([(0, 0), (-2, 0), (2, 4)], closed=True, fill=False, hatch="////", edgecolor="k", lw=1.0))
+    if ans:
+        ax.plot([-2, 2, 0], [0, -4, 0], "k--", lw=1.0)
+        ax.plot([2, 2], [-4, 4], "k--", lw=1.0)
+        t = np.linspace(0, 2 * np.pi, 200); ax.plot(2 + 0.5 * np.cos(t), 4 * np.sin(t), "k", lw=0.8)
+        ax.plot(2, 0, "ko", ms=3)
+        ax.text(2.25, -0.4, "H", fontsize=10, family="serif")
+    for p in ((-1, 1), (2, 4), (-2, 0)): ax.plot(*p, "ko", ms=3.5, zorder=5)
+    ax.text(-1.25, 1.3, "A", fontsize=11, ha="right", va="center", family="serif")
+    ax.text(1.75, 4.4, "B", fontsize=11, ha="right", va="center", family="serif")
+    ax.text(-2.1, 0.45, "C", fontsize=11, ha="right", va="center", family="serif")
+    ax.text(0.15, -0.5, "O", fontsize=10, family="serif")
+    ax.text(3.25, -0.55, "x", fontsize=12, style="italic", family="serif")
+    ax.text(0.15, 5.1, "y", fontsize=12, style="italic", family="serif")
+    ax.text(-2.9, 4.8, "$y=x^2$", fontsize=9)
+    ax.set_xlim(-3.4, 3.8); ax.set_ylim(-4.8 if ans else -1.0, 5.7); ax.set_aspect(0.8); ax.axis("off")
+    save(fig, name)
+adv1("s3c_1.png"); adv1("s3c_1_ans.png", ans=True)
+
+# ＜2＞ 長方形ABCD（AB=8, BC=12）。PはBからCへ毎秒2cm、QはCからDへ毎秒1cm。△PCQ
+def adv2(name, size=(2.6, 1.9)):
+    fig, ax = plt.subplots(figsize=size)
+    w, h = 12, 8; px, qy = 4.0, 2.0
+    ax.add_patch(Polygon([(px, 0), (w, 0), (w, qy)], closed=True, fill=False, hatch="////", edgecolor="k", lw=1.2))
+    ax.plot([0, 0, w, w, 0], [h, 0, 0, h, h], "k", lw=1.5)
+    corners(ax, w, h)
+    dimarc(ax, (0, h), (w, h), -1.3, f"{w}cm", 1.2); dimarc(ax, (0, h), (0, 0), 1.3, f"{h}cm", 1.0)
+    point(ax, (px, 0), "P", (0, -0.9), ((-0.8, -1.9), (1.4, -1.9)))
+    point(ax, (w, qy), "Q", (0.9, 0), ((1.9, -0.6), (1.9, 1.6)))
+    ax.set_xlim(-3.0, w + 3.0); ax.set_ylim(-2.8, h + 2.4); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+adv2("s3c_2.png")
+
+# ＜3＞ 正三角形ABC、BC上のD、AC上のE、∠ADE=60°
+def adv3(name, ans=False, size=(2.4, 2.2)):
+    fig, ax = plt.subplots(figsize=size)
+    s_ = 9.0; B, C = (0, 0), (s_, 0); A = (s_ / 2, s_ * 3 ** 0.5 / 2)
+    D = (3.0, 0)
+    # CE = 2（AB=9, BD=3 のとき）
+    E = (C[0] + (A[0] - C[0]) * 2 / 9, C[1] + (A[1] - C[1]) * 2 / 9)
+    seg(ax, A, B, C, A); seg(ax, A, D, lw=1.2); seg(ax, D, E, lw=1.2)
+    for p in (D, E): ax.plot(*p, "ko", ms=3.5, zorder=5)
+    lab(ax, "A", A, (0, 0.6)); lab(ax, "B", B, (-0.5, -0.4)); lab(ax, "C", C, (0.5, -0.4)); lab(ax, "D", D, (0, -0.6)); lab(ax, "E", E, (0.55, 0.3))
+    angle_mark(ax, D, A, E, 0.9)
+    if ans:
+        angle_mark(ax, B, A, C, 1.0); angle_mark(ax, C, A, B, 1.0)
+        angle_mark(ax, A, B, D, 1.3, 2); angle_mark(ax, D, E, C, 1.3, 2)
+    ax.set_xlim(-1.4, 10.4); ax.set_ylim(-1.3, 8.9); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+adv3("s3c_3.png"); adv3("s3c_3_ans.png", ans=True)
