@@ -810,3 +810,173 @@ def k5_pair(name, size=(3.4, 1.8)):
     ax.set_xlim(-1.2, 15.0); ax.set_ylim(-1.8, 6.4); ax.set_aspect("equal"); ax.axis("off")
     save(fig, name)
 k5_pair("s3b_k5.png")
+
+
+# ======================= 第4回（大問の特訓） =======================
+import math as _m
+def tri_pair_r(name, k=4/3, AB=9, EF=16, angA=50, angB=70, size=(3.4, 1.9)):
+    fig, ax = plt.subplots(figsize=size)
+    A_, B_ = _m.radians(angA), _m.radians(angB); C_ = _m.pi - A_ - B_
+    def tri(ox, s):
+        ab = AB * s; bc = ab * _m.sin(A_) / _m.sin(C_)
+        B = (ox, 0); C = (ox + bc, 0); A = (ox + ab * _m.cos(B_), ab * _m.sin(B_)); return A, B, C
+    s = 0.5
+    A, B, C = tri(0, s); D, E, F = tri(7.2, s * k)
+    for (P1, P2, P3), nm in (((A, B, C), "ABC"), ((D, E, F), "DEF")):
+        seg(ax, P1, P2, P3, P1)
+        lab(ax, nm[0], P1, (0, 0.5)); lab(ax, nm[1], P2, (-0.45, -0.35)); lab(ax, nm[2], P3, (0.45, -0.35))
+    dimarc(ax, A, B, 0.6, f"{AB}cm", 0.6, fs=9); dimarc(ax, E, F, 0.7, f"{EF}cm", 0.8, fs=9)
+    ax.set_xlim(-1.2, 16.5); ax.set_ylim(-1.8, 6.8); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+tri_pair_r("s4_k5.png")
+
+# 応用＜1＞ タイル：n番目は1辺(n+1)枚の正方形。まわりが灰色、内側が白
+def tiles(name, ns=(1, 2, 3), size=(3.6, 1.6)):
+    fig, ax = plt.subplots(figsize=size)
+    ox = 0
+    for n in ns:
+        m = n + 1
+        for i in range(m):
+            for j in range(m):
+                edge = i in (0, m - 1) or j in (0, m - 1)
+                ax.add_patch(Rectangle((ox + i, j), 1, 1, facecolor="#9a9a9a" if edge else "white", edgecolor="k", lw=0.8))
+        ax.text(ox + m / 2, -0.8, f"{n}番目", fontsize=9, ha="center", va="center")
+        ox += m + 1.5
+    ax.text(ox - 0.3, 1.5, "…", fontsize=12, ha="center", va="center")
+    ax.set_xlim(-0.5, ox + 0.5); ax.set_ylim(-1.4, 4.4); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+tiles("s4_tiles.png")
+
+# 応用＜2＞ 正方形ABCD（1辺6cm）。PはA→Bを毎秒1cm、QはA→D→Cを毎秒2cm
+def sq2(name, size=(2.2, 2.2)):
+    fig, ax = plt.subplots(figsize=size)
+    s_ = 6
+    ax.add_patch(Polygon([(0, s_), (0, s_ - 2), (4, s_)], closed=True, fill=False, hatch="////", edgecolor="k", lw=1.2))
+    ax.plot([0, 0, s_, s_, 0], [s_, 0, 0, s_, s_], "k", lw=1.5)
+    corners(ax, s_, s_)
+    dimarc(ax, (s_, s_), (s_, 0), -1.0, f"{s_}cm", 0.9)
+    point(ax, (0, s_ - 2), "P", (-0.7, 0), ((-1.5, 0.6), (-1.5, -0.9)))
+    point(ax, (4, s_), "Q", (0, 0.65), ((3.0 - 4, 1.6), (5.2 - 4, 1.6)))
+    ax.set_xlim(-2.4, s_ + 2.0); ax.set_ylim(-1.0, s_ + 2.4); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+sq2("s4_sq.png")
+
+# グラフ用の方眼（x:0〜6秒、y:0〜18cm²）
+def area_grid(name, pts=None, size=(2.5, 2.9)):
+    fig, ax = plt.subplots(figsize=size)
+    for v in range(0, 7): ax.plot([v, v], [0, 18 / 3], color="#b0b0b0", lw=0.6)
+    for v in range(0, 19, 2): ax.plot([0, 6], [v / 3, v / 3], color="#b0b0b0", lw=0.6)
+    ax.annotate("", xy=(6.8, 0), xytext=(0, 0), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+    ax.annotate("", xy=(0, 6.8), xytext=(0, 0), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+    for t in range(1, 7): ax.text(t, -0.35, str(t), fontsize=8, ha="center", va="center", family="serif")
+    for t in range(2, 19, 2): ax.text(-0.3, t / 3, str(t), fontsize=8, ha="right", va="center", family="serif")
+    ax.text(-0.3, -0.35, "O", fontsize=9, ha="center", va="center", family="serif")
+    ax.text(6.9, 0.35, "$x$", fontsize=11); ax.text(6.9, -0.5, "(秒)", fontsize=7)
+    ax.text(0, 7.2, "(cm²) $y$", fontsize=9, ha="center")
+    if pts:
+        xs = np.linspace(0, 3, 50); ax.plot(xs, xs ** 2 / 3, "k", lw=1.8)
+        ax.plot([3, 6], [9 / 3, 18 / 3], "k", lw=1.8)
+    ax.set_xlim(-1.4, 7.6); ax.set_ylim(-0.8, 7.6); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+area_grid("h4_grid.png"); area_grid("h4_grid_ans.png", pts=True)
+
+# 応用＜3＞ y=1/2x^2、A(-2,2)、B(4,8)、平行四辺形OACB（C(2,10)）
+def par_ob(name, ans=False, size=(2.5, 3.0)):
+    fig, ax = plt.subplots(figsize=size)
+    ax.annotate("", xy=(5.6, 0), xytext=(-4.4, 0), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+    ax.annotate("", xy=(0, 12.0), xytext=(0, -1.0), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+    xs = np.linspace(-4.0, 4.6, 300); k = xs ** 2 / 2 <= 11.0; ax.plot(xs[k], xs[k] ** 2 / 2, "k", lw=1.5)
+    O, A, B, C = (0, 0), (-2, 2), (4, 8), (2, 10)
+    ax.plot([O[0], A[0], C[0], B[0], O[0]], [O[1], A[1], C[1], B[1], O[1]], "k", lw=1.3)
+    for p in (A, B, C): ax.plot(*p, "ko", ms=3.5, zorder=5)
+    ax.text(-2.3, 2.3, "A", fontsize=11, ha="right", va="center", family="serif")
+    ax.text(4.3, 7.8, "B", fontsize=11, ha="left", va="center", family="serif")
+    ax.text(1.7, 10.5, "C", fontsize=11, ha="right", va="center", family="serif")
+    if ans:
+        ax.plot([-2, 4], [2, 8], "k--", lw=1.0)
+        for p, nm in (((0, 4), "(0, 4)"), ((0, 20 / 3), "P")):
+            ax.plot(*p, "ks", ms=3.5, zorder=5)
+        ax.text(0.25, 3.4, "(0, 4)", fontsize=8, ha="left", va="center")
+        ax.text(-0.25, 20 / 3, "P", fontsize=11, ha="right", va="center", family="serif")
+        ax.plot([-2, 0, 4], [2, 20 / 3, 8], "k:", lw=1.1)
+    ax.text(-0.5, -0.7, "O", fontsize=10, family="serif")
+    ax.text(5.4, -0.8, "x", fontsize=12, style="italic", family="serif")
+    ax.text(0.25, 11.6, "y", fontsize=12, style="italic", family="serif")
+    ax.text(-4.2, 10.6, "$y=\\frac{1}{2}x^2$", fontsize=9)
+    ax.set_xlim(-4.8, 6.0); ax.set_ylim(-1.2, 12.4); ax.set_aspect(0.55); ax.axis("off")
+    save(fig, name)
+par_ob("s4_par.png"); par_ob("s4_par_ans.png", ans=True)
+
+# 宿題＜1＞ 碁石の正三角形（n番目は1辺n個）
+def stones(name, ns=(1, 2, 3, 4), size=(3.6, 1.5)):
+    fig, ax = plt.subplots(figsize=size)
+    ox = 0
+    for n in ns:
+        for r in range(n):
+            for c in range(r + 1):
+                ax.add_patch(matplotlib.patches.Circle((ox + c - r / 2 + (n - 1) / 2, n - 1 - r), 0.38, facecolor="k"))
+        ax.text(ox + (n - 1) / 2, -1.0, f"{n}番目", fontsize=9, ha="center", va="center")
+        ox += n + 1.4
+    ax.text(ox - 0.2, 1.0, "…", fontsize=12, ha="center", va="center")
+    ax.set_xlim(-0.8, ox + 0.5); ax.set_ylim(-1.6, 4.0); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+stones("h4_stones.png")
+
+# 宿題＜3＞ y=x^2、A(-2,4)、B(1,1)
+pfig("h4_p.png", 1.0, (-3.0, 2.8), (-0.8, 6.2), [("A", (-2, 4), (-0.35, 0.3)), ("B", (1, 1), (0.35, -0.35))],
+     lines=[(-1, 2, -2.6, 2.2)], segs=[((-2, 4), (0, 0)), ((0, 0), (1, 1))], eqs=[("$y=x^2$", (2.2, 5.6))], aspect=0.75)
+pfig("h4_p_ans.png", 1.0, (-3.0, 2.8), (-0.8, 6.2), [("A", (-2, 4), (-0.35, 0.3)), ("B", (1, 1), (0.35, -0.35)), ("M", (-0.5, 2.5), (0.1, 0.45))],
+     lines=[(-1, 2, -2.6, 2.2)], segs=[((-2, 4), (0, 0)), ((0, 0), (1, 1))], dashed=[((0, 0), (-0.6, 3.0))], hatch=[(0, 0), (-2, 4), (-0.5, 2.5)],
+     eqs=[("$y=x^2$", (2.2, 5.6))], aspect=0.75)
+
+# 宿題＜4＞ △ABC、AB上のD、∠ACD=∠ABC
+def h4_tri(name, size=(2.4, 2.0)):
+    fig, ax = plt.subplots(figsize=size)
+    A, B, C = (0, 0), (9, 0), (3.0, 4.6)
+    D = (4, 0)
+    seg(ax, A, B, C, A); seg(ax, C, D, lw=1.2); ax.plot(*D, "ko", ms=3.5, zorder=5)
+    lab(ax, "A", A, (-0.45, -0.35)); lab(ax, "B", B, (0.45, -0.35)); lab(ax, "C", C, (0, 0.55)); lab(ax, "D", D, (0, -0.55))
+    angle_mark(ax, C, A, D, 0.9); angle_mark(ax, B, A, C, 1.3)
+    ax.set_xlim(-1.2, 10.2); ax.set_ylim(-1.2, 5.6); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+h4_tri("h4_tri.png")
+
+# 発展＜1＞ y=1/2x^2、A(-2,2)、B(4,8)、Oを通りABに平行な直線 y=x とQ(2,2)
+def adv4_1(name, ans=False, size=(2.5, 2.9)):
+    fig, ax = plt.subplots(figsize=size)
+    ax.annotate("", xy=(5.6, 0), xytext=(-4.0, 0), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+    ax.annotate("", xy=(0, 10.4), xytext=(0, -1.0), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+    xs = np.linspace(-3.8, 4.4, 300); ax.plot(xs, xs ** 2 / 2, "k", lw=1.5)
+    lx = np.linspace(-3.4, 5.2, 10); ax.plot(lx, lx + 4, "k", lw=1.2)
+    ax.plot([-2, 0, 4], [2, 0, 8], "k", lw=1.0)
+    for p in ((-2, 2), (4, 8)): ax.plot(*p, "ko", ms=3.5, zorder=5)
+    ax.text(-2.3, 2.3, "A", fontsize=11, ha="right", va="center", family="serif")
+    ax.text(3.7, 8.5, "B", fontsize=11, ha="right", va="center", family="serif")
+    if ans:
+        ox = np.linspace(-0.8, 3.4, 10); ax.plot(ox, ox, "k--", lw=1.0)
+        ax.plot(2, 2, "ko", ms=3.5, zorder=5); ax.text(2.3, 1.7, "Q(2, 2)", fontsize=8, ha="left", va="center")
+        ax.plot([-2, 2, 4], [2, 2, 8], "k:", lw=1.0)
+        ax.text(3.5, 3.6, "$y=x$", fontsize=8, ha="left")
+    ax.text(-0.5, -0.7, "O", fontsize=10, family="serif"); ax.text(5.4, -0.8, "x", fontsize=12, style="italic", family="serif")
+    ax.text(0.25, 10.0, "y", fontsize=12, style="italic", family="serif"); ax.text(-3.9, 9.2, "$y=\\frac{1}{2}x^2$", fontsize=9)
+    ax.set_xlim(-4.4, 6.0); ax.set_ylim(-1.2, 10.8); ax.set_aspect(0.6); ax.axis("off")
+    save(fig, name)
+adv4_1("a4_1.png"); adv4_1("a4_1_ans.png", ans=True)
+
+# 発展＜3＞ 平行四辺形ABCD、BC上のE（BE:EC=3:2）、AEとBDの交点F
+def adv4_3(name, ans=False, size=(2.8, 1.8)):
+    fig, ax = plt.subplots(figsize=size)
+    A, B, C, D = (2.0, 5.0), (0, 0), (10.0, 0), (12.0, 5.0)
+    E = (6.0, 0)
+    # F = AE ∩ BD : AF:FE = AD:BE = 10:6 = 5:3
+    F = (A[0] + (E[0] - A[0]) * 5 / 8, A[1] + (E[1] - A[1]) * 5 / 8)
+    seg(ax, A, B, C, D, A); seg(ax, A, E, lw=1.1); seg(ax, B, D, lw=1.1)
+    for p in (E, F): ax.plot(*p, "ko", ms=3.5, zorder=5)
+    lab(ax, "A", A, (-0.3, 0.45)); lab(ax, "B", B, (-0.4, -0.45)); lab(ax, "C", C, (0.4, -0.45)); lab(ax, "D", D, (0.4, 0.45))
+    lab(ax, "E", E, (0, -0.55)); lab(ax, "F", F, (0.55, 0.1))
+    if ans:
+        angle_mark(ax, A, F, D, 0.8); angle_mark(ax, E, F, B, 0.9)
+        angle_mark(ax, D, F, A, 0.9, 2); angle_mark(ax, B, F, E, 1.0, 2)
+    ax.set_xlim(-1.2, 13.2); ax.set_ylim(-1.2, 6.0); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+adv4_3("a4_3.png"); adv4_3("a4_3_ans.png", ans=True)
