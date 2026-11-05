@@ -782,3 +782,31 @@ def adv3(name, ans=False, size=(2.4, 2.2)):
     ax.set_xlim(-1.4, 10.4); ax.set_ylim(-1.3, 8.9); ax.set_aspect("equal"); ax.axis("off")
     save(fig, name)
 adv3("s3c_3.png"); adv3("s3c_3_ans.png", ans=True)
+
+# 基本＜5＞：△ABC∽△DEF（相似比 4：5）。∠A=∠D=50°、∠B=∠E=70°、AB=8cm、EF=15cm
+def k5_pair(name, size=(3.4, 1.8)):
+    fig, ax = plt.subplots(figsize=size)
+    import math
+    A_, B_ = math.radians(50), math.radians(70)
+    def tri(ox, k):
+        AB = 8 * k
+        B = (ox, 0)
+        # Cは B から角70°方向、A は ... ここでは BC を底辺に置く
+        C_ = math.pi - A_ - B_
+        BC = AB * math.sin(A_) / math.sin(C_)
+        C = (ox + BC, 0)
+        A = (ox + AB * math.cos(B_), AB * math.sin(B_))
+        return A, B, C
+    s = 0.55
+    A, B, C = tri(0, s); D, E, F = tri(7.0, s * 1.25)
+    for (P1, P2, P3), names in (((A, B, C), "ABC"), ((D, E, F), "DEF")):
+        seg(ax, P1, P2, P3, P1)
+        lab(ax, names[0], P1, (0, 0.5)); lab(ax, names[1], P2, (-0.45, -0.35)); lab(ax, names[2], P3, (0.45, -0.35))
+    dimarc(ax, A, B, 0.6, "8cm", 0.6, fs=9)
+    dimarc(ax, E, F, 0.7, "15cm", 0.8, fs=9)
+    ax.text(A[0] + 0.05, A[1] - 1.7, "50°", fontsize=8, ha="center", va="center")
+    ax.text(E[0] + 1.55, E[1] + 0.5, "70°", fontsize=8, ha="center", va="center")
+    angle_mark(ax, A, B, C, 0.7); angle_mark(ax, E, D, F, 0.8)
+    ax.set_xlim(-1.2, 15.0); ax.set_ylim(-1.8, 6.4); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+k5_pair("s3b_k5.png")
