@@ -334,3 +334,79 @@ dia("h2p_dia.png", 30, 3000, 1, 250, [10, 20, 30], [500, 1000, 1500, 2000, 2500,
     paths=[([(0, 0), (15, 1500), (20, 1500), (30, 3000)], {})], places=[(3000, "駅"), (0, "家")])
 # 動点：1辺6cmの正方形ABCD。PはAからBへ。△APD
 rect("h2p_sq.png", 6, 6, [(0, 6), (0, 2.5), (6, 6)], (0, 2.5), (-0.5, 0), ((-1.0, 0.7), (-1.0, -0.8)), size=(2.0, 2.0))
+
+
+# ======================= 第3回 宿題の予習（角と平行線）と、面積の2等分の補充 =======================
+def save(fig, name):
+    fig.savefig(OUT + name, dpi=200, bbox_inches="tight", pad_inches=0.05); plt.close(fig)
+def amark(ax, v, p, q, r=0.7, n=1):
+    a1 = np.arctan2(p[1] - v[1], p[0] - v[0]); a2 = np.arctan2(q[1] - v[1], q[0] - v[0])
+    d_ = (a2 - a1) % (2 * np.pi)
+    if d_ > np.pi: a1, a2 = a2, a1; d_ = 2 * np.pi - d_
+    for k in range(n):
+        t = np.linspace(a1, a1 + d_, 60); rr = r + 0.18 * k
+        ax.plot(v[0] + rr * np.cos(t), v[1] + rr * np.sin(t), "k", lw=0.9)
+
+def pl(ax, p, q, lw=1.4, ls="-"): ax.plot([p[0], q[0]], [p[1], q[1]], "k", lw=lw, ls=ls)
+
+# ＜4＞ ℓ//m と直線n。上の交点の右上の角が65°。a=同位角、b=錯角（左下に見える角）、c=対頂角
+def yo_angles(name, size=(2.6, 2.0)):
+    fig, ax = plt.subplots(figsize=size)
+    pl(ax, (-1, 5), (9, 5)); pl(ax, (-1, 0), (9, 0))
+    ax.text(9.3, 5, "ℓ", fontsize=12, style="italic", va="center"); ax.text(9.3, 0, "m", fontsize=12, style="italic", va="center", family="serif")
+    P, Q = (5.0, 5.0), (2.5, 0.0)
+    d = np.array(P) - np.array(Q); d = d / np.linalg.norm(d)
+    pl(ax, tuple(np.array(Q) - 1.6 * d), tuple(np.array(P) + 1.6 * d))
+    amark(ax, P, (9, 5), tuple(np.array(P) + d), 0.8); ax.text(P[0] + 1.35, P[1] + 0.6, "65°", fontsize=9, ha="center", va="center")
+    ax.text(P[0] - 1.1, P[1] - 0.55, "$c$", fontsize=12, ha="center", va="center")
+    ax.text(Q[0] + 1.25, Q[1] + 0.55, "$a$", fontsize=12, ha="center", va="center")
+    ax.text(Q[0] - 1.15, Q[1] + 0.5, "$b$", fontsize=12, ha="center", va="center")
+    ax.set_xlim(-1.4, 10.0); ax.set_ylim(-1.8, 7.0); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+yo_angles("h3y_angles.png")
+
+# ＜5＞ ℓ//m、折れ線（ℓで40°、mで30°）。点Pの角x
+def yo_z(name, ans=False, size=(2.6, 2.0)):
+    fig, ax = plt.subplots(figsize=size)
+    pl(ax, (-1, 5), (9, 5)); pl(ax, (-1, 0), (9, 0))
+    ax.text(9.3, 5, "ℓ", fontsize=12, style="italic", va="center"); ax.text(9.3, 0, "m", fontsize=12, style="italic", va="center", family="serif")
+    A, Pp, B = (1.0, 5.0), (6.0, 5.0 - 5.0 * np.tan(np.radians(40)) * 0 - 0), (1.0, 0.0)
+    # P はℓとmの間。A→P がℓと40°、P→B がmと30°
+    h1 = 5.0 * np.tan(np.radians(40)) / (np.tan(np.radians(40)) + np.tan(np.radians(30)))
+    Px = 1.0 + (5.0 - 0) / (np.tan(np.radians(40)) + np.tan(np.radians(30)))
+    Py = 5.0 - (Px - 1.0) * np.tan(np.radians(40))
+    Pp = (Px, Py)
+    pl(ax, A, Pp, 1.2); pl(ax, Pp, B, 1.2)
+    ax.plot(*Pp, "ko", ms=3.5)
+    amark(ax, A, (9, 5), Pp, 1.1); ax.text(A[0] + 1.9, A[1] - 0.45, "40°", fontsize=9, ha="center", va="center")
+    amark(ax, B, (9, 0), Pp, 1.1); ax.text(B[0] + 1.9, B[1] + 0.45, "30°", fontsize=9, ha="center", va="center")
+    amark(ax, Pp, A, B, 0.7); ax.text(Pp[0] - 1.15, Pp[1] + 0.45, "$x$", fontsize=12, ha="center", va="center")
+    ax.text(Pp[0] + 0.35, Pp[1] + 0.5, "P", fontsize=11, ha="left", va="center", family="serif")
+    if ans:
+        pl(ax, (Pp[0] - 4.5, Pp[1]), (Pp[0] + 2.5, Pp[1]), 1.0, "--")
+        ax.text(Pp[0] + 2.8, Pp[1], "n", fontsize=11, style="italic", va="center", family="serif")
+    ax.set_xlim(-1.4, 10.0); ax.set_ylim(-1.2, 6.2); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+yo_z("h3y_z.png"); yo_z("h3y_z_ans.png", ans=True)
+
+# 補充：ℓ: y=x+3、m: y=−2x+6。A(1,4)、B(−3,0)、C(3,0)
+def hoju_tri(name, extra=None, size=(2.8, 2.2)):
+    f = Fig(size, (-5.2, 5.6), (-1.6, 6.4))
+    f.arrow(-5.0, 0, 5.2, 0); f.arrow(0, -1.4, 0, 6.2)
+    e1 = f.line(1, 3, -4.6, 3.2, -1.2, 5.6); e2 = f.line(-2, 6, -0.2, 4.2, -1.2, 5.6)
+    if extra: extra(f)
+    for p in ((1, 4), (-3, 0), (3, 0)): f.dot(p)
+    f.text("A", (1, 4), [(0.0, 0.6), (0.6, 0.4)]); f.text("B", (-3, 0), [(-0.4, -0.55)]); f.text("C", (3, 0), [(0.45, -0.55)])
+    f.text("ℓ", (e1[2], e1[3]), [(-0.4, 0.3)], size=12, style="italic", family="IPAGothic")
+    f.ax.text(4.0, -0.9, "m", fontsize=12, style="italic", family="serif", ha="center", va="center")
+    f.text("x", (5.2, 0), [(0.1, -0.5)], size=12, style="italic"); f.text("y", (0, 6.2), [(-0.45, -0.1)], size=12, style="italic")
+    f.text("O", (0, 0), [(-0.45, -0.5), (0.45, -0.5)], size=10)
+    f.save(name)
+hoju_tri("h3h_tri.png")
+def hx(f):
+    f.dot((0, 0), "s", 3); f.dot((2, 2), "s", 3); f.dot((-1, 2), "s", 3)
+    f.seg(-0.2, -0.8, 1.2, 4.8, ls="-.", lw=1.0)
+    f.seg(-3, 0, 3.4, 2.56, ls=":", lw=1.2)
+    f.seg(-2.2, 2.6, 3, 0, ls="--", lw=1.0)
+    f.text("M", (2, 2), [(0.5, -0.1), (0.5, 0.4)], size=10); f.text("N", (-1, 2), [(-0.5, 0.3)], size=10)
+hoju_tri("h3h_tri_ans.png", extra=hx)
