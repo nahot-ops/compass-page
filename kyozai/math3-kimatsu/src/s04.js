@@ -319,6 +319,11 @@ const hattenKai = [
 ];
 
 
+// 幅を指定できる2列の表（半分の幅のセルの中で使う）
+const row2w = (W, w1, left, right) => new d.Table({
+  width: { size: W, type: d.WidthType.DXA }, columnWidths: [w1, W - w1], borders: d.TableBorders.NONE,
+  rows: [new d.TableRow({ children: [cell(w1, left), cell(W - w1, right)] })],
+});
 // ============ 南第二中用の宿題②（平行線と線分の比・中点連結定理まで） ============
 const hw2m = [
   bandTitle("第4回　宿題②　＜相似・南第二中用＞", NAME),
@@ -333,8 +338,8 @@ const hw2m = [
   new d.Table({
     width: { size: CW, type: d.WidthType.DXA }, columnWidths: [CW / 2, CW / 2], borders: d.TableBorders.NONE,
     rows: [new d.TableRow({ children: [
-      new d.TableCell({ borders: L.NOB, width: { size: CW / 2, type: d.WidthType.DXA }, margins: { right: 200 }, children: [P("（1）下の図で、DE//BCです。$x$の値を求めなさい。"), row2(CW / 2 - 2600, [imgP("s3_k5a.png", 160, d.AlignmentType.LEFT)], [space(900), ansBox("$x$＝", 2200)])] }),
-      new d.TableCell({ borders: L.NOB, width: { size: CW / 2, type: d.WidthType.DXA }, children: [P("（2）下の図で、ℓ//$m$//$n$です。$x$の値を求めなさい。"), row2(CW / 2 - 2600, [imgP("s3_k5c.png", 175, d.AlignmentType.LEFT)], [space(900), ansBox("$x$＝", 2200)])] }),
+      new d.TableCell({ borders: L.NOB, width: { size: CW / 2, type: d.WidthType.DXA }, margins: { right: 200 }, children: [P("（1）下の図で、DE//BCです。$x$の値を求めなさい。"), row2w(CW / 2 - 300, 3200, [imgP("s3_k5a.png", 160, d.AlignmentType.LEFT)], [space(900), ansBox("$x$＝", 2200)])] }),
+      new d.TableCell({ borders: L.NOB, width: { size: CW / 2, type: d.WidthType.DXA }, children: [P("（2）下の図で、ℓ//$m$//$n$です。$x$の値を求めなさい。"), row2w(CW / 2 - 100, 3400, [imgP("s3_k5c.png", 175, d.AlignmentType.LEFT)], [space(900), ansBox("$x$＝", 2200)])] }),
     ] })],
   }),
   qHead(6, "三角形と線分の比"),
@@ -346,10 +351,19 @@ const hw2m = [
     ], 2, { width: CW - 3600 }),
   ], [imgP("h3_par.png", 190)]),
   qHead(7, "中点連結定理"),
-  qgrid([
-    { q: [P("（1）△ABCで、辺AB、ACの中点をそれぞれM、Nとします。BC＝14cmのとき、MNの長さを求めなさい。また、MNとBCの位置の関係を記号で表しなさい。")], work: 500, ans: "MN＝　　cm，", ansW: 3400 },
-    { q: [P("（2）四角形ABCDの辺AB、BC、CD、DAの中点を、それぞれP、Q、R、Sとします。AC＝10cm、BD＝8cmのとき、四角形PQRSの周の長さを求めなさい。")], work: 500, ans: "　　　cm", ansW: 2400 },
-  ], 2),
+  new d.Table({
+    width: { size: CW, type: d.WidthType.DXA }, columnWidths: [CW / 2, CW / 2], borders: d.TableBorders.NONE,
+    rows: [new d.TableRow({ children: [
+      new d.TableCell({ borders: L.NOB, width: { size: CW / 2, type: d.WidthType.DXA }, margins: { right: 200 }, children: [
+        P("（1）下の図の△ABCで、点M、Nは辺AB、ACの中点です。BC＝14cmのとき、MNの長さを求めなさい。また、MNとBCの位置の関係を記号で表しなさい。"),
+        row2w(CW / 2 - 300, 2900, [imgP("h4m_mid1.png", 150, d.AlignmentType.LEFT)], [space(700), ansBox("MN＝　　cm，", 3000)]),
+      ] }),
+      new d.TableCell({ borders: L.NOB, width: { size: CW / 2, type: d.WidthType.DXA }, children: [
+        P("（2）下の図の四角形ABCDで、P、Q、R、Sは辺AB、BC、CD、DAの中点です。AC＝10cm、BD＝8cmのとき、四角形PQRSの周の長さを求めなさい。"),
+        row2w(CW / 2 - 100, 3100, [imgP("h4m_mid2.png", 150, d.AlignmentType.LEFT)], [space(700), ansBox("　　　cm", 2400)]),
+      ] }),
+    ] })],
+  }),
   qHead(8, "★台形と平行線"),
   row2(CW - 3600, [
     P("右の図のように、AD//BCの台形ABCDがあり、AD＝6cm、BC＝12cmです。辺AB上に点EをAE：EB＝1：2となるようにとり、Eを通りBCに平行な直線と辺DCとの交点をFとします。EFの長さを求めなさい。"),

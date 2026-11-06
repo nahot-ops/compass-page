@@ -993,3 +993,34 @@ def adv4_sas(name, size=(2.6, 2.1)):
     ax.set_xlim(-1.8, 10.2); ax.set_ylim(-2.8, 6.6); ax.set_aspect("equal"); ax.axis("off")
     save(fig, name)
 adv4_sas("a4_sas.png")
+
+# 南第二中用 宿題＜7＞ 中点連結定理：(1) △ABC と中点M、N。(2) 四角形ABCDと中点P、Q、R、S
+def mid_tri(name, size=(2.2, 1.9)):
+    fig, ax = plt.subplots(figsize=size)
+    A, B, C = (3.0, 6.0), (0, 0), (9.0, 0)
+    M = ((A[0] + B[0]) / 2, (A[1] + B[1]) / 2); N = ((A[0] + C[0]) / 2, (A[1] + C[1]) / 2)
+    seg(ax, A, B, C, A); seg(ax, M, N, lw=1.2)
+    for p in (M, N): ax.plot(*p, "ko", ms=3.5, zorder=5)
+    lab(ax, "A", A, (0, 0.55)); lab(ax, "B", B, (-0.45, -0.35)); lab(ax, "C", C, (0.45, -0.35)); lab(ax, "M", M, (-0.55, 0.1)); lab(ax, "N", N, (0.55, 0.1))
+    for p, q in ((A, M), (M, B)):  # 等しい長さの印（1本線）
+        mx, my = (p[0] + q[0]) / 2, (p[1] + q[1]) / 2; ax.plot([mx - 0.25, mx + 0.25], [my + 0.1, my - 0.1], "k", lw=1)
+    for p, q in ((A, N), (N, C)):  # 2本線
+        mx, my = (p[0] + q[0]) / 2, (p[1] + q[1]) / 2
+        for d_ in (-0.15, 0.15): ax.plot([mx - 0.22 + d_, mx + 0.22 + d_], [my - 0.18, my + 0.18], "k", lw=1)
+    dimarc(ax, B, C, 1.0, "14cm", 1.0, fs=9)
+    ax.set_xlim(-1.2, 10.2); ax.set_ylim(-1.9, 6.9); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+mid_tri("h4m_mid1.png")
+
+def mid_quad(name, size=(2.2, 1.9)):
+    fig, ax = plt.subplots(figsize=size)
+    A, B, C, D = (1.5, 6.0), (0, 0), (9.0, 0.5), (7.5, 6.5)
+    pts = [A, B, C, D]; mids = [((pts[i][0] + pts[(i + 1) % 4][0]) / 2, (pts[i][1] + pts[(i + 1) % 4][1]) / 2) for i in range(4)]
+    seg(ax, A, B, C, D, A); seg(ax, A, C, lw=0.9, ls="--"); seg(ax, B, D, lw=0.9, ls="--")
+    seg(ax, *mids, mids[0], lw=1.2)
+    for p in mids: ax.plot(*p, "ko", ms=3.5, zorder=5)
+    lab(ax, "A", A, (-0.4, 0.4)); lab(ax, "B", B, (-0.45, -0.35)); lab(ax, "C", C, (0.45, -0.35)); lab(ax, "D", D, (0.4, 0.4))
+    for nm, p, o in zip("PQRS", mids, ((-0.55, 0), (0, -0.55), (0.55, 0), (0, 0.5))): lab(ax, nm, p, o)
+    ax.set_xlim(-1.2, 10.2); ax.set_ylim(-1.2, 7.4); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+mid_quad("h4m_mid2.png")
