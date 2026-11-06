@@ -1024,3 +1024,23 @@ def mid_quad(name, size=(2.2, 1.9)):
     ax.set_xlim(-1.2, 10.2); ax.set_ylim(-1.2, 7.4); ax.set_aspect("equal"); ax.axis("off")
     save(fig, name)
 mid_quad("h4m_mid2.png")
+
+# 宿題④ y=1/2x^2、A(-4,8)、B(2,2)
+pfig("h4_p4.png", 0.5, (-5.4, 3.6), (-1.0, 10.0), [("A", (-4, 8), (-0.45, 0.4)), ("B", (2, 2), (0.45, -0.4))],
+     lines=[(-1, 4, -5.0, 3.2)], segs=[((-4, 8), (0, 0)), ((0, 0), (2, 2))], eqs=[("$y=\\frac{1}{2}x^2$", (2.4, 9.2))], aspect=0.6)
+def h4p4ans(f=None):
+    fig, ax = plt.subplots(figsize=(2.4, 2.6))
+    ax.annotate("", xy=(3.6, 0), xytext=(-5.4, 0), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+    ax.annotate("", xy=(0, 10.0), xytext=(0, -1.0), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+    xs = np.linspace(-4.4, 3.0, 300); ax.plot(xs, xs ** 2 / 2, "k", lw=1.5)
+    lx = np.linspace(-5.0, 3.2, 10); ax.plot(lx, -lx + 4, "k", lw=1.3)
+    ox = np.linspace(-2.0, 2.0, 10); ax.plot(ox, -ox + 8, "k--", lw=1.0)
+    ax.plot([-4, 0, 2], [8, 0, 2], "k", lw=1.0); ax.plot([-4, 0, 2], [8, 8, 2], "k:", lw=1.0)
+    for p in ((-4, 8), (2, 2), (0, 4), (0, 8)): ax.plot(*p, "ko", ms=3.5, zorder=5)
+    ax.text(-4.4, 8.4, "A", fontsize=11, ha="right", family="serif"); ax.text(2.4, 1.6, "B", fontsize=11, family="serif")
+    ax.text(0.25, 4.2, "(0, 4)", fontsize=8); ax.text(0.25, 8.3, "C", fontsize=11, family="serif")
+    ax.text(-0.5, -0.8, "O", fontsize=10, family="serif"); ax.text(3.4, -0.8, "x", fontsize=12, style="italic", family="serif")
+    ax.text(0.2, 9.6, "y", fontsize=12, style="italic", family="serif")
+    ax.set_xlim(-5.8, 4.0); ax.set_ylim(-1.2, 10.4); ax.set_aspect(0.6); ax.axis("off")
+    save(fig, "h4_p4_ans.png")
+h4p4ans()
