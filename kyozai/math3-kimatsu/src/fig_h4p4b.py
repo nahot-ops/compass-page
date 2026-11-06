@@ -1,0 +1,36 @@
+import sys; sys.argv=['x']
+exec(open("figs.py").read().split('\ndef ')[0])  # imports & settings
+def save(fig, name):
+    fig.savefig("img/" + name, dpi=300, bbox_inches="tight", pad_inches=0.05); plt.close(fig)
+def chev(ax, m, d=(1, -1), s=0.35):
+    ux, uy = d[0] / np.hypot(*d), d[1] / np.hypot(*d)
+    for k in (1, -1):
+        ax.plot([m[0], m[0] - s * ux + k * 0.7 * s * (-uy)], [m[1], m[1] - s * uy + k * 0.7 * s * ux], "k", lw=1.1)
+fig, ax = plt.subplots(figsize=(3.2, 3.5))
+ax.annotate("", xy=(5.0, 0), xytext=(-5.6, 0), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+ax.annotate("", xy=(0, 10.2), xytext=(0, -1.2), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+xs = np.linspace(-4.3, 4.3, 300); ax.plot(xs, xs ** 2 / 2, "k", lw=1.5)
+lx = np.array([-4.9, 3.6]); ax.plot(lx, -lx + 4, "k", lw=1.3)
+cx = np.array([-1.4, 4.3]); ax.plot(cx, -cx + 8, "k--", lw=1.0)
+ox = np.array([-5.2, 2.0]); ax.plot(ox, -ox, "k--", lw=1.0)
+A, B, C, D, O = (-4, 8), (2, 2), (0, 8), (0, 4), (0, 0)
+for p, q in ((O, A), (O, B), (C, A), (C, B)): ax.plot([p[0], q[0]], [p[1], q[1]], "k", lw=1.2)
+for p in (A, B, C, D, O): ax.plot(*p, "ko", ms=3.5, zorder=5)
+chev(ax, (-2.0, 6.0)); chev(ax, (2.6, 5.4)); chev(ax, (-3.6, 3.6))
+for yy in (6.0, 2.0):
+    for dy in (0.13, -0.13): ax.plot([-0.28, 0.28], [yy + dy, yy + dy], "k", lw=1.0)
+f = dict(family="serif")
+ax.text(-4.35, 8.0, "A", fontsize=11, ha="right", va="bottom", **f)
+ax.text(-4.35, 7.9, "(−4, 8)", fontsize=8.5, ha="right", va="top", **f)
+ax.text(2.35, 2.0, "B", fontsize=11, ha="left", va="center", **f)
+ax.text(2.95, 2.0, "(2, 2)", fontsize=8.5, ha="left", va="center", **f)
+ax.text(0.3, 8.3, "C", fontsize=11, ha="left", va="bottom", **f)
+ax.text(-0.3, 4.1, "D", fontsize=11, ha="right", va="top", **f)
+ax.text(-0.12, 3.05, "(0, 4)", fontsize=8, ha="right", va="top", **f)
+ax.text(-0.35, -0.3, "O", fontsize=10, ha="right", va="top", **f)
+ax.text(4.9, -0.4, "x", fontsize=12, style="italic", ha="center", va="top", **f)
+ax.text(0.3, 10.0, "y", fontsize=12, style="italic", va="top", **f)
+ax.text(4.0, 9.6, "$y=\\frac{1}{2}x^2$", fontsize=9, ha="center")
+ax.text(3.8, 0.6, "$y=-x+4$", fontsize=9, ha="left", va="center")
+ax.set_xlim(-5.8, 6.2); ax.set_ylim(-1.4, 10.4); ax.set_aspect(1); ax.axis("off")
+save(fig, "h4_p4_ans2.png")
