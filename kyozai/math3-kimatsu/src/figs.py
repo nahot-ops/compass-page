@@ -980,3 +980,16 @@ def adv4_3(name, ans=False, size=(2.8, 1.8)):
     ax.set_xlim(-1.2, 13.2); ax.set_ylim(-1.2, 6.0); ax.set_aspect("equal"); ax.axis("off")
     save(fig, name)
 adv4_3("a4_3.png"); adv4_3("a4_3_ans.png", ans=True)
+
+# 発展＜3＞（作りかえ）：△ABC、AB=6、BC=9、CA=9、BC上のD（BD=4）。△DBA∽△ABC（2組の辺の比とその間の角）
+def adv4_sas(name, size=(2.6, 2.1)):
+    fig, ax = plt.subplots(figsize=size)
+    B, C, A, D = (0, 0), (9, 0), (2.0, 32 ** 0.5), (4.0, 0)
+    seg(ax, A, B, C, A); seg(ax, A, D, lw=1.2); ax.plot(*D, "ko", ms=3.5, zorder=5)
+    lab(ax, "A", A, (0, 0.55)); lab(ax, "B", B, (-0.45, -0.35)); lab(ax, "C", C, (0.45, -0.35)); lab(ax, "D", D, (0.1, 0.45))
+    dimarc(ax, A, B, 1.0, "6cm", 0.8, fs=9)
+    dimarc(ax, B, D, 0.8, "4cm", 0.75, fs=9)
+    dimarc(ax, B, C, 2.0, "9cm", 0.8, fs=9)
+    ax.set_xlim(-1.8, 10.2); ax.set_ylim(-2.8, 6.6); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+adv4_sas("a4_sas.png")
