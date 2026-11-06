@@ -1,0 +1,63 @@
+# 中3 第3回 授業プリント②の解答解説用の図
+exec(open("figs.py").read())
+
+# ＜1＞ 2つの三角形を同じ向きにならべた図（△ABC と △DBA）
+def k1(name="s3k_o1_ans.png"):
+    fig, ax = plt.subplots(figsize=(4.4, 1.9))
+    B, C, A = (0, 0), (10, 0), (3.6, 4.8)
+    seg(ax, A, B, C, A); right_mark(ax, A, B, C); angle_mark(ax, B, C, A, 1.0)
+    lab(ax, "A", A, (0, 0.55)); lab(ax, "B", B, (-0.45, -0.4)); lab(ax, "C", C, (0.45, -0.4))
+    dimarc(ax, A, B, 1.0, "6cm", 0.8, fs=9); dimarc(ax, B, C, 1.5, "10cm", 1.0, fs=9)
+    ax.text(5.0, -3.4, "△ABC", fontsize=10, ha="center")
+    k = 0.6; o = 13.0
+    b, a, dd = (o, 0), (o + 10 * k, 0), (o + 3.6 * k, 4.8 * k)
+    seg(ax, dd, b, a, dd); right_mark(ax, dd, b, a, 0.4); angle_mark(ax, b, a, dd, 1.0)
+    lab(ax, "D", dd, (0, 0.55)); lab(ax, "B", b, (-0.45, -0.4)); lab(ax, "A", a, (0.45, -0.4))
+    dimarc(ax, dd, b, 0.9, "?cm", 0.8, fs=9); dimarc(ax, b, a, 1.2, "6cm", 0.9, fs=9)
+    ax.text(o + 3.0, -3.4, "△DBA", fontsize=10, ha="center")
+    ax.set_xlim(-1.8, 20.4); ax.set_ylim(-3.8, 5.8); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+k1()
+
+# ＜2＞ 解説図（Oの文字を点線からはなす）
+def k2(name="s3k_o2_ans.png", size=(2.6, 3.0)):
+    fig, ax = plt.subplots(figsize=size)
+    ax.annotate("", xy=(4.3, 0), xytext=(-3.0, 0), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+    ax.annotate("", xy=(0, 11.4), xytext=(0, -1.2), arrowprops=dict(arrowstyle="-|>", color="k", lw=1.1))
+    xs = np.linspace(-2.6, 3.25, 300); ax.plot(xs, xs ** 2, "k", lw=1.5)
+    lx = np.linspace(-2.3, 3.8, 10); ax.plot(lx, 2 * lx + 3, "k", lw=1.3)
+    ax.plot([-1, 0, 3], [1, 0, 9], "k", lw=1.0)
+    ox = np.linspace(-0.45, 3.4, 10); ax.plot(ox, 2 * ox, "k--", lw=1.0)
+    for p in ((-1, 1), (3, 9), (2, 4), (0, 3), (0, 6)): ax.plot(*p, "ko", ms=3.5, zorder=5)
+    ax.text(-1.25, 1.3, "A", fontsize=11, ha="right", va="center", family="serif")
+    ax.text(2.75, 9.4, "B", fontsize=11, ha="right", va="center", family="serif")
+    ax.text(2.25, 3.6, "P", fontsize=11, ha="left", va="center", family="serif")
+    ax.text(-0.2, 3.0, "C", fontsize=11, ha="right", va="center", family="serif")
+    ax.text(-0.2, 6.0, "Q", fontsize=11, ha="right", va="center", family="serif")
+    ax.text(3.45, 6.4, "$y=2x$", fontsize=9, ha="left", va="center")
+    ax.text(-0.2, 1.5, "3", fontsize=9, ha="right", va="center"); ax.text(-0.2, 4.5, "3", fontsize=9, ha="right", va="center")
+    ax.text(-0.95, -0.35, "O", fontsize=10, ha="center", va="top", family="serif")
+    ax.text(4.15, -0.8, "x", fontsize=12, style="italic", family="serif")
+    ax.text(0.2, 11.0, "y", fontsize=12, style="italic", family="serif")
+    ax.text(-2.8, 10.4, "$y=x^2$", fontsize=9)
+    ax.set_xlim(-3.4, 5.0); ax.set_ylim(-1.4, 11.8); ax.set_aspect(0.55); ax.axis("off")
+    save(fig, name)
+k2()
+
+# ＜3＞ チョウチョ型の比（AE：CB＝②：③）
+def k3(name="s3k_o3_ans.png", size=(3.2, 2.3)):
+    fig, ax = plt.subplots(figsize=size)
+    A, B, C, D = (2.0, 5.0), (0, 0), (9.0, 0), (11.0, 5.0)
+    E = (A[0] + (D[0] - A[0]) * 2 / 3, 5.0)
+    F = (A[0] + (C[0] - A[0]) * 0.4, A[1] + (C[1] - A[1]) * 0.4)
+    seg(ax, A, B, C, D, A); seg(ax, A, C, lw=1.1); seg(ax, B, E, lw=1.1)
+    for p in (E, F): ax.plot(*p, "ko", ms=3.5, zorder=5)
+    lab(ax, "A", A, (-0.3, 0.45)); lab(ax, "B", B, (-0.4, -0.45)); lab(ax, "C", C, (0.4, -0.45)); lab(ax, "D", D, (0.4, 0.45))
+    lab(ax, "E", E, (0, 0.5)); lab(ax, "F", F, (0.05, -0.75))
+    angle_mark(ax, E, F, A, 0.8); angle_mark(ax, B, F, C, 1.1)
+    angle_mark(ax, A, F, E, 0.8, 2); angle_mark(ax, C, F, B, 0.9, 2)
+    mark(ax, "circle", "2", ((A[0] + E[0]) / 2, 5.75)); mark(ax, "circle", "1", ((E[0] + D[0]) / 2, 5.75))
+    mark(ax, "circle", "3", (4.5, -0.85))
+    ax.set_xlim(-1.2, 12.2); ax.set_ylim(-1.6, 6.6); ax.set_aspect("equal"); ax.axis("off")
+    save(fig, name)
+k3()
