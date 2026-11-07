@@ -242,7 +242,7 @@ def article1():
     ]))
     b.append(photo(2, '小学部の授業の様子'))
 
-    b.append(h2('大事な日付', 'SCHEDULE'))
+    b.append(h2('日程と締切', 'SCHEDULE'))
     b.append(key_dates([
         ('12/10(木)', 'LINEで仮申込をすると、早期申込の料金になる期限<br><span style="color:#5B6675; font-size:0.9em;">各学年の料金欄をご覧ください</span>', False),
         ('12/19(土)', 'パーティーに参加する方の、窓口での手続きの期限', False),
