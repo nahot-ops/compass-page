@@ -242,14 +242,6 @@ def article1():
     ]))
     b.append(photo(2, '小学部の授業の様子'))
 
-    b.append(h2('日程と締切', 'SCHEDULE'))
-    b.append(key_dates([
-        ('12/10(木)', 'LINEで仮申込をすると、早期申込の料金になる期限<br><span style="color:#5B6675; font-size:0.9em;">各学年の料金欄をご覧ください</span>', False),
-        ('12/19(土)', 'パーティーに参加する方の、窓口での手続きの期限', False),
-        ('12/21(月)', 'クリスマスパーティー兼オリエンテーション<br><span style="color:#5B6675; font-size:0.9em;">17:00〜19:00</span>', False),
-        ('12/23(水)', '<strong>お申込み締切</strong><br><span style="color:#5B6675; font-size:0.9em;">この日までに窓口で手続きしてください</span>', True),
-    ], note('※12/10は申込締切ではありません。お申込みは12/23(水)まで受け付けます。')))
-
     # パーティー
     b.append(h2('クリスマスパーティー兼オリエンテーション', 'EVENT'))
     b.append(p('講習が始まる前に、教室に来ていただける機会です。<br>先生や、一緒に講習を受ける友だちと顔を合わせておけるので、<br>初めての方も、講習の初日を気楽に迎えられます。'))
@@ -373,6 +365,14 @@ def article1():
     b.append('<!-- 特典ここまで -->\n')
 
     b.append(zanseki())
+
+    b.append(h2('日程と締切', 'SCHEDULE'))
+    b.append(key_dates([
+        ('12/10(木)', 'LINEで仮申込をすると、早期申込の料金になる期限<br><span style="color:#5B6675; font-size:0.9em;">各学年の料金欄をご覧ください</span>', False),
+        ('12/19(土)', 'パーティーに参加する方の、窓口での手続きの期限', False),
+        ('12/21(月)', 'クリスマスパーティー兼オリエンテーション<br><span style="color:#5B6675; font-size:0.9em;">17:00〜19:00</span>', False),
+        ('12/23(水)', '<strong>お申込み締切</strong><br><span style="color:#5B6675; font-size:0.9em;">この日までに窓口で手続きしてください</span>', True),
+    ], note('※12/10は申込締切ではありません。お申込みは12/23(水)まで受け付けます。')))
 
     # 申込の流れ
     b.append(h2('お申込みの流れ', 'FLOW'))
