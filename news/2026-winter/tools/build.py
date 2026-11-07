@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """冬休み〜3学期 案内記事2本＋プレビューを生成する（ComPassロゴ配色）"""
-import urllib.parse, pathlib
+import pathlib
 
 D = pathlib.Path('/home/user/compass-page/news/2026-winter')
 
@@ -10,11 +10,8 @@ BLUE = '#2BA9E1'; BLUE_D = '#1A86BE'; BLUE_L = '#EEF7FD'; BLUE_B = '#BFE3F5'
 ORANGE = '#F39221'; ORANGE_D = '#C25E00'; CREAM = '#FFF5E9'; CREAM_B = '#F6C78F'
 YELLOW = '#F9D02B'; WARN = '#D2491E'
 LINE = '#06C755'
-FRIEND = 'https://lin.ee/oa4NaVe'
-
-
-def line_url(text):
-    return 'https://line.me/R/oaMessage/%40fmf0989i/?' + urllib.parse.quote(text, safe='')
+LINE_URL = 'https://cuiy3qe5.autosns.app/line'
+FRIEND = LINE_URL
 
 
 def dots():
@@ -88,21 +85,31 @@ def box(html, kind='blue', extra=''):
     return f'<div style="margin:1.2em 0; padding:1.1em 1em; {st} border-radius:12px; {extra}">{html}</div>'
 
 
+def msg_box(text):
+    return (f'<span style="display:inline-block; margin:0.3em 0 0; padding:0.35em 0.9em; background:#ffffff; border:2px dashed {LINE}; '
+            f'border-radius:8px; color:{NAVY}; font-weight:bold; letter-spacing:0.02em;">{text}</span>')
+
+
 def line_btn(label, text, lead):
     return (f'<div style="margin:1.8em 0; padding:1.3em 1em 1.1em; background:#F3FBF6; border:2px solid #BDE8CF; border-radius:14px; text-align:center;">'
             f'<p style="margin:0 0 0.8em; color:{NAVY}; font-weight:bold;">{lead}</p>'
-            f'<a href="{line_url(text)}" target="_blank" rel="noopener noreferrer" style="display:block; width:100%; max-width:360px; margin:0 auto 0.6em; '
+            f'<a href="{LINE_URL}" target="_blank" rel="noopener noreferrer" style="display:block; width:100%; max-width:360px; margin:0 auto 0.8em; '
             f'padding:0.95em 1em; background:{LINE}; border-radius:999px; box-shadow:0 3px 0 #04A346; color:#ffffff !important; font-size:1.08em; '
             f'font-weight:bold; text-decoration:none; text-align:center; box-sizing:border-box;">{label}</a>'
-            f'<p style="margin:0.3em 0; color:{WARN}; font-weight:bold; font-size:0.95em;">そのまま送信してください。</p>'
-            f'<p style="margin:0.5em 0 0; color:{SUB}; font-size:0.85em;">ボタンで開かない場合は、<a href="{FRIEND}" target="_blank" rel="noopener noreferrer" '
-            f'style="color:{BLUE_D};">友だち追加</a>のあと<br>「{text}」と送ってください。</p></div>')
+            f'<p style="margin:0; color:{TEXT}; font-size:0.92em;">トーク画面が開いたら、<br>次の文面を送ってください。<br>{msg_box(text)}</p></div>')
 
 
-def small_line_btn(label, text):
-    return (f'<a href="{line_url(text)}" target="_blank" rel="noopener noreferrer" style="display:block; width:100%; max-width:360px; margin:0.5em auto; '
-            f'padding:0.8em 1em; background:{LINE}; border-radius:999px; box-shadow:0 3px 0 #04A346; color:#ffffff !important; font-size:1em; '
+def small_line_btn(label):
+    return (f'<a href="{LINE_URL}" target="_blank" rel="noopener noreferrer" style="display:block; width:100%; max-width:360px; margin:0.5em auto; '
+            f'padding:0.9em 1em; background:{LINE}; border-radius:999px; box-shadow:0 3px 0 #04A346; color:#ffffff !important; font-size:1.05em; '
             f'font-weight:bold; text-decoration:none; text-align:center; box-sizing:border-box;">{label}</a>')
+
+
+def msg_list(items):
+    li = ''.join(f'<span style="display:block; margin:0.35em 0;"><span style="display:inline-block; width:4.5em; color:{SUB}; font-size:0.9em;">{g}</span>{msg_box(t)}</span>'
+                 for g, t in items)
+    return (f'<p style="margin:0.8em 0 0.2em; color:{TEXT}; font-size:0.92em;">トーク画面が開いたら、<br>お子さまの学年の文面を送ってください。</p>'
+            f'<div style="display:inline-block; text-align:left;">{li}</div>')
 
 
 def grade_card(href, badge, title, lines, color):
@@ -328,7 +335,7 @@ def article1():
     # 申込の流れ
     b.append(h2('お申込みの流れ', 'FLOW'))
     b.append(steps([
-        ('公式LINEにメッセージを送信', 'お子さまの学年のボタンから送ってください。'),
+        ('公式LINEにメッセージを送信', '各学年の欄にある文面を送ってください。'),
         ('教室から日程のご連絡・席の仮押さえ', 'キッズは、コマの空き状況もお伝えします。<br>12月10日(木)までに仮押さえした方は、<br>早期申込の料金になります。'),
         ('窓口に来ていただく時間を予約', '公式LINEから予約できます。'),
         ('窓口で手続き', '講習料・体験料のお支払いと、<br>申込用紙のご記入で、お申込み完了です。<br>仮押さえから1週間以内にお越しください。'),
@@ -357,14 +364,11 @@ def article1():
     b.append(
         f'<div style="margin:2.4em 0 0; padding:1.5em 1em 1.3em; background:{BLUE_L}; border-radius:18px; text-align:center;">'
         + dots() +
-        f'<p style="margin:0 0 0.2em; color:{NAVY}; font-size:1.15em; font-weight:bold;">学年を選んで、LINEで送るだけ</p>'
+        f'<p style="margin:0 0 0.2em; color:{NAVY}; font-size:1.15em; font-weight:bold;">公式LINEからお申込みください</p>'
         f'<p style="margin:0 0 0.8em; color:{TEXT}; font-size:0.95em;">窓口での手続きは12月23日(水)までです。</p>'
-        + small_line_btn('小6｜LINEで申し込む', '小6 冬期講習 申込希望')
-        + small_line_btn('小5｜LINEで申し込む', '小5 冬期講習 申込希望')
-        + small_line_btn('キッズ｜LINEで申し込む', 'キッズ 冬休み体験 申込希望')
-        + f'<p style="margin:0.6em 0 0; color:{WARN}; font-weight:bold; font-size:0.95em;">そのまま送信してください。</p>'
-        f'<p style="margin:0.4em 0 0; color:{SUB}; font-size:0.85em;">ボタンで開かない場合は、<a href="{FRIEND}" target="_blank" rel="noopener noreferrer" style="color:{BLUE_D};">友だち追加</a>のあと、<br>学年と「冬期講習 申込希望」と送ってください。</p>'
-        '</div>')
+        + small_line_btn('公式LINEで申し込む')
+        + msg_list([('小6', '小6 冬期講習 申込希望'), ('小5', '小5 冬期講習 申込希望'), ('キッズ', 'キッズ 冬休み体験 申込希望')])
+        + '</div>')
 
     b.append(footer('中学生の方へ：', '3学期スタート 2週間体験（中1・中2）のご案内はこちら'))
     return wrap('\n'.join(b))
@@ -493,11 +497,9 @@ def article2():
         + dots() +
         f'<p style="margin:0 0 0.2em; color:{NAVY}; font-size:1.15em; font-weight:bold;">まずはLINEでご相談ください</p>'
         f'<p style="margin:0 0 0.8em; color:{TEXT}; font-size:0.95em;">受付は1月13日(水)までです。</p>'
-        + small_line_btn('中1｜LINEで相談する', '中1 3学期体験 相談希望')
-        + small_line_btn('中2｜LINEで相談する', '中2 3学期体験 相談希望')
-        + f'<p style="margin:0.6em 0 0; color:{WARN}; font-weight:bold; font-size:0.95em;">そのまま送信してください。</p>'
-        f'<p style="margin:0.4em 0 0; color:{SUB}; font-size:0.85em;">ボタンで開かない場合は、<a href="{FRIEND}" target="_blank" rel="noopener noreferrer" style="color:{BLUE_D};">友だち追加</a>のあと、<br>学年と「3学期体験 相談希望」と送ってください。</p>'
-        '</div>')
+        + small_line_btn('公式LINEで相談する')
+        + msg_list([('中1', '中1 3学期体験 相談希望'), ('中2', '中2 3学期体験 相談希望')])
+        + '</div>')
 
     b.append(footer('小学生の方へ：', '冬期講習・冬の体験（小1〜小6）のご案内はこちら'))
     return wrap('\n'.join(b))
