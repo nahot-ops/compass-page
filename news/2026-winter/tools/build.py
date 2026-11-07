@@ -1,22 +1,16 @@
 #!/usr/bin/env python3
-"""冬休み〜3学期 案内記事2本＋プレビューを生成する（ComPassロゴ配色・コッピー入り）"""
-import base64, urllib.parse, pathlib
+"""冬休み〜3学期 案内記事2本＋プレビューを生成する（ComPassロゴ配色）"""
+import urllib.parse, pathlib
 
 D = pathlib.Path('/home/user/compass-page/news/2026-winter')
 
-# ---- 色（ComPassロゴ＋コッピー） ----
+# ---- 色（ComPassロゴ） ----
 NAVY = '#1E2B3C'; TEXT = '#333333'; SUB = '#5B6675'
 BLUE = '#2BA9E1'; BLUE_D = '#1A86BE'; BLUE_L = '#EEF7FD'; BLUE_B = '#BFE3F5'
 ORANGE = '#F39221'; ORANGE_D = '#C25E00'; CREAM = '#FFF5E9'; CREAM_B = '#F6C78F'
-YELLOW = '#F9D02B'; WARN = '#D2491E'; COPPY = '#6F96D1'
+YELLOW = '#F9D02B'; WARN = '#D2491E'
 LINE = '#06C755'
 FRIEND = 'https://lin.ee/oa4NaVe'
-
-
-def img(name, w, alt='コッピー'):
-    b = base64.b64encode((D / 'img' / f'{name}.png').read_bytes()).decode()
-    return (f'<img src="data:image/png;base64,{b}" alt="{alt}" width="{w}" '
-            f'style="display:block; width:{w}px; max-width:100%; height:auto; margin:0; border:0; box-shadow:none;">')
 
 
 def line_url(text):
@@ -28,19 +22,6 @@ def dots():
     d = ''.join(f'<span style="display:inline-block; width:7px; height:7px; margin:0 5px; border-radius:50%; background:{c};"></span>'
                 for c in [YELLOW, ORANGE, YELLOW, BLUE, YELLOW])
     return f'<div style="margin:0 0 0.6em; line-height:1;">{d}</div>'
-
-
-def bubble(text, tail='left'):
-    t = ('left:-7px; top:50%; margin-top:-6px; border-width:0 0 2px 2px;' if tail == 'left'
-         else 'left:50%; bottom:-7px; margin-left:-6px; border-width:0 2px 2px 0;')
-    return (f'<div style="position:relative; display:inline-block; padding:0.55em 0.9em; background:#ffffff; border:2px solid {COPPY}; '
-            f'border-radius:18px; color:{NAVY}; font-size:0.95em; font-weight:bold; line-height:1.5;">{text}'
-            f'<span style="position:absolute; {t} width:10px; height:10px; background:#ffffff; border-style:solid; border-color:{COPPY}; transform:rotate(45deg);"></span></div>')
-
-
-def coppy(name, w, text):
-    return (f'<div style="display:flex; align-items:center; justify-content:center; gap:14px; margin:1.2em 0;">'
-            f'<div style="flex:0 0 auto;">{img(name, w)}</div><div style="flex:0 1 auto;">{bubble(text)}</div></div>')
 
 
 def h2(text, eyebrow='', id_=''):
@@ -170,7 +151,7 @@ def faq(items):
     return ''.join(out)
 
 
-def hero(eyebrow, title, sub, chips, coppy_name, coppy_w, coppy_text):
+def hero(eyebrow, title, sub, chips):
     ch = ''.join(
         f'<div style="flex:1 1 28%; min-width:5em; padding:0.5em 0.4em; background:#ffffff; border-radius:10px; text-align:center; box-sizing:border-box;">'
         f'<span style="display:block; color:{SUB}; font-size:0.78em; font-weight:bold;">{k}</span>'
@@ -182,8 +163,7 @@ def hero(eyebrow, title, sub, chips, coppy_name, coppy_w, coppy_text):
         f'<p style="margin:0.2em 0 0.5em; color:{NAVY}; font-size:1.55em; font-weight:bold; line-height:1.4;">{title}</p>'
         f'<p style="margin:0 0 1em; color:{TEXT}; line-height:1.8;">{sub}</p>'
         f'<div style="display:flex; flex-wrap:wrap; gap:8px; margin:0 0 0.6em;">{ch}</div>'
-        + coppy(coppy_name, coppy_w, coppy_text) +
-        '</div>')
+        + '</div>')
 
 
 def wrap(body):
@@ -224,8 +204,7 @@ def article1():
     b.append(hero('2026 WINTER｜小学生',
                   '冬期講習・冬の体験',
                   '冬休みは短いですが、<br>2学期までに習ったことを<br>落ち着いて見直せる時間です。<br>新しい学年を安心して迎える準備を、<br>この冬に一緒に進めましょう。',
-                  [('対象', '小1〜小6'), ('期間', '12/25〜1/8'), ('申込締切', '12/23(水)')],
-                  'bird-wave', 96, '冬休み、<br>いっしょに準備しよう'))
+                  [('対象', '小1〜小6'), ('期間', '12/25〜1/8'), ('申込締切', '12/23(水)')]))
 
     b.append(p(f'<strong style="color:{NAVY};">お子さまの学年を選んでください。</strong><br>押すと、日程・料金・申込みボタンへ移動します。', 'margin:0 0 0.2em;'))
     b.append(cards(
@@ -244,7 +223,6 @@ def article1():
     # パーティー
     b.append(h2('クリスマスパーティー兼オリエンテーション', 'EVENT'))
     b.append(p('講習が始まる前に、教室に来ていただける機会です。<br>先生や、一緒に講習を受ける友だちと顔を合わせておけるので、<br>初めての方も、講習の初日を気楽に迎えられます。'))
-    b.append(coppy('bird-pair', 110, 'パーティーで<br>待ってるよ！'))
     b.append(kv_table([
         ('日時', '12月21日(月)<br>17:00〜19:00'),
         ('対象', '冬期講習・冬の体験にお申込みいただいた小学生<br>（ComPassに通っているかどうかは問いません）'),
@@ -302,7 +280,6 @@ def article1():
     b.append(h2('コンパスキッズ（小1〜小4）｜冬の体験', 'KIDS', 'winter-kids'))
     b.append(p(f'コンパスキッズは、小1〜小4を対象にした<br><strong style="color:{NAVY};">「学びを好きになるための土台づくり」</strong>のプログラムです。'))
     b.append(p('冬休みは、ふだんの授業を体験できる<br>「冬の体験（全4回）」として募集します。<br>開講しているコマの中から、4コマを選んで参加できます。'))
-    b.append(coppy('bird-walk', 110, 'まず1つ、<br>やってみよう'))
     b.append(kv_table([
         ('対象', '小学1年生〜小学4年生'),
         ('時間', 'コマ① 11:00〜12:00<br>コマ② 13:00〜14:00'),
@@ -403,8 +380,7 @@ def article2():
     b.append(hero('3学期スタート｜中1・中2',
                   '3学期スタート<br>2週間体験',
                   '2学期の期末テスト、<br>おつかれさまでした。<br>3学期は、新しい単元に入る区切りです。<br>このタイミングから、<br>ふだんの授業に合流してみませんか。',
-                  [('対象', '中1・中2'), ('体験', '1/14〜'), ('受付', '1/13(水)まで')],
-                  'bird-study', 120, '3学期から、<br>いっしょに進もう'))
+                  [('対象', '中1・中2'), ('体験', '1/14〜'), ('受付', '1/13(水)まで')]))
 
     b.append(h2('こんな方に', 'FOR YOU'))
     chk = ''.join(
